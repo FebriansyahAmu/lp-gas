@@ -3,7 +3,7 @@
         'name' => 'nosys/lp-gas',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'be6536c2c5ddcb92114ca3f23055ed01b46008f2',
+        'reference' => '23ebca31e9e28ca468befd11cf2f8175a54dbd28',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -31,7 +31,7 @@
         'nosys/lp-gas' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'be6536c2c5ddcb92114ca3f23055ed01b46008f2',
+            'reference' => '23ebca31e9e28ca468befd11cf2f8175a54dbd28',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

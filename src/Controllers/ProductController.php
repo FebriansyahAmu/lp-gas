@@ -8,7 +8,7 @@ class ProductController extends Controller
 
     public function product()
     {
-        $data = [];
+        $data =[];
         $this->render('/Product/index', $data, null);
     }
 

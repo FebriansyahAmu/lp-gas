@@ -97,11 +97,22 @@ class AuthController extends Controller
                 throw new \Exception("Invalid credentials", 401);
             }
 
-             $token = JwtHelper::generateToken([
+             $data = [
                 'id' => $user['user_id'],
                 'namalengkap' => $user['Nama_lengkap'],
                 'nohp' => $user['No_Hp'],
                 'role' => $user['role']
+             ];
+
+             $token = JwtHelper::generateToken($data);
+
+             setcookie('authToken', $token, [
+                'expires' => time() + 3600,
+                'path' => '/',
+                'domain' => '',
+                'secure' => true,
+                'httponly' => true,
+                'samesite' => 'Strict'
              ]);
 
              echo json_encode([

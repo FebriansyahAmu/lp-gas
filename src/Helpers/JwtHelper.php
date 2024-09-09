@@ -4,16 +4,19 @@ namespace App\Helpers;
 
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
+use Dotenv\Dotenv;
 
 class JwtHelper{
     private static $secretKey;
 
     public static function init(){
-        self::$secretKey = getenv('JWT_SECRET');
+        $dotenv = Dotenv::createImmutable(__DIR__ . '/../../');
+        $dotenv->load();
+        self::$secretKey = $_ENV['JWT_SECRET'];
     }
 
     public static function generateToken($data){
-        self::init();
+         self::init();
         $payload = [
             'iss' => 'localhost', //Issuer optional
             'aud' => 'localhost', //Audience optional
@@ -22,10 +25,14 @@ class JwtHelper{
             'data' => $data
         ];
 
-        try{
-            return JWT::encode($payload, self::$secretKey, 'HS256');
-        }catch(\Exception $e){
-            error_log("JWT Encoding error:" . $e->getMessage());
+        try {
+            $token = JWT::encode($payload, self::$secretKey, 'HS256');
+            if (!$token) {
+                error_log("Failed to encode token");
+            }
+            return $token; 
+        } catch (\Exception $e) {
+            error_log("JWT Encoding error: " . $e->getMessage());
             return false;
         }
     }

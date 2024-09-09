@@ -148,9 +148,6 @@
         contentType: false,
         dataType: 'json',
         success: function(response){
-          const token = response.token;
-          localStorage.setItem('authToken', token);
-
           window.location.href="/product";
         },
         error: function(xhr){

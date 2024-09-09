@@ -7,22 +7,43 @@ use Firebase\JWT\ExpiredException;
 use Firebase\JWT\SignatureInvalidException;
 
 class AuthMiddleware {
-    public static function checkAuth() {
+    public static function checkAuth($role = null) {
         try {
-            $headers = getallheaders();
-            if (!isset($headers['Authorization'])) {
-                throw new \Exception("Access denied");
-                //returnkan 404 not found nanti yah
+            // Periksa apakah cookie `authToken` ada
+            if (!isset($_COOKIE['authToken'])) {
+                http_response_code(401);
+                echo json_encode([
+                    'status' => 'error',
+                    'message' => 'Access denied, no token found',
+                ]);
+                exit;
             }
 
-            $token = str_replace('Bearer ', '', $headers['Authorization']);
+            // Ambil token dari cookie
+            $token = $_COOKIE['authToken'];
             $userData = JwtHelper::validateToken($token);
 
-            if ($userData) {
-                return $userData;
+            if (!$userData) {
+                http_response_code(401);
+                echo json_encode([
+                    'status' => 'error',
+                    'message' => 'Invalid token',
+                ]);
+                exit;
             }
 
-            throw new \Exception("Invalid token");
+            // Periksa role jika diperlukan
+            if ($role && (!isset($userData['role']) || $userData['role'] !== $role)) {
+                http_response_code(403);
+                echo json_encode([
+                    'status' => 'error',
+                    'message' => 'Access forbidden: insufficient role',
+                ]);
+                exit;
+            }
+
+            // Token valid dan role sesuai jika ada
+            return $userData;
         } catch (ExpiredException $e) {
             http_response_code(401);
             echo json_encode([
@@ -34,14 +55,14 @@ class AuthMiddleware {
             http_response_code(401);
             echo json_encode([
                 'status' => 'error',
-                'message' => 'Invalid token signature'
+                'message' => 'Invalid token signature',
             ]);
             exit;
         } catch (\Exception $e) {
             http_response_code(401);
             echo json_encode([
                 'status' => 'error',
-                'message' => $e->getMessage()
+                'message' => $e->getMessage(),
             ]);
             exit;
         }
