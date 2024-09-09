@@ -16,6 +16,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
       rel="stylesheet"
     />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </head>
   <body>
     <section
@@ -33,7 +34,7 @@
           </div>
           <div class="col-md-7 col-lg-5 col-xl-4 offset-xl-1">
             <h2 class="mb-3">Log in</h2>
-            <form id="loginForm" novalidate id="flogin">
+            <form novalidate id="flogin">
               <!-- Email input -->
               <div class="col-12 text-light mb-4">
                 <label for="email" class="form-label"
@@ -125,6 +126,7 @@
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"
   ></script>
+
   <script
     src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
     integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
@@ -134,13 +136,29 @@
 
 <script>
   $(document).ready(function(){
-    $('#flogin').submit(function(event)){
+    $("#flogin").submit(function(event){
       event.preventDefault();
       const formData = new FormData(this);
+
       $.ajax({
-        
+        url: '/auth/login',
+        type: 'POST',
+        data: formData,
+        processData: false,
+        contentType: false,
+        dataType: 'json',
+        success: function(response){
+          const token = response.token;
+          localStorage.setItem('authToken', token);
+
+          window.location.href="/product";
+        },
+        error: function(xhr){
+          const errorResponse = JSON.parse(xhr.responseText);
+          Swal.fire('Error', errorResponse.message, 'error');
+        }
       })
-    }
+    })
   })
 </script>
   </html>

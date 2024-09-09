@@ -1,4 +1,6 @@
-<section class="home w-100 vh-100 d-flex justify-content-center align-items-center bg-cover-with-overlay">
+<section class="home w-100 vh-100 d-flex justify-content-center align-items-center bg-cover-with-overlay"
+style="background: radial-gradient(circle at right, #b8ced6 , #3f3b3e)"
+>
     <div class="container">
         <div class="row">
             <div class="col-md-7 col-12 text-md-start text-center">
@@ -9,7 +11,7 @@
         </div>
     </div>
 </section>
-<style>
+<!-- <style>
   .bg-cover-with-overlay {
       position: relative;
       background-image: url('/img/lpg-gas.jpg');
@@ -34,4 +36,4 @@
       z-index: 2;
       color: white; 
   }
-</style>
+</style> -->

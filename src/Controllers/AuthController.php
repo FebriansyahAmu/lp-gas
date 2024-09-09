@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Helpers\JwtHelper;
 
 
+
 class AuthController extends Controller
 {
     public function login()
@@ -58,9 +59,9 @@ class AuthController extends Controller
                         'message' => 'Register berhasil, silahkan cek email anda untuk verifikasi'
                     ]);
                 }else{
-                    throw new Exception('Gagal membuat akun');
+                    throw new \Exception('Gagal membuat akun');
                 }
-            }catch(Exception $e){
+            }catch(\Exception $e){
                 error_log($e->getMessage());
 
                 http_response_code(500);
@@ -88,17 +89,17 @@ class AuthController extends Controller
             $password = filter_input(INPUT_POST, 'password', FILTER_DEFAULT);
         
             if(!$email || !$password){
-                throw new Exception("Email or password cannot be empty", 400);
+                throw new \Exception("Email or password cannot be empty", 400);
             }
             
             $user = User::verifyUser($email, $password);
             if(!$user){
-                throw new Exception("Invalid credentials", 401);
+                throw new \Exception("Invalid credentials", 401);
             }
 
              $token = JwtHelper::generateToken([
                 'id' => $user['user_id'],
-                'namalengkap' => $user['Nama_Lengkap'],
+                'namalengkap' => $user['Nama_lengkap'],
                 'nohp' => $user['No_Hp'],
                 'role' => $user['role']
              ]);
@@ -108,7 +109,7 @@ class AuthController extends Controller
                 'token' => $token
              ]);
 
-        }catch(Exception $e){
+        }catch(\Exception $e){
             http_response_code($e->getCode() ? $e->getCode() : 400);
 
             echo json_encode([

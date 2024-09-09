@@ -96,7 +96,7 @@ class User{
     public static function verifyUser($email, $password){
         try{
             $user = self::findByEmail($email);
-            if($user && password_verify($password, $user['password'])){
+            if($user && password_verify($password, $user['Password'])){
                 return $user;
             }
             return false;

@@ -12,8 +12,10 @@ $router->get('/about', HomeController::class, 'about');
 
 $router->get('/login', AuthController::class, 'login');
 $router->get('/register', AuthController::class, 'register');
-$router->post('/auth/register', AuthController::class, 'registerAct');
 
+//auth routes
+$router->post('/auth/register', AuthController::class, 'registerAct');
+$router->post('/auth/login', AuthController::class, 'loginAct');
 
 //product
 $router->get('/product', ProductController::class, 'product', \App\Middleware\AuthMiddleware::class);
