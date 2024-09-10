@@ -6,10 +6,10 @@ use App\Controller;
 class ProductController extends Controller
 {
 
-    public function product()
+    public function product($id)
     {
-        $data =[];
-        $this->render('/Product/index', $data, null);
+        $product = ProductModel::find($id);
+        $this->render('/Product/index');
     }
 
 }

@@ -33,7 +33,7 @@
             />
           </div>
           <div class="col-md-7 col-lg-5 col-xl-4 offset-xl-1">
-            <h2 class="mb-3">Log in</h2>
+            <h2 class="mb-3 text-light ">Log in</h2>
             <form novalidate id="flogin">
               <!-- Email input -->
               <div class="col-12 text-light mb-4">
@@ -51,7 +51,7 @@
               </div>
 
               <!-- Password input -->
-              <div class="col-12 position-relative text-light mb-3">
+              <div class="col-12 position-relative text-light mb-1">
                 <label for="password" class="form-label">Password</label>
                 <div class="input-group">
                   <input
@@ -72,6 +72,7 @@
                   Please provide a valid password.
                 </div>
               </div>
+              
               <!-- Submit button -->
               <button
                 type="submit"
@@ -79,6 +80,12 @@
               >
                 Log in
               </button>
+
+              <p class="mt-2">
+                Belum punya akun? <a href="/register" style="text-decoration:none;">Daftar Sekarang</a>
+                
+              </p>
+              <a href="/forgot-password" style="text-decoration:none;">Lupa Kata Sandi?</a>
             </form>
           </div>
         </div>

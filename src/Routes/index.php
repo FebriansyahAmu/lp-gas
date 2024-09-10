@@ -18,10 +18,12 @@ $router->post('/auth/register', AuthController::class, 'registerAct');
 $router->post('/auth/login', AuthController::class, 'loginAct');
 
 //product
-$router->get('/product', ProductController::class, 'product', [
-    'class' => \App\Middleware\AuthMiddleware::class,
-    'role' => 'user'
-]);
+$router->get('/product', ProductController::class, 'product');
+
+// $router->get('/product', ProductController::class, 'product', [
+//     'class' => \App\Middleware\AuthMiddleware::class,
+//     'role' => 'user'
+// ]);
 
 
 
