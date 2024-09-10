@@ -155,7 +155,7 @@
         contentType: false,
         dataType: 'json',
         success: function(response){
-          window.location.href="/product";
+          window.location.href="/dashboard";
         },
         error: function(xhr){
           const errorResponse = JSON.parse(xhr.responseText);

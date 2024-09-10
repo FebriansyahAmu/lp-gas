@@ -24,14 +24,16 @@
             <!-- Card 1 -->
             <div class="col-md-4 col-sm-6 col-12 mb-4">
                 <div class="card shadow-lg hover-shadow zoom-effect">
-                    <img class="card-img-top img-fluid" src="img/gas.jpeg" alt="Gas 1">
+                    <img class="card-img-top img-fluid " src="img/gas.jpeg" alt="Gas 1">
                     <div class="card-body">
                         <div class="text-center">
                             <span class="badge text-bg-success text-center fs-6">Rp.18.000</span>
                         </div>
                         <h5 class="card-title">Gas Type 1</h5>
                         <p class="card-text">Quick description about gas type 1.</p>
-                        <a href="#" class="btn btn-primary">Keranjang</a>
+                        <div class="d-flex justify-content-center">
+                            <a href="#" class="btn btn-primary p-2 mb-4">Pesan Sekarang</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -45,7 +47,9 @@
                         </div>
                         <h5 class="card-title">Gas Type 2</h5>
                         <p class="card-text">Quick description about gas type 2.</p>
-                        <a href="#" class="btn btn-primary">Keranjang</a>
+                        <div class="d-flex justify-content-center">
+                            <a href="#" class="btn btn-primary p-2 mb-4">Pesan Sekarang</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -59,7 +63,9 @@
                         </div>
                         <h5 class="card-title">Gas Type 3</h5>
                         <p class="card-text">Quick description about gas type 3.</p>
-                        <a href="#" class="btn btn-primary">Keranjang</a>
+                        <div class="d-flex justify-content-center mb-4">
+                            <a href="#" class="btn btn-primary p-2">Pesan Sekarang</a>
+                        </div>
                     </div>
                 </div>
             </div>

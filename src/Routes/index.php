@@ -3,6 +3,7 @@
 use App\Controllers\HomeController;
 use App\Controllers\AuthController;
 use App\Controllers\ProductController;
+use App\Controllers\AdminController;
 use App\Router;
 
 $router = new Router();
@@ -18,12 +19,14 @@ $router->post('/auth/register', AuthController::class, 'registerAct');
 $router->post('/auth/login', AuthController::class, 'loginAct');
 
 //product
-$router->get('/product', ProductController::class, 'product');
+$router->get('/product/{id}', ProductController::class, 'product');
+$router->get('/api/product/{id}', ProductController::class, 'getProduct');
 
-// $router->get('/product', ProductController::class, 'product', [
-//     'class' => \App\Middleware\AuthMiddleware::class,
-//     'role' => 'user'
-// ]);
+
+$router->get('/dashboard', AdminController::class, 'dashboard', [
+    'class' => \App\Middleware\AuthMiddleware::class,
+    'role' => 'admin'
+]);
 
 
 
