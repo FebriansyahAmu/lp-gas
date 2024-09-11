@@ -7,8 +7,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .product-image {
-            max-width: 100%;
-            height: auto;
+            max-width: 300px;
+            height: 300px;
             border-radius: 8px;
         }
         .quantity-controls {
@@ -47,14 +47,21 @@
         .ttl-hrga p{
             margin: 0;
         }
+
+        @media (max-width: 768px) {
+        .col-lg-6, .col-md-12 {
+            padding: 10px;
+        }
+        
+    }
     </style>
 </head>
 <body>
-    <section class="vh-100 d-flex justify-content-center align-items-center" style="min-height: 115vh;">
-        <div class="container">
-            <div class="row">
+    <section class=" d-flex justify-content-center align-items-center" >
+        <div class="container" >
+            <div class="row" style="padding:15px; margin-bottom: 150px; margin-top: 150px;">
                 <!-- Kolom Kiri: Gambar Produk -->
-                <div class="col-md-6 mb-4">
+                <div class="col-md-6 mb-4 p-5 d-flex justify-content-center">
                     <img src="https://via.placeholder.com/500" alt="Product Image" class="product-image">
                 </div>
 
@@ -71,16 +78,16 @@
                     </div>
                     
                     <div class="">
-                        <h4>Delivery Options</h4>
+                        <h4>Metode Pengambilan</h4>
                         <select id="delivery-option" class="form-select">
-                            <option value="regular">Regular</option>
-                            <option value="delivery">Delivery</option>
+                            <option value="regular">Ambil di tempat</option>
+                            <option value="delivery">Diantar langsung</option>
                         </select>
                     </div>
                     
                     <div class="delivery-info mb-4">
-                        <p class="fst-italic">*Regular, Pemesan mengambil pesanan langsung di pangkalan</p>
-                        <p class="fst-italic">*Delivery, kami akan mengantar di rumah anda dengan biaya per gas Rp.2000</p>
+                        <p class="fst-italic">Ambil di tempat, Pemesan mengambil pesanan langsung di pangkalan</p>
+                        <p class="fst-italic">Diantar langsung, kami akan mengantar di rumah anda dengan biaya per gas Rp.2000</p>
                     </div>
                     
                     <div class="mb-4 ttl-hrga">

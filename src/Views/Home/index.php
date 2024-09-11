@@ -32,7 +32,7 @@
                         <h5 class="card-title">Gas Type 1</h5>
                         <p class="card-text">Quick description about gas type 1.</p>
                         <div class="d-flex justify-content-center">
-                            <a href="#" class="btn btn-primary p-2 mb-4">Pesan Sekarang</a>
+                            <a href="/product/1" class="btn btn-primary p-2 mb-4">Pesan Sekarang</a>
                         </div>
                     </div>
                 </div>
@@ -48,7 +48,7 @@
                         <h5 class="card-title">Gas Type 2</h5>
                         <p class="card-text">Quick description about gas type 2.</p>
                         <div class="d-flex justify-content-center">
-                            <a href="#" class="btn btn-primary p-2 mb-4">Pesan Sekarang</a>
+                            <a href="/product/2" class="btn btn-primary p-2 mb-4">Pesan Sekarang</a>
                         </div>
                     </div>
                 </div>
@@ -64,7 +64,7 @@
                         <h5 class="card-title">Gas Type 3</h5>
                         <p class="card-text">Quick description about gas type 3.</p>
                         <div class="d-flex justify-content-center mb-4">
-                            <a href="#" class="btn btn-primary p-2">Pesan Sekarang</a>
+                            <a href="/product/3" class="btn btn-primary p-2">Pesan Sekarang</a>
                         </div>
                     </div>
                 </div>
@@ -104,7 +104,7 @@
             <!-- Kolom kiri: About Us -->
             <div class="col-md-8 text-black mb-4 mb-md-0">
              
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d296.52111372334923!2d124.30035815544517!3d0.7275439208993522!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x327e3d119fd60439%3A0x567152c26e8947ae!2sPangkalan%20Gas%20Elpiji%20Abdul%20Rahman!5e0!3m2!1sid!2sid!4v1725873169895!5m2!1sid!2sid" width="700" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d296.52111372334923!2d124.30035815544517!3d0.7275439208993522!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x327e3d119fd60439%3A0x567152c26e8947ae!2sPangkalan%20Gas%20Elpiji%20Abdul%20Rahman!5e0!3m2!1sid!2sid!4v1725873169895!5m2!1sid!2sid" height="450" style="border:0; width:100%;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
             <!-- Kolom kanan: Gambar -->
             <div class="col-md-4">

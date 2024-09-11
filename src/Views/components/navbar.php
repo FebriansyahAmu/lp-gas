@@ -21,7 +21,7 @@
     >
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0 me-4 text-center">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a class="nav-link active" aria-current="page" href="/">Home</a>
         </li>
         <li class="nav-item">
           <a class="nav-link nav-hover" href="#">About Us</a>
@@ -36,7 +36,7 @@
         </li>
         <!-- Login Link -->
         <li class="nav-item">
-          <a href="#" class="nav-link text-white">Login</a>
+          <a href="/login" class="nav-link text-white">Login</a>
         </li>
       </ul>
     </div>

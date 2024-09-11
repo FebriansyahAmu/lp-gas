@@ -7,7 +7,7 @@ use App\Core\Database;
 class ProductModel {
     protected static $table = 'ec_gas';
     
-
+ 
     public static function findbyId($id){
         try{
             $db = Database::getConnection();

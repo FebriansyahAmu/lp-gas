@@ -3,7 +3,7 @@
         <h1 class="display-1">404</h1>
         <h2 class="display-4">Not Found</h2>
         <p class="lead">Halaman yang Anda cari tidak ditemukan.</p>
-        <a href="" class="text-decoration-none">Home</a>
+        <a href="/" class="text-decoration-none">Home</a>
     </div>
 </section>
 
