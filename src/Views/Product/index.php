@@ -57,38 +57,64 @@
                 </div>
 
                 <div class="col-md-6">
-                    <h2 class="mb-3 mb-5">Gas Elpiji 8 KG</h2>
-                    
-                    <div class="mb-4">
-                        <h4>Quantity</h4>
-                        <div class="quantity-controls">
-                            <button id="decrement">-</button>
-                            <input id="quantity" type="text" value="1" readonly>
-                            <button id="increment">+</button>
-                        </div>
-                    </div>
-                    
-                    <div class="">
-                        <h4>Metode Pengambilan</h4>
-                        <select id="delivery-option" class="form-select">
-                            <option value="regular">Ambil di tempat</option>
-                            <option value="delivery">Diantar langsung</option>
-                        </select>
-                    </div>
-                    
-                    <div class="delivery-info mb-4">
-                        <p class="fst-italic">Ambil di tempat, Pemesan mengambil pesanan langsung di pangkalan</p>
-                        <p class="fst-italic">Diantar langsung, kami akan mengantar di rumah anda dengan biaya per gas Rp.2000</p>
-                    </div>
-                    
-                    <div class="mb-4 ttl-hrga">
-                        <h4>Harga</h4>
-                        <p id="delivery-fee" style="display: none;">Biaya Delivery: Rp 0</p>
-                        <p id="total-price">Rp 0</p>
-                    </div>
+                <form action="/checkout" method="POST" id="checkout-form" class="needs-validation" novalidate>
+                    <div class="col-md-10">
+                        <h2 class="mb-3 mb-5">Gas Elpiji 8 KG</h2>
 
-                    <button class="checkout-btn">Checkout</button>
-                </div>
+                        <div class="mb-4">
+                            <h4>Quantity</h4>
+                            <div class="quantity-controls d-flex">
+                                <button type="button" id="decrement" class="btn btn-outline-secondary">-</button>
+                                <input id="quantity" name="quantity" type="text" class="form-control mx-2 text-center" value="1" readonly required>
+                                <button type="button" id="increment" class="btn btn-outline-secondary">+</button>
+                                <div class="invalid-feedback">Jumlah harus minimal 1.</div>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <h4>Metode Pengambilan</h4>
+                            <select id="delivery-option" name="delivery_method" class="form-select" required>
+                                <option value="" disabled selected>Pilih metode pengambilan</option>
+                                <option value="regular">Ambil di tempat</option>
+                                <option value="delivery">Diantar langsung</option>
+                            </select>
+                            <div class="invalid-feedback">Silakan pilih metode pengambilan.</div>
+                        </div>
+
+                        <div class="delivery-info mb-4">
+                            <p class="fst-italic">Ambil di tempat, Pemesan mengambil pesanan langsung di pangkalan</p>
+                            <p class="fst-italic">Diantar langsung, kami akan mengantar di rumah anda dengan biaya per gas Rp.2000</p>
+                        </div>
+
+                        <div class="mb-4 ttl-hrga">
+                            <h4>Harga</h4>
+                            <p id="delivery-fee" style="display: none;">Biaya Delivery: Rp 0</p>
+                            <p id="total-price">Rp 0</p>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Checkout</button>
+                    </div>
+                </form>
+
+                <script>
+                    // Bootstrap's validation
+                    (function () {
+                        'use strict'
+                        var forms = document.querySelectorAll('.needs-validation')
+
+                        Array.prototype.slice.call(forms).forEach(function (form) {
+                            form.addEventListener('submit', function (event) {
+                                if (!form.checkValidity()) {
+                                    event.preventDefault()
+                                    event.stopPropagation()
+                                }
+
+                                form.classList.add('was-validated')
+                            }, false)
+                        })
+                    })();
+                </script>
+
             </div>
         </div>
     </section>

@@ -4,6 +4,8 @@ use App\Controllers\HomeController;
 use App\Controllers\AuthController;
 use App\Controllers\ProductController;
 use App\Controllers\AdminController;
+use App\Controllers\AccountController;
+use App\Middleware\AuthMiddleWare;
 use App\Router;
 
 $router = new Router();
@@ -21,12 +23,20 @@ $router->post('/auth/login', AuthController::class, 'loginAct');
 //product
 $router->get('/product/{id}', ProductController::class, 'product');
 $router->get('/api/product/{id}', ProductController::class, 'getProduct');
+$router->get('/api/products', ProductController::class, 'getAllProduct');
 
-
-$router->get('/dashboard', AdminController::class, 'dashboard', [
-    'class' => \App\Middleware\AuthMiddleware::class,
+//account
+$router->get('/Account', AccountController::class, 'index', [
+    'class' => AuthMiddleWare:: class,
     'role' => 'user'
 ]);
+
+$router->get('/dashboard', AdminController::class, 'dashboard', [
+    'class' => AuthMiddleware::class,
+    'role' => 'user'
+]);
+
+
 
 
 

@@ -4,7 +4,7 @@ namespace App\Controllers;
 use App\Controller;
 use App\Middleware\AuthMiddleware;
 
-class HomeController extends Controller
+class AccountController extends Controller
 {
     protected $authMiddleware;
 
@@ -15,7 +15,7 @@ class HomeController extends Controller
     public function index()
     {
         $isLoggedIn = $this->authMiddleware->handle();
-        $this->render('/Home/index', ['isLoggedIn' => $isLoggedIn] );
+        $this->render('/Account/index', ['isLoggedIn' => $isLoggedIn] );
     }
 
 }

@@ -7,6 +7,7 @@ use Firebase\JWT\ExpiredException;
 use Firebase\JWT\SignatureInvalidException;
 
 class AuthMiddleware {
+    
     public static function checkAuth($role = null) {
         try {
             // Periksa apakah cookie `authToken` ada
@@ -66,5 +67,22 @@ class AuthMiddleware {
             ]);
             exit;
         }
+    }
+
+    public function handle(){
+        $isLoggedIn = false;
+        if(isset($_COOKIE['authToken'])){
+            try{
+                $token = $_COOKIE['authToken'];
+                $userData = JwtHelper::validateToken('$token');
+                if($userData){
+                    $isLoggedIn = true;
+                }
+            }catch(\Exception $e){
+                error_log($e->getMessage());
+            }
+        }
+
+        return $isLoggedIn;
     }
 }
