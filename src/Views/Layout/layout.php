@@ -13,7 +13,7 @@
 <body>
 
 <main>
-<?php component('navbar'); ?>
+<?php component('navbar', ['isLoggedIn' => $isLoggedIn]); ?>
 <?php component('whatsapme'); ?>
     <div class="">
         <?php echo $content; ?>

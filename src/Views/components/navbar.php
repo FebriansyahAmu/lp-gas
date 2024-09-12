@@ -29,15 +29,29 @@
         <li class="nav-item">
           <a class="nav-link" href="#">Contact</a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a href="#" class="nav-link text-white">
             <i class="fa-solid fa-cart-shopping"></i>
           </a>
-        </li>
+        </li> -->
         <!-- Login Link -->
-        <li class="nav-item">
-          <a href="/login" class="nav-link text-white">Login</a>
-        </li>
+        <ul class="navbar-nav ">
+                <?php if ($isLoggedIn): ?>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Account
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="profileDropdown">
+                            <li><a class="dropdown-item" href="/purchase-history">Purchase History</a></li>
+                            <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                        </ul>
+                    </li>
+                <?php else: ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Login</a>
+                    </li>
+                <?php endif; ?>
+            </ul>
       </ul>
     </div>
   </div>
@@ -47,3 +61,20 @@
       color: red !important;
     }
   </style> -->
+<style>
+  /* Styling untuk dropdown menu */
+.navbar .dropdown-menu {
+    border-radius: 0.25rem;
+    padding: 0;
+    margin: 0;
+}
+
+.navbar .dropdown-menu .dropdown-item {
+    padding: 0.5rem 1rem;
+}
+
+.navbar .dropdown-menu .dropdown-item:hover {
+    background-color: #f8f9fa;
+}
+
+</style>

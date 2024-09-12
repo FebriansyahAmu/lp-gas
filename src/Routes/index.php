@@ -25,7 +25,7 @@ $router->get('/api/product/{id}', ProductController::class, 'getProduct');
 
 $router->get('/dashboard', AdminController::class, 'dashboard', [
     'class' => \App\Middleware\AuthMiddleware::class,
-    'role' => 'admin'
+    'role' => 'user'
 ]);
 
 

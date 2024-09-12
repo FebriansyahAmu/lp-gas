@@ -1,5 +1,4 @@
 <?php
-
 namespace App;
 
 class Controller
@@ -24,10 +23,13 @@ class Controller
                 $layoutPath = __DIR__ . '/Views/' . $layout . '.php';
                 
                 if (file_exists($layoutPath)) {
+                    // Mulai output buffering untuk menangkap output view
                     ob_start();
                     include $viewPath;
                     $content = ob_get_clean(); // Menyimpan konten view
-                    include $layoutPath; // Menyertakan layout dengan konten view
+
+                    // Kirim data ke layout, termasuk konten view
+                    include $layoutPath;
                 } else {
                     throw new \Exception("Layout not found: " . $layoutPath);
                 }
