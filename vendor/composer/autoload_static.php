@@ -23,6 +23,10 @@ class ComposerStaticInit18443e750f04449a9a7d3aa419d67b99
         array (
             'PhpOption\\' => 10,
         ),
+        'M' => 
+        array (
+            'Midtrans\\' => 9,
+        ),
         'G' => 
         array (
             'GrahamCampbell\\ResultType\\' => 26,
@@ -57,6 +61,10 @@ class ComposerStaticInit18443e750f04449a9a7d3aa419d67b99
         'PhpOption\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpoption/phpoption/src/PhpOption',
+        ),
+        'Midtrans\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/midtrans/midtrans-php/Midtrans',
         ),
         'GrahamCampbell\\ResultType\\' => 
         array (

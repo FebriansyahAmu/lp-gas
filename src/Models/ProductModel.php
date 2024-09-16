@@ -49,6 +49,14 @@ class ProductModel {
         }
     }
 
+    public static function checkStok($id){
+        $product = self::findById($id);
+        if($product && $product['Stok'] > 0){
+            return true;
+        }
+        return false;
+    }
+
 //     public function getProduct($id){
 //     try {
 //         // Cek apakah permintaan adalah AJAX atau API request

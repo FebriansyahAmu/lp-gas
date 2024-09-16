@@ -5,11 +5,20 @@ use App\Controller;
 use App\Models\User;
 
 use App\Helpers\JwtHelper;
+use App\Middleware\AuthMiddleware;
 
 
 
 class AuthController extends Controller
 {
+
+    protected $authMiddleware;
+
+    public function __construct(){
+        parent::__construct();
+        $this->authMiddleware = new AuthMiddleware();
+    }
+
     public function login()
     {
         $data = []; 
@@ -25,9 +34,9 @@ class AuthController extends Controller
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
             try{
                 $data = [
-                    'namalengkap' => filter_input(INPUT_POST, 'namalengkap', FILTER_SANITIZE_STRING),
+                    'namalengkap' => filter_input(INPUT_POST, 'namalengkap', FILTER_SANITIZE_SPECIAL_CHARS),
                     'email' => filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL),
-                    'phone' => filter_input(INPUT_POST, 'phone', FILTER_SANITIZE_STRING),
+                    'phone' => filter_input(INPUT_POST, 'phone', FILTER_SANITIZE_SPECIAL_CHARS),
                     'password' => filter_input(INPUT_POST, 'password', FILTER_DEFAULT),
                 ];
 
@@ -82,7 +91,7 @@ class AuthController extends Controller
     public function loginAct(){
         try{
             if($_SERVER['REQUEST_METHOD'] !== 'POST'){
-                throw new Exception('Method not allowd', 405);
+                throw new Exception('Method not allowed', 405);
             }
 
             $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
@@ -100,7 +109,6 @@ class AuthController extends Controller
              $data = [
                 'id' => $user['user_id'],
                 'namalengkap' => $user['Nama_lengkap'],
-                'nohp' => $user['No_Hp'],
                 'role' => $user['role']
              ];
 
@@ -127,6 +135,37 @@ class AuthController extends Controller
                 'status' => 'error',
                 'message'=> $e->getMessage()
             ]);
+        }
+    }
+
+    public function checkAuthStatus(){
+        try{
+            $this->checkRefer();
+            $auth =  $this->authMiddleware->handle();
+            if($auth){
+                echo json_encode([
+                    "auth" => true
+                ]);
+            }else{
+                http_response_code(401);
+                echo json_encode([
+                    "auth" => false
+                ]);
+            }
+        }catch(Exception $e){
+            http_response_code(500);
+            echo json_encode([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
+    private function checkRefer(){
+        $allowedReferer = "http://localhost:3000";
+        if (!isset($_SERVER['HTTP_REFERER']) || strpos($_SERVER['HTTP_REFERER'], $allowedReferer) === false) {
+           header('Location: /');
+           exit;
         }
     }
 }

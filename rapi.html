@@ -1,180 +1,165 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pangkalan Gas Abdulah</title>
+<!-- Section 1: Hero Section -->
+<section
+  class="home w-100 vh-100 d-flex justify-content-center align-items-center bg-cover-with-overlay"
+  style="background: radial-gradient(circle at right, #b8ced6, #3f3b3e)"
+>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-7 col-12 text-md-start text-center">
+        <h1 class="display-4">Welcome to Our Website!</h1>
+        <p class="lead">
+          This is a simple responsive website template with a clean and modern
+          design.
+        </p>
+        <a href="#" class="btn btn-primary">Daftar Sekarang</a>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!--Bootstrap-->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-      crossorigin="anonymous"
-    />
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    <section
-      class=""
-      style="background: radial-gradient(circle at left top, #0d6efd, #e0c9c2)"
-    >
-      <div class="container h-100">
-        <div
-          class="row d-flex align-items-center justify-content-center h-100 p-2"
-        >
-          <div
-            class="col-md-12 col-lg-5 col-xl-6 p-5 rounded"
-            style="background-color: rgba(0, 0, 0, 0.6); overflow: hidden"
-          >
-            <h2 class="mb-3 text-center text-light">Register</h2>
-            <p class="text-light">Please provide valid information</p>
-            <form class="row g-3 needs-validation" novalidate>
-              <div class="col-12 text-light">
-                <label for="validationCustom01" class="form-label"
-                  >Nama Lengkap</label
-                >
-                <input
-                  type="text"
-                  class="form-control"
-                  id="validationCustom01"
-                  required
-                />
-                <div class="invalid-feedback">Please provide a valid name.</div>
-              </div>
-
-              <div class="col-12 text-light">
-                <label for="validationCustom02" class="form-label">Email</label>
-                <input
-                  type="email"
-                  class="form-control"
-                  id="validationCustom02"
-                  required
-                />
-                <div class="invalid-feedback">
-                  Please provide a valid email.
-                </div>
-              </div>
-
-              <div class="col-12 text-light">
-                <label for="validationCustom03" class="form-label">No Hp</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="validationCustom03"
-                  required
-                />
-                <div class="invalid-feedback">
-                  Please provide a valid phone number.
-                </div>
-              </div>
-
-              <!-- Password field with show/hide functionality -->
-              <div class="col-12 position-relative text-light">
-                <label for="password" class="form-label">Password</label>
-                <div class="input-group">
-                  <input
-                    type="password"
-                    class="form-control"
-                    id="password"
-                    required
-                  />
-                  <span
-                    class="input-group-text"
-                    onclick="togglePassword('password', 'togglePasswordIcon')"
-                  >
-                    <i id="togglePasswordIcon" class="fas fa-eye"></i>
-                  </span>
-                </div>
-                <div class="invalid-feedback">
-                  Please provide a valid password.
-                </div>
-              </div>
-
-              <!-- Confirm password field with show/hide functionality -->
-              <div class="col-12 position-relative text-light">
-                <label for="confirmPassword" class="form-label"
-                  >Konfirmasi Password</label
-                >
-                <div class="input-group">
-                  <input
-                    type="password"
-                    class="form-control"
-                    id="confirmPassword"
-                    required
-                  />
-                  <span
-                    class="input-group-text"
-                    onclick="togglePassword('confirmPassword', 'toggleConfirmPasswordIcon')"
-                  >
-                    <i id="toggleConfirmPasswordIcon" class="fas fa-eye"></i>
-                  </span>
-                </div>
-                <div class="invalid-feedback">
-                  Please confirm your password.
-                </div>
-              </div>
-
-              <div class="col-12 d-flex justify-content-center">
-                <button class="btn btn-md btn-primary px-4 py-2" type="submit">
-                  Register
-                </button>
-              </div>
-            </form>
+<!-- Section 2: List Gas -->
+<section
+  class="d-flex justify-content-center align-items-center py-5"
+  style="background-color: #f9f9f9; min-height: 120vh"
+>
+  <div class="container">
+    <div class="d-flex justify-content-center mb-4">
+      <h1 class="text-black">In Sale</h1>
+    </div>
+    <p class="mb-5 text-center">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus ab
+      velit est! Accusantium vitae ex provident, a.
+    </p>
+    <div class="row">
+      <!-- Card 1 -->
+      <div class="col-md-4 col-sm-6 col-12 mb-4">
+        <div class="card shadow-lg hover-shadow zoom-effect">
+          <img class="card-img-top img-fluid" src="img/gas.jpeg" alt="Gas 1" />
+          <div class="card-body">
+            <div class="text-center">
+              <span class="badge text-bg-success text-center fs-6"
+                >Rp.18.000</span
+              >
+            </div>
+            <h5 class="card-title">Gas Type 1</h5>
+            <p class="card-text">Quick description about gas type 1.</p>
+            <div class="d-flex justify-content-center">
+              <a href="/product/1" class="btn btn-primary p-2 mb-4"
+                >Pesan Sekarang</a
+              >
+            </div>
           </div>
         </div>
       </div>
-    </section>
-  </body>
+      <!-- Card 2 -->
+      <div class="col-md-4 col-sm-6 col-12 mb-4">
+        <div class="card shadow-lg hover-shadow zoom-effect">
+          <img class="card-img-top img-fluid" src="img/gas.jpeg" alt="Gas 2" />
+          <div class="card-body">
+            <div class="text-center">
+              <span class="badge text-bg-success text-center fs-6"
+                >Rp.18.000</span
+              >
+            </div>
+            <h5 class="card-title">Gas Type 2</h5>
+            <p class="card-text">Quick description about gas type 2.</p>
+            <div class="d-flex justify-content-center">
+              <a href="/product/2" class="btn btn-primary p-2 mb-4"
+                >Pesan Sekarang</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Card 3 -->
+      <div class="col-md-4 col-sm-6 col-12 mb-4">
+        <div class="card shadow-lg hover-shadow zoom-effect">
+          <img class="card-img-top img-fluid" src="img/gas.jpeg" alt="Gas 3" />
+          <div class="card-body">
+            <div class="text-center">
+              <span class="badge text-bg-success text-center fs-6"
+                >Rp.18.000</span
+              >
+            </div>
+            <h5 class="card-title">Gas Type 3</h5>
+            <p class="card-text">Quick description about gas type 3.</p>
+            <div class="d-flex justify-content-center mb-4">
+              <a href="/product/3" class="btn btn-primary p-2"
+                >Pesan Sekarang</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <script>
-    (() => {
-      "use strict";
-      const forms = document.querySelectorAll(".needs-validation");
-      Array.from(forms).forEach((form) => {
-        form.addEventListener(
-          "submit",
-          (event) => {
-            if (!form.checkValidity()) {
-              event.preventDefault();
-              event.stopPropagation();
-            }
+<!-- Section 3: About Us -->
+<section
+  class="w-100 bg-dark-subtle py-5 d-flex justify-content-center align-items-center"
+  style="min-height: 100vh"
+>
+  <div class="container">
+    <div class="row align-items-center">
+      <!-- Kolom kiri: About Us -->
+      <div class="col-md-6 text-black mb-4 mb-md-0">
+        <h2 class="mb-4">About Us</h2>
+        <p>
+          Kami adalah perusahaan yang bergerak di bidang distribusi gas,
+          menyediakan berbagai jenis gas untuk kebutuhan rumah tangga dan
+          industri. Kami berkomitmen untuk memberikan layanan terbaik dengan
+          produk berkualitas tinggi.
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus,
+          itaque. Amet asperiores odio illum aliquam incidunt ex unde aperiam
+          dicta, autem est explicabo ipsa exercitationem nihil soluta odit
+          consequuntur accusamus.
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum
+          molestiae nesciunt accusamus non quis ad officia nisi! Nam, sunt ipsum
+          at, deleniti pariatur perspiciatis beatae ratione velit nisi officiis
+          repellat.
+        </p>
+      </div>
+      <!-- Kolom kanan: Gambar -->
+      <div class="col-md-6">
+        <img src="img/lpg-gas.jpg" alt="About Us Image" class="img-fluid" />
+      </div>
+    </div>
+  </div>
+</section>
 
-            form.classList.add("was-validated");
-          },
-          false
-        );
-      });
-    })();
-  </script>
-  <script>
-    function togglePassword(fieldId, iconId) {
-      const passwordField = document.getElementById(fieldId);
-      const icon = document.getElementById(iconId);
-
-      if (passwordField.type === "password") {
-        passwordField.type = "text";
-        icon.classList.remove("fa-eye");
-        icon.classList.add("fa-eye-slash");
-      } else {
-        passwordField.type = "password";
-        icon.classList.remove("fa-eye-slash");
-        icon.classList.add("fa-eye");
-      }
-    }
-  </script>
-  <script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-    crossorigin="anonymous"
-  ></script>
-  <script
-    src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
-    integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
-  ></script>
-</html>
+<section class="w-100 py-5">
+  <div class="container">
+    <div class="row align-items-center">
+      <!-- Kolom kiri: About Us -->
+      <div class="col-md-8 text-black mb-4 mb-md-0">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d296.52111372334923!2d124.30035815544517!3d0.7275439208993522!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x327e3d119fd60439%3A0x567152c26e8947ae!2sPangkalan%20Gas%20Elpiji%20Abdul%20Rahman!5e0!3m2!1sid!2sid!4v1725873169895!5m2!1sid!2sid"
+          height="450"
+          style="border: 0; width: 100%"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+      </div>
+      <!-- Kolom kanan: Gambar -->
+      <div class="col-md-4">
+        <h3 class="mb-3">Contact Us</h3>
+        <p>
+          <strong>Pangkalan Gas Elpiji AbdulRahman</strong><br />
+          Jalan Veteran, Kelurahan Motoboi Kecil<br />
+          Kecamatan Kotamobagu Selatan<br />
+        </p>
+        <p>
+          <strong>Email:</strong>
+          <a href="mailto:contact@example.com">contact@example.com</a>
+        </p>
+        <p><strong>Phone:</strong> +62 812 3456 7890</p>
+      </div>
+    </div>
+  </div>
+</section>

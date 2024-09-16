@@ -58,21 +58,35 @@ class ProductController extends Controller
         }
     }
 
-    public function getAllProduct(){
-        try{
-            $product = ProductModel::getAll();
+    public function getAllProduct() {
+        try {
+            // Set header CORS
+            header("Access-Control-Allow-Origin: http://localhost:3000"); // Ganti sesuai dengan URL situs kamu
+            header("Access-Control-Allow-Methods: GET");
+            header("Access-Control-Allow-Headers: Content-Type");
 
-            if($product){
+            if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+                http_response_code(200);
+                exit();
+            }
+
+            $allowedReferer = "http://localhost:3000"; // Ganti sesuai dengan URL situs kamu
+            if (!isset($_SERVER['HTTP_REFERER']) || strpos($_SERVER['HTTP_REFERER'], $allowedReferer) === false) {
+                throw new \Exception("Akses tidak diizinkan", 403);
+            }
+            $product = ProductModel::getAll();
+    
+            if ($product) {
                 header('Content-Type: application/json');
                 echo json_encode([
                     'status' => 'success',
                     'data' => $product
                 ]);
-            }else{
+            } else {
                 throw new \Exception("Product tidak ditemukan", 404);
             }
-
-        }catch(\Exception $e){
+    
+        } catch (\Exception $e) {
             header('Content-Type: application/json');
             http_response_code($e->getCode() ?: 500);
             echo json_encode([
@@ -81,5 +95,7 @@ class ProductController extends Controller
             ]);
         }
     }
+    
+    
   
 }
