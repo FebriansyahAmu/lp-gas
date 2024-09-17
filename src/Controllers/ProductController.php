@@ -70,10 +70,10 @@ class ProductController extends Controller
                 exit();
             }
 
-            $allowedReferer = "http://localhost:3000"; // Ganti sesuai dengan URL situs kamu
-            if (!isset($_SERVER['HTTP_REFERER']) || strpos($_SERVER['HTTP_REFERER'], $allowedReferer) === false) {
-                throw new \Exception("Akses tidak diizinkan", 403);
-            }
+            // $allowedReferer = "http://localhost:3000"; // Ganti sesuai dengan URL situs kamu
+            // if (!isset($_SERVER['HTTP_REFERER']) || strpos($_SERVER['HTTP_REFERER'], $allowedReferer) === false) {
+            //     throw new \Exception("Akses tidak diizinkan", 403);
+            // }
             $product = ProductModel::getAll();
     
             if ($product) {

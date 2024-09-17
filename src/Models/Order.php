@@ -71,8 +71,8 @@ Class Order{
             $db = Database::getConnection();
             $db->begin_transaction();
 
-            $stmt = $db->prepare("INSERT INTO " . self::$table . " (user_id, id_gas, id_alamat, Qty, delivery_method, delivery_fee, totalharga, status)
-                                  VALUES(?,?,?,?,?,?,?,?)");
+            $stmt = $db->prepare("INSERT INTO " . self::$table . " (id_Order, user_id, id_gas, id_alamat, Qty, delivery_method, delivery_fee, totalharga, status)
+                                  VALUES(?,?,?,?,?,?,?,?,?)");
     
             if (!$stmt) {
                 throw new \Exception("Failed to prepare statement: " . $db->error);
@@ -80,7 +80,8 @@ Class Order{
     
             // Binding parameter
             $stmt->bind_param(
-                'iiiisiis', 
+                'siiiisiis',
+                $data['order_id'], 
                 $data['id_user'], 
                 $data['productId'], 
                 $data['alamat'], 
@@ -135,28 +136,29 @@ Class Order{
     }
 
 
-    public static function updateOrderStatus($order_id, $status){
-        try{
-            $db = Database::getConection();
-            $stmt = $db->prepare("UPDATE " . self::$table . " SET status = ? WHERE order_id = ?");
+ public static function updateOrderStatus($order_id, $status){
+    try{
+        $db = Database::getConnection(); // Pastikan ini adalah metode yang benar
+        $stmt = $db->prepare("UPDATE " . self::$table . " SET status = ? WHERE id_Order = ?");
 
-            if(!$stmt){
-                throw new \Exception("Failed to prepare statement", $db->error);
-            }
-
-            $stmt->bin_param("is", $order_id, $status);
-            $success = $stmt->execute();
-
-            if(!$success){
-                throw new \Exception("Failed to execute statement", $stmt->error);
-            }
-
-            return true;
-        }catch(\Exception $e){
-            error_log($e->getMessage());
-            return false;
+        if(!$stmt){
+            throw new \Exception("Failed to prepare statement: " . $db->error);
         }
+
+        $stmt->bind_param("ss", $status, $order_id); // Perhatikan urutan parameter
+        $success = $stmt->execute();
+
+        if(!$success){
+            throw new \Exception("Failed to execute statement: " . $stmt->error);
+        }
+
+        return true;
+    }catch(\Exception $e){
+        error_log($e->getMessage()); // Cek log untuk pesan error
+        return false;
     }
+}
+
 
     
 

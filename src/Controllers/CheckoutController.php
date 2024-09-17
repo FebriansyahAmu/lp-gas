@@ -20,6 +20,8 @@ class CheckoutController extends Controller{
                 $userData = AuthMiddleware::checkAuth();
                 $userId = $userData['id'];
 
+                $orderId = uniqid('ORDER-', true);
+
                 $data = [
                     'productId' => filter_input(INPUT_POST, 'Id_gas', FILTER_VALIDATE_INT),
                     'id_user' => $userId,
@@ -29,17 +31,9 @@ class CheckoutController extends Controller{
                     'submittedTotalHarga' => filter_input(INPUT_POST, 'total_harga', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION),
                     'deliveryFee' => filter_input(INPUT_POST, 'delivery_fee', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION),
                     'status' => 'pending',
+                    'order_id' => $orderId
                 ];
 
-                //check stok apakah tersedia atau tidak
-                // $checkStok = ProductModel::checkStok($data['productId']);
-                // if(!$checkStok){
-                //     http_response_code(400);
-                //     echo json_encode([
-                //         'status' => 'error',
-                //         'message' => 'Stok produk habis'
-                //     ]);
-                // }
 
                 //validasi data input 
                 $validationResult = Order::validateOrder($data);
@@ -51,24 +45,8 @@ class CheckoutController extends Controller{
 
                 $createOrder = Order::createOrder($data);
 
-                // if ($createOrder) {
-                //     http_response_code(201);
-                //     echo json_encode([
-                //         'status' => 'success',
-                //         'message' => 'Order created successfully'
-                //     ]);
-                // } else {
-                //     http_response_code(400);
-                //     echo json_encode([
-                //         'status' => 'error',
-                //         'message' => 'Failed to create order'
-                //     ]);
-                // }
-
-                //Integrasi dengan midtrans
-                //parameter untuk transaksi
                 $transactionDetails = [
-                    'order_id' => uniqid('ORDER-', true),
+                    'order_id' => $orderId,
                     'gross_amount' => $data['submittedTotalHarga']
                 ];
 
@@ -109,4 +87,36 @@ class CheckoutController extends Controller{
             }
         }
     }
+
+
+    public function handleNotification(){
+        try{
+            $jsonResult = file_get_contents('php://input');
+            $notification = json_decode($jsonResult);
+
+            $transactionStatus = $notification->transaction_status;
+            $orderId = $notification->order_id;
+
+            // Periksa status transaksi dan update status pesanan di database
+            if($transactionStatus == 'capture' || $transactionStatus == 'settlement'){
+                    Order::updateOrderStatus($orderId, 'paid');
+                } elseif ($transactionStatus == 'pending') {
+                    Order::updateOrderStatus($orderId, 'pending');
+                } elseif ($transactionStatus == 'deny' || $transactionStatus == 'expire' || $transactionStatus == 'cancel') {
+                    Order::updateOrderStatus($orderId, 'failed');
+                }
+
+            // Response ke Midtrans
+            header('Content-Type: application/json');
+            return json_encode(['status' => 'success']);
+        }catch(\Exception $e){
+            http_response_code(500);
+            echo json_encode([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
+
 }

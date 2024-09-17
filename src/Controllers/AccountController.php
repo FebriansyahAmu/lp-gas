@@ -56,7 +56,7 @@ class AccountController extends Controller
     public function getAlamatbyUser(){
         try{
 
-            $this->checkRefer();
+            // $this->checkRefer();
 
             $userData = AuthMiddleware::checkAuth();
             $userId = $userData['id'];

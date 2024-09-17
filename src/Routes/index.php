@@ -44,11 +44,14 @@ $router->get('/Alamat', AccountController::class, 'getAlamatbyUser', [
     'role' => 'user'
 ]);
 
+
 //chechkouts
 $router->post('/checkout', CheckoutController::class, 'checkout', [
     'class' => AuthMiddleware::class,
     'role' => 'user'
 ]);
+
+$router->post('/payment-notif', CheckoutController::class, 'handleNotification');
 
 //admin routes
 $router->get('/dashboard', AdminController::class, 'dashboard', [
