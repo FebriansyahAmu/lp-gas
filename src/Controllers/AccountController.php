@@ -89,12 +89,29 @@ class AccountController extends Controller
     }
 
 
-    public function putAlamatbyID($id){
+    public function editAlamat(){
         try{
             $userData = AuthMiddleware::checkAuth();
             $userId = $userData['id'];
 
-            $putAlamat = Alamat::putAlamatbyID($id, $userId);
+            $input = file_get_contents("php://input");
+            $putVars = json_decode($input, true);
+            
+            $data = [
+                'iduser' => $userId,
+                'idAlamat' => filter_var($putVars['id_Alamat'], FILTER_SANITIZE_NUMBER_INT),
+                'Detail_alamat' => filter_var($putVars['Detail_alamat'], FILTER_SANITIZE_SPECIAL_CHARS),
+                'Description' => filter_var($putVars['Description'], FILTER_SANITIZE_SPECIAL_CHARS)
+            ];
+            
+            // $data = [
+            //     'iduser' => $userId,
+            //     'idAlamat' => filter_input(INPUT_POST['id_Alamat'], FILTER_SANITIZE_NUMBER_INT),
+            //     'Detail_alamat' => filter_input(INPUT_POST['Detail_alamat'], FILTER_SANITIZE_SPECIAL_CHARS),
+            //     'Description' => filter_input(INPUT_POST['Description'], FILTER_SANITIZE_SPECIAL_CHARS)
+            // ];
+
+            $putAlamat = Alamat::putAlamatByUID($data);
             if($putAlamat){
                 echo json_encode([
                     'status' => 'success',

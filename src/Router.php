@@ -32,7 +32,7 @@ class Router {
         $this->addRoute($route, $controller, $action, "POST", $middleware);
     }
 
-    public function pu($route, $controller, $action, $middleware = null){
+    public function put($route, $controller, $action, $middleware = null){
         $this->addRoute($route, $controller, $action, "PUT", $middleware);
     }
 

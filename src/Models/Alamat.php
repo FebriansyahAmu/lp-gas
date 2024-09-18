@@ -16,7 +16,7 @@ class Alamat{
                 throw new \Exception("Failed to create statement", $db->error);   
             }
 
-            $stmt->bind_param("iss", $data['id_user'], $data['Detail_alamat'], $data['Description']);
+            $stmt->bind_param("iss", $data['userId'], $data['Detail_alamat'], $data['Description']);
             $success = $stmt->execute();
             if(!$success){
                 throw new \Exception("Failed to execute query", $stmt->error);
@@ -46,7 +46,7 @@ class Alamat{
                 throw new \Exception("Failed to create statement", $stmt->error);
             }
 
-            return $result->fetch_assoc();
+            return $result->fetch_all(MYSQLI_ASSOC);
         }catch(\Exception $e){
             error_log($e->getMessage());
             return false;
@@ -72,6 +72,29 @@ class Alamat{
 
             return $result->fetch_assoc();
 
+        }catch(\Exception $e){
+            error_log($e->getMessage());
+            return false;
+        }
+    }
+
+    public static function putAlamatByUID($data){
+        try{
+            $db = Database::getConnection();
+            
+            $stmt = $db->prepare("UPDATE " . self::$table . " SET Detail_alamat = ?, Description = ? WHERE id_Alamat = ? AND id_user = ?");
+            if(!$stmt){
+                throw new \Exception("Failed to prepare statement", $db->error);
+            }
+
+            $stmt->bind_param("ssii", $data['Detail_alamat'], $data['Description'], $data['iduser'], $data['ídAlamat']);
+            
+            $result = $stmt->execute();
+            if(!$result){
+                throw new \Exception("Failed to execute query", $stmt->error);
+            }
+
+            return true;
         }catch(\Exception $e){
             error_log($e->getMessage());
             return false;

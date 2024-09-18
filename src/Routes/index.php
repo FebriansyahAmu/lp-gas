@@ -36,12 +36,14 @@ $router->get('/account', AccountController::class, 'index', [
     'role' => 'user'
 ]);
 
+
+//router untuk handle alamat
 $router->get('/account/alamat', AccountController::class, 'indexAlamat', [
     'class' => AuthMiddleware::class,
     'role' => 'user'
 ]);
 
-$router->post('/Addresses', AccountController::class, 'Alamat', [
+$router->post('/Alamat/Create', AccountController::class, 'Alamat', [
     'class' => AuthMiddleware::class,
     'role' => 'user'
 ]);
@@ -51,6 +53,11 @@ $router->get('/Alamat', AccountController::class, 'getAlamatbyUser', [
 ]);
 
 $router->get('/Alamat/{id}', AccountController::class, 'getAlamatbyID', [
+    'class' => AuthMiddleware::class,
+    'role' => 'user'
+]);
+
+$router->put('/Alamat/Edit', AccountController::class, 'editAlamat', [
     'class' => AuthMiddleware::class,
     'role' => 'user'
 ]);
