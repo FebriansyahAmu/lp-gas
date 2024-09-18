@@ -4,6 +4,7 @@ namespace App\Controllers;
 use App\Controller;
 use App\Middleware\AuthMiddleware;
 use App\Models\Alamat;
+use App\Models\Order;
 
 class AccountController extends Controller
 {
@@ -33,11 +34,15 @@ class AccountController extends Controller
             $userData = AuthMiddleware::checkAuth();
             $userId = $userData['id'];
 
+            $input = file_get_contents("php://input");
+            $putVars = json_decode($input, true);
+            
             $data = [
                 'userId' => $userId,
-                'Detail_alamat' =>  filter_input(INPUT_POST, "Detail_alamat", FILTER_SANITIZE_FULL_SPECIAL_CHARS),
-                'Description' => filter_input(INPUT_POST, "Description", FILTER_SANITIZE_FULL_SPECIAL_CHARS)
+                'Detail_alamat' => filter_var($putVars['Detail_alamat'], FILTER_SANITIZE_FULL_SPECIAL_CHARS),
+                'Description' => filter_var($putVars['Description'], FILTER_SANITIZE_FULL_SPECIAL_CHARS)
             ];
+            
 
             if(Alamat::createAlamat($data)){
                 http_response_code(201);
@@ -46,7 +51,7 @@ class AccountController extends Controller
                     'message' => 'Alamat berhasil dibuat'
                 ]);
             }else{
-                throw new Exception("Gagal membuat alamat");
+                throw new \Exception("Gagal membuat alamat");
             }
 
         }catch(\Exception $e){
@@ -95,22 +100,16 @@ class AccountController extends Controller
             $userId = $userData['id'];
 
             $input = file_get_contents("php://input");
-            $putVars = json_decode($input, true);
-            
+            $putVars = json_decode($input, true); // decode data JSON
+
+            // Pastikan ada validasi sebelum mengakses variabel
             $data = [
                 'iduser' => $userId,
-                'idAlamat' => filter_var($putVars['id_Alamat'], FILTER_SANITIZE_NUMBER_INT),
-                'Detail_alamat' => filter_var($putVars['Detail_alamat'], FILTER_SANITIZE_SPECIAL_CHARS),
-                'Description' => filter_var($putVars['Description'], FILTER_SANITIZE_SPECIAL_CHARS)
+                'idAlamat' => isset($putVars['id_Alamat']) ? filter_var($putVars['id_Alamat'], FILTER_SANITIZE_NUMBER_INT) : null,
+                'Detail_alamat' => isset($putVars['Detail_alamat']) ? filter_var($putVars['Detail_alamat'], FILTER_SANITIZE_SPECIAL_CHARS) : null,
+                'Description' => isset($putVars['Description']) ? filter_var($putVars['Description'], FILTER_SANITIZE_SPECIAL_CHARS) : null
             ];
-            
-            // $data = [
-            //     'iduser' => $userId,
-            //     'idAlamat' => filter_input(INPUT_POST['id_Alamat'], FILTER_SANITIZE_NUMBER_INT),
-            //     'Detail_alamat' => filter_input(INPUT_POST['Detail_alamat'], FILTER_SANITIZE_SPECIAL_CHARS),
-            //     'Description' => filter_input(INPUT_POST['Description'], FILTER_SANITIZE_SPECIAL_CHARS)
-            // ];
-
+        
             $putAlamat = Alamat::putAlamatByUID($data);
             if($putAlamat){
                 echo json_encode([
@@ -151,6 +150,63 @@ class AccountController extends Controller
                 echo json_encode([
                     'status' => 'error',
                    'message' => 'Alamat tidak ditemukan'
+                ]);
+            }
+
+        }catch(\Exception $e){
+            http_response_code(400);
+            echo json_encode([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
+    public function deleteAlamat($id){
+        try{
+            $userData = AuthMiddleware::checkAuth();
+            $userId = $userData['id'];
+
+            $deleteAlamat = Alamat::deleteAlamatByUID($id, $userId);
+            if($deleteAlamat){
+                echo json_encode([
+                    'status' => 'success',
+                    'message' => 'Alamat berhasil dihapus'
+                ]);
+            }else{
+                http_response_code(404);
+                echo json_encode([
+                    'status' => 'error',
+                   'message' => 'Alamat tidak ditemukan'
+                ]);
+            }
+
+        }catch(\Exception $e){
+            http_response_code(400);
+            echo json_encode([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
+
+    //Riwayat Pembelian
+    public function getRiwayatPembelian(){
+        try{
+            $userData = AuthMiddleware::checkAuth();
+            $userId = $userData['id'];
+
+            $riwayatPembelian = Order::getRiwayatByUID($userId);
+            if($riwayatPembelian){
+                echo json_encode([
+                    'data' => $riwayatPembelian
+                ]);
+            }else{
+                http_response_code(404);
+                echo json_encode([
+                    'status' => 'error',
+                   'message' => 'Riwayat pembelian tidak ditemukan'
                 ]);
             }
 

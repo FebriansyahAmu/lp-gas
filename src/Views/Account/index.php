@@ -12,9 +12,40 @@
             <!-- Home tab content -->
             <div class="tab-pane fade show active" id="tab1">
                 <h3>Riwayat Pembelian</h3>
-                <p>Welcome to the home tab! Here you can find some general information and updates.</p>
+                <div class="tab-content">
+            <!-- Home tab content -->
+            <div class="tab-pane fade show active" id="tab1">
+                <h3>List Riwayat Pembelian</h3>
+                <div class="mt-4">
+                    <table id="tabelRiwayatPembelian" class="display">
+                        <thead>
+                            <tr>
+                                <th>Order Id</th>
+                                <th>Jenis Gas</th>
+                                <th>Qty</th>
+                                <th>Total Harga</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
             </div>
 
         </div>
     </div>
 </section>
+
+<script>
+    $(document).ready(function(){
+
+    });
+
+
+</script>

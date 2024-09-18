@@ -384,8 +384,6 @@
         url : '/Alamat',
         type: 'GET',
         success: function(response){
-            console.log(response);  // Debugging untuk melihat data alamat yang diterima
-
             if (typeof response === "string") {
                 try {
                     response = JSON.parse(response);  // Parsing jika respons berupa string JSON
@@ -395,22 +393,28 @@
                 }
             }
             // Pastikan response.data ada
-            if (response && response.data) {
+            if (response && Array.isArray(response.data)) {
                 var addressSelect = document.getElementById('addr-select');
-                const alamat = response.data;
+                const alamatArray = response.data;
 
+                addressSelect.innerHTML = '<option value="" disabled selected>Pilih Alamat</option>';
+
+                alamatArray.forEach(alamat =>{
+                    const maxLength = 50;
+                    const fullText = `${alamat.Detail_alamat} - ${alamat.Description}`;
+                    const truncatedText = truncateText(fullText, maxLength);
+
+
+                    const option = document.createElement('option');
+                    option.value = alamat.id_Alamat;  // Mengambil id_Alamat dari response.data
+                    option.textContent = truncatedText;  // Menggabungkan Detail_alamat dan Description
+
+                    // Tambahkan ke select
+                    addressSelect.appendChild(option);
+                })
+                
                 // Buat option baru
-                const maxLength = 50;
-                const fullText = `${alamat.Detail_alamat} - ${alamat.Description}`;
-                const truncatedText = truncateText(fullText, maxLength);
-
-
-                const option = document.createElement('option');
-                option.value = alamat.id_Alamat;  // Mengambil id_Alamat dari response.data
-                option.textContent = truncatedText;  // Menggabungkan Detail_alamat dan Description
-
-                // Tambahkan ke select
-                addressSelect.appendChild(option);
+  
 
                 // Menampilkan elemen div jika belum terlihat
                 document.getElementById('address-option').style.display = 'block';

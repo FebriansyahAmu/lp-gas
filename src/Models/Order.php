@@ -160,6 +160,34 @@ Class Order{
 }
 
 
+    public static function getOrderByUID($userId){
+        try{
+            $db = Database::getConnection();
+            $stmt = $db->prepare("
+                            SELECT ec_order.id_Order, ec_gas.Jenis_gas, ec_order.Qty, ec_order.totalharga
+                            FROM " . self::$table . " 
+                            JOIN ". self::$tb_gas ." ON ec_order.id_gas = ec_gas.id_gas
+                            WHERE ec_order.user_id = ?
+                     ");
+            
+            if(!$stmt){
+                throw new \Exception("Failed to prepare statement: " . $db->error);
+            }
+
+            $stmt->bind_param("i", $userId);
+            $success = $stmt->execute();
+            if(!$success){
+                throw new \Exception("Failed to execute statement: " . $stmt->error);
+            }
+            return true;
+
+        }catch(\Exception $e){
+            error_log($e->getMessage());
+            return false;
+        }
+    }
+
+
     
 
 }

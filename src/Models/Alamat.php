@@ -84,13 +84,36 @@ class Alamat{
             
             $stmt = $db->prepare("UPDATE " . self::$table . " SET Detail_alamat = ?, Description = ? WHERE id_Alamat = ? AND id_user = ?");
             if(!$stmt){
-                throw new \Exception("Failed to prepare statement", $db->error);
+                throw new \Exception("Failed to prepare statement: " . $db->error);
             }
-
-            $stmt->bind_param("ssii", $data['Detail_alamat'], $data['Description'], $data['iduser'], $data['ídAlamat']);
+    
+            // Perbaiki urutan parameter dan pengetikan
+            $stmt->bind_param("ssii", $data['Detail_alamat'], $data['Description'], $data['idAlamat'], $data['iduser']);
             
             $result = $stmt->execute();
             if(!$result){
+                throw new \Exception("Failed to execute query: " . $stmt->error);
+            }
+    
+            return true;
+        } catch(\Exception $e) {
+            error_log($e->getMessage());
+            return false;
+        }
+    }
+
+    public static function deleteAlamatByUID($id, $userId){
+        try{
+            $db = Database::getConnection();
+
+            $stmt = $db->prepare("DELETE FROM " . self::$table . " WHERE id_Alamat = ? AND id_user = ?");
+            if(!$stmt){
+                throw new \Exception("Failed to create statement", $db->error);
+            }
+
+            $stmt->bind_param("ii", $id, $userId);
+            $success = $stmt->execute();
+            if(!$success){
                 throw new \Exception("Failed to execute query", $stmt->error);
             }
 
@@ -100,6 +123,7 @@ class Alamat{
             return false;
         }
     }
+    
 
 
 }

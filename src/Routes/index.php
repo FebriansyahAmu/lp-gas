@@ -62,6 +62,11 @@ $router->put('/Alamat/Edit', AccountController::class, 'editAlamat', [
     'role' => 'user'
 ]);
 
+$router->delete('/Alamat/Delete/{id}', AccountController::class, 'deleteAlamat', [
+    'class' => AuthMiddleware::class,
+    'role' => 'user'
+]);
+
 
 //chechkouts
 $router->post('/checkout', CheckoutController::class, 'checkout', [

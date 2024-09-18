@@ -78,7 +78,8 @@
         clearFormAlamat();
         getEditAlamatData();
         // submitFormAlamat();
-        submitFormAlamatUpdate();
+        submitFormAlamat();
+        deleteAlamat();
     });
 
     function tabelAlamats(){
@@ -166,98 +167,60 @@
     }
 
 
-    // function submitFormAlamat(){
-    //     $('#submitAlamat').click(function(){
-    //         $('#formAlamat').submit();
-    //     });
+    function deleteAlamat(){
+        $("#tabelAlamat").on('click', '.btn-delete', function(){
+            const idAlamat = $(this).data('id');
 
-    //     $('#formAlamat').submit(function(event){
-    //         event.preventDefault();
+            $.ajax({
+                url: '/Alamat/Delete/' + idAlamat,
+                method: 'DELETE',
+                success: function(response){
+                    alert('Alamat berhasil dihapus');
+                    $('#tabelAlamat').DataTable().ajax.reload();
+                },
+                error: function(xhr, status, error){
+                    alert('Terjadi kesalahan', + error);
+                }
+            })
+        })
+    }
 
-    //         const form = new FormData(this);
-    //         const idAlamat = $(this).data('id');
-
-    //         const url = idAlamat ? `/edit-alamat/${idAlamat}` : '/Alamat/Create';
-    //         const method = idAlamat ? 'PUT' : 'POST';
-
-
-    //        $.ajax({
-    //             url: url,
-    //             method: method,
-    //             data: form,
-    //             contentType: false, // Ini penting untuk FormData
-    //             processData: false,
-    //             success: function(response) {
-    //                 alert('Alamat berhasil' + (idAlamat ? 'diperbarui' : 'ditambahkan'));
-    //                 $('#alamatModal').hide('hide');
-    //                 $('#tabelAlamat').DataTable().ajax.reload(); // Pastikan ini sesuai dengan ID tabel
-    //             },
-    //             error: function(xhr, status, error) {
-    //                 alert('Terjadi kesalahan: ' + error);
-    //             }
-    //         });
-    //     })
-    // }
-
-    function submitFormAlamatCreate() {
-    $('#submitAlamat').click(function() {
-        $('#formAlamat').submit();
-    });
-
-    $('#formAlamat').submit(function(event) {
-        event.preventDefault();
-
-        const form = new FormData(this);
-        const url = '/Alamat/Create'; // Endpoint untuk menambahkan alamat
-
-        $.ajax({
-            url: url,
-            method: 'POST',
-            data: form,
-            contentType: false, // Ini penting untuk FormData
-            processData: false,
-            success: function(response) {
-                alert('Alamat berhasil ditambahkan');
-                $('#alamatModal').hide('hide');
-                $('#tabelAlamat').DataTable().ajax.reload(); // Pastikan ini sesuai dengan ID tabel
-            },
-            error: function(xhr, status, error) {
-                alert('Terjadi kesalahan: ' + error);
-            }
+    function submitFormAlamat(){
+        $('#submitAlamat').click(function(){
+            $('#formAlamat').submit();
         });
-    });
-}
 
+        $('#formAlamat').submit(function(event){
+            event.preventDefault();
 
-function submitFormAlamatUpdate() {
-    $('#submitAlamat').click(function() {
-        $('#formAlamat').submit();
-    });
+            const idAlamat = $(this).data('id');
 
-    $('#formAlamat').submit(function(event) {
-        event.preventDefault();
+            const url = idAlamat ? `/Alamat/Edit` : '/Alamat/Create';
+            const method = idAlamat ? 'PUT' : 'POST';
 
-        const form = new FormData(this);
-        const idAlamat = $(this).data('id');
-        form.append('id_Alamat', idAlamat);
+            const data = {
+                Detail_alamat: $('#detailAlamat').val(),
+                Description: $('#description').val(),
+                id_Alamat: idAlamat
+            };
 
-        $.ajax({
-            url: '/Alamat/Edit',
-            method: 'PUT',
-            data: form,
-            contentType: false, // Ini penting untuk FormData
-            processData: false,
-            success: function(response) {
-                alert('Alamat berhasil diperbarui');
-                $('#alamatModal').hide('hide');
-                $('#tabelAlamat').DataTable().ajax.reload(); // Pastikan ini sesuai dengan ID tabel
-            },
-            error: function(xhr, status, error) {
-                alert('Terjadi kesalahan: ' + error);
-            }
-        });
-    });
-}
+           $.ajax({
+                url: url,
+                method: method,
+                contentType: 'application/json',
+                data: JSON.stringify(data),
+                processData: false,
+                success: function(response) {
+                    alert('Alamat berhasil' + (idAlamat ? 'diperbarui' : 'ditambahkan'));
+                    $('#alamatModal').hide('hide');
+                    $('#tabelAlamat').DataTable().ajax.reload(); 
+                },
+                error: function(xhr, status, error) {
+                    alert('Terjadi kesalahan: ' + error);
+                }
+            });
+        })
+    }
 
 </script>
 
