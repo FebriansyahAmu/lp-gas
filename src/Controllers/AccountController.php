@@ -19,6 +19,11 @@ class AccountController extends Controller
         $this->render('/Account/index', ['isLoggedIn' => $isLoggedIn] );
     }
 
+    public function indexAlamat(){
+        $isLoggedIn = $this->authMiddleware->handle();
+        $this->render('/Alamat/index', ['isLoggedIn' => $isLoggedIn] );
+    }
+
     public function Alamat(){
         try{
             if($_SERVER['REQUEST_METHOD'] !== 'POST'){
@@ -74,6 +79,64 @@ class AccountController extends Controller
                 ]);
             }
             
+        }catch(\Exception $e){
+            http_response_code(400);
+            echo json_encode([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
+
+    public function putAlamatbyID($id){
+        try{
+            $userData = AuthMiddleware::checkAuth();
+            $userId = $userData['id'];
+
+            $putAlamat = Alamat::putAlamatbyID($id, $userId);
+            if($putAlamat){
+                echo json_encode([
+                    'status' => 'success',
+                    'message' => 'Alamat berhasil diubah'
+                ]);
+            }else{
+                http_response_code(404);
+                echo json_encode([
+                    'status' => 'error',
+                    'message' => 'Alamat tidak ditemukan'
+                ]);
+            }
+
+        }catch(\Exception $e){
+            http_response_code(400);
+            echo json_encode([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
+
+    public function getAlamatbyID($id){
+        try{
+
+            $userData = AuthMiddleware::checkAuth();
+            $userId = $userData['id'];
+
+            $getAlamat = Alamat::getAlamatUID($id, $userId);
+            if($getAlamat){
+                echo json_encode([
+                    'data' => $getAlamat
+                ]);
+            }else{
+                http_response_code(404);
+                echo json_encode([
+                    'status' => 'error',
+                   'message' => 'Alamat tidak ditemukan'
+                ]);
+            }
+
         }catch(\Exception $e){
             http_response_code(400);
             echo json_encode([

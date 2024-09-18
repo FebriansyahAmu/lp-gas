@@ -155,7 +155,7 @@
         contentType: false,
         dataType: 'json',
         success: function(response){
-          window.location.href="/Account";
+          window.location.href="/account";
         },
         error: function(xhr){
           const errorResponse = JSON.parse(xhr.responseText);

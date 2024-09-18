@@ -31,15 +31,26 @@ $router->get('/api/product/{id}', ProductController::class, 'getProduct');
 $router->get('/api/products', ProductController::class, 'getAllProduct');
 
 //account
-$router->get('/Account', AccountController::class, 'index', [
+$router->get('/account', AccountController::class, 'index', [
     'class' => AuthMiddleware:: class,
     'role' => 'user'
 ]);
+
+$router->get('/account/alamat', AccountController::class, 'indexAlamat', [
+    'class' => AuthMiddleware::class,
+    'role' => 'user'
+]);
+
 $router->post('/Addresses', AccountController::class, 'Alamat', [
     'class' => AuthMiddleware::class,
     'role' => 'user'
 ]);
 $router->get('/Alamat', AccountController::class, 'getAlamatbyUser', [
+    'class' => AuthMiddleware::class,
+    'role' => 'user'
+]);
+
+$router->get('/Alamat/{id}', AccountController::class, 'getAlamatbyID', [
     'class' => AuthMiddleware::class,
     'role' => 'user'
 ]);

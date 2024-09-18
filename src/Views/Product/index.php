@@ -144,6 +144,7 @@
     $(document).ready(function(){
         handleProductData();
         checkAuth();
+        checkoutProducts();
     });
 </script>
 
@@ -262,7 +263,6 @@
     }
 </script>
 
-
 <script>
   function checkoutProducts() {
     $("#checkout-form").on('submit', function(event){
@@ -336,14 +336,28 @@
                         }
                     },
                     error: function(xhr, status, error) {
+                // Cek apakah status code 401
+                if(xhr.status === 401) {
+                        Swal.fire({
+                            title: 'Anda belum login',
+                            text: "Silahkan Login terlebih dahulu untuk membuat pesanan",
+                            icon: 'error',
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'Login Sekarang'
+                        }).then((result) => {
+                            if(result.isConfirmed){
+                                window.location.href = '/login';  // Redirect ke halaman login
+                            }
+                        });
+                    } else {
                         console.error('AJAX Error:', status, error);
                     }
+                }
                 });
             }
         })
     });
 }
-
 
 </script>
 
@@ -355,7 +369,6 @@
             success: function(response){
                 if(response.auth = true){
                     showAlamat();
-                    checkoutProducts();
                 }
             }
         })

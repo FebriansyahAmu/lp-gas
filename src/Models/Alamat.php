@@ -52,6 +52,31 @@ class Alamat{
             return false;
         }
     }
+    
+    public static function getAlamatUID($id, $userId){
+        try{
+            $db = Database::getConnection();
+
+            $stmt = $db->prepare("SELECT Detail_Alamat, Description FROM " . self::$table . " WHERE id_Alamat = ? AND id_user = ?");
+            if(!$stmt){
+                throw new \Exception("Failed to prepare statement", $db->error);
+            }
+
+            $stmt->bind_param("ii", $id, $userId);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            if(!$result){
+                throw new \Exception("Failed to execute query", $stmt->error);
+            }
+
+            return $result->fetch_assoc();
+
+        }catch(\Exception $e){
+            error_log($e->getMessage());
+            return false;
+        }
+    }
 
 
 }

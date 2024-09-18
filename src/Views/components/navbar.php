@@ -43,6 +43,7 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="profileDropdown">
                             <li><a class="dropdown-item" href="/purchase-history">Purchase History</a></li>
+                            <li><a class="dropdown-item" href="/purchase-history">Alamat</a></li>
                             <li><a class="dropdown-item" href="/logout">Logout</a></li>
                         </ul>
                     </li>
