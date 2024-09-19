@@ -155,7 +155,11 @@
         contentType: false,
         dataType: 'json',
         success: function(response){
-          window.location.href="/account";
+           if (response.status === 'success') {
+            if (response.redirect) {
+                window.location.href = response.redirect;
+            }
+        }
         },
         error: function(xhr){
           const errorResponse = JSON.parse(xhr.responseText);

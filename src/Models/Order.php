@@ -164,7 +164,7 @@ Class Order{
         try{
             $db = Database::getConnection();
             $stmt = $db->prepare("
-                            SELECT ec_order.id_Order, ec_gas.Jenis_gas, ec_order.Qty, ec_order.totalharga
+                            SELECT ec_order.id_Order, ec_gas.Jenis_gas, ec_order.Qty, ec_order.totalharga, ec_order.status
                             FROM " . self::$table . " 
                             JOIN ". self::$tb_gas ." ON ec_order.id_gas = ec_gas.id_gas
                             WHERE ec_order.user_id = ?
@@ -175,11 +175,14 @@ Class Order{
             }
 
             $stmt->bind_param("i", $userId);
-            $success = $stmt->execute();
-            if(!$success){
+            $stmt->execute();
+
+            $result = $stmt->get_result();
+            if(!$result){
                 throw new \Exception("Failed to execute statement: " . $stmt->error);
             }
-            return true;
+
+            return $result->fetch_all(MYSQLI_ASSOC);
 
         }catch(\Exception $e){
             error_log($e->getMessage());

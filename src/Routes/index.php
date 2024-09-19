@@ -36,6 +36,10 @@ $router->get('/account', AccountController::class, 'index', [
     'role' => 'user'
 ]);
 
+$router->get('/riwayat-pembelian', AccountController::class, 'getRiwayatPembelian', [
+    'class' => AuthMiddleware::class,
+    'role' => 'user'
+]);
 
 //router untuk handle alamat
 $router->get('/account/alamat', AccountController::class, 'indexAlamat', [
@@ -79,11 +83,11 @@ $router->post('/payment-notif', CheckoutController::class, 'handleNotification')
 //admin routes
 $router->get('/dashboard', AdminController::class, 'dashboard', [
     'class' => AuthMiddleware::class,
-    'role' => 'user'
+    'role' => 'admin'
 ]);
 
 
 
-
+$router->get('/logout', AuthController::class, 'logoutUsers');
 
 $router->dispatch();

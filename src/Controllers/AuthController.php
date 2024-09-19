@@ -122,11 +122,19 @@ class AuthController extends Controller
                 'httponly' => true,
                 'samesite' => 'Strict'
              ]);
+            if($user['role'] === 'admin'){
+                echo json_encode([
+                    'status' => 'success',
+                    'redirect' => '/dashboard'
+                ]);
+                exit();
+             }else if($user['role'] === 'user'){
+                echo json_encode([
+                    'status' => 'success',
+                    'redirect' => '/account'
+                ]);
+             }
 
-             echo json_encode([
-                'status' => 'success',
-                'token' => $token
-             ]);
 
         }catch(\Exception $e){
             http_response_code($e->getCode() ? $e->getCode() : 400);
@@ -159,6 +167,21 @@ class AuthController extends Controller
                 'message' => $e->getMessage()
             ]);
         }
+    }
+
+
+    public function logoutUsers(){
+        setcookie('authToken', '', [
+            'expires' => time() - 3600,
+            'path' => '/',
+            'domain' => '',
+            'secure' => true,
+            'httponly' => true,
+            'samesite' => 'Strict'
+        ]);
+
+        header('Location: /login');
+        exit();
     }
 
     private function checkRefer(){

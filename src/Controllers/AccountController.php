@@ -197,7 +197,7 @@ class AccountController extends Controller
             $userData = AuthMiddleware::checkAuth();
             $userId = $userData['id'];
 
-            $riwayatPembelian = Order::getRiwayatByUID($userId);
+            $riwayatPembelian = Order::getOrderByUID($userId);
             if($riwayatPembelian){
                 echo json_encode([
                     'data' => $riwayatPembelian

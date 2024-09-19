@@ -9,8 +9,10 @@ class AdminController extends Controller
     public function dashboard()
     {
         $data = [];
-        $this->render('Dashboard/index', $data, null);
+         $this->render('Dashboard/index', ['title' => 'Dashboard'], 'Layout/dashLayout');
     }
+
+    
 
 
 }

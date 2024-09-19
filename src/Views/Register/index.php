@@ -29,7 +29,7 @@
         >
           <div
             class="col-md-12 col-lg-5 col-xl-6 p-5 rounded"
-            style="background-color: rgba(0, 0, 0, 0.6); "
+            style="background-color: rgba(0, 0, 0, 0.3); "
           >
             <h2 class="mb-3 text-center text-light">Register</h2>
             <p class="text-light">Please provide valid information</p>
@@ -123,11 +123,12 @@
                 </div>
               </div>
 
-              <div class="col-12 d-flex justify-content-center">
+              <div class="col-12 d-flex justify-content-center mt-5">
                 <button class="btn btn-md btn-primary px-4 py-2" type="submit">
                   Register
                 </button>
               </div>
+              <p class="text-white">Sudah punya Akun?<a href="" class="text-decoration-none"> Login</a></p>
             </form>
           </div>
         </div>

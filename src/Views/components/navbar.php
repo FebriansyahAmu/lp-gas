@@ -23,18 +23,16 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/">Home</a>
         </li>
+
+        <?php if ($_SERVER['REQUEST_URI'] === '/'): ?>
         <li class="nav-item">
           <a class="nav-link nav-hover" href="#">About Us</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Contact</a>
         </li>
-        <!-- <li class="nav-item">
-          <a href="#" class="nav-link text-white">
-            <i class="fa-solid fa-cart-shopping"></i>
-          </a>
-        </li> -->
-        <!-- Login Link -->
+        <?php endif; ?>
+
         <ul class="navbar-nav ">
                 <?php if ($isLoggedIn): ?>
                     <li class="nav-item dropdown">
@@ -57,25 +55,3 @@
     </div>
   </div>
 </nav>
-<!-- <style>
-    .nav-hover:hover {
-      color: red !important;
-    }
-  </style> -->
-<style>
-  /* Styling untuk dropdown menu */
-.navbar .dropdown-menu {
-    border-radius: 0.25rem;
-    padding: 0;
-    margin: 0;
-}
-
-.navbar .dropdown-menu .dropdown-item {
-    padding: 0.5rem 1rem;
-}
-
-.navbar .dropdown-menu .dropdown-item:hover {
-    background-color: #f8f9fa;
-}
-
-</style>

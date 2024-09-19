@@ -9,11 +9,6 @@
 
         <!-- Tab content -->
         <div class="tab-content">
-            <!-- Home tab content -->
-            <div class="tab-pane fade show active" id="tab1">
-                <h3>Riwayat Pembelian</h3>
-                <div class="tab-content">
-            <!-- Home tab content -->
             <div class="tab-pane fade show active" id="tab1">
                 <h3>List Riwayat Pembelian</h3>
                 <div class="mt-4">
@@ -25,7 +20,7 @@
                                 <th>Qty</th>
                                 <th>Total Harga</th>
                                 <th>Status</th>
-                                <th>Action</th>
+                                <!-- <th>Action</th> -->
                             </tr>
                         </thead>
                         <tbody>
@@ -34,8 +29,6 @@
                     </table>
                 </div>
             </div>
-
-        </div>
             </div>
 
         </div>
@@ -44,8 +37,32 @@
 
 <script>
     $(document).ready(function(){
-
+        getHistoryUID();
     });
 
+    function getHistoryUID(){
+        $('#tabelRiwayatPembelian').DataTable({
+            "responsive" : true,
+            "scrollX": true,
+            "ajax": {
+                "url" : "/riwayat-pembelian",
+                "dataSrc": "data",
+            },
+            "columns":[
+                { "data": "id_Order"},
+                { "data": "Jenis_gas"},
+                { "data": "Qty"},
+                { "data": "totalharga"},
+                { "data": "status"}
+            ],
+            "columnDefs": [
+                { "width": "5%", "targets": 0 },  
+                { "width": "5%", "targets": 1 },  
+                { "width": "2%", "targets": 2 },  
+                { "width": "2%", "targets": 3 },
+                { "width": "2%", "targets": 4 }  
+            ],
+        })
+    }
 
 </script>
