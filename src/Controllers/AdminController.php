@@ -12,7 +12,8 @@ class AdminController extends Controller
          $this->render('Dashboard/index', ['title' => 'Dashboard'], 'Layout/dashLayout');
     }
 
-    
-
-
+    public function indexGas(){
+        $data = [];
+        $this->render('Admin-lgas/index', $data, 'Layout/dashLayout');
+    }
 }

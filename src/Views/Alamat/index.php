@@ -85,6 +85,7 @@
     function tabelAlamats(){
         $('#tabelAlamat').DataTable({
             "responsive" : true,
+            "scrollX": true,
             "ajax" : {
                 "url" : "/Alamat",
                 
@@ -171,15 +172,37 @@
         $("#tabelAlamat").on('click', '.btn-delete', function(){
             const idAlamat = $(this).data('id');
 
-            $.ajax({
-                url: '/Alamat/Delete/' + idAlamat,
-                method: 'DELETE',
-                success: function(response){
-                    alert('Alamat berhasil dihapus');
-                    $('#tabelAlamat').DataTable().ajax.reload();
-                },
-                error: function(xhr, status, error){
-                    alert('Terjadi kesalahan', + error);
+            Swal.fire({
+                title: 'Apakah Anda yakin?',
+                text: "Anda akan menghapus data ini!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if(result.isConfirmed){
+                    $.ajax({
+                        url: '/Alamat/Delete/' + idAlamat,
+                        method: 'DELETE',
+                        success: function(response){
+                            if(typeof response === 'string'){
+                                response = JSON.parse(response);  
+                            }
+                            if(response.status === "success"){
+                                Swal.fire(
+                                    'Deleted!',
+                                    'Your data has been deleted.',
+                                    'success'
+                                ).then(() => {
+                                    $('#tabelAlamat').DataTable().ajax.reload(); 
+                                });
+                            }
+                        },
+                        error: function(xhr, status, error){
+                            alert('Terjadi kesalahan', + error);
+                        }
+                    })
                 }
             })
         })

@@ -80,12 +80,34 @@ $router->post('/checkout', CheckoutController::class, 'checkout', [
 
 $router->post('/payment-notif', CheckoutController::class, 'handleNotification');
 
+
+
 //admin routes
 $router->get('/dashboard', AdminController::class, 'dashboard', [
     'class' => AuthMiddleware::class,
     'role' => 'admin'
 ]);
 
+$router->get('/data-gas', AdminController::class, 'indexGas', [
+    'class' => AuthMiddleware::class,
+    'role' => 'admin'
+]);
+
+
+$router->post('/gas/create', ProductController::class, 'inputDataGas', [
+    'class' => AuthMiddleware::class,
+    'role' => 'admin'
+]);
+
+$router->post('/gas/edit', ProductController::class, 'editDataGas', [
+    'class' => AuthMiddleware::class,
+    'role' => 'admin'
+]);
+
+$router->delete('/gas/delete/{id}', ProductController::class, 'deleteDataGas', [
+    'class' => AuthMiddleware::class,
+    'role' => 'admin'
+]);
 
 
 $router->get('/logout', AuthController::class, 'logoutUsers');

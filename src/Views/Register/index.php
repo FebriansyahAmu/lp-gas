@@ -32,7 +32,7 @@
             style="background-color: rgba(0, 0, 0, 0.3); "
           >
             <h2 class="mb-3 text-center text-light">Register</h2>
-            <p class="text-light">Please provide valid information</p>
+            <p class="text-light">Silahkan isi form ini dengan data yang valid</p>
             <form id="fregister" class="row g-3 needs-validation" novalidate >
               <div class="col-12 text-light">
                 <label for="namalengkap" class="form-label"
@@ -128,7 +128,7 @@
                   Register
                 </button>
               </div>
-              <p class="text-white">Sudah punya Akun?<a href="" class="text-decoration-none"> Login</a></p>
+              <p class="text-white">Sudah punya Akun?<a href="/login" class="text-decoration-none"> Login</a></p>
             </form>
           </div>
         </div>

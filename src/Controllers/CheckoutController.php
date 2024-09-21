@@ -11,9 +11,7 @@ use App\Models\ProductModel;
 
 
 class CheckoutController extends Controller{
-
     
-
     public function checkout(){
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
             try{
@@ -33,7 +31,7 @@ class CheckoutController extends Controller{
                     'status' => 'pending',
                     'order_id' => $orderId
                 ];
-
+                $jenisGas = filter_input(INPUT_POST, 'Jenis_gas', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
                 //validasi data input 
                 $validationResult = Order::validateOrder($data);
@@ -55,7 +53,7 @@ class CheckoutController extends Controller{
                         'id' => $data['productId'],
                         'price' => $data['submittedTotalHarga'],
                         'quantity' => $data['quantity'],
-                        'name' => 'gas' //not done yet
+                        'name' => $jenisGas
                     ]
                 ];
                 

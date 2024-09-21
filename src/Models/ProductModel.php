@@ -57,6 +57,73 @@ class ProductModel {
         return false;
     }
 
+
+    public static function inputGas($data){
+        try{
+            $db = Database::getConnection();
+            $stmt = $db->prepare("INSERT INTO " . self::$table . " (Jenis_gas, Harga_gas, Stok, foto_gas) VALUES(?,?,?,?)");
+            if(!$stmt){
+                throw new \Exception("Failed to prepare statement", $db->error);
+            }
+
+            $stmt->bind_param('siis', $data['jenisGas'], $data['hargaGas'], $data['stok'], $data['gambarGas']);
+            $success = $stmt->execute();
+
+            if(!$success){
+                throw new \Exception("Failed to execute query: ", $stmt->error);
+            }
+
+            return true;
+        }catch(\Exception $e){
+            error_log($e->getMessage());
+            return false;
+        }
+    }
+    
+    public static function updateDataGas($data){
+        try{
+            $db = Database::getConnection();
+            $stmt = $db->prepare("UPDATE " . self::$table . " SET Jenis_gas = ?, Harga_gas = ?, Stok = ?, foto_gas = ? WHERE id_gas = ?");
+            if(!$stmt){
+                throw new \Exception("Failed to prepare statement", $db->error);
+            }
+
+            $stmt->bind_param('siisi', $data['jenisGas'], $data['hargaGas'], $data['stok'], $data['gambarGas'], $data['idGas']);
+            $success = $stmt->execute();
+            if(!$success){
+                throw new \Exception("Failed to execute query", $stmt->error);
+            }
+
+            return true;
+        }catch(\Exception $e){
+            error_log($e->getMessage());
+            return false;
+        }
+    }
+
+    public static function deleteDataGas($id){
+        try{
+            $db = Database::getConnection();
+            $stmt = $db->prepare("DELETE FROM " . self::$table . " WHERE id_gas = ?");
+            if(!$stmt){
+                throw new \Exception("failed to prepare statement", $db->error);
+            }
+
+            $stmt->bind_param('i', $id);
+            $success = $stmt->execute();
+
+            if(!$success){
+                throw new \Exception("failed to execute query", $stmt->error);
+            }
+
+            return true;
+
+        }catch(\Exception $e){
+            error_log($e->getMessage());
+            return false;
+        }
+    }
+
 //     public function getProduct($id){
 //     try {
 //         // Cek apakah permintaan adalah AJAX atau API request

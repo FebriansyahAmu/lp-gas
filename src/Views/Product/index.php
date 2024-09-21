@@ -92,7 +92,6 @@
                         <div class="mb-4" id="address-option" style="display: none;">
                             <h5>Pilih Alamat</h5>
                             <select id="addr-select" name="alamat" class="form-select" required>
-                                <option value="" disabled selected>Pilih Alamat</option>
                             </select>
                             <div class="invalid-feedback">Silakan pilih metode pengambilan.</div>
                         </div>
@@ -258,13 +257,13 @@
 
         // Panggil updateTotalPrice pertama kali setelah semua event listener ditambahkan
         updateTotalPrice();
-    }
+    } 
 </script>
 
 <script>
   function checkoutProducts() {
     $("#checkout-form").on('submit', function(event){
-        event.preventDefault();  // Mencegah form submit normal
+        event.preventDefault();  
 
         //Validasi form
         const deliveryMethod = document.getElementById('delivery-option').value;
@@ -282,14 +281,13 @@
         const idGas = getProductId();
         const deliveryfee = parseInt(document.getElementById('delivery-fee').textContent.replace(/[^\d]/g, ''));
         const totalPrice = parseInt(document.getElementById('total-price').textContent.replace(/[^\d]/g, ''));
-
-        console.log("Delivery Fee:", deliveryfee);
-        console.log("Total Price:", totalPrice);
-
+        const titleGas = document.getElementById('title-gas').textContent;
+        
         const formData = new FormData(this);
 
         // Menambahkan data tambahan ke formData
         formData.append('Id_gas', idGas);
+        formData.append('jenis_gas', titleGas);
         formData.append('delivery_fee', deliveryfee);
         formData.append('total_harga', totalPrice);
 
@@ -373,9 +371,9 @@
     }
 
     function truncateText(text, maxLength) {
-    if (text.length > maxLength) {
-        return text.substring(0, maxLength) + '...';  // Potong teks dan tambahkan "..."
-    }
+        if (text.length > maxLength) {
+            return text.substring(0, maxLength) + '...';
+        }
     return text;
 }
 
@@ -398,7 +396,7 @@
                 const alamatArray = response.data;
 
                 addressSelect.innerHTML = '<option value="" disabled selected>Pilih Alamat</option>';
-
+                
                 alamatArray.forEach(alamat =>{
                     const maxLength = 50;
                     const fullText = `${alamat.Detail_alamat} - ${alamat.Description}`;
@@ -406,15 +404,23 @@
 
 
                     const option = document.createElement('option');
-                    option.value = alamat.id_Alamat;  // Mengambil id_Alamat dari response.data
-                    option.textContent = truncatedText;  // Menggabungkan Detail_alamat dan Description
+                    option.value = alamat.id_Alamat; 
+    
+
+                    option.textContent = truncatedText; 
 
                     // Tambahkan ke select
                     addressSelect.appendChild(option);
                 })
                 
+                
                 // Buat option baru
-  
+                const addOption = document.createElement('option');
+                addOption.value = 'add-new';  // Nilai unik untuk mendeteksi opsi ini
+                addOption.classList.add('bg-primary');
+                addOption.classList.add('text-center');
+                addOption.textContent = '    + Tambah Alamat';  // Teks untuk opsi "Tambah Alamat"
+                addressSelect.appendChild(addOption);
 
                 // Menampilkan elemen div jika belum terlihat
                 document.getElementById('address-option').style.display = 'block';
@@ -428,6 +434,11 @@
     });
 }
 
+document.getElementById('addr-select').addEventListener('change', function(){
+        if (this.value === 'add-new') {
+            window.location.href = '/account/alamat';
+        }
+    });
 
 
     function showAlamat(){
