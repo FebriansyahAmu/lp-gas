@@ -88,6 +88,8 @@ $router->get('/dashboard', AdminController::class, 'dashboard', [
     'role' => 'admin'
 ]);
 
+
+//CRUD DATA GAS
 $router->get('/data-gas', AdminController::class, 'indexGas', [
     'class' => AuthMiddleware::class,
     'role' => 'admin'
@@ -109,6 +111,29 @@ $router->delete('/gas/delete/{id}', ProductController::class, 'deleteDataGas', [
     'role' => 'admin'
 ]);
 
+
+//GET DATA USERS
+$router->get('/data-customer', AdminController::class, 'indexDataCustomer', [
+    'class' => AuthMiddleware::class,
+    'role' => 'admin'
+]);
+
+$router->get('/data/customers', AdminController::class, 'getDataCustomer', [
+    'class' => AuthMiddleware::class,
+    'role' => 'admin'
+]);
+
+$router->get('/data/total-customer', AdminController::class, 'getCountUsers', [
+    'class' => AuthMiddleware::class,
+    'role' => 'admin'
+]);
+
+
+//GET DATA PEMBELIAN
+$router->get('/data/riwayat-pembelian', AdminController::class, 'getRiwayatPembelian', [
+    'class' => AuthMiddleware::class,
+    'role' => 'admin'
+]);
 
 $router->get('/logout', AuthController::class, 'logoutUsers');
 

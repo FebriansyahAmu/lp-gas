@@ -136,7 +136,7 @@ class AccountController extends Controller
 
     public function getAlamatbyID($id){
         try{
-
+            // $this->checkRefer();
             $userData = AuthMiddleware::checkAuth();
             $userId = $userData['id'];
 
@@ -194,6 +194,8 @@ class AccountController extends Controller
     //Riwayat Pembelian
     public function getRiwayatPembelian(){
         try{
+
+            // $this->checkRefer();
             $userData = AuthMiddleware::checkAuth();
             $userId = $userData['id'];
 

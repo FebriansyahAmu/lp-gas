@@ -52,7 +52,7 @@
                             </li>
                             <li><hr class="dropdown-divider"></li>
                             <li>
-                              <a href="#" class="dropdown-item mb-3">
+                              <a href="/logout" class="dropdown-item mb-3">
                                 <i class="fas fa-sign-out-alt me-2"></i> Logout
                               </a>
                             </li>

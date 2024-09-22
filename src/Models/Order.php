@@ -7,7 +7,8 @@ use App\Core\Database;
 
 Class Order{
     protected static $table = 'ec_order';
-    protected static $tb_gas = 'ec_gas';
+    protected static $table_gas = 'ec_gas';
+    protected static $tb_user = 'ec_user';
  
     public static function  validateOrder($data){
         $errors = [
@@ -191,6 +192,51 @@ Class Order{
     }
 
 
+    public static function getRiwayatOrders(){
+        try{
+            $db = Database::getConnection();
+
+            $userRole = 'user';
+            $stmt = $db->prepare("
+                    SELECT
+                        ec_order.id_Order,
+                        ec_user.Nama_lengkap,
+                        ec_gas.Jenis_gas,
+                        ec_order.Qty,
+                        ec_order.delivery_method,
+                        ec_order.delivery_fee,
+                        ec_order.totalharga,
+                        ec_order.status
+                    FROM
+                        " . self::$table ."
+                    JOIN ". self::$table_gas ." 
+                        ON ec_order.id_gas = ec_gas.id_gas
+                    JOIN ". self::$tb_user ." 
+                        ON ec_order.user_id = ec_user.user_id
+                    WHERE
+                        ec_user.role = ?
+                    ORDER BY
+                        ec_order.created_at DESC
+            ");
+
+            if(!$stmt){
+                throw new \Exception("Failed to prepare statement", $db->error);
+            }
+
+            $stmt->bind_param('s', $userRole);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            if(!$result){
+                throw new \Exception("Failed to execute query", $stmt->error);
+            }
+
+            return $result->fetch_all(MYSQLI_ASSOC);
+        }catch(\Exception $e){
+            error_log($e->getMessage());
+            return false;
+        }
+    }
     
 
 }

@@ -37,6 +37,7 @@ class ProductController extends Controller
 
     public function getProduct($id){
         try{
+            //$this->checkRefer();
             $product = ProductModel::findbyId($id);
 
             if($product){
@@ -61,6 +62,7 @@ class ProductController extends Controller
     public function getAllProduct() {
         try {
             // Set header CORS
+            // $this->checkRefer();
             header("Access-Control-Allow-Origin: http://localhost:3000"); // Ganti sesuai dengan URL situs kamu
             header("Access-Control-Allow-Methods: GET");
             header("Access-Control-Allow-Headers: Content-Type");
@@ -237,6 +239,14 @@ class ProductController extends Controller
                 'status' => 'error',
                 'message' => $e->getMessage()
             ]);
+        }
+    }
+
+    private function checkRefer(){
+        $allowedReferer = "http://localhost:3000";
+        if (!isset($_SERVER['HTTP_REFERER']) || strpos($_SERVER['HTTP_REFERER'], $allowedReferer) === false) {
+           header('Location: /');
+           exit;
         }
     }
 }

@@ -105,4 +105,54 @@ class User{
             return false;
         }
     }
+
+    public static function getAllCustomer(){
+        try{
+            $db = Database::getConnection();
+
+            $role = 'user';
+            $stmt = $db->prepare("SELECT user_id, Nama_lengkap, Email, No_Hp FROM " . self::$table . " WHERE role = ?");
+            if(!$stmt){
+                throw new \Exception("Failed to prepare statement", $db->error);
+            }
+
+            $stmt->bind_param('s', $role);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            if(!$result){
+                throw new \Exception("Failed to execute query", $stmt->error);
+            }
+
+            return $result->fetch_all(MYSQLI_ASSOC);
+        }catch(\Exception $e){
+            error_log($e->getMessage());
+            return false;
+        }
+    }
+
+    public static function countUsers(){
+        try{
+            $db = Database::getConnection();
+            $role = 'user';
+            $stmt = $db->prepare("SELECT count(user_id) FROM " . self::$table . " WHERE role = ?");
+
+            if(!$stmt){
+                throw new \Exception("Failed to prepare statement", $db->error);
+            }
+
+            $stmt->bind_param('s', $role);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            if(!$result){
+                throw new \Exception("Failed to execute query", $stmt->error);
+            }
+            
+            return $result->fetch_assoc();
+        }catch(\Exception $e){
+            error_log($e->getMessage());
+            return false;
+        }
+    }
 }
