@@ -44,6 +44,7 @@
                   id="namalengkap"
                   name="namalengkap"
                   required
+                  autocomplete="off"
                 />
                 <div class="invalid-feedback">Name Cannot be empty.</div>
               </div>
@@ -56,6 +57,7 @@
                   id="email"
                   name="email"
                   required
+                  autocomplete="off"
                 />
                 <div class="invalid-feedback">
                   Please provide a valid email.
@@ -70,6 +72,7 @@
                   id="phone"
                   name="phone"
                   required
+                  autocomplete="off"
                 />
                 <div class="invalid-feedback">
                   Please provide a valid phone number.
@@ -78,50 +81,49 @@
 
               
               <div class="col-12 position-relative text-light">
-                <label for="password" class="form-label">Password</label>
-                <div class="input-group">
+              <label for="password" class="form-label">Password</label>
+              <div class="input-group">
                   <input
-                    type="password"
-                    class="form-control"
-                    id="password"
-                    name="password"
-                    required
+                      type="password"
+                      class="form-control"
+                      id="password"
+                      name="password"
+                      required
+                      autocomplete="off"
                   />
                   <span
-                    class="input-group-text"
-                    onclick="togglePassword('password', 'togglePasswordIcon')"
+                      class="input-group-text"
+                      onclick="togglePassword('password', 'togglePasswordIcon')"
                   >
-                    <i id="togglePasswordIcon" class="fas fa-eye"></i>
+                      <i id="togglePasswordIcon" class="fas fa-eye"></i>
                   </span>
-                </div>
-                <div class="invalid-feedback">
-                  Please provide a valid password.
-                </div>
               </div>
+              <div class="invalid-feedback" id="passwordFeedback">
+                  Password must be at least 8 characters.
+              </div>
+          </div>
 
-             
-              <div class="col-12 position-relative text-light">
-                <label for="confirmPassword" class="form-label"
-                  >Konfirmasi Password</label
-                >
-                <div class="input-group">
+          <div class="col-12 position-relative text-light">
+              <label for="confirmPassword" class="form-label">Konfirmasi Password</label>
+              <div class="input-group">
                   <input
-                    type="password"
-                    class="form-control"
-                    id="confirmPassword"
-                    required
+                      type="password"
+                      class="form-control"
+                      id="confirmPassword"
+                      required
+                      autocomplete="off"
                   />
                   <span
-                    class="input-group-text"
-                    onclick="togglePassword('confirmPassword', 'toggleConfirmPasswordIcon')"
+                      class="input-group-text"
+                      onclick="togglePassword('confirmPassword', 'toggleConfirmPasswordIcon')"
                   >
-                    <i id="toggleConfirmPasswordIcon" class="fas fa-eye"></i>
+                      <i id="toggleConfirmPasswordIcon" class="fas fa-eye"></i>
                   </span>
-                </div>
-                <div class="invalid-feedback">
-                  Please confirm your password.
-                </div>
               </div>
+              <div class="invalid-feedback" id="confirmPasswordFeedback">
+                  Passwords do not match.
+              </div>
+          </div>
 
               <div class="col-12 d-flex justify-content-center mt-5">
                 <button class="btn btn-md btn-primary px-4 py-2" type="submit">
@@ -158,26 +160,6 @@
       });
     })();
   </script>
-  <script>
-    function togglePassword(fieldId, iconId) {
-      const passwordField = document.getElementById(fieldId);
-      const icon = document.getElementById(iconId);
-
-      if (passwordField.type === "password") {
-        passwordField.type = "text";
-        icon.classList.remove("fa-eye");
-        icon.classList.add("fa-eye-slash");
-      } else {
-        passwordField.type = "password";
-        icon.classList.remove("fa-eye-slash");
-        icon.classList.add("fa-eye");
-      }
-    }
-  </script>
-
-
-
-
   <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
@@ -193,16 +175,41 @@
 
   <script>
    $(document).ready(function(){
-      $("#fregister").submit(function(event){
+    togglePassword();
+    submitRegister();
+   })
+
+   function togglePassword(fieldId, iconId) {
+      const passwordField = document.getElementById(fieldId);
+      const icon = document.getElementById(iconId);
+
+      if (passwordField.type === "password") {
+        passwordField.type = "text";
+        icon.classList.remove("fa-eye");
+        icon.classList.add("fa-eye-slash");
+      } else {
+        passwordField.type = "password";
+        icon.classList.remove("fa-eye-slash");
+        icon.classList.add("fa-eye");
+      }
+    }
+
+   function submitRegister(){
+    $("#fregister").submit(function(event){
         event.preventDefault();
         var formData = new FormData(this);
 
         var password  = $("#password").val();
         var confirmPassword = $("#confirmPassword").val();
 
-        if(password !== confirmPassword){
-           Swal.fire('Error', 'Password do not match', 'error');
-           return;
+        if (password.length < 8) {
+            Swal.fire('Error', 'Password harus minimal 8 karakter', 'error');
+            return;
+        }
+
+        if (password !== confirmPassword) {
+            Swal.fire('Error', 'Password tidak cocok', 'error');
+            return;
         }
         
         $.ajax({
@@ -215,16 +222,15 @@
           success: function(response){
               if(response.status === 'success'){
                 Swal.fire('Success', response.message, 'success');
-              }else{
-                Swal.fire('Error', response.message, 'error');
               }
           },
           error: function(xhr, status, error){
-            console.log(xhr);
-            Swal.fire('Error', 'An error occurred', 'error');
+            Swal.fire('Error', xhr.responseJSON.message, 'error');
           }
         })
       })
-   })
+   }
+
+   
   </script>
 </html>

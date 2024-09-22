@@ -16,35 +16,48 @@ class User{
         ],
         'email' => [
             'rule' => 'email',
-            'message'=> 'Email tidak valid'
+            'message'=> 'Email tidak valid.'
         ],
         'phone' => [
             'rule' => 'required',
             'message' => 'Nomor Hp tidak boleh kosong.'
         ],
         'password' => [
-            'rule'=> 'required',
-            'message'=> 'Password tidak boleh kosong'
+            'rule'=> ['required', 'min_length' => 8],
+            'message'=> [
+                'required' => 'Password tidak boleh kosong.',
+                'min_length' => 'Password harus minimal 8 karakter.'
+            ]
         ]
     ];
-
+    
     public static function validateData($data){
         $errors = [];
-
+    
         foreach(self::$validationRules as $field => $validation){
             $value = isset($data[$field]) ? $data[$field] : null;
-
-            if($validation['rule'] === 'required' && empty($value)){
+    
+            // Validasi 'required'
+            if(is_array($validation['rule']) && in_array('required', $validation['rule']) && empty($value)){
+                $errors[$field] = $validation['message']['required'];
+            } elseif($validation['rule'] === 'required' && empty($value)){
                 $errors[$field] = $validation['message'];
             }
-
+    
+            // Validasi 'email'
             if($validation['rule'] === 'email' && !filter_var($value, FILTER_VALIDATE_EMAIL)){
                 $errors[$field] = $validation['message'];
             }
+    
+            // Validasi 'min_length' untuk password
+            if(isset($validation['rule']['min_length']) && strlen($value) < $validation['rule']['min_length']){
+                $errors[$field] = $validation['message']['min_length'];
+            }
         }
-
+    
         return $errors;
     }
+    
 
 
     //cari user berdasarkan email
@@ -66,6 +79,34 @@ class User{
 
             return $result->fetch_assoc();
         }catch(Exception $e){
+            error_log($e->getMessage());
+            return false;
+        }
+    }
+    
+    public static function isVerified($email){
+        try{
+            $db = Database::getConnection();
+            $stmt = $db->prepare("SELECT isVerified, token FROM " . self::$table . " WHERE email = ?");
+            if(!$stmt){
+                throw new Exception("Failed to prepare statement: ", $db->error);
+            }
+
+            $stmt->bind_param('s', $email);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            
+            if(!$result){
+                throw new Exception("Failed to execute query: ", $stmt->error);
+            }
+
+            $userData = $stmt->fetch_assoc();
+            if($userData && $userData['isVeridied'] == 1 && is_null($userData['token'])){
+                return true;
+            }
+            
+            return false;
+        }catch(\Exception $e){
             error_log($e->getMessage());
             return false;
         }

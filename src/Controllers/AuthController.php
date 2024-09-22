@@ -42,6 +42,7 @@ class AuthController extends Controller
 
                 $errors = User::validateData($data);
                 if(!empty($errors)){
+                    header('Content-Type: application/json');
                     echo json_encode([
                         'status' => 'error',
                         'message' => $errors
@@ -50,6 +51,7 @@ class AuthController extends Controller
                 }
                 
                 if(User::findByEmail($data['email'])){
+                    header('Content-Type: application/json');
                     echo json_encode([
                         'status' => 'error',
                         'message' => 'Email sudah terdaftar'
@@ -59,7 +61,10 @@ class AuthController extends Controller
 
                 $data['password'] = password_hash($data['password'], PASSWORD_BCRYPT);
                 $data['isverified'] = 0;
+                $data['token'] = bin2hex(random_bytes(16));
                 $data['role'] = 'user';
+
+
 
                 if(User::create($data)){
                     http_response_code(201);
@@ -71,9 +76,8 @@ class AuthController extends Controller
                     throw new \Exception('Gagal membuat akun');
                 }
             }catch(\Exception $e){
-                error_log($e->getMessage());
-
-                http_response_code(500);
+                header('Content-Type: application/json');
+                http_response_code($e->getCode() ? : 500);
                 echo json_encode([
                     'status' => 'error',
                     'message' => $e->getMessage()
@@ -162,6 +166,20 @@ class AuthController extends Controller
             }
         }catch(Exception $e){
             http_response_code(500);
+            echo json_encode([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
+
+    private function sendVerificationEmail(){
+        try{
+            //TODO: configurasi PHP Mailer
+        }catch(\Exception $e){
+            header('Content-Type: application/json');
+            http_response_code($e->getCode() ? : 500);
             echo json_encode([
                 'status' => 'error',
                 'message' => $e->getMessage()
