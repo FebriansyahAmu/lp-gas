@@ -179,20 +179,27 @@
     submitRegister();
    })
 
-   function togglePassword(fieldId, iconId) {
-      const passwordField = document.getElementById(fieldId);
-      const icon = document.getElementById(iconId);
+function togglePassword(fieldId, iconId) {
+    const passwordField = document.getElementById(fieldId);
+    const icon = document.getElementById(iconId);
+    
+    console.log(passwordField, icon);  // Periksa apakah passwordField dan icon ditemukan
 
-      if (passwordField.type === "password") {
-        passwordField.type = "text";
-        icon.classList.remove("fa-eye");
-        icon.classList.add("fa-eye-slash");
-      } else {
-        passwordField.type = "password";
-        icon.classList.remove("fa-eye-slash");
-        icon.classList.add("fa-eye");
-      }
+    if (passwordField && icon) {
+        if (passwordField.type === "password") {
+            passwordField.type = "text";
+            icon.classList.remove("fa-eye");
+            icon.classList.add("fa-eye-slash");
+        } else {
+            passwordField.type = "password";
+            icon.classList.remove("fa-eye-slash");
+            icon.classList.add("fa-eye");
+        }
+    } else {
+        console.error("Element not found for IDs:", fieldId, iconId);
     }
+}
+
 
    function submitRegister(){
     $("#fregister").submit(function(event){

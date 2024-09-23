@@ -3,16 +3,30 @@
 namespace App\Controllers;
 use App\Controller;
 use App\Models\User;
-
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 use App\Helpers\JwtHelper;
 use App\Middleware\AuthMiddleware;
-
-
+use Dotenv\Dotenv;
 
 class AuthController extends Controller
 {
 
     protected $authMiddleware;
+    protected static $host;
+    protected static $smtpEmail;
+    protected static $smtpPass;
+    protected static $port;
+
+    public static function init(){
+        $dotenv = Dotenv::createImmutable(__DIR__ . '/../../');
+        $dotenv->load();
+        self::$host = $_ENV['SMTP_HOST'];
+        self::$smtpEmail = $_ENV['SMTP_USERNAME'];
+        self::$smtpPass = $_ENV['SMTP_PASSWORD'];
+        self::$port = $_ENV['SMTP_PORT'];
+    }
+
 
     public function __construct(){
         parent::__construct();
@@ -43,6 +57,7 @@ class AuthController extends Controller
                 $errors = User::validateData($data);
                 if(!empty($errors)){
                     header('Content-Type: application/json');
+                    http_response_code(422);
                     echo json_encode([
                         'status' => 'error',
                         'message' => $errors
@@ -52,6 +67,7 @@ class AuthController extends Controller
                 
                 if(User::findByEmail($data['email'])){
                     header('Content-Type: application/json');
+                    http_response_code(409);
                     echo json_encode([
                         'status' => 'error',
                         'message' => 'Email sudah terdaftar'
@@ -61,19 +77,27 @@ class AuthController extends Controller
 
                 $data['password'] = password_hash($data['password'], PASSWORD_BCRYPT);
                 $data['isverified'] = 0;
-                $data['token'] = bin2hex(random_bytes(16));
+                $data['token'] = bin2hex(random_bytes(32));
                 $data['role'] = 'user';
 
+                if(self::sendVerificationEmail($data['email'], $data['token'])){
 
+                }
 
                 if(User::create($data)){
-                    http_response_code(201);
-                    echo json_encode([
-                       'status' =>'success',
-                        'message' => 'Register berhasil, silahkan cek email anda untuk verifikasi'
-                    ]);
+                    
+                    $sendVerifEmail = self::sendVerificationEmail($data['email'], $data['token']);
+                    if($sendVerifEmail){
+                        http_response_code(201);
+                        echo json_encode([
+                        'status' =>'success',
+                            'message' => 'Register berhasil, silahkan cek email anda untuk verifikasi'
+                        ]);
+                    }else{
+                        throw new \Exception('Akun berhasil dibuat, tetapi gagal mengirim email verifikasi. Silahkan coba lagi nanti.', 500);
+                    }
                 }else{
-                    throw new \Exception('Gagal membuat akun');
+                    throw new \Exception('Gagal membuat akun, Silahkan coba lagi nanti', 500);
                 }
             }catch(\Exception $e){
                 header('Content-Type: application/json');
@@ -174,9 +198,58 @@ class AuthController extends Controller
     }
 
 
-    private function sendVerificationEmail(){
+    private function sendVerificationEmail($toEmail, $token){
+        $mail = new PHPMailer();
         try{
-            //TODO: configurasi PHP Mailer
+            self::init();
+            $mail->isSMTP();
+            $mail->Host = self::$host;
+            $mail->SMTPAuth = true;
+            $mail->Username = self::$smtpEmail;
+            $mail->Password = self::$smtpPass;
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+            $mail->Port = self::$port;
+
+            $mail->setFrom('nvlysys@gmail.com', 'PKGas-Abdullah');
+            $mail->addAddress($toEmail);
+
+            $mail->isHTML(true);
+            $mail->Subject = 'Verifikasi Email';
+            $verificationLink = "http://localhost:3000/verifikasi-email/$token";
+            $mail->Body = "Klik link berikut untuk memverifikasi akun anda: <a href='$verificationLink'>$verificationLink</a>";
+            $mail->AltBody = "Klik link berikut untuk memverifikasi akun Anda: $verificationLink";
+
+            $mail->send();
+            return true;
+        }catch(\Exception $e){
+            header('Content-Type: application/json');
+            http_response_code($e->getCode() ? : 500);
+            echo json_encode([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
+    public function emailVerification($token){
+        try{
+            $userToken = User::findByToken($token);
+            if(!$userToken){
+                throw new \Exception("Token tidak ditemukan, silahkan coba lagi nanti");
+            }
+
+            if(is_null($userToken['token']) && $userToken['isVerified'] == 0){
+                header('Location: /verifikasi-gagal');
+            }
+
+            $verifyUser = User::verifiedToken($token);
+            if(!$verifyUser){
+                throw new \Exception("Terjadi kesalahan, silahkan coba lagi nanti", 500);
+            }
+
+            header('Location: /verifikasi-sukses');
+            exit();
+
         }catch(\Exception $e){
             header('Content-Type: application/json');
             http_response_code($e->getCode() ? : 500);

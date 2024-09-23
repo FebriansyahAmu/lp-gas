@@ -116,12 +116,12 @@ class User{
     public static function create($data){
         try{
             $db = Database::getConnection();
-            $stmt = $db->prepare("INSERT INTO " . self::$table . " (Nama_Lengkap, Email, No_Hp, Password, isVerified, role) VALUES(?, ?, ?, ?, ?, ?)");
+            $stmt = $db->prepare("INSERT INTO " . self::$table . " (Nama_Lengkap, Email, No_Hp, Password, isVerified, role, token) VALUES(?, ?, ?, ?, ?, ?, ?)");
             if(!$stmt){
                 throw new Exception("Failed to prepare statement: ", $db->error);
             }
 
-            $stmt->bind_param("ssisis", $data['namalengkap'], $data['email'], $data['phone'], $data['password'], $data['isverified'], $data['role']);
+            $stmt->bind_param("ssisiss", $data['namalengkap'], $data['email'], $data['phone'], $data['password'], $data['isverified'], $data['role'], $data['token']);
             $success = $stmt->execute();
             if(!$success){
                 throw new Exception("Failed to execute query", $stmt->error);
@@ -166,6 +166,53 @@ class User{
             }
 
             return $result->fetch_all(MYSQLI_ASSOC);
+        }catch(\Exception $e){
+            error_log($e->getMessage());
+            return false;
+        }
+    }
+
+    public static function findByToken($token){
+        try{
+            $db = Database::getConnection();
+            $stmt = $db->prepare("SELECT isVerified, token FROM " . self::$table . " where token = ?");
+            if(!$stmt){
+                throw new \Exception("Failed to prepare statement", $db->error);
+            }
+
+            $stmt->bind_param();
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            if(!$result){
+                throw new \Exception("Failed to execute query", $stmt->error);
+            }
+
+            return $result->fetch_assoc();
+        }catch(\Exception $e){
+            error_log($e->getMessage());
+            return false;
+        }
+    }
+
+    public static function verifiedToken($token){
+        try{
+            $db = Database::getConnection();
+            $isverified = 1;
+            $stmt = $db->prepare("UPDATE " . self::$table . " isVerified = ?, token = NULL WHERE token=?");
+
+            if(!$stmt){
+                throw new \Exception("Failed to prepare statement", $db->error);
+            }
+            $stmt->bind_param('is', $isverified, $token);
+            $success = $stmt->execute();
+
+            if(!$success){
+                throw new \Exception("Failed to execute query", $stmt->error);
+            }
+
+            return true;
+
         }catch(\Exception $e){
             error_log($e->getMessage());
             return false;
