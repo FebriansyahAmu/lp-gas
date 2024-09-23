@@ -135,6 +135,16 @@ $router->get('/data/riwayat-pembelian', AdminController::class, 'getRiwayatPembe
     'role' => 'admin'
 ]);
 
+
+
+//Verifikasi akun
+$router->get('/verifikasi-email/{token}', AuthController::class, 'emailVerification');
+$router->get('/verifikasi-sukses', AuthController::class, 'verificationSuccess');
+$router->post('/auth/resend-verification', AuthController::class, 'resendLink');
+
+
+
+//logout
 $router->get('/logout', AuthController::class, 'logoutUsers');
 
 $router->dispatch();

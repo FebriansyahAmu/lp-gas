@@ -11,7 +11,7 @@
 </style>
 <div
   id="loading-spinner"
-  class="d-flex justify-content-center align-items-center"
+  class="d-none d-flex justify-content-center align-items-center"
 >
   <div class="spinner-border text-primary" role="status">
     <span class="visually-hidden">Loading...</span>

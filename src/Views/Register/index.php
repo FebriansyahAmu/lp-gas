@@ -19,6 +19,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </head>
   <body>
+  <?php component('spinners'); ?>
     <section
       class="vh-100"
       style="background: radial-gradient(circle at right, #b8ced6 , #3f3b3e); overflow:auto;"
@@ -218,7 +219,7 @@ function togglePassword(fieldId, iconId) {
             Swal.fire('Error', 'Password tidak cocok', 'error');
             return;
         }
-        
+        $("#loading-spinner").removeClass("d-none");
         $.ajax({
           url: '/auth/register',
           type: 'POST',
@@ -227,12 +228,16 @@ function togglePassword(fieldId, iconId) {
           contentType: false,
           dataType: "json",
           success: function(response){
+            $("#loading-spinner").addClass("d-none");
               if(response.status === 'success'){
                 Swal.fire('Success', response.message, 'success');
               }
           },
           error: function(xhr, status, error){
             Swal.fire('Error', xhr.responseJSON.message, 'error');
+          },
+          complete: function(){
+            $("#loading-spinner").addClass("d-none");
           }
         })
       })

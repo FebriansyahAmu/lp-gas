@@ -87,7 +87,7 @@ class User{
     public static function isVerified($email){
         try{
             $db = Database::getConnection();
-            $stmt = $db->prepare("SELECT isVerified, token FROM " . self::$table . " WHERE email = ?");
+            $stmt = $db->prepare("SELECT isVerified FROM " . self::$table . " WHERE email = ?");
             if(!$stmt){
                 throw new Exception("Failed to prepare statement: ", $db->error);
             }
@@ -100,8 +100,8 @@ class User{
                 throw new Exception("Failed to execute query: ", $stmt->error);
             }
 
-            $userData = $stmt->fetch_assoc();
-            if($userData && $userData['isVeridied'] == 1 && is_null($userData['token'])){
+            $userData = $result->fetch_assoc();
+            if($userData && $userData['isVerified'] == 1){
                 return true;
             }
             
@@ -175,12 +175,12 @@ class User{
     public static function findByToken($token){
         try{
             $db = Database::getConnection();
-            $stmt = $db->prepare("SELECT isVerified, token FROM " . self::$table . " where token = ?");
+            $stmt = $db->prepare("SELECT isVerified, token FROM " . self::$table . " WHERE token = ?");
             if(!$stmt){
                 throw new \Exception("Failed to prepare statement", $db->error);
             }
 
-            $stmt->bind_param();
+            $stmt->bind_param('s', $token);
             $stmt->execute();
             $result = $stmt->get_result();
 
@@ -199,7 +199,7 @@ class User{
         try{
             $db = Database::getConnection();
             $isverified = 1;
-            $stmt = $db->prepare("UPDATE " . self::$table . " isVerified = ?, token = NULL WHERE token=?");
+            $stmt = $db->prepare("UPDATE " . self::$table . " SET isVerified = ?, token = NULL WHERE token=?");
 
             if(!$stmt){
                 throw new \Exception("Failed to prepare statement", $db->error);

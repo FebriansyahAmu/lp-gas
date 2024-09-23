@@ -159,7 +159,34 @@
             if (response.redirect) {
                 window.location.href = response.redirect;
             }
-        }
+        }else if(response.status === 'unverified'){
+            Swal.fire({
+              icon: "error",
+              title: "Error",
+              text: response.message,
+              footer: '<a href="" id="resend-verification-link">Kirim link verifikasi</a>'
+            });
+
+            $('#resend-verification-link').on('click', function(e){
+              e.preventDefault();
+              $.ajax({
+                url: '/auth/resend-verification',
+                type: 'POST',
+                data: {email: response.email},
+                success: function(res){
+                  Swal.fire({
+                    icon: "success",
+                    title: "Link verifikasi dikrim",
+                    text: "Silahkan cek email anda! "
+                  });
+                },
+                error: function(xhr){
+                  const errRes = JSON.parse(xhr.responseText);
+                  Swal.fire('Error', errRes.message, 'error');
+                }
+              })
+            })
+          }
         },
         error: function(xhr){
           const errorResponse = JSON.parse(xhr.responseText);

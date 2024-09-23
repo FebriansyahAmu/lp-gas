@@ -44,6 +44,11 @@ class AuthController extends Controller
         $this->render('/Register/index', $data, null);
     }
 
+    public function verificationSuccess(){
+        $data = [];
+        $this->render('/verification-sukses/index', $data, null);
+    }
+
     public function registerAct(){
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
             try{
@@ -80,9 +85,9 @@ class AuthController extends Controller
                 $data['token'] = bin2hex(random_bytes(32));
                 $data['role'] = 'user';
 
-                if(self::sendVerificationEmail($data['email'], $data['token'])){
+                // if(self::sendVerificationEmail($data['email'], $data['token'])){
 
-                }
+                // }
 
                 if(User::create($data)){
                     
@@ -132,6 +137,18 @@ class AuthController extends Controller
             $user = User::verifyUser($email, $password);
             if(!$user){
                 throw new \Exception("Invalid credentials", 401);
+            }
+
+            $isVerified = User::isVerified($email);
+            if(!$isVerified){
+                header('Content-Type: application/json');
+                // http_response_code(403);
+                echo json_encode([
+                    'status' => 'unverified',
+                    'message' => 'Akun anda belum verifikasi. Silahkan cek email anda untuk verifikasi',
+                    'email' => $email
+                ]);
+                exit();
             }
 
              $data = [
@@ -232,6 +249,32 @@ class AuthController extends Controller
     }
 
     public function emailVerification($token){
+        // $user = User::findByEmail($toEmail);
+
+        // // Cek apakah user ditemukan
+        // if (!$user) {
+        //     http_response_code(404);
+        //     echo json_encode([
+        //         'status' => 'error',
+        //         'message' => 'User tidak ditemukan'
+        //     ]);
+        //     return;
+        // }
+    
+        // // Cek apakah sudah lewat 1 menit sejak pengiriman terakhir
+        // $lastRequest = strtotime($user['last_verification_request']);
+        // $currentTime = time();
+        // $timeDiff = $currentTime - $lastRequest;
+    
+        // if ($lastRequest && $timeDiff < 60) {
+        //     // Jika belum lewat 1 menit
+        //     http_response_code(429); // 429 Too Many Requests
+        //     echo json_encode([
+        //         'status' => 'error',
+        //         'message' => 'Anda hanya bisa meminta verifikasi setiap 1 menit.'
+        //     ]);
+        //     return;
+        // }
         try{
             $userToken = User::findByToken($token);
             if(!$userToken){
