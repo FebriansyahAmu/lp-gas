@@ -143,6 +143,11 @@ $router->get('/verifikasi-sukses', AuthController::class, 'verificationSuccess')
 $router->post('/auth/resend-verification', AuthController::class, 'resendLink');
 
 
+//Lupa Password
+$router->get('/lupa-password', AuthController::class, 'lupaPassword');
+$router->post('/auth/password-reset', AuthController::class, 'forgetPassword');
+$router->get('/auth/password-reset/{token}', AuthController::class, 'resetPassword');
+$router->post('/auth/new-password', AuthController::class, 'newPassword');
 
 //logout
 $router->get('/logout', AuthController::class, 'logoutUsers');

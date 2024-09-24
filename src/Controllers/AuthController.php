@@ -36,17 +36,22 @@ class AuthController extends Controller
     public function login()
     {
         $data = []; 
-        $this->render('/Login/index', $data, null); 
+        $this->render('/Login/index', $data, 'Layout/standardLayout'); 
     }
 
     public function register(){
         $data = [];
-        $this->render('/Register/index', $data, null);
+        $this->render('/Register/index', $data, 'Layout/standardLayout');
     }
 
     public function verificationSuccess(){
         $data = [];
-        $this->render('/verification-sukses/index', $data, null);
+        $this->render('/verification-sukses/index', $data, 'Layout/standardLayout');
+    }
+
+    public function lupaPassword(){
+        $data = [];
+        $this->render('/Lupa-password/index', $data, 'Layout/standardLayout');
     }
 
     public function registerAct(){
@@ -91,7 +96,7 @@ class AuthController extends Controller
 
                 if(User::create($data)){
                     
-                    $sendVerifEmail = self::sendVerificationEmail($data['email'], $data['token']);
+                    $sendVerifEmail = self::sendVerificationEmail($data['email'], $data['token'], 'verification');
                     if($sendVerifEmail){
                         http_response_code(201);
                         echo json_encode([
@@ -215,40 +220,8 @@ class AuthController extends Controller
     }
 
 
-    private function sendVerificationEmail($toEmail, $token){
+    private function sendVerificationEmail($toEmail, $token, $type){
         $mail = new PHPMailer();
-        try{
-            self::init();
-            $mail->isSMTP();
-            $mail->Host = self::$host;
-            $mail->SMTPAuth = true;
-            $mail->Username = self::$smtpEmail;
-            $mail->Password = self::$smtpPass;
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-            $mail->Port = self::$port;
-
-            $mail->setFrom('nvlysys@gmail.com', 'PKGas-Abdullah');
-            $mail->addAddress($toEmail);
-
-            $mail->isHTML(true);
-            $mail->Subject = 'Verifikasi Email';
-            $verificationLink = "http://localhost:3000/verifikasi-email/$token";
-            $mail->Body = "Klik link berikut untuk memverifikasi akun anda: <a href='$verificationLink'>$verificationLink</a>";
-            $mail->AltBody = "Klik link berikut untuk memverifikasi akun Anda: $verificationLink";
-
-            $mail->send();
-            return true;
-        }catch(\Exception $e){
-            header('Content-Type: application/json');
-            http_response_code($e->getCode() ? : 500);
-            echo json_encode([
-                'status' => 'error',
-                'message' => $e->getMessage()
-            ]);
-        }
-    }
-
-    public function emailVerification($token){
         // $user = User::findByEmail($toEmail);
 
         // // Cek apakah user ditemukan
@@ -276,9 +249,49 @@ class AuthController extends Controller
         //     return;
         // }
         try{
+            self::init();
+            $mail->isSMTP();
+            $mail->Host = self::$host;
+            $mail->SMTPAuth = true;
+            $mail->Username = self::$smtpEmail;
+            $mail->Password = self::$smtpPass;
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+            $mail->Port = self::$port;
+
+            $mail->setFrom('nvlysys@gmail.com', 'PKGas-Abdullah');
+            $mail->addAddress($toEmail);
+
+            $mail->isHTML(true);
+            $mail->Subject = 'Verifikasi Email';
+            
+            if ($type === 'verification') {
+                $verificationLink = "http://localhost:3000/verifikasi-email/$token";
+                $mail->Body = "Klik link berikut untuk memverifikasi akun anda: <a href='$verificationLink'>$verificationLink</a>";
+                $mail->AltBody = "Klik link berikut untuk memverifikasi akun Anda: $verificationLink";
+            } elseif ($type === 'reset_password') {
+                $resetLink = "http://localhost:3000/auth/password-reset/$token";
+                $mail->Body = "Klik link berikut untuk reset password anda: <a href='$resetLink'>$resetLink</a>";
+                $mail->AltBody = "Klik link berikut untuk reset password Anda: $resetLink";
+            }
+
+            $mail->send();
+            return true;
+        }catch(\Exception $e){
+            header('Content-Type: application/json');
+            http_response_code($e->getCode() ? : 500);
+            echo json_encode([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
+    public function emailVerification($token){
+        try{
             $userToken = User::findByToken($token);
             if(!$userToken){
                 throw new \Exception("Token tidak ditemukan, silahkan coba lagi nanti");
+                exit();
             }
 
             if(is_null($userToken['token']) && $userToken['isVerified'] == 0){
@@ -300,9 +313,45 @@ class AuthController extends Controller
                 'status' => 'error',
                 'message' => $e->getMessage()
             ]);
+            
         }
     }
 
+    //resend link verification
+    public function resendLink(){
+        try{
+            
+            $token = bin2hex(random_bytes(32));
+            $data = [
+                'email' => filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL),
+                'token' =>  $token
+            ];
+
+            $resendVerificationLink = self::sendVerificationEmail($data['email'], $data['token'], 'verification');
+            if($resendVerificationLink){
+                header('Content-Type: application/json');
+                echo json_encode([
+                    'status' => 'success',
+                    'message' => 'Link verifikasi telah dikirim, silahkan cek email anda'
+                ]);
+            }else{
+                throw new \Exception("Terjadi kesalahan, silahkan coba lagi nanti", 500);
+                exit();
+            }
+
+            $updateToken = User::resendVerif($data);
+            if(!$updateToken){
+                throw new \Exception("invalid Data", 400);
+            }
+        }catch(\Exception $e){
+            header('Content-Type: application/jso');
+            http_response_code($e->getCode() ? : 500);
+            echo json_encode([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
 
     public function logoutUsers(){
         setcookie('authToken', '', [
@@ -316,6 +365,109 @@ class AuthController extends Controller
 
         header('Location: /login');
         exit();
+    }
+
+
+    //Forget Password
+    public function forgetPassword(){
+        try{
+            if($_SERVER['REQUEST_METHOD'] !== 'POST'){
+                throw new \Exception("Method not allowed", 405);
+            }
+
+            $resetToken = bin2hex(random_bytes(32));
+            $data = [
+                'email' => filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL),
+                'repas-token' => $resetToken
+            ];
+
+            $checkEmail = User::findByEmail($data['email']);
+            if(!$checkEmail){
+                throw new \Exception("Email anda tidak ditemukan", 404);
+                exit();
+            }
+
+            if(User::tokenResPas($data)){
+                $sendResetLink = self::sendVerificationEmail($data['email'], $data['repas-token'], 'reset_password');
+                if($sendResetLink){
+                    header('Content-Type: application/json');
+                    echo json_encode([
+                        'status' => 'success',
+                        'message' => 'Link untuk reset password telah dikirim, silahkan cek email anda'
+                    ]); 
+                }else{
+                    throw new \Exception("Terjadi kesalahan, silahkan coba lagi nanti", 500);
+                }
+            }
+            
+        }catch(\Exception $e){
+            header('Content-Type: application/json');
+            http_response_code($e->getCode() ? : 500);
+            echo json_encode([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
+    public function resetPassword($token){
+        try{
+            $resToken = User::checkResToken($token);
+            if(!$resToken){
+                throw new \Exception("Invalid token", 400);
+            }
+            $data = ['resToken' => $resToken['res_token']];
+            $this->render('/Lupa-password/reset-password/index', $data, 'Layout/standardLayout');
+        }catch(\Exception $e){
+            http_response_code($e->getCode() ? : 500);
+            header('Content-Type: application/json');
+            echo json_encode([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
+    public function newPassword(){
+        try{
+            if($_SERVER['REQUEST_METHOD'] !== "POST"){
+                throw new \Exception("method not allowed", 400);
+            }
+
+            $data = [
+                'res-token' => filter_input(INPUT_POST, 'resToken', FILTER_SANITIZE_STRING),
+                'password' => filter_input(INPUT_POST, 'password', FILTER_DEFAULT)
+            ];
+
+            if(strlen($data['password']) < 8){
+                throw new \Exception("Password minimal 8 karakter", 400);
+            }
+
+            $checkResToken = User::checkResToken($data['res-token']);
+            if(!$checkResToken){
+                throw new \Exception("Token invalid", 400);
+            }
+
+            $data['password'] = password_hash($data['password'], PASSWORD_BCRYPT);
+            $updatePassword = User::newPassword($data);
+            if($updatePassword){
+                header('Content-Type: application/json');
+                echo json_encode([
+                    'status' => 'success',
+                    'message' => 'Password berhasil diubah'
+                ]);
+            }
+
+
+
+        }catch(\Exception $e){
+            http_response_code($e->getCode() ? : 500);
+            header('Content-Type: application/json');
+            echo json_encode([
+                'status' => 'error',
+                'message'=> $e->getMessage()
+            ]);
+        }
     }
 
     private function checkRefer(){

@@ -1,29 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pangkalan Gas Abdulah</title>
-
-    <!--Bootstrap-->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-      crossorigin="anonymous"
-    />
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-      rel="stylesheet"
-    />
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  </head>
-  <body>
-    <section
-      class="vh-100"
-      style="background: radial-gradient(circle at right, #b8ced6 , #3f3b3e)"
-    >
-      <div class="container py-5 h-100">
+<div class="container py-5 h-100">
         <div class="row d-flex align-items-center justify-content-center h-100 ">
           <div class="col-md-8 col-lg-7 col-xl-6">
             <img
@@ -85,13 +60,12 @@
                 Belum punya akun? <a href="/register" style="text-decoration:none;">Daftar Sekarang</a>
                 
               </p>
-              <a href="/forgot-password" style="text-decoration:none;">Lupa Kata Sandi?</a>
+              <a href="/lupa-password" style="text-decoration:none;">Lupa Kata Sandi?</a>
             </form>
           </div>
         </div>
       </div>
-    </section>
-  </body>
+
   <script>
   // Validasi form
   (function () {
@@ -127,26 +101,12 @@
       }
     }
   </script>
-
-  <script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-    crossorigin="anonymous"
-  ></script>
-
-  <script
-    src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
-    integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
-  ></script>
-
 <script>
   $(document).ready(function(){
     $("#flogin").submit(function(event){
       event.preventDefault();
       const formData = new FormData(this);
-
+      $("#loading-spinner").removeClass("d-none");
       $.ajax({
         url: '/auth/login',
         type: 'POST',
@@ -155,6 +115,7 @@
         contentType: false,
         dataType: 'json',
         success: function(response){
+          $("#loading-spinner").addClass("d-none");
            if (response.status === 'success') {
             if (response.redirect) {
                 window.location.href = response.redirect;
@@ -169,11 +130,13 @@
 
             $('#resend-verification-link').on('click', function(e){
               e.preventDefault();
+              $("#loading-spinner").removeClass("d-none");
               $.ajax({
                 url: '/auth/resend-verification',
                 type: 'POST',
                 data: {email: response.email},
                 success: function(res){
+                   $("#loading-spinner").addClass("d-none");
                   Swal.fire({
                     icon: "success",
                     title: "Link verifikasi dikrim",
@@ -183,6 +146,9 @@
                 error: function(xhr){
                   const errRes = JSON.parse(xhr.responseText);
                   Swal.fire('Error', errRes.message, 'error');
+                },
+                complete: function(){
+                  $("#loading-spinner").addClass("d-none");
                 }
               })
             })
@@ -191,9 +157,11 @@
         error: function(xhr){
           const errorResponse = JSON.parse(xhr.responseText);
           Swal.fire('Error', errorResponse.message, 'error');
+        },
+        complete: function(){
+          $("#loading-spinner").addClass("d-none");
         }
       })
     })
   })
 </script>
-  </html>

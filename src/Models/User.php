@@ -64,7 +64,7 @@ class User{
     public static function findByEmail($email){
         try{
             $db = Database::getConnection();
-            $stmt = $db->prepare("SELECT * FROM " . self::$table . " WHERE Email = ?");
+            $stmt = $db->prepare("SELECT user_id, Nama_lengkap, Email, Password, role FROM " . self::$table . " WHERE Email = ?");
             if(!$stmt){
                 throw new Exception("Failed to prepare statement: ", $db->error);
             }
@@ -215,6 +215,91 @@ class User{
 
         }catch(\Exception $e){
             error_log($e->getMessage());
+            return false;
+        }
+    }
+
+    public static function resendVerif($data){
+        try{
+            $db = Database::getConnection();
+            $stmt = $db->prepare("UPDATE " . self::$table . " SET token = ? WHERE email = ?");
+            if(!$stmt){
+                throw new \Exception("Failed to prepare statement", $db->error);
+            }
+
+            $stmt->bind_param('ss', $data['token'], $data['email']);
+            $success = $stmt->execute();
+
+            if(!$stmt){
+                throw new \Exception("Failed to execute query", $stmt->error);
+            }
+
+            return true;
+        }catch(\Exception $e){
+            error_log($e->getMessage());
+            return false;
+        }
+    }
+
+    public static function tokenResPas($data){
+        try{
+            $db = Database::getConnection();
+            $stmt = $db->prepare("UPDATE " . self::$table . " SET res_token = ? WHERE Email = ?");
+            if(!$stmt){
+                throw new \Exception("Failed to prepare statement", $db->error);
+            }
+
+            $stmt->bind_param('ss', $data['repas-token'], $data['email']);
+            $success = $stmt->execute();
+            if(!$success){
+                throw new \Exception("Failed to execute query", $stmt->error);
+            }
+
+            return true;
+        }catch(\Exception $e){
+            error_log($e->getMessage());
+            return false;
+        }
+    }
+
+    public static function checkResToken($token){
+        try{
+            $db = Database::getConnection();
+            $stmt = $db->prepare("SELECT res_token FROM " . self::$table . " WHERE res_token = ?");
+            if(!$stmt){
+                throw new \Exception("Failed to prepare statement", $db->error);
+            }
+
+            $stmt->bind_param('s', $token);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            if(!$result){
+                throw new \Exception("Failed to execute query", $stmt->error);
+            }
+
+            return $result->fetch_assoc();
+        }catch(\Exception $e){
+            error_log($e->getMessage());
+            return false;
+        }
+    }
+
+    public static function newPassword($data){
+        try{
+            $db = Database::getConnection();
+            $stmt = $db->prepare("UPDATE " . self::$table . " SET Password = ?, res_token = NULL WHERE res_token = ?");
+            if(!$stmt){
+                throw new \Exception("Failed to prepare statement", $db->error);
+            }
+            $stmt->bind_param('ss', $data['password'], $data['res-token']);
+            $success = $stmt->execute();
+            if(!$success){
+                throw new \Exception("Failed to execute query", $stmt->error);
+            }
+
+            return true;
+        }catch(\Exception $e){
+            error_log($e->getMessage);
             return false;
         }
     }
