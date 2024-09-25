@@ -96,3 +96,9 @@
     }
   })
 </script>
+
+<script>
+  $(document).ready(function(){
+    login();
+  })
+</script>

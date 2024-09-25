@@ -106,3 +106,8 @@
     </div>
   </div>
 </section>
+<script>
+  $(document).ready(function(){
+    fetchProducts();
+  })
+</script>

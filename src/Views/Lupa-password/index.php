@@ -39,4 +39,8 @@
     }, false)
   })
 })()
+
+$(document).ready(function(){
+  sendResetLink();
+});
 </script>

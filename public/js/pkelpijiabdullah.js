@@ -1,15 +1,11 @@
 $(document).ready(function () {
   //function bagian home
-  fetchProducts();
 
   //Function halaman register
   submitRegister();
-
   //Function halaman login
-  login();
 
   //Function untuk lupa password
-  sendResetLink();
   sendResetPassword();
 
   //function account
@@ -19,6 +15,7 @@ $(document).ready(function () {
   getEditAlamatData();
   submitFormAlamat();
   deleteAlamat();
+  selesaikanPemesanana();
 });
 
 //Submit form register
@@ -257,6 +254,15 @@ function getHistoryUID() {
     ajax: {
       url: "/riwayat-pembelian",
       dataSrc: "data",
+      error: function (xhr, error, thrown) {
+        // Kosongkan tabel jika ada kesalahan
+        $("#tabelRiwayatPembelian").DataTable().clear().draw();
+
+        // Tampilkan pesan no data found
+        $("#tabelRiwayatPembelian tbody").html(
+          '<tr><td colspan="5" class="text-center">No data found</td></tr>'
+        );
+      },
     },
     columns: [
       { data: "id_Order" },
@@ -273,6 +279,22 @@ function getHistoryUID() {
           }
         },
       },
+      {
+        data: null, // Kolom untuk tombol 'Selesaikan Pemesanan'
+        render: function (data, type, row) {
+          // Jika ada snap_token, tampilkan tombol 'Selesaikan Pemesanan'
+          if (row.snap_token) {
+            return (
+              '<button class="btn btn-primary btn-sm complete-order" data-order-id="' +
+              row.id_Order +
+              '" data-token="' +
+              row.snap_token +
+              '">Selesaikan Pemesanan</button>'
+            );
+          }
+          return "";
+        },
+      },
     ],
     columnDefs: [
       { width: "5%", targets: 0 },
@@ -280,7 +302,28 @@ function getHistoryUID() {
       { width: "2%", targets: 2 },
       { width: "2%", targets: 3 },
       { width: "2%", targets: 4 },
+      { width: "2%", targets: 5 },
     ],
+  });
+}
+
+//selesaikan pemesanana menggunakan snapToken;
+function selesaikanPemesanana() {
+  $("#tabelRiwayatPembelian").on("click", ".complete-order", function () {
+    var snapToken = $(this).data("token");
+
+    window.snap.pay(snapToken, {
+      onSuccess: function (result) {
+        Swal.fire("Success", "Pemesanan berhasil", "success");
+        $("#tabelRiwayatPembelian").DataTable().ajax.reload();
+      },
+      onPending: function (result) {
+        Swal.fire("Pending", "Menunggu Pembayaran", "warning");
+      },
+      onError: function (result) {
+        Swal.fire("Error", "Pemesanan gagal", "error");
+      },
+    });
   });
 }
 
@@ -290,10 +333,20 @@ function tabelAlamats() {
     destroy: true,
     responsive: true,
     scrollX: true,
+
     ajax: {
       url: "/Alamat",
 
       dataSrc: "data",
+      error: function (xhr, error, thrown) {
+        // Kosongkan tabel jika ada kesalahan
+        $("#tabelAlamat").DataTable().clear().draw();
+
+        // Tampilkan pesan no data found
+        $("#tabelAlamat tbody").html(
+          '<tr><td colspan="5" class="text-center">Belum ada alamat</td></tr>'
+        );
+      },
     },
     columns: [
       { data: "id_Alamat" },

@@ -4,7 +4,7 @@
     style="margin-left: 50px; margin-right: 50px"
   >
     <a class="navbar-brand" href="#">
-       <img src="/img/logo.png" alt="PK-GasAbdullah Logo" style="height: 55px;">
+       <img src="/img/logo.png" alt="PK-GasAbdullah Logo" style="height: 40px;">
     </a>
 
     <button

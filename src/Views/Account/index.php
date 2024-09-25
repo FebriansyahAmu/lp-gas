@@ -1,3 +1,8 @@
+<script
+  type="text/javascript"
+  src="https://app.sandbox.midtrans.com/snap/snap.js"
+  data-client-key=""
+></script>
 <section
   class="d-flex justify-content-center align-items-center py-5"
   style="min-height: 100vh"
@@ -32,7 +37,7 @@
                 <th>Qty</th>
                 <th>Total Harga</th>
                 <th>Status</th>
-                <!-- <th>Action</th> -->
+                <th>Action</th>
               </tr>
             </thead>
             <tbody></tbody>

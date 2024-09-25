@@ -71,6 +71,8 @@ class CheckoutController extends Controller{
                 Midtrans::init();
 
                 $snapToken = \Midtrans\Snap::getSnapToken($transactionParams);
+                Order::updateSnapToken($orderId, $snapToken);
+
                 echo json_encode([
                     'token' => $snapToken
                 ]);
@@ -98,6 +100,7 @@ class CheckoutController extends Controller{
             // Periksa status transaksi dan update status pesanan di database
             if($transactionStatus == 'capture' || $transactionStatus == 'settlement'){
                     Order::updateOrderStatus($orderId, 'paid');
+                    Order::updateSnapToken($orderId, NULL);
                 } elseif ($transactionStatus == 'pending') {
                     Order::updateOrderStatus($orderId, 'pending');
                 } elseif ($transactionStatus == 'deny' || $transactionStatus == 'expire' || $transactionStatus == 'cancel') {

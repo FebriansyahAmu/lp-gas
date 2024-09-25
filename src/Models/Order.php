@@ -165,7 +165,7 @@ Class Order{
         try{
             $db = Database::getConnection();
             $stmt = $db->prepare("
-                            SELECT ec_order.id_Order, ec_gas.Jenis_gas, ec_order.Qty, ec_order.totalharga, ec_order.status
+                            SELECT ec_order.id_Order, ec_gas.Jenis_gas, ec_order.Qty, ec_order.totalharga, ec_order.status, ec_order.snap_token
                             FROM " . self::$table . " 
                             JOIN ". self::$table_gas ." ON ec_order.id_gas = ec_gas.id_gas
                             WHERE ec_order.user_id = ?
@@ -238,5 +238,25 @@ Class Order{
         }
     }
     
+    public static function updateSnapToken($orderId, $snapToken = NULL){
+        try{
+            $db = Database::getConnection();
+            $stmt = $db->prepare("UPDATE " . self::$table . " SET snap_token = ? WHERE id_Order = ?");
+            if(!$stmt){
+                throw new \Exception("Failed to prepare statement", $db->error);
+            }
+
+            $stmt->bind_param('ss', $snapToken, $orderId);
+            $success = $stmt->execute();
+            if(!$success){
+                throw new \Exception("Failed to execute query", $stmt->error);
+            }
+
+            return true;
+        }catch(\Exception $e){
+            error_log($e->getMessage());
+            return false;
+        }
+    }
 
 }
