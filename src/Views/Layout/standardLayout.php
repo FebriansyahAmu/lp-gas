@@ -40,6 +40,7 @@
         <?php echo $content; ?>
     </section>
   </body>
+  <script src="/js/pkelpijiabdullah.js"></script>
 
 
 

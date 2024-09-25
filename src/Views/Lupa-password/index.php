@@ -40,38 +40,3 @@
   })
 })()
 </script>
-
-<script>
-    $(document).ready(function(){
-        sendResetLink();
-    });
-
-    function sendResetLink(){
-        $('#forgotPasswordForm').submit(function(event){
-            event.preventDefault();
-
-            const formData = new FormData(this);
-            console.log(formData);
-            $("#loading-spinner").removeClass("d-none");
-            $.ajax({
-                url: '/auth/password-reset',
-                method: 'POST',
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function(response){
-                    $("#loading-spinner").addClass("d-none");
-                    if(response.status === 'success'){
-                        Swal.fire('Success', response.message, 'success');
-                    }
-                },
-                error: function(xhr, status, error){
-                    Swal.fire('Error', xhr.responseJSON.message, 'error');
-                },
-                complete: function(){
-                    $("#loading-spinner").addClass("d-none");
-                }
-            })
-        })
-    }
-</script>

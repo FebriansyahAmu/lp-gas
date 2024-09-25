@@ -32,6 +32,7 @@
 <?php component('footer'); ?>
 </body>
 </html>
+<script src="/js/pkelpijiabdullah.js"></script>
 
 <script>
   AOS.init();

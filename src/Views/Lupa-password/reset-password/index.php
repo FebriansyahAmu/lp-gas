@@ -78,9 +78,8 @@
 <script>
     $(document).ready(function(){
         togglePassword();
-        sendResetPassword();
     });
-    
+
     function togglePassword(fieldId, iconId) {
     const passwordField = document.getElementById(fieldId);
     const icon = document.getElementById(iconId);
@@ -99,49 +98,5 @@
     } else {
         console.error("Element not found for IDs:", fieldId, iconId);
     }
-}
-
-
-function sendResetPassword(){
-    $('#resetPasswordForm').submit(function(event){
-        event.preventDefault();
-        var password  = $("#password").val();
-        var confirmPassword = $("#confirmPassword").val();
-
-        if (password.length < 8) {
-            Swal.fire('Error', 'Password harus minimal 8 karakter', 'error');
-            return;
-        }
-
-        if (password !== confirmPassword) {
-            Swal.fire('Error', 'Password tidak cocok', 'error');
-            return;
-        }
-
-        const formData = new FormData(this);
-
-        $("#loading-spinner").removeClass("d-none");
-        $.ajax({
-            url: '/auth/new-password',
-            method: 'POST',
-            data: formData,
-            processData: false,
-            contentType: false,
-            success: function(response){
-                 $("#loading-spinner").addClass("d-none");
-                if(response.status === 'success'){
-                    Swal.fire('Success', response.message, 'success').then(()=>{
-                        window.location.href = '/login';
-                    })
-                }
-            },
-            error: function(xhr, status, error){
-                Swal.fire('Error', xhr.responseJSON.message, 'error');
-            },
-            complete: function(){
-            $("#loading-spinner").addClass("d-none");
-          }
-        })
-    })
 }
 </script>

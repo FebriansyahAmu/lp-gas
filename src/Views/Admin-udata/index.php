@@ -42,28 +42,3 @@
     </div>
   </div>
 </div>
-
-<script>
-    $(document).ready(function(){
-      dataCustomer();
-    })
-
-    function dataCustomer(){
-        $('#tabelDataCustomer').DataTable({
-          "responsive": true,
-          "scrollX": true,
-          "ajax":{
-            "url": "/data/customers",
-            "dataSrc": "data",
-          },
-          "columns":[
-            { "data": "user_id"},
-            { "data": "Nama_lengkap"},
-            { "data": "Email"},
-            { "data": "No_Hp"},
-          ]
-        })
-    }
-
-
-</script>
