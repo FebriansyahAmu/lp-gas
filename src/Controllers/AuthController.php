@@ -18,6 +18,7 @@ class AuthController extends Controller
     protected static $smtpPass;
     protected static $port;
 
+    //Inisiasi method untuk memanggil key di file .env
     public static function init(){
         $dotenv = Dotenv::createImmutable(__DIR__ . '/../../');
         $dotenv->load();
@@ -27,36 +28,43 @@ class AuthController extends Controller
         self::$port = $_ENV['SMTP_PORT'];
     }
 
-
+    //method untuk memanggil middlewarare
     public function __construct(){
         parent::__construct();
         $this->authMiddleware = new AuthMiddleware();
     }
 
+    //method untuk menampilkan halamana Login
     public function login()
     {
         $data = []; 
         $this->render('/Login/index', $data, 'Layout/standardLayout'); 
     }
 
+    //method untuk menampilkan halaman register
     public function register(){
         $data = [];
         $this->render('/Register/index', $data, 'Layout/standardLayout');
     }
 
+    //method untuk menampilkan halaman verifikasi sukses
     public function verificationSuccess(){
         $data = [];
         $this->render('/verification-sukses/index', $data, 'Layout/standardLayout');
     }
 
+    //method untuk menampilkan halaman lupa password
     public function lupaPassword(){
         $data = [];
         $this->render('/Lupa-password/index', $data, 'Layout/standardLayout');
     }
 
+    //method ini berfungsi untuk mengambil request untuk daftar akun baru
     public function registerAct(){
+        //Cek apakah requestnya sesuai yaitu POST
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
-            try{
+            try{ //Menggunakan try catch sebagai error handling
+                //inisiasi array untuk menangkap request user, dan memvalidasi inputnya 
                 $data = [
                     'namalengkap' => filter_input(INPUT_POST, 'namalengkap', FILTER_SANITIZE_SPECIAL_CHARS),
                     'email' => filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL),
@@ -64,6 +72,7 @@ class AuthController extends Controller
                     'password' => filter_input(INPUT_POST, 'password', FILTER_DEFAULT),
                 ];
 
+                //validasi Data yang diinputkan oleh user
                 $errors = User::validateData($data);
                 if(!empty($errors)){
                     header('Content-Type: application/json');
@@ -75,6 +84,7 @@ class AuthController extends Controller
                     return;
                 }
                 
+                //lakukan pengecekan email apakah email yang dikirim telah terdaftar atau belum
                 if(User::findByEmail($data['email'])){
                     header('Content-Type: application/json');
                     http_response_code(409);
@@ -85,17 +95,14 @@ class AuthController extends Controller
                     return;
                 }
 
+                //lakukan hashing password dan set isVerifiednya ke 0
                 $data['password'] = password_hash($data['password'], PASSWORD_BCRYPT);
                 $data['isverified'] = 0;
                 $data['token'] = bin2hex(random_bytes(32));
                 $data['role'] = 'user';
 
-                // if(self::sendVerificationEmail($data['email'], $data['token'])){
-
-                // }
-
-                if(User::create($data)){
-                    
+                if(User::create($data)){ //panggil method create untuk membuat akun baru
+                    //kirim link verifikasi email berdasarkan email yang diinputkan oleh user
                     $sendVerifEmail = self::sendVerificationEmail($data['email'], $data['token'], 'verification');
                     if($sendVerifEmail){
                         http_response_code(201);
@@ -109,7 +116,7 @@ class AuthController extends Controller
                 }else{
                     throw new \Exception('Gagal membuat akun, Silahkan coba lagi nanti', 500);
                 }
-            }catch(\Exception $e){
+            }catch(\Exception $e){ //Tangkap semua error dan tampilkan dalam header application/json
                 header('Content-Type: application/json');
                 http_response_code($e->getCode() ? : 500);
                 echo json_encode([
@@ -117,7 +124,7 @@ class AuthController extends Controller
                     'message' => $e->getMessage()
                 ]);
             }
-        }else{
+        }else{ //Jika REQUEST_METHOD tidak sesuai dalam arti, tidak POST, maka akan muncul error invalid method
             http_response_code(405);
             echo json_encode([
                 'status' => 'error',
@@ -126,12 +133,15 @@ class AuthController extends Controller
         }
     }
 
+    //Method untuk login
     public function loginAct(){
-        try{
+        try{ //Gunakan try & catch untuk error handling
+            //lakukan pengecekan request method apakah post atau bukan.
             if($_SERVER['REQUEST_METHOD'] !== 'POST'){
                 throw new Exception('Method not allowed', 405);
             }
 
+            //Validasi input dari user 
             $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
             $password = filter_input(INPUT_POST, 'password', FILTER_DEFAULT);
         
@@ -139,11 +149,13 @@ class AuthController extends Controller
                 throw new \Exception("Email or password cannot be empty", 400);
             }
             
+            //cek apakah email dan username sesuai dengan yang ada di database
             $user = User::verifyUser($email, $password);
             if(!$user){
                 throw new \Exception("Invalid credentials", 401);
             }
 
+            //lakukan pengecekan apakah user sudah melakukan verifikasi email?
             $isVerified = User::isVerified($email);
             if(!$isVerified){
                 header('Content-Type: application/json');
@@ -155,15 +167,18 @@ class AuthController extends Controller
                 ]);
                 exit();
             }
-
+            
+            //jika sudah melalui proses sebelumnnya, ambil data id, namalengkap, role
              $data = [
                 'id' => $user['user_id'],
                 'namalengkap' => $user['Nama_lengkap'],
                 'role' => $user['role']
              ];
 
+             //Buat token JWT untuk menyimpan $data sebelumnya, untuk digunakan dalam keperluan mengakses halaman yang di proteksi
              $token = JwtHelper::generateToken($data);
 
+             //simpan authToken di cookie, NOTE::HARUS COOKIE HTTP_ONLY
              setcookie('authToken', $token, [
                 'expires' => time() + 3600,
                 'path' => '/',
@@ -172,6 +187,8 @@ class AuthController extends Controller
                 'httponly' => true,
                 'samesite' => 'Strict'
              ]);
+
+            //lakukan validasi, dan redirect ke masing" halaman sesuai dengan role yang ada
             if($user['role'] === 'admin'){
                 echo json_encode([
                     'status' => 'success',
@@ -186,7 +203,7 @@ class AuthController extends Controller
              }
 
 
-        }catch(\Exception $e){
+        }catch(\Exception $e){//Tangkap error dengan menggunakan catch
             http_response_code($e->getCode() ? $e->getCode() : 400);
 
             echo json_encode([
@@ -196,6 +213,7 @@ class AuthController extends Controller
         }
     }
 
+    //Method untuk chekauth apakah user sudah login atau belum yang mana data ini akan diperlukan nanti
     public function checkAuthStatus(){
         try{
             $this->checkRefer();
@@ -219,7 +237,7 @@ class AuthController extends Controller
         }
     }
 
-
+    //Method untuk mengirim verifikasi email
     private function sendVerificationEmail($toEmail, $token, $type){
         $mail = new PHPMailer();
         // $user = User::findByEmail($toEmail);

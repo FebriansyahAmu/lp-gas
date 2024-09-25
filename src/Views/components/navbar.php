@@ -3,7 +3,10 @@
     class="container-fluid p-2"
     style="margin-left: 50px; margin-right: 50px"
   >
-    <a class="navbar-brand" href="#">PK-GasAbdullah</a>
+    <a class="navbar-brand" href="#">
+       <img src="/img/logo.png" alt="PK-GasAbdullah Logo" style="height: 55px;">
+    </a>
+
     <button
       class="navbar-toggler"
       type="button"
