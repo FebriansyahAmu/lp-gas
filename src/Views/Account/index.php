@@ -53,7 +53,16 @@
                 { "data": "Jenis_gas"},
                 { "data": "Qty"},
                 { "data": "totalharga"},
-                { "data": "status"}
+                { 
+                    "data": "status",
+                        "render": function(data, type, row) {
+                        if (data === 'pending') {
+                            return '<span class="badge text-bg-warning">pending</span>';
+                        } else if (data === 'paid') {
+                            return '<span class="badge text-bg-success">success</span>';
+                        }
+                    }
+                }
             ],
             "columnDefs": [
                 { "width": "5%", "targets": 0 },  

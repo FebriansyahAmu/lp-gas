@@ -31,14 +31,14 @@ class CheckoutController extends Controller{
                     'status' => 'pending',
                     'order_id' => $orderId
                 ];
-                $jenisGas = filter_input(INPUT_POST, 'Jenis_gas', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                $jenisGas = filter_input(INPUT_POST, 'jenis_gas', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
                 //validasi data input 
                 $validationResult = Order::validateOrder($data);
                 if($validationResult['status'] === 'error'){
                     http_response_code(400);
                     echo json_encode($validationResult);
-                    exit;
+                    exit();
                 }
 
                 $createOrder = Order::createOrder($data);

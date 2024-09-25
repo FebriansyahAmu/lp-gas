@@ -26,6 +26,9 @@
 
         <?php if ($_SERVER['REQUEST_URI'] === '/'): ?>
         <li class="nav-item">
+          <a class="nav-link nav-hover" href="#">Product</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link nav-hover" href="#">About Us</a>
         </li>
         <li class="nav-item">

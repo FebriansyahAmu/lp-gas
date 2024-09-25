@@ -34,12 +34,14 @@
   <body>
     <?php component('spinners'); ?>
     <section
-      class="vh-100"
-      style="background: radial-gradient(circle at right, #b8ced6 , #3f3b3e)"
+      class="vh-100 overflow-auto"
+      style="background: radial-gradient(circle at right, #b8ced6 , #3f3b3e);"
     >
         <?php echo $content; ?>
     </section>
   </body>
+
+
 
 
 

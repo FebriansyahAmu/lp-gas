@@ -1,5 +1,5 @@
 <div class="container py-5 h-100" >
-  <div class="row d-flex justify-content-center align-items-center h-100">
+  <div class="row d-flex justify-content-center align-items-center h-100 p-2">
     <div class="col-md-6 p-5 rounded  text-white" style="background-color: rgba(0, 0, 0, 0.2)">
       <h2 class="mb-4 text-center">Lupa Password</h2>
       <form id="forgotPasswordForm" class="needs-validation" novalidate>

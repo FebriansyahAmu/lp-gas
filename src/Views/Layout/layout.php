@@ -16,7 +16,9 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.1.6/css/dataTables.dataTables.min.css"/>
     <script type="text/javascript" src="https://cdn.datatables.net/2.1.6/js/dataTables.min.js"></script>
 
-    
+    <!--AOS-->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 </head>
 <body>
 
@@ -27,8 +29,10 @@
         <?php echo $content; ?>
     </div>
 </main>
-
 <?php component('footer'); ?>
 </body>
-
 </html>
+
+<script>
+  AOS.init();
+</script>

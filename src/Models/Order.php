@@ -119,7 +119,7 @@ Class Order{
     public static function updateStock($productId, $quantity){
         try{
             $db = Database::getConnection();
-            $stmtUpdate = $db->prepare("UPDATE " . self::$tb_gas . " SET Stok = Stok - ? WHERE id_gas = ?");
+            $stmtUpdate = $db->prepare("UPDATE " . self::$table_gas . " SET Stok = Stok - ? WHERE id_gas = ?");
             if(!$stmtUpdate){
                 throw new \Exception("Failed to prepare statement" . $db->error);
             }
@@ -167,7 +167,7 @@ Class Order{
             $stmt = $db->prepare("
                             SELECT ec_order.id_Order, ec_gas.Jenis_gas, ec_order.Qty, ec_order.totalharga, ec_order.status
                             FROM " . self::$table . " 
-                            JOIN ". self::$tb_gas ." ON ec_order.id_gas = ec_gas.id_gas
+                            JOIN ". self::$table_gas ." ON ec_order.id_gas = ec_gas.id_gas
                             WHERE ec_order.user_id = ?
                      ");
             

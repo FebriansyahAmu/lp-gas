@@ -234,9 +234,10 @@
                 data: JSON.stringify(data),
                 processData: false,
                 success: function(response) {
-                    alert('Alamat berhasil' + (idAlamat ? 'diperbarui' : 'ditambahkan'));
-                    $('#alamatModal').hide('hide');
-                    $('#tabelAlamat').DataTable().ajax.reload(); 
+                    if(response.status === "success"){
+                        Swal.fire('Success', response.message, 'success');
+                        $('#tabelAlamat').DataTable().ajax.reload(); 
+                    }
                 },
                 error: function(xhr, status, error) {
                     alert('Terjadi kesalahan: ' + error);

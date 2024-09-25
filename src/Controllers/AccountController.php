@@ -45,6 +45,7 @@ class AccountController extends Controller
             
 
             if(Alamat::createAlamat($data)){
+                header('Content-Type: application/json');
                 http_response_code(201);
                 echo json_encode([
                     'status' => 'success',
@@ -112,6 +113,7 @@ class AccountController extends Controller
         
             $putAlamat = Alamat::putAlamatByUID($data);
             if($putAlamat){
+                header('Content-Type: application/json');
                 echo json_encode([
                     'status' => 'success',
                     'message' => 'Alamat berhasil diubah'
