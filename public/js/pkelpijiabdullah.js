@@ -143,14 +143,22 @@ function fetchProducts() {
 //display gas elpiji
 function displayProducts(products) {
   products.forEach((product, index) => {
+    // Tentukan warna shadow berdasarkan index
+    let shadowColor = index === 0 ? "green-purple-shadow" : "pink-shadow";
+
+    // Tentukan apakah produk stoknya 0, jika iya maka tambahkan class disabled
+    let isDisabled = product.Stok == 0 ? "disabled" : "";
+    let disableMessage =
+      product.Stok == 0 ? "<span class='text-danger'>Stok Habis</span>" : "";
+
     let productCard = `
         <div class="col-md-4 col-sm-6 col-12 mb-4" data-aos="fade-up" data-aos-delay="${
           index * 200
         }" data-aos-duration="800">
-          <div class="card shadow-lg hover-shadow zoom-effect">
-            <img class="card-img-top img-fluid" src="img/gas.jpeg" alt="${
-              product.Jenis_gas
-            }" />
+          <div class="card hover-shadow zoom-effect ${shadowColor}">
+            <img class="card-img-top img-fluid" src="${
+              product.foto_gas
+            }" alt="${product.Jenis_gas}" />
             <div class="card-body">
               <div class="text-center">
                 <span class="badge text-bg-success text-center fs-6">Rp.${
@@ -158,11 +166,13 @@ function displayProducts(products) {
                 }</span>
               </div>
               <h5 class="card-title">${product.Jenis_gas}</h5>
-              <p class="card-text">Stok: ${product.Stok}</p>
+              
+              <p class="card-text">Stok: ${product.Stok} ${disableMessage}</p>
+               <!-- Tampilkan pesan stok habis jika stoknya 0 -->
               <div class="d-flex justify-content-center mb-4">
                 <a href="/product/${
                   product.id_gas
-                }" class="btn btn-primary p-2">Pesan Sekarang</a>
+                }" class="btn btn-primary p-2 ${isDisabled}">Pesan Sekarang</a>
               </div>
             </div>
           </div>
