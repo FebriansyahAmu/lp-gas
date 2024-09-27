@@ -79,11 +79,10 @@
 >
   <div class="container" id="product">
     <div class="d-flex justify-content-center mb-4">
-      <h1 class="text-black" data-aos="zoom-in"  data-aos-duration="800" >In Sale</h1>
+      <h1 class="text-black" data-aos="zoom-in"  data-aos-duration="800" >Produk Kami</h1>
     </div>
     <p class="mb-5 text-center" data-aos="zoom-in"  data-aos-duration="800" >
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus ab
-      velit est! Accusantium vitae ex provident, a.
+      Harap diperhatikan, stok produk dapat berubah sewaktu-waktu sesuai ketersediaan.
     </p>
     <div class="row" id="product-container" >
    

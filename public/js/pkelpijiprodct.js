@@ -18,6 +18,7 @@ function getProductId() {
 
 let stok = 0;
 function getdatabyid(id) {
+  const productImage = document.getElementById("product-image");
   $.ajax({
     url: "/api/product/" + id,
     type: "GET",
@@ -27,6 +28,7 @@ function getdatabyid(id) {
         $("#title-gas").text(response.data.Jenis_gas);
         $("#stok").text(response.data.Stok);
         $("#harga-gas").text(response.data.Harga_gas.toLocaleString());
+        productImage.src = "../" + response.data.foto_gas;
 
         stok = parseInt(response.data.Stok);
         initializeAndSetupEvents();

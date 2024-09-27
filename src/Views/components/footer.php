@@ -12,10 +12,10 @@
             <div class="col-md-4 mb-4">
                 <h5 class="text-uppercase mb-4">Navigasi</h5>
                 <ul class="list-unstyled">
-                    <li><a href="#" class="text-white text-decoration-none">Beranda</a></li>
-                    <li><a href="#" class="text-white text-decoration-none">Produk</a></li>
-                    <li><a href="#" class="text-white text-decoration-none">Tentang Kami</a></li>
-                    <li><a href="#" class="text-white text-decoration-none">Kontak</a></li>
+                    <li><a href="#" class="text-white text-decoration-none">Home</a></li>
+                    <li><a href="#product" class="text-white text-decoration-none">Produk</a></li>
+                    <li><a href="#about" class="text-white text-decoration-none">Tentang Kami</a></li>
+                    <li><a href="#contact" class="text-white text-decoration-none">Kontak</a></li>
                 </ul>
             </div>
             <!-- Contact Info -->

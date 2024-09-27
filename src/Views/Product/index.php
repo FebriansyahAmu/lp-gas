@@ -14,9 +14,10 @@
       <!-- Kolom Kiri: Gambar Produk -->
       <div class="col-md-6 mb-4 p-5 d-flex justify-content-center">
         <img
-          src="https://via.placeholder.com/500"
+          src=""
           alt="Product Image"
           class="product-image"
+          id="product-image"
         />
       </div>
 

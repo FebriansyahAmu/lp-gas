@@ -50,10 +50,10 @@
           <a class="nav-link nav-hover" href="#product">Product</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link nav-hover" href="#about">About Us</a>
+          <a class="nav-link nav-hover" href="#about">Tentang Kami</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#contact">Contact</a>
+          <a class="nav-link" href="#contact">Kontak</a>
         </li>
         <?php endif; ?>
 
