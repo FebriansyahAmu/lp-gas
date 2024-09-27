@@ -1,33 +1,4 @@
-<style>
-  .navbar {
-  transition: background-color 0.4s ease;
-}
-
-.navbar.bg-gray {
-  background-color: rgba(128, 128, 128, 0.5); /* Warna abu-abu dengan sedikit transparansi */
-  backdrop-filter: blur(10px); /* Efek blur pada background */
-  -webkit-backdrop-filter: blur(10px); /* Untuk browser dengan prefix Webkit (Safari) */
-  transition: background-color 0.4s ease, backdrop-filter 0.4s ease;
-}
-
-.navbar-nav .nav-link {
-    color: white !important; /* Pastikan warna link putih */
-  }
-
-  .navbar-nav .nav-link:hover {
-    color: #83C683 !important; /* Ubah warna menjadi merah saat hover, gunakan !important untuk memastikan */
-    
-}
-  .navbar-nav .dropdown-menu .dropdown-item {
-    color: black; /* Jika ingin dropdown item tetap hitam */
-  }
-
-  .navbar-nav .dropdown-menu .dropdown-item:hover {
-    background-color: #e2e6ea; /* Mengubah warna background saat hover di dropdown */
-    color: black; /* Tetap warna hitam untuk dropdown item */
-  }
-</style>
-
+<link rel="stylesheet" href="/css/nvStyle.css" />
 <nav class="navbar navbar-expand-lg bt-transparent fixed-top" id="navbar-scrolspy">
   <div class="container-fluid p-2" style="margin-left: 50px; margin-right: 50px">
     <a class="navbar-brand" href="#">
@@ -81,24 +52,30 @@
   </div>
 </nav>
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const navbar = document.querySelector(".navbar");
-    
-    // Cek apakah URL saat ini adalah beranda
-    const isHomePage = window.location.pathname === "/";
-
-    if (isHomePage) {
-      // Jika di halaman beranda, jalankan logika scroll untuk navbar transparan
-      document.addEventListener("scroll", function () {
-        if (window.scrollY > 50) { // Jika halaman di-scroll lebih dari 50px
-          navbar.classList.add("bg-gray");
-        } else {
-          navbar.classList.remove("bg-gray");
-        }
-      });
-    } else {
-      // Jika bukan di halaman beranda, tambahkan langsung background
-      navbar.classList.add("bg-gray");
+document.addEventListener("DOMContentLoaded", function () {
+  const navbar = document.querySelector(".navbar");
+  const navbarToggler = document.querySelector(".navbar-toggler");
+  const isHomePage = window.location.pathname === "/";
+  if (isHomePage) {
+    document.addEventListener("scroll", function () {
+      if (window.scrollY > 50) {
+        navbar.classList.add("bg-gray");
+      } else {
+        navbar.classList.remove("bg-gray");
+      }
+    });
+  } else {
+    navbar.classList.add("bg-gray");
+  }
+  navbarToggler.addEventListener("click", function () {
+    if (!navbar.classList.contains("bg-gray") || navbar.classList.contains("bg-solid")) {
+      navbar.classList.toggle("bg-solid");
     }
   });
+  window.addEventListener("resize", function () {
+    if (window.innerWidth < 768 && !navbar.classList.contains("bg-gray")) {
+      navbar.classList.add("bg-solid");
+    }
+  });
+});
 </script>

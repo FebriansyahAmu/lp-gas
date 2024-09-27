@@ -1,0 +1,89 @@
+.navbar {
+  transition: background-color 0.4s ease;
+}
+
+.navbar.bg-gray {
+  background-color: rgba(
+    128,
+    128,
+    128,
+    0.5
+  ); /* Warna abu-abu dengan sedikit transparansi */
+  backdrop-filter: blur(10px); /* Efek blur pada background */
+  -webkit-backdrop-filter: blur(
+    10px
+  ); /* Untuk browser dengan prefix Webkit (Safari) */
+  transition: background-color 0.4s ease, backdrop-filter 0.4s ease;
+}
+
+/* Background solid ketika navbar di-toggle */
+.navbar.bg-solid {
+  background-color: rgba(128, 128, 128, 1); /* Background abu-abu solid */
+  transition: background-color 0.4s ease;
+}
+
+.navbar-toggler {
+  border-color: rgba(255, 255, 255, 0.5); /* Warna border toggler */
+}
+
+.navbar-nav .nav-link {
+  color: white !important;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #83c683 !important;
+}
+
+.navbar-nav .dropdown-menu .dropdown-item {
+  color: black;
+}
+
+.navbar-nav .dropdown-menu .dropdown-item:hover {
+  background-color: #e2e6ea;
+  color: black;
+}
+
+/* Navbar Toggler - Ukuran lebih kecil */
+.navbar-toggler {
+  padding: 0.25rem 0.75rem; /* Mengurangi padding untuk membuatnya lebih kecil */
+  font-size: 0.875rem; /* Mengurangi ukuran font */
+  line-height: 1;
+  border: 1px solid rgba(255, 255, 255, 0.5); /* Warna border */
+  border-radius: 0.25rem; /* Radius untuk sudut yang lebih halus */
+}
+
+/* Ubah ukuran ikon pada toggler (hamburger icon) */
+.navbar-toggler-icon {
+  width: 20px; /* Sesuaikan lebar ikon */
+  height: 20px; /* Sesuaikan tinggi ikon */
+  background-size: 20px 20px; /* Sesuaikan ukuran ikon latar */
+}
+
+/* Ubah padding pada toggler untuk layar kecil */
+@media (max-width: 768px) {
+  .navbar-toggler {
+    padding: 0.2rem 0.6rem; /* Ukuran toggler lebih kecil di layar mobile */
+  }
+
+  .container-fluid {
+    margin-left: 10px !important;
+    margin-right: 10px !important;
+  }
+  .navbar-toggler-icon {
+    width: 18px; /* Ukuran ikon sedikit lebih kecil di layar mobile */
+    height: 18px;
+    background-size: 18px 18px;
+  }
+}
+
+/* Logo responsif */
+.navbar-brand img {
+  height: auto;
+  max-width: 100%;
+}
+
+@media (max-width: 768px) {
+  .navbar-brand img {
+    height: 30px; /* Ubah ukuran logo pada layar kecil */
+  }
+}
