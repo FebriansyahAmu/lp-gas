@@ -1,5 +1,13 @@
+
 <div class="container py-5 vh-100 overflow-hidden">
+  
   <div class="row d-flex align-items-center justify-content-center h-100">
+      <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb" class="d-flex justify-content-center ">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/" class="text-decoration-none">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Login</li>
+    </ol>
+  </nav>
     <div class="col-md-8 col-lg-7 col-xl-6">
       <img
         src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
@@ -7,6 +15,7 @@
         alt="Phone image"
       />
     </div>
+    
     <div class="col-md-7 col-lg-5 col-xl-4 offset-xl-1">
       <h2 class="mb-3 text-light">Log in</h2>
       <form novalidate id="flogin">

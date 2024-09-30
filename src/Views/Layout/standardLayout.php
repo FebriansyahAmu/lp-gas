@@ -33,6 +33,11 @@
   </head>
   <body>
     <?php component('spinners'); ?>
+      <!-- <div class="container-fluid p-2 fixed-top mt-3" style="margin-left: 50px; margin-right: 50px">
+          <a class="navbar-brand" href="#">
+            <img src="/img/logo.png" alt="PK-GasAbdullah Logo" style="height: 40px;">
+          </a>
+      </div> -->
     <section
       class="vh-100 overflow-auto"
       style="background: radial-gradient(circle at right, #b8ced6 , #3f3b3e);"
