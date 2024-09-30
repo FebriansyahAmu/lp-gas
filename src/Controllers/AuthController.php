@@ -215,20 +215,17 @@ class AuthController extends Controller
 
     //Method untuk chekauth apakah user sudah login atau belum yang mana data ini akan diperlukan nanti
     public function checkAuthStatus(){
-        try{
+        try {
             $this->checkRefer();
-            $auth =  $this->authMiddleware->handle();
-            if($auth){
-                echo json_encode([
-                    "auth" => true
-                ]);
-            }else{
-                http_response_code(401);
-                echo json_encode([
-                    "auth" => false
-                ]);
-            }
-        }catch(Exception $e){
+            $auth = $this->authMiddleware->handle();
+    
+            header('Content-Type: application/json');
+    
+            // Kembalikan nilai boolean secara langsung
+            echo json_encode([
+                "auth" => $auth ? true : false  // Mengembalikan boolean, bukan string
+            ]);
+        } catch (Exception $e) {
             http_response_code(500);
             echo json_encode([
                 'status' => 'error',
@@ -236,6 +233,7 @@ class AuthController extends Controller
             ]);
         }
     }
+    
 
     //Method untuk mengirim verifikasi email
     private function sendVerificationEmail($toEmail, $token, $type){

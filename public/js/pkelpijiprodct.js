@@ -3,6 +3,7 @@ $(document).ready(function () {
   handleProductData();
   checkAuth();
   checkoutProducts();
+  showAlamat();
 });
 
 function handleProductData() {
@@ -199,8 +200,7 @@ function checkoutProducts() {
                 title: "Anda belum login",
                 text: "Silahkan Login terlebih dahulu untuk membuat pesanan",
                 icon: "error",
-                confirmButtonColor: "#3085d6",
-                confirmButtonText: "Login Sekarang",
+                confirmButtonText: "Login",
               }).then((result) => {
                 if (result.isConfirmed) {
                   window.location.href = "/login"; // Redirect ke halaman login
@@ -221,9 +221,36 @@ function checkAuth() {
     url: "/checkauth",
     type: "GET",
     success: function (response) {
-      if ((response.auth = true)) {
-        showAlamat();
-      }
+      // Cek apakah pengguna terautentikasi
+      const isAuthenticated = response.auth === true;
+
+      // Tambahkan event listener untuk perubahan pada select
+      document
+        .getElementById("addr-select")
+        .addEventListener("change", function () {
+          if (this.value === "add-new") {
+            if (isAuthenticated) {
+              // Jika pengguna terautentikasi, arahkan ke halaman tambah alamat
+              window.location.href = "/account/alamat";
+            } else {
+              // Jika pengguna tidak terautentikasi, tampilkan Swal
+              Swal.fire({
+                title: "Info",
+                text: "Anda belum login, silahkan login untuk melanjutkan ordering",
+                icon: "info",
+                confirmButtonText: "Login",
+              }).then((result) => {
+                // Redirect ke halaman login setelah konfirmasi
+                if (result.isConfirmed) {
+                  window.location.href = "/login";
+                }
+              });
+            }
+          }
+        });
+    },
+    error: function () {
+      console.error("Gagal melakukan cek autentikasi");
     },
   });
 }
@@ -236,6 +263,25 @@ function truncateText(text, maxLength) {
 }
 
 function getAlamat() {
+  // Menambahkan opsi "Tambah Alamat" terlebih dahulu
+  var addressSelect = document.getElementById("addr-select");
+
+  // Reset isi select terlebih dahulu
+  addressSelect.innerHTML =
+    '<option value="" disabled selected>Pilih Alamat</option>';
+
+  // Tambahkan opsi "Tambah Alamat"
+  const addOption = document.createElement("option");
+  addOption.value = "add-new"; // Nilai unik untuk mendeteksi opsi ini
+  addOption.classList.add("bg-primary");
+  addOption.classList.add("text-center");
+  addOption.textContent = "    + Tambah Alamat"; // Teks untuk opsi "Tambah Alamat"
+  addressSelect.appendChild(addOption);
+
+  // Menampilkan elemen div jika belum terlihat
+  document.getElementById("address-option").style.display = "block";
+
+  // Panggilan AJAX untuk mendapatkan alamat
   $.ajax({
     url: "/Alamat",
     type: "GET",
@@ -248,14 +294,12 @@ function getAlamat() {
           return;
         }
       }
+
       // Pastikan response.data ada
       if (response && Array.isArray(response.data)) {
-        var addressSelect = document.getElementById("addr-select");
         const alamatArray = response.data;
 
-        addressSelect.innerHTML =
-          '<option value="" disabled selected>Pilih Alamat</option>';
-
+        // Tambahkan opsi untuk setiap alamat dari respons
         alamatArray.forEach((alamat) => {
           const maxLength = 50;
           const fullText = `${alamat.Detail_alamat} - ${alamat.Description}`;
@@ -263,23 +307,11 @@ function getAlamat() {
 
           const option = document.createElement("option");
           option.value = alamat.id_Alamat;
-
           option.textContent = truncatedText;
 
-          // Tambahkan ke select
-          addressSelect.appendChild(option);
+          // Tambahkan ke select sebelum opsi "Tambah Alamat"
+          addressSelect.insertBefore(option, addOption);
         });
-
-        // Buat option baru
-        const addOption = document.createElement("option");
-        addOption.value = "add-new"; // Nilai unik untuk mendeteksi opsi ini
-        addOption.classList.add("bg-primary");
-        addOption.classList.add("text-center");
-        addOption.textContent = "    + Tambah Alamat"; // Teks untuk opsi "Tambah Alamat"
-        addressSelect.appendChild(addOption);
-
-        // Menampilkan elemen div jika belum terlihat
-        document.getElementById("address-option").style.display = "block";
       } else {
         console.error("Response tidak sesuai dengan format yang diharapkan.");
       }
@@ -290,11 +322,11 @@ function getAlamat() {
   });
 }
 
-document.getElementById("addr-select").addEventListener("change", function () {
-  if (this.value === "add-new") {
-    window.location.href = "/account/alamat";
-  }
-});
+// document.getElementById("addr-select").addEventListener("change", function () {
+//   if (this.value === "add-new") {
+//     window.location.href = "/account/alamat";
+//   }
+// });
 
 function showAlamat() {
   $("#delivery-option").on("change", function () {
