@@ -4,6 +4,7 @@ $(document).ready(function () {
   checkAuth();
   checkoutProducts();
   showAlamat();
+  addCart();
 });
 
 function handleProductData() {
@@ -338,5 +339,39 @@ function showAlamat() {
     } else {
       $("#address-option").hide();
     }
+  });
+}
+
+function addCart() {
+  $("#cart-button").on("click", function () {
+    const idGas = getProductId();
+    console.log(idGas);
+    const titleGas = document.getElementById("title-gas").textContent;
+    const priceGas = document.getElementById("harga-gas").textContent;
+    const quantityGas = parseInt(document.getElementById("quantity").value);
+
+    const formData = {
+      id_gas: idGas,
+      jenis_gas: titleGas,
+      harga_gas: priceGas,
+      qty: quantityGas,
+    };
+
+    const jsonData = JSON.stringify(formData);
+
+    $.ajax({
+      url: "/api/add-cart",
+      method: "POST",
+      data: jsonData,
+      contentType: "application/json",
+      success: function (response) {
+        if (response.status === "success") {
+          Swal.fire("Sukses", response.message, "success");
+        }
+      },
+      error: function (xhr, status, err) {
+        Swal.fire("Error", xhr.responseJSON.message, "error");
+      },
+    });
   });
 }

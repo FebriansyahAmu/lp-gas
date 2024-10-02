@@ -6,6 +6,7 @@ use App\Controllers\ProductController;
 use App\Controllers\AdminController;
 use App\Controllers\AccountController;
 use App\Controllers\CheckoutController;
+use App\Controllers\CartController;
 
 
 use App\Middleware\AuthMiddleWare;
@@ -71,6 +72,12 @@ $router->delete('/Alamat/Delete/{id}', AccountController::class, 'deleteAlamat',
     'role' => 'user'
 ]);
 
+
+//add to carts
+$router->post('/api/add-cart', CartController::class, 'addCart', [
+    'class' => AuthMiddleware::class,
+    'role' => 'user'
+]);
 
 //chechkouts
 $router->post('/checkout', CheckoutController::class, 'checkout', [
