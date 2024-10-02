@@ -1,8 +1,8 @@
 <link rel="stylesheet" href="/css/nvStyle.css" />
 <nav class="navbar navbar-expand-lg bt-transparent fixed-top" id="navbar-scrolspy">
-  <div class="container-fluid p-2" style="margin-left: 50px; margin-right: 50px">
+  <div class="container-fluid p-2" style="margin-left: 3rem; margin-right: 3rem;">
     <a class="navbar-brand" href="#">
-      <img src="/img/logo.png" alt="PK-GasAbdullah Logo" style="height: 40px;">
+      <img src="/img/logo.png" alt="PK-GasAbdullah Logo" style="height: 2.5rem;">
     </a>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -10,8 +10,9 @@
       aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
-      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 me-4 text-center">
+
+    <div class="collapse navbar-collapse justify-content-center " id="navbarSupportedContent">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 text-center d-flex align-items-center">
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/">Home</a>
         </li>
@@ -28,7 +29,7 @@
         </li>
         <?php endif; ?>
 
-        <ul class="navbar-nav ">
+        <ul class="navbar-nav d-flex align-items-center" >
           <?php if ($isLoggedIn): ?>
           <li class="nav-item dropdown">
             <a class="nav-link text-light dropdown-toggle" href="#" id="profileDropdown" role="button"
@@ -41,6 +42,12 @@
               <li><a class="dropdown-item" href="/logout">Logout</a></li>
             </ul>
           </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="/cart">
+            <i class="bi bi-cart4" style="font-size: 1.5rem; padding-top: 2;"></i>
+          </a>
+        </li>
+
           <?php else: ?>
           <li class="nav-item">
             <a class="nav-link" href="/login">Login</a>
@@ -51,6 +58,7 @@
     </div>
   </div>
 </nav>
+
 <script>
 document.addEventListener("DOMContentLoaded", function () {
   const navbar = document.querySelector(".navbar");

@@ -75,7 +75,13 @@
     background-size: 18px 18px;
   }
 }
+.nav-link {
+  line-height: 1.5;
+}
 
+.bi-cart4 {
+  vertical-align: middle;
+}
 /* Logo responsif */
 .navbar-brand img {
   height: auto;
