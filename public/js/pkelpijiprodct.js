@@ -345,7 +345,6 @@ function showAlamat() {
 function addCart() {
   $("#cart-button").on("click", function () {
     const idGas = getProductId();
-    console.log(idGas);
     const titleGas = document.getElementById("title-gas").textContent;
     const priceGas = document.getElementById("harga-gas").textContent;
     const quantityGas = parseInt(document.getElementById("quantity").value);
