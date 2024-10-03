@@ -10,6 +10,18 @@ use App\Models\CartModel;
 
 class CartController extends Controller{
 
+    protected $authMiddleware;
+
+    public function __construct(){
+        parent::__construct();
+        $this->authMiddleware = new AuthMiddleware();
+    }
+
+    public function indexCart(){
+        $isLoggedIn = $this->authMiddleware->handle();
+        $this->render('/Cart/index', ['isLoggedIn' => $isLoggedIn] );
+    }
+
     public function addCart(){
         try {
             if ($_SERVER['REQUEST_METHOD'] !== 'POST') {

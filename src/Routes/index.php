@@ -73,6 +73,12 @@ $router->delete('/Alamat/Delete/{id}', AccountController::class, 'deleteAlamat',
 ]);
 
 
+//index cart
+$router->get('/account/cart', CartController::class, 'indexCart', [
+    'class' => AuthMiddleware::class,
+    'role' => 'user'
+]);
+
 //add to carts
 $router->post('/api/add-cart', CartController::class, 'addCart', [
     'class' => AuthMiddleware::class,

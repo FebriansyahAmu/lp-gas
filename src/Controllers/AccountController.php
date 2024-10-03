@@ -25,6 +25,8 @@ class AccountController extends Controller
         $this->render('/Alamat/index', ['isLoggedIn' => $isLoggedIn] );
     }
 
+
+
     public function Alamat(){
         try{
             if($_SERVER['REQUEST_METHOD'] !== 'POST'){
