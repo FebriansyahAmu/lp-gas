@@ -78,5 +78,32 @@ class CartController extends Controller{
             ]);
         }
     }
+
+
+
+    public function getAllCartByUID(){
+        try{
+            $userData = AuthMiddleware::checkAuth();
+            $userId = $userData['id'];
+
+            $getAllchart = CartModel::getallCartUID($userId);
+            if($getAllchart){
+                header('Content-Type: application/json');
+                echo json_encode([
+                    'status' => 'success',
+                    'data' => $getAllchart
+                ]);
+            }else{
+                throw new \Exception('Data not found', 404);
+            }
+        }catch(\Exception $e){
+            header('Content-Type: application/json');
+            http_response_code($e->getCode() ? : 500);
+            echo json_encode([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
     
 }

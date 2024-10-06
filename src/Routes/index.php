@@ -85,6 +85,18 @@ $router->post('/api/add-cart', CartController::class, 'addCart', [
     'role' => 'user'
 ]);
 
+
+//getall carts
+$router->get('/api/carts', CartController::class, 'getAllCartByUID',[
+    'class' => AuthMiddleware::class,
+    'role' => 'user'
+]);
+
+$router->delete('api/carts/{id}', CartController::class, 'deleteCartByID', [
+    'class' => AuthMiddleware::class,
+    'role' => 'user'
+]);
+
 //chechkouts
 $router->post('/checkout', CheckoutController::class, 'checkout', [
     'class' => AuthMiddleware::class,

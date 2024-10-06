@@ -6,6 +6,8 @@ use App\Core\Database;
 
 class CartModel{
     protected static $table = 'ec_cart';
+    protected static $tb_gas = 'ec_gas';
+    protected static $tb_user = 'ec_user';
 
     public static function findCart($userId, $id_gas){
         try{
@@ -28,6 +30,36 @@ class CartModel{
         }catch(\Exception $e){
             error_log($e->getMessage());
             return null;
+        }
+    }
+
+    public static function getallCartUID($userId){
+        try{    
+            $db = Database::getConnection();
+            $stmt = $db->prepare("
+                SELECT cart.cart_id, cart.Jenis_gas, cart.harga_unit, cart.Qty, gas.Stok
+                FROM ". self::$table ." AS cart
+                LEFT JOIN " . self::$tb_gas . " AS gas  ON gas.id_gas = cart.id_gas
+                LEFT JOIN " . self::$tb_user ." AS user ON user.user_id = cart.user_id
+                WHERE cart.user_id = ?
+            ");
+
+            if(!$stmt){
+                throw new \Exception("Failed to prepare statement", $db->error);
+            }
+
+            $stmt->bind_param("i", $userId);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            if(!$result){
+                throw new \Exception("failed to execute query", $stmt->error);
+            }
+
+            return $result->fetch_all(MYSQLI_ASSOC);
+        }catch(\Exception $e){
+            error_log($e->getMessage());
+            return false;
         }
     }
 

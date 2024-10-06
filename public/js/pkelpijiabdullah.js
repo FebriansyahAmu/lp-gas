@@ -375,12 +375,37 @@ function tabelAlamats() {
                         `;
         },
       },
+      {
+        data: null,
+        className: "text-center",
+        render: function (data, type, row) {
+          return `
+                            <button class="btn btn-sm  btn-success btn-delete" data-id="${data.id_Alamat}">
+                                Pilih Alamat
+                            </button>
+                        `;
+        },
+      },
+      {
+        data: "Status",
+        className: "text-center",
+        render: function (data, type, row) {
+          if (data === "secondary") {
+            return '<span class="badge bg-warning">Secondary</span>';
+          } else if (data === "utama") {
+            return '<span class="badge bg-success">Utama</span>';
+          } else {
+            return '<span class="badge bg-secondary">Unknown</span>'; // Jika ada status lain
+          }
+        },
+      },
     ],
     columnDefs: [
       { width: "5%", targets: 0 },
       { width: "40%", targets: 1 },
       { width: "30%", targets: 2 },
       { width: "5%", targets: 3 },
+      { width: "15%", targets: 4 },
     ],
   });
 }

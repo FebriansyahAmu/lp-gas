@@ -43,7 +43,7 @@
             </ul>
           </li>
         <li class="nav-item ">
-          <a class="nav-link" href="/cart">
+          <a class="nav-link" href="/account/cart">
             <i class="bi bi-cart4" style="font-size: 1.5rem; padding-top: 2;"></i>
           </a>
         </li>

@@ -106,6 +106,8 @@
                 <th>Detail Alamat</th>
                 <th>Description</th>
                 <th>Action</th>
+                <th>Alamat Utama</th>
+                <th>Status</th>
               </tr>
             </thead>
             <tbody></tbody>

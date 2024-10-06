@@ -11,12 +11,13 @@ class Alamat{
         try{
             $db = Database::getConnection();
 
-            $stmt = $db->prepare("INSERT INTO " . self::$table . " (id_user, Detail_alamat, Description) VALUES(?,?,?)");
+            $status = 'secondary';
+            $stmt = $db->prepare("INSERT INTO " . self::$table . " (id_user, Detail_alamat, Description, Status) VALUES(?,?,?,?)");
             if(!$stmt){
                 throw new \Exception("Failed to create statement", $db->error);   
             }
 
-            $stmt->bind_param("iss", $data['userId'], $data['Detail_alamat'], $data['Description']);
+            $stmt->bind_param("isss", $data['userId'], $data['Detail_alamat'], $data['Description'], $status);
             $success = $stmt->execute();
             if(!$success){
                 throw new \Exception("Failed to execute query", $stmt->error);
@@ -33,7 +34,7 @@ class Alamat{
         try{
             $db = Database::getConnection();
 
-            $stmt = $db->prepare("SELECT id_Alamat, Detail_alamat, Description FROM " . self::$table . " WHERE id_user = ?");
+            $stmt = $db->prepare("SELECT id_Alamat, Detail_alamat, Description, Status FROM " . self::$table . " WHERE id_user = ?");
             if(!$stmt){
                 throw new \Exception("Failed to creaete statement", $db->error);
             }
