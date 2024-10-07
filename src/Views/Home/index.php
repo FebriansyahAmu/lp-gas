@@ -131,7 +131,7 @@
   </div>
 </section>
 
-<section class="w-100 py-5" data-bs-spy="scroll" data-bs-target="#navbar-scrolspy"  data-bs-smooth-scroll="true" id="contact">
+<section class="w-100 py-5" data-bs-spy="scroll" data-bs-target="#navbar-scrolspy"  data-bs-smooth-scroll="true" id="contact" >
   <div class="container">
     <div class="row align-items-center">
       <!-- Kolom kiri: About Us -->
@@ -161,6 +161,59 @@
           <p><strong>Phone:</strong> +62 812 3456 7890</p>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+<section class="w-100 py-5 bg-dark-subtle d-flex align-items-center" data-bs-smooth-scroll="true" id="testimonials" style="min-height: 60vh">
+  <div class="container">
+    <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <!-- Testimonial 1 -->
+        <div class="carousel-item active text-center">
+          <div class="row justify-content-center">
+            <div class="col-md-8">
+              <div class="testimonial">
+                <p class="mb-4">"Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum placeat iste, officia labore voluptas"</p>
+                <h5 class="font-weight-bold">John Doe</h5>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Testimonial 2 -->
+        <div class="carousel-item text-center">
+          <div class="row justify-content-center">
+            <div class="col-md-8">
+              <div class="testimonial">
+                <p class="mb-4">"A great experience overall, the team was very supportive and the product exceeded expectations."</p>
+                <h5 class="font-weight-bold">Jane Smith</h5>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Testimonial 3 -->
+        <div class="carousel-item text-center">
+          <div class="row justify-content-center">
+            <div class="col-md-8">
+              <div class="testimonial">
+                <p class="mb-4">"Highly recommend! A seamless experience from start to finish."</p>
+                <h5 class="font-weight-bold">Mike Johnson</h5>
+              
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Controls -->
+      <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
     </div>
   </div>
 </section>

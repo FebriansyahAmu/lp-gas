@@ -37,7 +37,7 @@ class CartModel{
         try{    
             $db = Database::getConnection();
             $stmt = $db->prepare("
-                SELECT cart.cart_id, cart.Jenis_gas, cart.harga_unit, cart.Qty, gas.Stok
+                SELECT cart.cart_id, cart.id_gas, cart.Jenis_gas, cart.harga_unit, cart.Qty, gas.Stok, gas.foto_gas
                 FROM ". self::$table ." AS cart
                 LEFT JOIN " . self::$tb_gas . " AS gas  ON gas.id_gas = cart.id_gas
                 LEFT JOIN " . self::$tb_user ." AS user ON user.user_id = cart.user_id
@@ -98,6 +98,26 @@ class CartModel{
             return true;
         }catch(\Exception $e){
             $db->rollback();
+            error_log($e->getMessage());
+            return false;
+        }
+    }
+
+    public static function deleteCartByID($id, $userId){
+        try{
+            $db = Database::getConnection();
+            $stmt = $db->prepare("DELETE FROM " . self::$table . " WHERE cart_id = ? AND user_id = ?");
+            if(!$stmt){
+                throw new \Exception("Failed to prepare statement", $db->error);
+            }
+
+            $stmt->bind_param('ii', $id, $userId);
+            $res = $stmt->execute();
+            if(!$res){
+                throw new \Exception("Failed to execute query", $db->error);
+            }
+            return true;
+        }catch(\Exception $e){
             error_log($e->getMessage());
             return false;
         }

@@ -67,6 +67,55 @@ Class Order{
         }
     }
 
+
+    public static function validationCartCO($data){
+        $errors = [
+            'invalid_product_id' => 'Id gas tidak valid',
+            'invalid_quantity' => 'Kuantitas harus lebih dari 0 dan valid',
+            'product_not_found' => 'Product tidak ditemukan',
+            'quantity_exceeds_stock' => 'Kuantitas melebihi stok yang tersisa',
+            'invalid_total_price' => 'Total harga tidak sesuai'
+        ];
+    
+        try {
+            // Validasi productId
+            if (!$data['productId'] || !is_int($data['productId'])) {
+                throw new \Exception($errors['invalid_product_id']);
+            }
+    
+            // Validasi quantity
+            if (!$data['quantity'] || $data['quantity'] <= 0) {
+                throw new \Exception($errors['invalid_quantity']);
+            }
+    
+            // Ambil produk dari database
+            $product = ProductModel::findById($data['productId']);
+            if (!$product) {
+                throw new \Exception($errors['product_not_found']);
+            }
+    
+            // Cek stok
+            if ($data['quantity'] > $product['Stok']) {
+                throw new \Exception($errors['quantity_exceeds_stock']);
+            }
+    
+            // Validasi total harga per produk
+            $expectedTotalPrice = $product['Harga_gas'] * $data['quantity'];
+            if ($data['submittedTotalHarga'] != $expectedTotalPrice) {
+                throw new \Exception($errors['invalid_total_price']);
+            }
+    
+            return ['status' => 'success'];
+    
+        } catch (\Exception $e) {
+            return [
+                'status' => 'error',
+                'message' => $e->getMessage(),
+            ];
+        }
+    }
+    
+
     public static function createOrder($data){
         try {
             $db = Database::getConnection();
@@ -80,18 +129,39 @@ Class Order{
             }
     
             // Binding parameter
-            $stmt->bind_param(
-                'siiiisiis',
-                $data['order_id'], 
-                $data['id_user'], 
-                $data['productId'], 
-                $data['alamat'], 
-                $data['quantity'], 
-                $data['delivery_method'], 
-                $data['deliveryFee'], 
-                $data['submittedTotalHarga'], 
-                $data['status']
-            );
+            if ($data['alamat'] === NULL) {
+                // Definisikan variabel null untuk bind_param
+                $nullValue = NULL;
+                
+                $stmt->bind_param(
+                    'siiiisiis',
+                    $data['order_id'], 
+                    $data['id_user'], 
+                    $data['productId'], 
+                    $nullValue,  // Gunakan variabel null
+                    $data['quantity'], 
+                    $data['delivery_method'], 
+                    $data['deliveryFee'], 
+                    $data['submittedTotalHarga'], 
+                    $data['status']
+                );
+            } else {
+                // Jika ada alamat, bind dengan nilai yang diberikan
+                $stmt->bind_param(
+                    'siiiisiis',
+                    $data['order_id'], 
+                    $data['id_user'], 
+                    $data['productId'], 
+                    $data['alamat'], 
+                    $data['quantity'], 
+                    $data['delivery_method'], 
+                    $data['deliveryFee'], 
+                    $data['submittedTotalHarga'], 
+                    $data['status']
+                );
+            }
+            
+            
     
             // Eksekusi statement
             $success = $stmt->execute();

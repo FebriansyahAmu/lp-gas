@@ -20,6 +20,7 @@
           id="product-image"
         />
       </div>
+      
 
       <div class="col-md-6">
       <form id="checkout-form" class="needs-validation" novalidate>
@@ -95,6 +96,36 @@
         </div>
       </form>
       </div>
+      <!-- Modal untuk Menulis Ulasan -->
+<div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="reviewModalLabel">Bagikan Ulasan Anda</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="reviewForm" action="/submit-review" method="POST">
+          <div class="mb-3">
+            <label for="rating" class="form-label">Penilaian:</label>
+            <select id="rating" name="rating" class="form-select">
+              <option value="5">⭐️⭐️⭐️⭐️⭐️ (Sempurna)</option>
+              <option value="4">⭐️⭐️⭐️⭐️ (Bagus)</option>
+              <option value="3">⭐️⭐️⭐️ (Cukup)</option>
+              <option value="2">⭐️⭐️ (Kurang)</option>
+              <option value="1">⭐️ (Buruk)</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <textarea id="review" name="review" rows="4" class="form-control" placeholder="Tuliskan ulasan Anda di sini"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Kirim Ulasan</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
     </div>
   </div>
 </section>

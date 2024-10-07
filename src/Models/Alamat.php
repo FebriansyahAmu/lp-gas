@@ -124,6 +124,32 @@ class Alamat{
             return false;
         }
     }
+
+
+    public static function getAlamatCart($userId){
+        try{
+            $status = 'utama';
+            $db = Database::getConnection();
+            $stmt = $db->prepare("SELECT id_Alamat, Detail_alamat, Description FROM " . self::$table . " WHERE id_user = ? AND status = ?");
+
+            if(!$stmt){
+                throw new \Exception("Failed to prepare statement", $db->error);
+            }
+
+            $stmt->bind_param('is', $userId, $status);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            if(!$result){
+                throw new \Exception("Failed to execute query", $stmt->error);
+            };
+
+            return $result->fetch_assoc();
+        }catch(\Exception $e){
+            error_log($e->getMessage());
+            return false;
+        }
+    }
     
 
 

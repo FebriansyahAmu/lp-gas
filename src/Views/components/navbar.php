@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="/css/nvStyle.css" />
 <nav class="navbar navbar-expand-lg bt-transparent fixed-top" id="navbar-scrolspy">
   <div class="container-fluid p-2" style="margin-left: 3rem; margin-right: 3rem;">
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" href="/">
       <img src="/img/logo.png" alt="PK-GasAbdullah Logo" style="height: 2.5rem;">
     </a>
 

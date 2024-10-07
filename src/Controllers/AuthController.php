@@ -198,7 +198,7 @@ class AuthController extends Controller
              }else if($user['role'] === 'user'){
                 echo json_encode([
                     'status' => 'success',
-                    'redirect' => '/account'
+                    'redirect' => '/account/alamat'
                 ]);
              }
 

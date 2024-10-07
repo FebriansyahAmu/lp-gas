@@ -128,6 +128,7 @@ function checkoutProducts() {
     //Validasi form
     const deliveryMethod = document.getElementById("delivery-option").value;
     const alamat = document.getElementById("addr-select").value;
+    console.log(alamat);
     if (deliveryMethod === "") {
       event.preventDefault();
       return;
@@ -179,7 +180,7 @@ function checkoutProducts() {
               window.snap.pay(token, {
                 onSuccess: function (result) {
                   console.log("Payment success:", result);
-                  // Tangani hasil sukses pembayaran di sini
+                  $("#reviewModal").modal("show");
                 },
                 onPending: function (result) {
                   console.log("Waiting for payment:", result);

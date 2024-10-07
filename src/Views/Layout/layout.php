@@ -26,7 +26,7 @@
 
 <main>
 <?php component('navbar', ['isLoggedIn' => $isLoggedIn]); ?>
-<?php component('whatsapme'); ?>
+
     <div class="">
         <?php echo $content; ?>
     </div>

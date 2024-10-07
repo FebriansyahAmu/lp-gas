@@ -4,6 +4,7 @@ namespace App\Controllers;
 use App\Controller;
 use App\Middleware\AuthMiddleware;
 use App\Models\CartModel;
+use App\Models\Alamat;
 
 
 
@@ -102,6 +103,61 @@ class CartController extends Controller{
             echo json_encode([
                 'status' => 'error',
                 'message' => $e->getMessage()
+            ]);
+        }
+    }
+
+    public function deleteCartByID($id){
+        try{
+            if($_SERVER['REQUEST_METHOD'] !== 'DELETE'){
+                throw new \Exception("Invalid request method", 400);
+            }
+
+            $userData = AuthMiddleware::checkAuth();
+            $userId = $userData['id'];
+
+            $deleteCart = CartModel::deleteCartByID($id, $userId);
+            if($deleteCart){
+                header('Content-Type: application/json');
+                echo json_encode([
+                    'status' => 'success',
+                    'message' => 'Cart item berhasil dihapus'
+                ]);
+            }else{
+                throw new \Exception('Data not found', 404);
+            }
+        }catch(\Exception $e){
+            header('Content-Type: application/json');
+            http_response_code($e->getCode() ? : 500);
+            echo json_encode([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+    
+
+    public function getAlamatCart(){
+        try{
+            $userData = AuthMiddleware::checkAuth();
+            $userId = $userData['id'];
+
+            $alamatCart = Alamat::getAlamatCart($userId);
+            if($alamatCart){
+                header('Content-Type: application/json');
+                echo json_encode([
+                    'status' => 'success',
+                    'data' => $alamatCart
+                ]);
+            }else{
+                throw new \Exception('Alamat tidak ditemukan', 404);
+            }
+        }catch(\Exception $e){
+            header('Content-Type: application/json');
+            http_response_code($e->getCode() ? : 500);
+            echo json_encode([
+                'status' => 'error',
+                'error' => $e->getMessage()
             ]);
         }
     }
