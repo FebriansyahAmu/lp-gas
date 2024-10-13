@@ -39,6 +39,7 @@
             <ul class="dropdown-menu" aria-labelledby="profileDropdown">
               <li><a class="dropdown-item" href="/account">Riwayat Pembelian</a></li>
               <li><a class="dropdown-item" href="/account/alamat">Alamat</a></li>
+              <li><a class="dropdown-item" href="/account/pengaturan">Pengaturan</a></li>
               <li><a class="dropdown-item" href="/logout">Logout</a></li>
             </ul>
           </li>

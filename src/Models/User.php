@@ -328,4 +328,54 @@ class User{
             return false;
         }
     }
+
+
+    //ini untuk bagian user
+    public static function getUserByUID($userId){
+        try{
+            $db = Database::getConnection();
+            $stmt = $db->prepare("SELECT Nama_lengkap, Email, No_Hp, foto_filepath FROM " . self::$table . " WHERE user_id = ?");
+            if(!$stmt){
+                throw new \Exception("Failed to prepare statement", $db->error);
+            }
+
+            $stmt->bind_param("i", $userId);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            if(!$result){
+                throw new \Exception("Failed to execute query", $stmt->error);
+            }
+
+            return $result->fetch_assoc();
+        }catch(\Exception $e){
+            error_log($e->getMessage());
+            return false;
+        }
+    }
+
+    //update user data
+    public static function updateUserData($data){
+        try{
+            $db = Database::getConnection();
+            $stmt = $db->prepare("
+                        UPDATE ". self::$table ." SET Nama_lengkap = ?, Email = ?, No_Hp = ?, foto_filepath = ?
+                        WHERE user_id = ?
+            ");
+
+            if(!$stmt){
+                throw new \Exception("Failed to prepare statement", $db->error);
+            }
+
+            $stmt->bind_param("ssisi", $data['namaLengkap'], $data['email'], $data['noHp'], $data['profilePicture'], $data['userId']);
+            $result = $stmt->execute();
+            if(!$result){
+                throw new \Exception("Failed to execute query", $stmt->error);
+            }
+
+            return true;
+        }catch(\Exception $e){
+            error_log($e->getMessage());
+            return false;
+        }
+    }
 }

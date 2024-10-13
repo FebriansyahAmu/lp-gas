@@ -90,8 +90,8 @@ function renderCartItem(cart) {
                     
                     <div class="d-flex justify-content-between align-items-center flex-column flex-md-row">
                         <div class="mb-2 mb-md-0">
+                        <span class="text-success fw-bold">Rp${cart.harga_unit}</span><br>
                         <span>Total Price: <span id="total-price-${cart.cart_id}">Rp 0</span></span><br>
-                            <span class="text-success fw-bold">Rp${cart.harga_unit}</span><br>
                             
                         </div>
                         <div class="d-flex align-items-center mb-2 mb-md-0">

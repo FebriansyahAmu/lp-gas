@@ -180,6 +180,22 @@ $router->post('/ulasan', UlasanController::class, 'kirimUlasan',[
 
 
 
+//pengaturan akun
+$router->get('/account/pengaturan', AccountController::class, 'indexPengaturan', [
+    'class' => AuthMiddleware::class,
+    'role' => 'user'
+]);
+
+$router->get('/account/user-data', AccountController::class, 'getUserbyuid', [
+    'class' => AuthMiddleware::class,
+    'role' => 'user'
+]);
+
+$router->post('/account/update-profile', AccountController::class, 'updateProfile', [
+    'class' => AuthMiddleware::class,
+    'role' => 'user'
+]);
+
 
 //Verifikasi akun
 $router->get('/verifikasi-email/{token}', AuthController::class, 'emailVerification');

@@ -5,6 +5,7 @@ use App\Controller;
 use App\Middleware\AuthMiddleware;
 use App\Models\Alamat;
 use App\Models\Order;
+use App\Models\User;
 
 class AccountController extends Controller
 {
@@ -25,6 +26,11 @@ class AccountController extends Controller
         $this->render('/Alamat/index', ['isLoggedIn' => $isLoggedIn] );
     }
 
+
+    public function indexPengaturan(){
+        $isLoggedIn = $this->authMiddleware->handle();
+        $this->render('/Pengaturan/index', ['isLoggedIn' => $isLoggedIn]);
+    }
 
 
     public function Alamat(){
@@ -218,6 +224,92 @@ class AccountController extends Controller
 
         }catch(\Exception $e){
             http_response_code(400);
+            echo json_encode([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
+    //ini untun pengaturan akun
+    public function getUserbyuid(){
+        try{
+            $userData = AuthMiddleware::checkAuth();
+            $userId = $userData['id'];
+
+            $getUser = User::getUserByUID($userId);
+            if(!$getUser){
+                throw new \Exception('User not found', 404);
+            }
+            header('Content-Type: application/json');
+            echo json_encode([
+                'status' => 'success',
+                'data' => $getUser
+            ]);
+        }catch(\Exception $e){
+            header('Content-Type: application/json');
+            http_response_code($e->getCode() ? : 500);
+            echo json_encode([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
+    public function updateProfile(){
+        try{
+            $userData = AuthMiddleware::checkAuth();
+            $userId = $userData['id'];
+
+            $oldData = User::getUserByUID($userId);
+            if(!$oldData){
+                throw new \Exception('User not found', 404);
+            }
+
+            $data = [
+                'userId' => $userId,
+                'namaLengkap' => filter_input(INPUT_POST, 'fullName', FILTER_SANITIZE_FULL_SPECIAL_CHAR),
+                'email' => filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL),
+                'noHp' => filter_input(INPUT_POST, 'no_hp', FILTER_VALIDATE_INT)
+            ];
+
+            if(isset($_FILES['profilePicture']) && $_FILES['profilePicture']['error'] === UPLOAD_ERR_OK){
+                $targetDir = 'img/pf';
+                $fileName = basename($_FILES['profilePicture']['name']);
+                $targetFile = $targetDir . $fileName;
+                $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+            
+                $allowedFileType = ['jpg', 'jpeg', 'png'];
+                if(!in_array($imageFileType, $allowedFileType)){
+                    throw new \Exception('Format file tidak didukung', 400);
+                }
+
+                if(move_uploaded_file($_FILES['profilePicture']['tmp_name'], $targetFile)){
+                    if(file_exists($oldData['foto_filepath'])){
+                        unlink($oldData['foto_filepath']);
+                    }
+                    $data['profilePicture'] = $targetFile;
+                }else{
+                    throw new \Exception('Gagal mengunggah gambar', 500);
+                }
+            }else{
+                $data['profilePicture'] = $oldData['foto_filepath'];
+            }
+
+            $updateData = User::updateUserData($data);
+            if(!$updateData){
+                throw new \Exception('Gagal memperbarui data', 500);
+            }
+
+            header('Content-Type: application/json');
+            echo json_encode([
+                'status' => 'success',
+                'message' => 'Data berhasil diperbarui'
+            ]);
+
+        }catch(\Exception $e){
+            header('Content-Type: application/json');
+            http_response_code($e->getCode() ? : 500);
             echo json_encode([
                 'status' => 'error',
                 'message' => $e->getMessage()
