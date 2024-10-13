@@ -32,10 +32,10 @@
                 </ul>
                 <ul class="navbar-nav ms-auto"> 
 
-                    <li class="nav-item dropdown user-menu"> <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"> <img src="../../dist/assets/img/user2-160x160.jpg" class="user-image rounded-circle shadow" alt="User Image"> <span class="d-none d-md-inline">Administrator</span> </a>
+                    <li class="nav-item dropdown user-menu"> <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"> <img src="/img/person-circle.svg" class="user-image rounded-circle shadow" alt="User Image"> <span class="d-none d-md-inline">Administrator</span> </a>
                         <ul class="dropdown-menu dropdown-menu-end shadow-lg animate__animated animate__fadeIn">
                             <li class="dropdown-header text-center">
-                              <img src="../../dist/assets/img/user2-160x160.jpg" class="img-fluid rounded-circle mb-2" alt="User Image" style="width: 60px; height: 60px;">
+                              <img src="/img/person-circle.svg" class="img-fluid rounded-circle mb-2" alt="User Image" style="width: 60px; height: 60px;">
                               <p class="mb-1 fw-bold">Administrator</p>
                               <small class="text-muted">admin@example.com</small>
                             </li>

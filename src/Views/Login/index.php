@@ -8,7 +8,7 @@
       <li class="breadcrumb-item active" aria-current="page">Login</li>
     </ol>
   </nav>
-    <div class="col-md-8 col-lg-7 col-xl-6">
+    <div class="col-md-5">
       <img
         src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
         class="img-fluid"
@@ -16,7 +16,7 @@
       />
     </div>
     
-    <div class="col-md-7 col-lg-5 col-xl-4 offset-xl-1">
+    <div class="col-md-8 col-lg-5 col-xl-5 offset-xl-1  p-5 rounded-2" style="background-color: rgba(0, 0, 0, 0.3)">
       <h2 class="mb-3 text-light">Log in</h2>
       <form novalidate id="flogin">
         <!-- Email input -->

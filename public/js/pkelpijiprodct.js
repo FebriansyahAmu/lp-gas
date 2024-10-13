@@ -5,6 +5,7 @@ $(document).ready(function () {
   checkoutProducts();
   showAlamat();
   addCart();
+  kirimUlasan();
 });
 
 function handleProductData() {
@@ -370,6 +371,32 @@ function addCart() {
         }
       },
       error: function (xhr, status, err) {
+        Swal.fire("Error", xhr.responseJSON.message, "error");
+      },
+    });
+  });
+}
+
+function kirimUlasan() {
+  $("#reviewForm").on("submit", function (event) {
+    event.preventDefault();
+
+    const formData = new FormData(this);
+
+    $.ajax({
+      url: "/ulasan",
+      method: "POST",
+      data: formData,
+      contentType: false,
+      processData: false,
+      success: function (response) {
+        if (response.status === "success") {
+          Swal.fire("Sukses", response.message, "success").then(() => {
+            window.location.reload();
+          });
+        }
+      },
+      error: function (xhr, status, error) {
         Swal.fire("Error", xhr.responseJSON.message, "error");
       },
     });

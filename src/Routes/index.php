@@ -7,6 +7,7 @@ use App\Controllers\AdminController;
 use App\Controllers\AccountController;
 use App\Controllers\CheckoutController;
 use App\Controllers\CartController;
+use App\Controllers\UlasanController;
 
 
 use App\Middleware\AuthMiddleWare;
@@ -30,6 +31,7 @@ $router->post('/auth/login', AuthController::class, 'loginAct');
 $router->get('/product/{id}', ProductController::class, 'product');
 $router->get('/api/product/{id}', ProductController::class, 'getProduct');
 $router->get('/api/products', ProductController::class, 'getAllProduct');
+
 
 //account
 $router->get('/account', AccountController::class, 'index', [
@@ -168,6 +170,14 @@ $router->get('/data/riwayat-pembelian', AdminController::class, 'getRiwayatPembe
     'class' => AuthMiddleware::class,
     'role' => 'admin'
 ]);
+
+
+//ulasan
+$router->post('/ulasan', UlasanController::class, 'kirimUlasan',[
+    'class' => AuthMiddleware::class,
+    'role' => 'user'
+]);
+
 
 
 

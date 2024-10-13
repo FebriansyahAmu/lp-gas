@@ -40,7 +40,9 @@
       </div> -->
     <section
       class="vh-100 overflow-auto"
-      style="background: radial-gradient(circle at right, #b8ced6 , #3f3b3e);"
+      style="
+       
+      "
     >
         <?php echo $content; ?>
     </section>
