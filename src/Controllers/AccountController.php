@@ -268,9 +268,9 @@ class AccountController extends Controller
 
             $data = [
                 'userId' => $userId,
-                'namaLengkap' => filter_input(INPUT_POST, 'fullName', FILTER_SANITIZE_FULL_SPECIAL_CHAR),
+                'namaLengkap' => filter_input(INPUT_POST, 'fullName', FILTER_SANITIZE_FULL_SPECIAL_CHARS),
                 'email' => filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL),
-                'noHp' => filter_input(INPUT_POST, 'no_hp', FILTER_VALIDATE_INT)
+                'noHp' => filter_input(INPUT_POST, 'no_hp', FILTER_SANITIZE_FULL_SPECIAL_CHARS)
             ];
 
             if(isset($_FILES['profilePicture']) && $_FILES['profilePicture']['error'] === UPLOAD_ERR_OK){

@@ -37,6 +37,7 @@
               type="file"
               class="form-control"
               id="profilePicture"
+              name="profilePicture"
               accept="image/*"
               onchange="previewImage(event)"
             />
@@ -49,6 +50,7 @@
               type="text"
               class="form-control"
               id="fullName"
+              name="fullName"
               placeholder="Masukkan nama lengkap"
               required
             />
@@ -59,8 +61,9 @@
               type="email"
               class="form-control"
               id="email"
+              name="email"
               placeholder="Masukkan email"
-              readonly
+              
             />
           </div>
           <div class="mb-3">
@@ -69,6 +72,7 @@
               type="tel"
               class="form-control"
               id="no_hp"
+              name="no_hp"
               placeholder="Masukkan nomor telepon"
             />
           </div>
@@ -159,8 +163,6 @@
         preview.src = e.target.result;
       };
       reader.readAsDataURL(input.files[0]);
-    } else {
-      preview.src = "/img/Portrait_Placeholder.png"; 
     }
   }
 </script>
@@ -173,6 +175,7 @@
     });
 
     function getuserbyUID(){
+      const preview = document.getElementById("profilePicturePreview");
         $.ajax({
             url: '/account/user-data',
             method: 'GET',
@@ -181,6 +184,12 @@
                     $('#fullName').val(response.data.Nama_lengkap);
                     $('#email').val(response.data.Email);
                     $('#no_hp').val(response.data.No_Hp);
+                    if(response.data.foto_filepath === null){
+                      preview.src = "/img/Portrait_Placeholder.png";
+                    }else{
+                      preview.src = "../" + response.data.foto_filepath;
+                    }
+                    
                 }
             },
             error: function(xhr, status, error){
@@ -193,7 +202,7 @@
       $('#formProfile').submit(function(event){
         event.preventDefault();
 
-        const formData = new FormDat(this);
+        const formData = new FormData(this);
         Swal.fire({
           title: 'Apakah anda yakin ingin mengubah data profile?',
           icon: 'question',
