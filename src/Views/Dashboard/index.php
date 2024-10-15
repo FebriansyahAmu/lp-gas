@@ -76,7 +76,6 @@
                     <tr>
                       <th>Order Id</th>
                       <th>Nama Lengkap</th>
-                      <th>Jenis Gas</th>
                       <th>Qty</th>
                       <th>Metode Pengambilan</th>
                       <th>Delivery Fee</th>

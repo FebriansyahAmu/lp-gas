@@ -205,7 +205,6 @@ function getHistoryPembelian() {
     columns: [
       { data: "id_Order" },
       { data: "Nama_lengkap" },
-      { data: "Jenis_gas" },
       { data: "Qty" },
       { data: "delivery_method" },
       { data: "delivery_fee" },

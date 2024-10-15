@@ -301,7 +301,6 @@ Class Order{
                     SELECT
                         ec_order.id_Order,
                         ec_user.Nama_lengkap,
-                        ec_gas.Jenis_gas,
                         ec_order.Qty,
                         ec_order.delivery_method,
                         ec_order.delivery_fee,
@@ -315,6 +314,8 @@ Class Order{
                         ON ec_order.user_id = ec_user.user_id
                     WHERE
                         ec_user.role = ?
+                    GROUP BY
+                        ec_order.id_Order
                     ORDER BY
                         ec_order.created_at DESC
             ");
