@@ -169,42 +169,7 @@
     <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-inner">
         <!-- Testimonial 1 -->
-        <div class="carousel-item active text-center">
-          <div class="row justify-content-center">
-            <div class="col-md-8">
-              <div class="testimonial">
-                <p class="mb-4">"Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum placeat iste, officia labore voluptas"</p>
-                <h5 class="font-weight-bold">John Doe</h5>
-                
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- Testimonial 2 -->
-        <div class="carousel-item text-center">
-          <div class="row justify-content-center">
-            <div class="col-md-8">
-              <div class="testimonial">
-                <p class="mb-4">"A great experience overall, the team was very supportive and the product exceeded expectations."</p>
-                <h5 class="font-weight-bold">Jane Smith</h5>
-                
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- Testimonial 3 -->
-        <div class="carousel-item text-center">
-          <div class="row justify-content-center">
-            <div class="col-md-8">
-              <div class="testimonial">
-                <p class="mb-4">"Highly recommend! A seamless experience from start to finish."</p>
-                <h5 class="font-weight-bold">Mike Johnson</h5>
-              
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+        
       <!-- Controls -->
       <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -220,5 +185,56 @@
 <script>
   $(document).ready(function(){
     fetchProducts();
+    fetchUlasan();
   })
+
+  function fetchUlasan(){
+    $.ajax({
+      url: '/data/ulasan',
+      method: 'GET',
+      success: function(response){
+        tampilkanUlasan(response.data);
+      }
+    })
+  }
+
+
+function generateStars(rating) {
+  let stars = '';
+  for (let i = 1; i <= 5; i++) {
+    if (i <= rating) {
+      stars += '<i class="fas fa-star text-warning" style="margin-right: 10px;"></i>'; 
+    } else {
+      stars += '<i class="far fa-star text-warning" style="margin-right: 10px;"></i>'; 
+    }
+  }
+  return stars;
+}
+
+function tampilkanUlasan(data) {
+  const carouselInner = document.querySelector('.carousel-inner');
+  carouselInner.innerHTML = '';
+
+  data.forEach((ulasan, index) => {
+    const isActive = index === 0 ? 'active' : '';
+
+    const ulasanItem = `
+      <div class="carousel-item ${isActive} text-center">
+        <div class="row justify-content-center">
+          <div class="col-md-8">
+            <div class="testimonial">
+              <p class="mb-4">"${ulasan.review_description}"</p>
+              <h2 class="font-weight-bold">${ulasan.Nama_lengkap}</h2>
+              <div class="stars mb-3">
+                ${generateStars(ulasan.rating)}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+
+    carouselInner.innerHTML += ulasanItem;
+  });
+}
 </script>

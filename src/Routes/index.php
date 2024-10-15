@@ -183,6 +183,8 @@ $router->post('/ulasan', UlasanController::class, 'kirimUlasan',[
     'role' => 'user'
 ]);
 
+$router->get('/data/ulasan', UlasanController::class, 'getUlasan');
+
 
 
 //pengaturan akun

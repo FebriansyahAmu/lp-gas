@@ -63,4 +63,24 @@ class UlasanController extends Controller
             ]);
         }
     }
+
+    public function getUlasan(){
+        try{
+            $ulasan = Ulasan::getDataUlasan();
+            if(!$ulasan){
+                throw new \Exception("Tidak ada ulasan", 404);
+            }
+            header('Content-Type: application/json');
+            echo json_encode([
+                'data' => $ulasan
+            ]);
+        }catch(\Exception $e){
+            header('Content-Type: application/json');
+            http_response_code($e->getCode() ? : 500);
+            echo json_encode([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
 }

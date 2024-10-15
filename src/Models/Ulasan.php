@@ -36,7 +36,7 @@ class Ulasan{
             $stmt = $db->prepare("
                     SELECT rating.rating, rating.review_description, user.Nama_lengkap
                     FROM " . self::$table ." AS rating
-                    INNER JOIN " . self::$table_user . "AS user ON rating.user_id = user.user_id
+                    INNER JOIN " . self::$table_user . " AS user ON rating.user_id = user.user_id
             ");
             if(!$stmt){
                 throw new \Exception("Failed to prepare statement", $db->error);
