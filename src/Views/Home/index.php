@@ -203,9 +203,9 @@ function generateStars(rating) {
   let stars = '';
   for (let i = 1; i <= 5; i++) {
     if (i <= rating) {
-      stars += '<i class="fas fa-star text-warning" style="margin-right: 10px;"></i>'; 
+      stars += '<i class="fas fa-star text-warning" style="margin-right: 15px;"></i>'; 
     } else {
-      stars += '<i class="far fa-star text-warning" style="margin-right: 10px;"></i>'; 
+      stars += '<i class="far fa-star text-warning" style="margin-right: 15px;"></i>'; 
     }
   }
   return stars;
