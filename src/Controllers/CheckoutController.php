@@ -204,12 +204,19 @@ class CheckoutController extends Controller{
             $customerDetails = [
                 'first_name' => $userData['namalengkap'],
             ];
+
+            $expiry = [
+                "unit" => "minutes",
+                "duration" => 5
+            ];
+
     
             // Parameter transaksi untuk Midtrans Snap
             $transactionParams = [
                 'transaction_details' => $transactionDetails,
                 'item_details' => $itemsDetail,
                 'customer_details' => $customerDetails,
+                'expiry' => $expiry
             ];
     
             // Inisialisasi Midtrans dan mendapatkan Snap Tok

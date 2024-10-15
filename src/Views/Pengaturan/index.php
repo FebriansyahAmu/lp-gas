@@ -110,13 +110,14 @@
         ></button>
       </div>
       <div class="modal-body">
-        <form>
+        <form id="ubahPassForm">
           <div class="mb-3">
             <label for="currentPassword" class="form-label">Password Lama</label>
             <input
               type="password"
               class="form-control"
               id="currentPassword"
+              name="currentPassword"
               placeholder="Masukkan password lama"
               required
             />
@@ -127,6 +128,7 @@
               type="password"
               class="form-control"
               id="newPassword"
+              name="newPassword"
               placeholder="Masukkan password baru"
               required
             />
@@ -172,6 +174,7 @@
     $(document).ready(function() {
         getuserbyUID();
         ubahDataProfile();
+        ubahPassword();
     });
 
     function getuserbyUID(){
@@ -212,6 +215,7 @@
           confirmButtonText: "Ya, Ubdah Data",
         }).then((result)=>{
           if(result.isConfirmed){
+            $("#loading-spinner").removeClass("d-none");
             $.ajax({
               url: '/account/update-profile',
               method: 'POST',
@@ -219,8 +223,55 @@
               contentType: false,
               processData: false,
               success: function(response){
+                $("#loading-spinner").addClass("d-none");
                 if(response.status === 'success'){
                   Swal.fire('Sukses', response.message, 'success');
+                }
+              },
+              error: function(xhr, status, error){
+                Swal.fire('Error', xhr.responseJSON.message, 'error');
+              },
+              complete: function () {
+                $("#loading-spinner").addClass("d-none");
+              },
+            })
+          }
+        })
+      })
+    }
+
+    function ubahPassword(){
+      $("#ubahPassForm").submit(function(event){
+        event.preventDefault();
+
+        const newPassword = $('#newPassword').val();
+        const konfirmasiPass = $('#confirmNewPassword').val();
+
+        if(konfirmasiPass !== newPassword){
+          Swal.fire('Error', 'Password tidak sesuai', 'error');
+        }
+
+        const formData = new FormData(this);
+        Swal.fire({
+          title: 'Apakah anda yakin ingin mengubah password?',
+          icon: 'question',
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Ya, Ubah Password",
+        }).then((result)=>{
+          if(result.isConfirmed){
+            $.ajax({
+              url: "/account/ubah-password",
+              method: "POST",
+              data: formData,
+              contentType: false,
+              processData: false,
+              success: function(response){
+                if(response.status === 'success'){
+                  Swal.fire('Sukses', response.message, 'success').then(()=>{
+                    window.location.reload();
+                  });
                 }
               },
               error: function(xhr, status, error){

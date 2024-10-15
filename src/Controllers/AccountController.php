@@ -343,6 +343,47 @@ class AccountController extends Controller
         }
     }
 
+
+    public function ubahPassword(){
+        try{
+            $userData = AuthMiddleware::checkAuth();
+            $userId = $userData['id'];
+
+            $currentPassword = filter_input(INPUT_POST, 'currentPassword', FILTER_DEFAULT);
+            $data = [
+                'userId' => $userId,
+                'newPassword' => filter_input(INPUT_POST, 'newPassword', FILTER_DEFAULT)
+            ];
+
+            if(strlen($data['newPassword']) < 6){
+                throw new \Exception("Password minimal 6 karakter", 400);
+            }
+            $validateCurrentPassword = User::validateCurrentPass($userId, $currentPassword);
+            if(!$validateCurrentPassword){
+                throw new \Exception("Password lama anda salah", 400);
+            }
+
+            $data['newPassword'] = password_hash($data['newPassword'], PASSWORD_BCRYPT);
+            $updatePassword = User::updatePasswordUID($data);
+            if(!$updatePassword){
+                throw new \Exception("Terjadi kesalahan, silahkan coba lagi nanti", 500);
+            }
+
+            header('Content-Type: application/json');
+            echo json_encode([
+                'status' => 'success',
+                'message' => 'Password berhasil diubah'
+            ]);
+        }catch(\Exception $e){
+            header('Content-Type: application/json');
+            http_response_code($e->getCode() ? : 500);
+            echo json_encode([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
     private function checkRefer(){
         $allowedReferer = "http://localhost:3000";
         if (!isset($_SERVER['HTTP_REFERER']) || strpos($_SERVER['HTTP_REFERER'], $allowedReferer) === false) {

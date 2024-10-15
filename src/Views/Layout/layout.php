@@ -26,7 +26,7 @@
 
 <main>
 <?php component('navbar', ['isLoggedIn' => $isLoggedIn]); ?>
-
+<?php component('spinners'); ?>
     <div class="">
         <?php echo $content; ?>
     </div>

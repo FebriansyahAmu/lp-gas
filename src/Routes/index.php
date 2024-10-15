@@ -201,6 +201,11 @@ $router->post('/account/update-profile', AccountController::class, 'updateProfil
     'role' => 'user'
 ]);
 
+$router->post('/account/ubah-password', AccountController::class, 'ubahPassword', [
+    'class' => AuthMiddleware::class,
+    'role' => 'user'
+]);
+
 
 //Verifikasi akun
 $router->get('/verifikasi-email/{token}', AuthController::class, 'emailVerification');

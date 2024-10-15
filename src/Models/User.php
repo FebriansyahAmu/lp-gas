@@ -378,4 +378,48 @@ class User{
             return false;
         }
     }
+
+    //update user password
+    public static function validateCurrentPass($userId, $currentPass){
+        try{
+            $db = Database::getConnection();
+            $stmt = $db->prepare("SELECT Password FROM " . self::$table . " WHERE user_id = ?");
+            if(!$stmt){
+                throw new \Exception("Failed to prepare statement", $db->error);
+            }
+            $stmt->bind_param("i", $userId);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            
+            $user = $result->fetch_assoc();
+            if($user && password_verify($currentPass, $user['Password'])){
+                return true;
+            }
+            return false;
+        }catch(\Exception $e){
+            error_log($e->getMessage());
+            return false;
+        }
+    }
+
+    public static function updatePasswordUID($data){
+        try{
+            $db = Database::getConnection();
+            $stmt = $db->prepare("UPDATE " . self::$table . " SET Password = ? WHERE user_id = ?");
+            if(!$stmt){
+                throw new \Exception("Failed to prepare statement", $db->error);
+            }
+
+            $stmt->bind_param("si", $data['newPassword'], $data['userId']);
+            $success = $stmt->execute();
+            if(!$success){
+                throw new \Exception("Failed to execute query", $stmt->error);
+            }
+
+            return true;
+        }catch(\Exception $e){
+            error_log($e->getMessage());
+            return false;
+        }
+    }
 }

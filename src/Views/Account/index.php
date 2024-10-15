@@ -1,7 +1,7 @@
 <script
   type="text/javascript"
   src="https://app.sandbox.midtrans.com/snap/snap.js"
-  data-client-key="SB-Mid-client-KiwULraVceHK4U4i"
+  data-client-key=""
 ></script>
 <section
   class="d-flex justify-content-center align-items-center py-5"

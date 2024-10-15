@@ -535,7 +535,7 @@ function submitFormAlamat() {
       Description: $("#description").val(),
       id_Alamat: idAlamat,
     };
-
+    $("#loading-spinner").removeClass("d-none");
     $.ajax({
       url: url,
       method: method,
@@ -543,6 +543,7 @@ function submitFormAlamat() {
       data: JSON.stringify(data),
       processData: false,
       success: function (response) {
+        $("#loading-spinner").addClass("d-none");
         if (response.status === "success") {
           Swal.fire("Success", response.message, "success");
           $("#tabelAlamat").DataTable().ajax.reload();
@@ -550,6 +551,9 @@ function submitFormAlamat() {
       },
       error: function (xhr, status, error) {
         alert("Terjadi kesalahan: " + error);
+      },
+      complete: function () {
+        $("#loading-spinner").addClass("d-none");
       },
     });
   });
