@@ -43,29 +43,35 @@ class CheckoutController extends Controller{
 
                 $createOrder = Order::createOrder($data);
 
-                $transactionDetails = [
-                    'order_id' => $orderId,
-                    'gross_amount' => $data['submittedTotalHarga']
-                ];
-
                 $itemsDetail = [
                     [
                         'id' => $data['productId'],
-                        'price' => $data['submittedTotalHarga'],
+                        'price' => $data['submittedTotalHarga'] / $data['quantity'],
                         'quantity' => $data['quantity'],
                         'name' => $jenisGas
                     ]
                 ];
                 
+                $transactionDetails = [
+                    'order_id' => $orderId,
+                    'gross_amount' => $data['submittedTotalHarga']
+                ];
+
 
                 $customerDetails=[
                     'first_name' => $userData['namalengkap']
+                ];
+
+                $expiry = [
+                    "unit" => "minutes",
+                    "duration" => 5
                 ];
 
                 $transactionParams = [
                     'transaction_details' => $transactionDetails,
                     'item_details' => $itemsDetail,
                     'customer_details' => $customerDetails,
+                    'expiry' => $expiry
                 ];
 
                 Midtrans::init();
@@ -248,7 +254,8 @@ class CheckoutController extends Controller{
                 } elseif ($transactionStatus == 'pending') {
                     Order::updateOrderStatus($orderId, 'pending');
                 } elseif ($transactionStatus == 'deny' || $transactionStatus == 'expire' || $transactionStatus == 'cancel') {
-                    Order::updateOrderStatus($orderId, 'failed');
+                    // Order::updateOrderStatus($orderId, 'failed');
+                    Order::deleteExpireOrder($orderId);
                 }
 
             // Response ke Midtrans

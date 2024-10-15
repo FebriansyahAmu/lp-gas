@@ -201,6 +201,32 @@ class AccountController extends Controller
     }
 
 
+    public function pilihAlamatbyUID($id){
+        try{
+            $userData = AuthMiddleware::checkAuth();
+            $userId = $userData['id'];
+
+            $pilihAlamat = Alamat::pilihAlamatUtama($userId, $id);
+            if(!$pilihAlamat){
+                throw new \Exception("Invalid, alamat not found", 404);
+            }
+
+            header('Content-Type: application/json');
+            echo json_encode([
+                'status'=> 'success',
+                'message' => 'ALamat berhasil digunakan sebagai alamat utama'
+            ]);
+        }catch(\Exception $e){
+            header('Content-Type: application/json');
+            http_response_code($e->getCode() ? : 500);
+            echo json_encode([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
+
     //Riwayat Pembelian
     public function getRiwayatPembelian(){
         try{

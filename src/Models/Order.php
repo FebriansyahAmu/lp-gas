@@ -231,21 +231,51 @@ Class Order{
 }
 
 
+    // public static function deleteExpiredPayment(){
+    //     try{
+    //         $db = Database::getConnection();
+    //         $stmt = $db->prepare("DELETE FROM " . self::$table . " WHERE status = ? AND Interval ....");
+    //     }catch(\Exception $e){
+    //         error_log($e->getMessage());
+    //         return false;
+    //     }
+    // }
+
+
+    public static function deleteExpireOrder($orderId){
+        try{
+            $db = Database::getConnection();
+            $stmt = $db->prepare("DELETE FROM " . self::$table . " WHERE id_Order = ?");
+            if(!$stmt){
+                throw new \Exception("Failed to prepare statement", $db->error);
+            }
+
+            $stmt->bind_param("s", $orderId);
+            $success = $stmt->execute();
+            if(!$success){
+                throw new \Exception("Failed to execute query", $stmt->error);
+            }
+
+            return true;
+        }catch(Exception $e){
+            error_log($e->getMessage());
+            return false;
+        }
+    }
+
     public static function getOrderByUID($userId){
         try{
             $db = Database::getConnection();
             $stmt = $db->prepare("
-                            SELECT ec_order.id_Order, ec_gas.Jenis_gas, ec_order.Qty, ec_order.totalharga, ec_order.status, ec_order.snap_token
-                            FROM " . self::$table . " 
-                            JOIN ". self::$table_gas ." ON ec_order.id_gas = ec_gas.id_gas
-                            WHERE ec_order.user_id = ?
+                           SELECT id_Order, SUM(Qty) AS total_qty, SUM(totalharga) + delivery_fee AS total_harga, status, snap_token
+                           FROM ". self::$table ."
+                           GROUP BY id_Order
+                           ORDER BY created_at DESC
                      ");
             
             if(!$stmt){
                 throw new \Exception("Failed to prepare statement: " . $db->error);
             }
-
-            $stmt->bind_param("i", $userId);
             $stmt->execute();
 
             $result = $stmt->get_result();

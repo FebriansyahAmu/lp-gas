@@ -14,6 +14,7 @@ $(document).ready(function () {
   clearFormAlamat();
   getEditAlamatData();
   submitFormAlamat();
+  pilihAlamat();
   deleteAlamat();
   selesaikanPemesanana();
 });
@@ -276,9 +277,8 @@ function getHistoryUID() {
     },
     columns: [
       { data: "id_Order" },
-      { data: "Jenis_gas" },
-      { data: "Qty" },
-      { data: "totalharga" },
+      { data: "total_qty" },
+      { data: "total_harga" },
       {
         data: "status",
         render: function (data, type, row) {
@@ -308,12 +308,12 @@ function getHistoryUID() {
     ],
     columnDefs: [
       { width: "5%", targets: 0 },
-      { width: "5%", targets: 1 },
+      { width: "2%", targets: 1 },
       { width: "2%", targets: 2 },
       { width: "2%", targets: 3 },
       { width: "2%", targets: 4 },
-      { width: "2%", targets: 5 },
     ],
+    order: [[0, "desc"]],
   });
 }
 
@@ -380,7 +380,7 @@ function tabelAlamats() {
         className: "text-center",
         render: function (data, type, row) {
           return `
-                            <button class="btn btn-sm  btn-success btn-delete" data-id="${data.id_Alamat}">
+                            <button class="btn btn-sm  btn-success btn-pAlamat" data-id="${data.id_Alamat}">
                                 Pilih Alamat
                             </button>
                         `;
@@ -451,6 +451,27 @@ function getEditAlamatData() {
       },
       error: function (xhr, status, error) {
         alert("Terjadi kesalahan", +error);
+      },
+    });
+  });
+}
+
+function pilihAlamat() {
+  $("#tabelAlamat").on("click", ".btn-pAlamat", function () {
+    const idAlamat = $(this).data("id");
+
+    $.ajax({
+      url: "/Alamat/pilih-alamat/" + idAlamat,
+      method: "POST",
+      success: function (response) {
+        if (response.status === "success") {
+          Swal.fire("Sukses", response.message, "success").then(() => {
+            $("#tabelAlamat").DataTable().ajax.reload();
+          });
+        }
+      },
+      error: function (xhr, status, error) {
+        Swal.fire("Error", xhr.responseJSON.message, "error");
       },
     });
   });

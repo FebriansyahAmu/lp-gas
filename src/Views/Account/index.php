@@ -1,7 +1,7 @@
 <script
   type="text/javascript"
   src="https://app.sandbox.midtrans.com/snap/snap.js"
-  data-client-key=""
+  data-client-key="SB-Mid-client-KiwULraVceHK4U4i"
 ></script>
 <section
   class="d-flex justify-content-center align-items-center py-5"
@@ -33,8 +33,7 @@
             <thead>
               <tr>
                 <th>Order Id</th>
-                <th>Jenis Gas</th>
-                <th>Qty</th>
+                <th>Total Qty</th>
                 <th>Total Harga</th>
                 <th>Status</th>
                 <th>Action</th>

@@ -150,6 +150,52 @@ class Alamat{
             return false;
         }
     }
+
+
+    private static function updateToSec($userId){
+        try{
+            $db = Database::getConnection();
+            $status = 'secondary';
+            $stmt = $db->prepare("UPDATE " . self::$table . " SET Status = ? WHERE id_user = ?");
+            if(!$stmt){
+                throw new \Exception("Failed to prepare statement", $db->error);
+            }
+
+            $stmt->bind_param("si", $status, $userId);
+            $success = $stmt->execute();
+            if(!$success){
+                throw new \Exception("Failed to execute query", $stmt->error);
+            }
+
+            return true;
+        }catch(\Exception $e){
+            error_log($e->getMessage());
+            return false;
+        }
+    }
+
+    public static function pilihAlamatUtama($userId, $id){
+        try{
+            self::updateToSec($userId);
+            $db = Database::getConnection();
+            $status = 'utama';
+            $stmt = $db->prepare("UPDATE " . self::$table . " SET Status = ? WHERE id_Alamat = ? AND id_user = ?");
+            if(!$stmt){
+                throw new \Exception("Failed to prepare statement", $db->error);
+            }
+
+            $stmt->bind_param("sii", $status, $id, $userId);
+            $success = $stmt->execute();
+            if(!$success){
+                throw new \Exception("Failed to execute query", $stmt->error);
+            }
+
+            return true;
+        }catch(\Exception $e){
+            error_log($e->getMessage());
+            return false;
+        }
+    }
     
 
 

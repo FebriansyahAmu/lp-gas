@@ -74,6 +74,11 @@ $router->delete('/Alamat/Delete/{id}', AccountController::class, 'deleteAlamat',
     'role' => 'user'
 ]);
 
+$router->post('/Alamat/pilih-alamat/{id}', AccountController::class, 'pilihAlamatbyUID', [
+    'class' => AuthMiddleware::class,
+    'role' => 'user'
+]);
+
 
 //index cart
 $router->get('/account/cart', CartController::class, 'indexCart', [
