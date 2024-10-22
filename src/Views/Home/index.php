@@ -60,9 +60,9 @@
   <div class="container">
     <div class="row d-flex justify-content-center text-center">
       <div class="col-md-7 col-12">
-        <h1 class="display-4 fw-bold text-light" data-aos="zoom-in" data-aos-delay="300" data-aos-duration="800">Pangkalan Gas Abdullah</h1>
+        <h1 class="display-4 fw-bold text-light" data-aos="zoom-in" data-aos-delay="300" data-aos-duration="800">Pangkalan Gas Abdul Rahman</h1>
         <p class="lead text-light" data-aos="zoom-in" data-aos-delay="300" data-aos-duration="1000">
-          Di sini, Anda akan menemukan solusi praktis untuk semua kebutuhan gas Anda.
+          Di sini, anda akan menemukan solusi praktis untuk semua kebutuhan gas LPG anda.
         </p>
         <a href="/register" class="btn btn-md rounded-1 btn-primary mt-4" data-aos="zoom-in" data-aos-delay="300" data-aos-duration="1200">Daftar Sekarang</a>
       </div>
@@ -103,29 +103,21 @@
     <div class="row align-items-center">
       <!-- Kolom kiri: About Us -->
       <div class="col-md-6 text-black mb-4 mb-md-0">
-        <h2 class="mb-4" data-aos="zoom-in" data-aos-delay="300" data-aos-duration="800" >About Us</h2>
+        <h2 class="mb-4" data-aos="zoom-in" data-aos-delay="300" data-aos-duration="800" >Tentang Kami</h2>
         <p data-aos="zoom-in" data-aos-delay="300" data-aos-duration="800">
           Kami adalah perusahaan yang bergerak di bidang distribusi gas,
           menyediakan berbagai jenis gas untuk kebutuhan rumah tangga dan
-          industri. Kami berkomitmen untuk memberikan layanan terbaik dengan
-          produk berkualitas tinggi.
+          industri. Kami berkomitmen untuk memberikan layanan dan pengalaman terbaik untuk anda.
         </p>
         <p data-aos="zoom-in" data-aos-delay="300" data-aos-duration="800">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus,
-          itaque. Amet asperiores odio illum aliquam incidunt ex unde aperiam
-          dicta, autem est explicabo ipsa exercitationem nihil soluta odit
-          consequuntur accusamus.
+        Kami juga memperluas jangkauan pelayanan dengan meningkatkan 
+        kapasistas distribusi dan berkomitmen untuk menyediakan stok gas yang stabil bagi pelanggan.
         </p>
-        <p data-aos="zoom-in" data-aos-delay="300" data-aos-duration="800">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum
-          molestiae nesciunt accusamus non quis ad officia nisi! Nam, sunt ipsum
-          at, deleniti pariatur perspiciatis beatae ratione velit nisi officiis
-          repellat.
-        </p>
+
       </div>
       <!-- Kolom kanan: Gambar -->
       <div class="col-md-6" data-aos="zoom-in" data-aos-delay="300" data-aos-duration="800">
-        <img src="img/lpg-gas.jpg" alt="About Us Image" class="img-fluid" />
+        <img src="img/pangkalan-gas.jpeg" alt="About Us Image" class="img-fluid" />
       </div>
     </div>
   </div>
@@ -147,7 +139,7 @@
       </div>
       <!-- Kolom kanan: Gambar -->
       <div class="col-md-4">
-        <h3 class="mb-3" data-aos="zoom-in" data-aos-delay="300" data-aos-duration="800" >Contact Us</h3>
+        <h3 class="mb-3" data-aos="zoom-in" data-aos-delay="300" data-aos-duration="800" >Hubungi Kami</h3>
         <p data-aos="zoom-in" data-aos-delay="300" data-aos-duration="800">
           <strong>Pangkalan Gas Elpiji AbdulRahman</strong><br />
           Jalan Veteran, Kelurahan Motoboi Kecil<br />
@@ -156,7 +148,7 @@
         <div class="" data-aos="zoom-in" data-aos-delay="300" data-aos-duration="800">
           <p>
             <strong>Email:</strong>
-            <a href="mailto:contact@example.com">contact@example.com</a>
+            <a href="mailto:contact@example.com">info@pangkalangasabdulrahman.online</a>
           </p>
           <p><strong>Phone:</strong> +62 812 3456 7890</p>
         </div>
@@ -166,7 +158,9 @@
 </section>
 <section class="w-100 py-5 bg-dark-subtle d-flex align-items-center" data-bs-smooth-scroll="true" id="testimonials" style="min-height: 60vh">
   <div class="container">
-    <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+    <h2 class="mb-4 text-center" data-aos="zoom-in" data-aos-delay="300" data-aos-duration="800" >Testimonial</h2>
+    <div id="testimonialCarousel" class="carousel slide " data-bs-ride="carousel" data-aos="zoom-in" data-aos-delay="300" data-aos-duration="800" >
+    
       <div class="carousel-inner">
         <!-- Testimonial 1 -->
         

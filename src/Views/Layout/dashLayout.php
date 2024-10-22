@@ -67,7 +67,7 @@
             <div class="sidebar-brand">
                 <a href="" class="brand-link"> 
                     <!-- <img src="" alt="Img Logo" class="brand-image opacity-75 shadow">  -->
-                    <span class="brand-text fw-light">PK-Gas Abdullah</span> 
+                    <span class="brand-text fw-light">PK-Gas Abdul Rahman</span> 
                 </a> 
             </div>
             <div class="sidebar-wrapper">
@@ -95,7 +95,7 @@
            <?php echo $content; ?>
         </main> 
         <footer class="app-footer">
-            <strong>PK-Gas Abdullah</strong> 
+            <strong>PK-Gas Abdul Rahman</strong> 
         </footer> 
     </div> 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha256-whL0tQWoY1Ku1iskqPFvmZ+CHsvmRWx/PIoEvIeWh4I=" crossorigin="anonymous"></script> <!--end::Required Plugin(popperjs for Bootstrap 5)--><!--begin::Required Plugin(Bootstrap 5)-->

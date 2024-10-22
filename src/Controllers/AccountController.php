@@ -300,7 +300,7 @@ class AccountController extends Controller
             ];
 
             if(isset($_FILES['profilePicture']) && $_FILES['profilePicture']['error'] === UPLOAD_ERR_OK){
-                $targetDir = 'img/pf';
+                $targetDir = 'img/pf/';
                 $fileName = basename($_FILES['profilePicture']['name']);
                 $targetFile = $targetDir . $fileName;
                 $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));

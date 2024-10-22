@@ -3,9 +3,9 @@
         <div class="row">
             <!-- Logo and About -->
             <div class="col-md-4 mb-4">
-                <h5 class="text-uppercase mb-4">Our Company</h5>
+                <h5 class="text-uppercase mb-4">Pangkalan Abdul Rahman</h5>
                 <p>
-                    Kami adalah perusahaan yang menyediakan gas berkualitas tinggi untuk kebutuhan rumah tangga dan industri, dengan fokus pada keamanan dan keandalan.
+                    Kami adalah perusahaan yang menyediakan gas LPG untuk kebutuhan rumah tangga dan industri, dengan fokus pada keamanan dan keandalan.
                 </p>
             </div>
             <!-- Navigation Links -->
@@ -20,10 +20,10 @@
             </div>
             <!-- Contact Info -->
             <div class="col-md-4 mb-4">
-                <h5 class="text-uppercase mb-4">Kontak Kami</h5>
+                <h5 class="text-uppercase mb-4">Hubungi Kami</h5>
                 <p><i class="fas fa-map-marker-alt me-2"></i>Jalan Veteran, Motoboi Kecil</p>
                 <p><i class="fas fa-phone-alt me-2"></i>+62 123 4567 890</p>
-                <p><i class="fas fa-envelope me-2"></i>info@ourcompany.com</p>
+                <p><i class="fas fa-envelope me-2"></i>info@pangkalangasabdulrahman.online</p>
             </div>
         </div>
         <hr class="bg-light">
@@ -41,7 +41,7 @@
                 </a>
             </div>
             <div class="col-md-12 mt-3">
-                <p class="small">&copy; 2024 WriteLine. All Rights Reserved.</p>
+                <p class="small">&copy; 2024 Pangkalan Gas Abdul Rahman. All Rights Reserved.</p>
             </div>
         </div>
     </div>

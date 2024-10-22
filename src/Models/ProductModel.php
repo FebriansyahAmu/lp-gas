@@ -104,25 +104,45 @@ class ProductModel {
     public static function deleteDataGas($id){
         try{
             $db = Database::getConnection();
+            $stmt = $db->prepare("SELECT foto_gas FROM " . self::$table . " WHERE id_gas = ?");
+            if(!$stmt){
+                throw new \Exception("Failed to prepare select statement", $db->error);
+            }
+    
+            $stmt->bind_param('i', $id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $product = $result->fetch_assoc();
+    
+            if(!$product){
+                throw new \Exception("Data Gas tidak ditemukan", 404);
+            }
+    
+            $foto_filepath = $product['foto_gas'];
+            if($foto_filepath && file_exists($foto_filepath)){
+                unlink($foto_filepath); 
+            }
+
             $stmt = $db->prepare("DELETE FROM " . self::$table . " WHERE id_gas = ?");
             if(!$stmt){
-                throw new \Exception("failed to prepare statement", $db->error);
+                throw new \Exception("Failed to prepare delete statement", $db->error);
             }
-
+    
             $stmt->bind_param('i', $id);
             $success = $stmt->execute();
-
+    
             if(!$success){
-                throw new \Exception("failed to execute query", $stmt->error);
+                throw new \Exception("Failed to execute delete query", $stmt->error);
             }
-
+    
             return true;
-
+    
         }catch(\Exception $e){
             error_log($e->getMessage());
             return false;
         }
     }
+    
 
 //     public function getProduct($id){
 //     try {

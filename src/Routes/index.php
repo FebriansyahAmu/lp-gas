@@ -10,7 +10,7 @@ use App\Controllers\CartController;
 use App\Controllers\UlasanController;
 
 
-use App\Middleware\AuthMiddleWare;
+use App\Middleware\AuthMiddleware;
 
 use App\Router;
 

@@ -3,7 +3,7 @@ namespace App\Controllers;
 
 use App\Controller;
 use App\Models\ProductModel;
-use App\Middleware\AuthMiddleWare;
+use App\Middleware\AuthMiddleware;
 
 class ProductController extends Controller
 {

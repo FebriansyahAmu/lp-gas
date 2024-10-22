@@ -281,11 +281,11 @@ class AuthController extends Controller
             $mail->Subject = 'Verifikasi Email';
             
             if ($type === 'verification') {
-                $verificationLink = "https://1a1a-2400-9800-c21-2d2-35c5-8d05-655a-7f3.ngrok-free.app/verifikasi-email/$token";
+                $verificationLink = "https://pangkalangasabdulrahman.online/verifikasi-email/$token";
                 $mail->Body = "Klik link berikut untuk memverifikasi akun anda: <a href='$verificationLink'>$verificationLink</a>";
                 $mail->AltBody = "Klik link berikut untuk memverifikasi akun Anda: $verificationLink";
             } elseif ($type === 'reset_password') {
-                $resetLink = "https://1a1a-2400-9800-c21-2d2-35c5-8d05-655a-7f3.ngrok-free.app/auth/password-reset/$token";
+                $resetLink = "https://pangkalangasabdulrahman.online/auth/password-reset/$token";
                 $mail->Body = "Klik link berikut untuk reset password anda: <a href='$resetLink'>$resetLink</a>";
                 $mail->AltBody = "Klik link berikut untuk reset password Anda: $resetLink";
             }

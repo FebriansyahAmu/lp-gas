@@ -267,15 +267,17 @@ Class Order{
         try{
             $db = Database::getConnection();
             $stmt = $db->prepare("
-                           SELECT id_Order, SUM(Qty) AS total_qty, SUM(totalharga) + delivery_fee AS total_harga, status, snap_token
-                           FROM ". self::$table ."
-                           GROUP BY id_Order
-                           ORDER BY created_at DESC
+                    SELECT id_Order, SUM(Qty) AS total_qty, SUM(totalharga) + MAX(delivery_fee) AS total_harga, status, snap_token
+                    FROM " . self::$table . "
+                    WHERE user_id = ?
+                    GROUP BY id_Order, status, snap_token
+                    ORDER BY created_at DESC;
                      ");
             
             if(!$stmt){
                 throw new \Exception("Failed to prepare statement: " . $db->error);
             }
+            $stmt->bind_param("i", $userId);
             $stmt->execute();
 
             $result = $stmt->get_result();
@@ -298,26 +300,27 @@ Class Order{
 
             $userRole = 'user';
             $stmt = $db->prepare("
-                    SELECT
-                        ec_order.id_Order,
-                        ec_user.Nama_lengkap,
-                        ec_order.Qty,
-                        ec_order.delivery_method,
-                        ec_order.delivery_fee,
-                        ec_order.totalharga,
-                        ec_order.status
-                    FROM
-                        " . self::$table ."
-                    JOIN ". self::$table_gas ." 
-                        ON ec_order.id_gas = ec_gas.id_gas
-                    JOIN ". self::$tb_user ." 
-                        ON ec_order.user_id = ec_user.user_id
-                    WHERE
-                        ec_user.role = ?
-                    GROUP BY
-                        ec_order.id_Order
-                    ORDER BY
-                        ec_order.created_at DESC
+                SELECT
+                    ec_order.id_Order,
+                    ec_user.Nama_lengkap,
+                    SUM(ec_order.Qty) AS total_qty,
+                    ec_order.delivery_method,
+                    MAX(ec_order.delivery_fee) AS delivery_fee,
+                    SUM(ec_order.totalharga) + MAX(ec_order.delivery_fee) AS total_harga,
+                    ec_order.status
+                FROM
+                    ". self::$table ."
+                JOIN ". self::$table_gas ." 
+                    ON ec_order.id_gas = ec_gas.id_gas
+                JOIN ". self::$tb_user ." 
+                    ON ec_order.user_id = ec_user.user_id
+                WHERE
+                    ec_user.role = ?
+                GROUP BY
+                    ec_order.id_Order, ec_user.Nama_lengkap, ec_order.delivery_method, ec_order.status
+                ORDER BY
+                    ec_order.created_at DESC
+                
             ");
 
             if(!$stmt){
