@@ -88,11 +88,11 @@
   })();
 </script>
 <script>
-  $(document).ready(function(){
-    function togglePassword(fieldId, iconId) {
-      const passwordField = document.getElementById(fieldId);
-      const icon = document.getElementById(iconId);
-
+  
+ function togglePassword(fieldId, iconId) {
+    const passwordField = document.getElementById(fieldId);
+    const icon = document.getElementById(iconId);
+    if (passwordField && icon) {
       if (passwordField.type === "password") {
         passwordField.type = "text";
         icon.classList.remove("fa-eye");
@@ -102,8 +102,10 @@
         icon.classList.remove("fa-eye-slash");
         icon.classList.add("fa-eye");
       }
+    } else {
+      console.error("Element not found for IDs:", fieldId, iconId);
     }
-  })
+  }
 </script>
 
 <script>

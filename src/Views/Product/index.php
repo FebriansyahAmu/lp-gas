@@ -1,10 +1,16 @@
 <link rel="stylesheet" href="/css/prodctAdditionalcss.css" />
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script
-  type="text/javascript"
-  src="https://app.sandbox.midtrans.com/snap/snap.js"
-  data-client-key=""
-></script>
+<?php 
+$clientKey = getenv('MIDTRANS_CLIENT_KEY');
+
+  echo '
+  <script
+    type="text/javascript"
+    src="https://app.sandbox.midtrans.com/snap/snap.js"
+    data-client-key="' . $clientKey . '"
+  ></script>
+  ';
+?>
 <section class="d-flex justify-content-center align-items-center">
   <div class="container">
     <div

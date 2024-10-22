@@ -1,8 +1,14 @@
-<script
-  type="text/javascript"
-  src="https://app.sandbox.midtrans.com/snap/snap.js"
-  data-client-key=""
-></script>
+<?php 
+$clientKey = getenv('MIDTRANS_CLIENT_KEY');
+
+  echo '
+  <script
+    type="text/javascript"
+    src="https://app.sandbox.midtrans.com/snap/snap.js"
+    data-client-key="' . $clientKey . '"
+  ></script>
+  ';
+?>
 <section
   class="d-flex justify-content-center align-items-center py-5"
   style="min-height: 100vh"
