@@ -37,7 +37,12 @@ class ProductController extends Controller
 
     public function getProduct($id){
         try{
-            //$this->checkRefer();
+            $this->checkRequest();
+            $allowedReferer = "https://pangkalangasabdulrahman.online";
+            if (!isset($_SERVER['HTTP_REFERER']) || strpos($_SERVER['HTTP_REFERER'], $allowedReferer) !== 0) {
+                header('Location: /');
+                exit();
+            }
             $product = ProductModel::findbyId($id);
 
             if($product){
@@ -61,21 +66,13 @@ class ProductController extends Controller
 
     public function getAllProduct() {
         try {
-            // Set header CORS
-            // $this->checkRefer();
-            header("Access-Control-Allow-Origin: http://localhost:3000"); // Ganti sesuai dengan URL situs kamu
-            header("Access-Control-Allow-Methods: GET");
-            header("Access-Control-Allow-Headers: Content-Type");
-
-            if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-                http_response_code(200);
+            $this->checkRequest();
+            $allowedReferer = "https://pangkalangasabdulrahman.online";
+            if (!isset($_SERVER['HTTP_REFERER']) || strpos($_SERVER['HTTP_REFERER'], $allowedReferer) !== 0) {
+                header('Location: /');
                 exit();
             }
 
-            // $allowedReferer = "http://localhost:3000"; // Ganti sesuai dengan URL situs kamu
-            // if (!isset($_SERVER['HTTP_REFERER']) || strpos($_SERVER['HTTP_REFERER'], $allowedReferer) === false) {
-            //     throw new \Exception("Akses tidak diizinkan", 403);
-            // }
             $product = ProductModel::getAll();
     
             if ($product) {
@@ -102,9 +99,8 @@ class ProductController extends Controller
     public function inputDataGas(){
         try{
             if($_SERVER['REQUEST_METHOD'] !== 'POST'){
-                throw new \Exception("Invalid request method", 400);
+                throw new \Exception('Invalid request method', 405);
             }
-
             $data = [
                 'jenisGas' => filter_input(INPUT_POST, 'jenisGas', FILTER_SANITIZE_FULL_SPECIAL_CHARS),
                 'hargaGas' => filter_input(INPUT_POST, 'hargaGas', FILTER_VALIDATE_INT),
@@ -156,8 +152,8 @@ class ProductController extends Controller
 
     public function editDataGas() {
         try {
-            if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-                throw new \Exception("Invalid request method", 400);
+            if($_SERVER['REQUEST_METHOD'] !== 'POST'){
+                throw new \Exception('Invalid request method', 405);
             }
             
             $id = filter_input(INPUT_POST, 'idGas', FILTER_VALIDATE_INT);
@@ -224,7 +220,7 @@ class ProductController extends Controller
     public function deleteDataGas($id){
         try{
             if($_SERVER['REQUEST_METHOD'] !== 'DELETE'){
-                throw new \Exception("Invalid request method", 400);
+                throw new \Exception('Invalid request method', 405);
             }
 
             $deleteDataGas = ProductModel::deleteDataGas($id);
@@ -248,11 +244,11 @@ class ProductController extends Controller
         }
     }
 
-    private function checkRefer(){
-        $allowedReferer = "http://localhost:3000";
-        if (!isset($_SERVER['HTTP_REFERER']) || strpos($_SERVER['HTTP_REFERER'], $allowedReferer) === false) {
-           header('Location: /');
-           exit;
+    private function checkRequest(){
+        if (!isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_REQUESTED_WITH'] !== 'XMLHttpRequest') {
+            http_response_code(403); 
+            echo json_encode(['status' => 'error', 'message' => 'Permintaan tidak diizinkan']);
+            exit();
         }
     }
 }

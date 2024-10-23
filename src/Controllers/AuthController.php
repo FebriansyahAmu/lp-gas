@@ -61,7 +61,6 @@ class AuthController extends Controller
 
     //method ini berfungsi untuk mengambil request untuk daftar akun baru
     public function registerAct(){
-        //Cek apakah requestnya sesuai yaitu POST
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
             try{ //Menggunakan try catch sebagai error handling
                 //inisiasi array untuk menangkap request user, dan memvalidasi inputnya 
@@ -140,6 +139,7 @@ class AuthController extends Controller
             if($_SERVER['REQUEST_METHOD'] !== 'POST'){
                 throw new Exception('Method not allowed', 405);
             }
+            $this->checkRequest();
 
             //Validasi input dari user 
             $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
@@ -216,7 +216,10 @@ class AuthController extends Controller
     //Method untuk chekauth apakah user sudah login atau belum yang mana data ini akan diperlukan nanti
     public function checkAuthStatus(){
         try {
-            $this->checkRefer();
+            $endPoint = "/";
+            $this->checkReferer($endPoint);
+            $this->checkRequest();
+
             $auth = $this->authMiddleware->handle();
     
             header('Content-Type: application/json');
@@ -446,10 +449,11 @@ class AuthController extends Controller
 
     public function newPassword(){
         try{
-            if($_SERVER['REQUEST_METHOD'] !== "POST"){
-                throw new \Exception("method not allowed", 400);
+            if($_SERVER['REQUEST_METHOD'] !== 'POST'){
+                throw new \Exception("Method not allowed", 405);
             }
-
+            $this->checkRequest();
+            
             $data = [
                 'res-token' => filter_input(INPUT_POST, 'resToken', FILTER_SANITIZE_STRING),
                 'password' => filter_input(INPUT_POST, 'password', FILTER_DEFAULT)
@@ -473,9 +477,6 @@ class AuthController extends Controller
                     'message' => 'Password berhasil diubah'
                 ]);
             }
-
-
-
         }catch(\Exception $e){
             http_response_code($e->getCode() ? : 500);
             header('Content-Type: application/json');
@@ -486,11 +487,21 @@ class AuthController extends Controller
         }
     }
 
-    private function checkRefer(){
-        $allowedReferer = "http://localhost:3000";
-        if (!isset($_SERVER['HTTP_REFERER']) || strpos($_SERVER['HTTP_REFERER'], $allowedReferer) === false) {
-           header('Location: /');
-           exit;
+    private function checkReferer($endpoint){
+        $allowedReferer = "https://pangkalangasabdulrahman.online";
+        if (!isset($_SERVER['HTTP_REFERER']) || strpos($_SERVER['HTTP_REFERER'], $allowedReferer) !== 0) {
+            header("Location: $endpoint");
+            exit();
         }
     }
+
+
+    private function checkRequest(){
+        if (!isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_REQUESTED_WITH'] !== 'XMLHttpRequest') {
+            http_response_code(403); 
+            echo json_encode(['status' => 'error', 'message' => 'Permintaan tidak diizinkan']);
+            exit();
+        }
+    }
+
 }

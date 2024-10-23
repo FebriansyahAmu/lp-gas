@@ -267,7 +267,7 @@ Class Order{
         try{
             $db = Database::getConnection();
             $stmt = $db->prepare("
-                    SELECT id_Order, SUM(Qty) AS total_qty, SUM(totalharga) + MAX(delivery_fee) AS total_harga, status, snap_token
+                    SELECT id_Order, SUM(Qty) AS total_qty, SUM(totalharga) + MAX(delivery_fee) AS total_harga, status, snap_token, MAX(created_at) AS created_at 
                     FROM " . self::$table . "
                     WHERE user_id = ?
                     GROUP BY id_Order, status, snap_token
@@ -307,7 +307,8 @@ Class Order{
                     ec_order.delivery_method,
                     MAX(ec_order.delivery_fee) AS delivery_fee,
                     SUM(ec_order.totalharga) + MAX(ec_order.delivery_fee) AS total_harga,
-                    ec_order.status
+                    ec_order.status,
+                    MAX(ec_order.created_at) AS created_at
                 FROM
                     ". self::$table ."
                 JOIN ". self::$table_gas ." 
@@ -319,7 +320,7 @@ Class Order{
                 GROUP BY
                     ec_order.id_Order, ec_user.Nama_lengkap, ec_order.delivery_method, ec_order.status
                 ORDER BY
-                    ec_order.created_at DESC
+                    created_at DESC
                 
             ");
 

@@ -29,9 +29,11 @@ class AdminController extends Controller
 
     public function getDataCustomer(){
         try{
-            // $this->checkRefer();
-            $dataCustomer = User::getAllCustomer();
+            $endPoint = "/data-customer";
+            $this->checkReferer($endpoint);
+            $this->checkRequest();
             
+            $dataCustomer = User::getAllCustomer();
             if($dataCustomer){
                 header('Content-Type: application/json');
                 echo json_encode([
@@ -56,7 +58,10 @@ class AdminController extends Controller
 
     public function getRiwayatPembelian(){
         try{
-            //$this->checkRefer();
+            $endPoint = "/dashboard";
+            $this->checkReferer($endPoint);
+            $this->checkRequest();
+
             $riwayatPembelian = Order::getRiwayatOrders();
             if($riwayatPembelian){
                 header('Content-Type: application/json');
@@ -79,8 +84,10 @@ class AdminController extends Controller
 
     public function getCountUsers(){
         try{
-            // $this->checkRefer();
-
+            $endPoint = "/dashboard";
+            $this->checkReferer($endPoint);
+            $this->checkRequest();
+            
             $getcountUser = User::countUsers();
 
             if($getcountUser){
@@ -102,12 +109,20 @@ class AdminController extends Controller
         }
     }
 
-    private function checkRefer(){
-        $allowedReferer = "http://localhost:3000";
-        if (!isset($_SERVER['HTTP_REFERER']) || strpos($_SERVER['HTTP_REFERER'], $allowedReferer) === false) {
-           header('Location: /');
-           exit;
+
+    private function checkReferer($endpoint){
+        $allowedReferer = "https://pangkalangasabdulrahman.online";
+        if (!isset($_SERVER['HTTP_REFERER']) || strpos($_SERVER['HTTP_REFERER'], $allowedReferer) !== 0) {
+            header("Location: $endpoint");
+            exit();
         }
     }
 
+    private function checkRequest(){
+        if (!isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_REQUESTED_WITH'] !== 'XMLHttpRequest') {
+            http_response_code(403); 
+            echo json_encode(['status' => 'error', 'message' => 'Permintaan tidak diizinkan']);
+            exit();
+        }
+    }
 }

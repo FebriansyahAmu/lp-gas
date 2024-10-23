@@ -84,6 +84,17 @@ class CartController extends Controller{
 
     public function getAllCartByUID(){
         try{
+            $allowedOrigin = "https://pangkalangasabdulrahman.online";
+            if (isset($_SERVER['HTTP_ORIGIN'])) {
+                if ($_SERVER['HTTP_ORIGIN'] === $allowedOrigin) {
+                    header("Access-Control-Allow-Origin: $allowedOrigin");
+                    header("Access-Control-Allow-Methods: GET");
+                    header("Access-Control-Allow-Headers: Content-Type, X-Requested-With");
+                } else {
+                    header('Location: /account/cart');
+                    exit();
+                }
+            }
             $userData = AuthMiddleware::checkAuth();
             $userId = $userData['id'];
 
@@ -109,8 +120,19 @@ class CartController extends Controller{
 
     public function deleteCartByID($id){
         try{
-            if($_SERVER['REQUEST_METHOD'] !== 'DELETE'){
-                throw new \Exception("Invalid request method", 400);
+            $allowedOrigin = "https://pangkalangasabdulrahman.online";
+            if (isset($_SERVER['HTTP_ORIGIN'])) {
+                if ($_SERVER['HTTP_ORIGIN'] === $allowedOrigin) {
+                    header("Access-Control-Allow-Origin: $allowedOrigin");
+                    header("Access-Control-Allow-Methods: DELETE");
+                    header("Access-Control-Allow-Headers: Content-Type, X-Requested-With");
+                } else {
+                    http_response_code(403);
+                    echo json_encode([
+                        'error'=> 'Origin not allowed'
+                    ]);
+                    exit();
+                }
             }
 
             $userData = AuthMiddleware::checkAuth();
@@ -139,6 +161,17 @@ class CartController extends Controller{
 
     public function getAlamatCart(){
         try{
+            $allowedOrigin = "https://pangkalangasabdulrahman.online";
+            if (isset($_SERVER['HTTP_ORIGIN'])) {
+                if ($_SERVER['HTTP_ORIGIN'] === $allowedOrigin) {
+                    header("Access-Control-Allow-Origin: $allowedOrigin");
+                    header("Access-Control-Allow-Methods: GET");
+                    header("Access-Control-Allow-Headers: Content-Type, X-Requested-With");
+                } else {
+                    header('Location: /account/cart');
+                    exit();
+                }
+            }
             $userData = AuthMiddleware::checkAuth();
             $userId = $userData['id'];
 
@@ -159,6 +192,22 @@ class CartController extends Controller{
                 'status' => 'error',
                 'error' => $e->getMessage()
             ]);
+        }
+    }
+
+    private function checkReferer($endpoint){
+        $allowedReferer = "https://pangkalangasabdulrahman.online";
+        if (!isset($_SERVER['HTTP_REFERER']) || strpos($_SERVER['HTTP_REFERER'], $allowedReferer) !== 0) {
+            header("Location: $endpoint");
+            exit();
+        }
+    }
+
+    private function checkRequest(){
+        if (!isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_REQUESTED_WITH'] !== 'XMLHttpRequest') {
+            http_response_code(403); 
+            echo json_encode(['status' => 'error', 'message' => 'Permintaan tidak diizinkan']);
+            exit();
         }
     }
     

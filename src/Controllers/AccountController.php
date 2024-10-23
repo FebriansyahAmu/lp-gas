@@ -35,8 +35,9 @@ class AccountController extends Controller
 
     public function Alamat(){
         try{
+            $this->checkRequest();
             if($_SERVER['REQUEST_METHOD'] !== 'POST'){
-                throw new \Exception("Method not allowed", 405);
+                throw new \Exception('Invalid request method', 400);
             }
 
             $userData = AuthMiddleware::checkAuth();
@@ -74,9 +75,14 @@ class AccountController extends Controller
 
     public function getAlamatbyUser(){
         try{
-
-            // $this->checkRefer();
-
+            
+            $allowedReferer = "https://pangkalangasabdulrahman.online";
+            if (!isset($_SERVER['HTTP_REFERER']) || strpos($_SERVER['HTTP_REFERER'], $allowedReferer) !== 0) {
+                header('Location: /account/alamat');
+                exit();
+            }
+            $this->checkRequest();
+            
             $userData = AuthMiddleware::checkAuth();
             $userId = $userData['id'];
 
@@ -105,6 +111,11 @@ class AccountController extends Controller
 
     public function editAlamat(){
         try{
+            $this->checkRequest();
+            if($_SERVER['REQUEST_METHOD'] !== 'PUT'){
+                throw new \Exception('Invalid request method', 405);
+            }
+
             $userData = AuthMiddleware::checkAuth();
             $userId = $userData['id'];
 
@@ -146,7 +157,14 @@ class AccountController extends Controller
 
     public function getAlamatbyID($id){
         try{
-            // $this->checkRefer();
+            
+            $allowedReferer = "https://pangkalangasabdulrahman.online";
+            if (!isset($_SERVER['HTTP_REFERER']) || strpos($_SERVER['HTTP_REFERER'], $allowedReferer) !== 0) {
+                header('Location: /Alamat');
+                exit();
+            }
+            $this->checkRequest();
+
             $userData = AuthMiddleware::checkAuth();
             $userId = $userData['id'];
 
@@ -174,6 +192,10 @@ class AccountController extends Controller
 
     public function deleteAlamat($id){
         try{
+            $this->checkRequest();
+            if($_SERVER['REQUEST_METHOD'] !== 'DELETE'){
+                throw new \Exception('Invalid request method', 405);
+            }
             $userData = AuthMiddleware::checkAuth();
             $userId = $userData['id'];
 
@@ -203,6 +225,11 @@ class AccountController extends Controller
 
     public function pilihAlamatbyUID($id){
         try{
+            $this->checkRequest();
+            if($_SERVER['REQUEST_METHOD'] !== 'POST'){
+                throw new \Exception('Invalid request method', 405);
+            }
+
             $userData = AuthMiddleware::checkAuth();
             $userId = $userData['id'];
 
@@ -231,7 +258,13 @@ class AccountController extends Controller
     public function getRiwayatPembelian(){
         try{
 
-            // $this->checkRefer();
+            $allowedReferer = "https://pangkalangasabdulrahman.online";
+            if (!isset($_SERVER['HTTP_REFERER']) || strpos($_SERVER['HTTP_REFERER'], $allowedReferer) !== 0) {
+                header('Location: /account');
+                exit();
+            }
+            $this->checkRequest();
+
             $userData = AuthMiddleware::checkAuth();
             $userId = $userData['id'];
 
@@ -260,6 +293,13 @@ class AccountController extends Controller
     //ini untun pengaturan akun
     public function getUserbyuid(){
         try{
+            $allowedReferer = "https://pangkalangasabdulrahman.online";
+            if (!isset($_SERVER['HTTP_REFERER']) || strpos($_SERVER['HTTP_REFERER'], $allowedReferer) !== 0) {
+                header('Location: /account/pengaturan');
+                exit();
+            }
+            $this->checkRequest();
+
             $userData = AuthMiddleware::checkAuth();
             $userId = $userData['id'];
 
@@ -284,6 +324,11 @@ class AccountController extends Controller
 
     public function updateProfile(){
         try{
+            $this->checkRequest();
+            if($_SERVER['REQUEST_METHOD'] !== 'POST'){
+                throw new \Exception('Invalid request method', 405);
+            }
+
             $userData = AuthMiddleware::checkAuth();
             $userId = $userData['id'];
 
@@ -346,6 +391,11 @@ class AccountController extends Controller
 
     public function ubahPassword(){
         try{
+            $this->checkRequest();
+            if($_SERVER['REQUEST_METHOD'] !== 'POST'){
+                throw new \Exception('Invalid request method', 405);
+            }
+
             $userData = AuthMiddleware::checkAuth();
             $userId = $userData['id'];
 
@@ -383,13 +433,12 @@ class AccountController extends Controller
             ]);
         }
     }
-
-    private function checkRefer(){
-        $allowedReferer = "http://localhost:3000";
-        if (!isset($_SERVER['HTTP_REFERER']) || strpos($_SERVER['HTTP_REFERER'], $allowedReferer) === false) {
-           header('Location: /');
-           exit;
+    
+    private function checkRequest(){
+        if (!isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_REQUESTED_WITH'] !== 'XMLHttpRequest') {
+            http_response_code(403); 
+            echo json_encode(['status' => 'error', 'message' => 'Permintaan tidak diizinkan']);
+            exit();
         }
     }
-
 }
