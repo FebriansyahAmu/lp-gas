@@ -69,6 +69,11 @@ function submitRegister() {
 function login() {
   $("#flogin").submit(function (event) {
     event.preventDefault();
+    const form = this;
+    if (!form.checkValidity()) {
+      return;
+    }
+
     const formData = new FormData(this);
     $("#loading-spinner").removeClass("d-none");
     $.ajax({

@@ -18,7 +18,7 @@
     
     <div class="col-md-8 col-lg-5 col-xl-5 offset-xl-1  p-5 rounded-2" style="background-color: rgba(0, 0, 0, 0.3)">
       <h2 class="mb-3 text-light">Log in</h2>
-      <form novalidate id="flogin">
+      <form novalidate id="flogin" class="needs-validation" novalidate>
         <!-- Email input -->
         <div class="col-12 text-light mb-4">
           <label for="email" class="form-label">Email Address</label>
@@ -29,7 +29,6 @@
             name="email"
             required
           />
-          <div class="invalid-feedback">Please provide valid email</div>
         </div>
 
         <!-- Password input -->
@@ -50,7 +49,7 @@
               <i id="togglePasswordIcon" class="fas fa-eye"></i>
             </span>
           </div>
-          <div class="invalid-feedback">Please provide a valid password.</div>
+          <div class="invalid-feedback">Password tidak boleh kosong</div>
         </div>
 
         <!-- Submit button -->
@@ -74,18 +73,20 @@
 </div>
 
 <script>
-  (function () {
-    'use strict';
-    var form = document.getElementById('loginForm');
-    form.addEventListener('submit', function (event) {
-      if (!form.checkValidity()) {
-        event.preventDefault();
-        event.stopPropagation();
-      }
+  (() => {
+    'use strict'
+    const forms = document.querySelectorAll('.needs-validation')
+    Array.from(forms).forEach(form => {
+      form.addEventListener('submit', event => {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
 
-      form.classList.add('was-validated');
-    }, false);
-  })();
+        form.classList.add('was-validated')
+      }, false)
+    })
+  })()
 </script>
 <script>
   
