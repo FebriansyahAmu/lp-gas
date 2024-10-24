@@ -1,1 +1,570 @@
-const _0x3f0c6d=_0x2614;(function(_0x22f83d,_0x285773){const _0x32ce6f=_0x2614,_0x333764=_0x22f83d();while(!![]){try{const _0x48d6ce=-parseInt(_0x32ce6f(0x13a))/0x1+-parseInt(_0x32ce6f(0x194))/0x2+-parseInt(_0x32ce6f(0x188))/0x3*(parseInt(_0x32ce6f(0x117))/0x4)+-parseInt(_0x32ce6f(0x148))/0x5*(parseInt(_0x32ce6f(0x169))/0x6)+parseInt(_0x32ce6f(0x16c))/0x7+-parseInt(_0x32ce6f(0x190))/0x8*(parseInt(_0x32ce6f(0x19f))/0x9)+-parseInt(_0x32ce6f(0x126))/0xa*(-parseInt(_0x32ce6f(0x17e))/0xb);if(_0x48d6ce===_0x285773)break;else _0x333764['push'](_0x333764['shift']());}catch(_0x366b95){_0x333764['push'](_0x333764['shift']());}}}(_0xdfb1,0xe77df),$(document)[_0x3f0c6d(0x13d)](function(){submitRegister(),sendResetPassword(),getHistoryUID(),tabelAlamats(),clearFormAlamat(),getEditAlamatData(),submitFormAlamat(),pilihAlamat(),deleteAlamat(),selesaikanPemesanana();}));function _0x2614(_0xb532f2,_0x427716){const _0xdfb16d=_0xdfb1();return _0x2614=function(_0x2614d7,_0x145466){_0x2614d7=_0x2614d7-0x117;let _0x5945bb=_0xdfb16d[_0x2614d7];return _0x5945bb;},_0x2614(_0xb532f2,_0x427716);}function submitRegister(){const _0x4d5d4e=_0x3f0c6d;$('#fregister')[_0x4d5d4e(0x156)](function(_0x3963e8){const _0x4f9268=_0x4d5d4e;_0x3963e8[_0x4f9268(0x198)]();var _0x57c4fd=new FormData(this),_0x4fb7ec=$(_0x4f9268(0x183))[_0x4f9268(0x133)](),_0xa4188e=$(_0x4f9268(0x168))[_0x4f9268(0x133)]();if(_0x4fb7ec[_0x4f9268(0x19a)]<0x8){Swal[_0x4f9268(0x136)](_0x4f9268(0x15b),'Password\x20harus\x20minimal\x208\x20karakter','error');return;}if(_0x4fb7ec!==_0xa4188e){Swal[_0x4f9268(0x136)](_0x4f9268(0x15b),_0x4f9268(0x15e),'error');return;}$(_0x4f9268(0x15a))[_0x4f9268(0x158)](_0x4f9268(0x193)),$['ajax']({'url':_0x4f9268(0x1a4),'type':_0x4f9268(0x165),'data':_0x57c4fd,'processData':![],'contentType':![],'dataType':_0x4f9268(0x149),'success':function(_0x3339b6){const _0x3a43fb=_0x4f9268;$(_0x3a43fb(0x15a))[_0x3a43fb(0x152)]('d-none'),_0x3339b6['status']==='success'&&Swal[_0x3a43fb(0x136)](_0x3a43fb(0x12d),_0x3339b6['message'],'success');},'error':function(_0x419b55,_0x5586ab,_0x58fec6){const _0x3ffeb5=_0x4f9268;Swal[_0x3ffeb5(0x136)](_0x3ffeb5(0x15b),_0x419b55[_0x3ffeb5(0x129)][_0x3ffeb5(0x150)],'error');},'complete':function(){const _0x525630=_0x4f9268;$('#loading-spinner')['addClass'](_0x525630(0x193));}});});}function login(){const _0x24d47e=_0x3f0c6d;$(_0x24d47e(0x131))['submit'](function(_0x4181d4){const _0xcaeaf8=_0x24d47e;_0x4181d4[_0xcaeaf8(0x198)]();const _0x3acf8d=new FormData(this);$(_0xcaeaf8(0x15a))[_0xcaeaf8(0x158)](_0xcaeaf8(0x193)),$[_0xcaeaf8(0x159)]({'url':_0xcaeaf8(0x12f),'type':_0xcaeaf8(0x165),'data':_0x3acf8d,'processData':![],'contentType':![],'dataType':_0xcaeaf8(0x149),'success':function(_0x3ded1b){const _0x53082d=_0xcaeaf8;$('#loading-spinner')['addClass']('d-none');if(_0x3ded1b[_0x53082d(0x174)]===_0x53082d(0x13f))_0x3ded1b[_0x53082d(0x13e)]&&(window[_0x53082d(0x18c)]['href']=_0x3ded1b[_0x53082d(0x13e)]);else _0x3ded1b[_0x53082d(0x174)]==='unverified'&&(Swal[_0x53082d(0x136)]({'icon':_0x53082d(0x125),'title':_0x53082d(0x15b),'text':_0x3ded1b[_0x53082d(0x150)],'footer':_0x53082d(0x187)}),$(_0x53082d(0x142))['on'](_0x53082d(0x18f),function(_0x5ca734){const _0x137e4d=_0x53082d;_0x5ca734[_0x137e4d(0x198)](),$(_0x137e4d(0x15a))['removeClass']('d-none'),$[_0x137e4d(0x159)]({'url':_0x137e4d(0x15f),'type':'POST','data':{'email':_0x3ded1b['email']},'success':function(_0xf98282){const _0x40e7be=_0x137e4d;$(_0x40e7be(0x15a))[_0x40e7be(0x152)](_0x40e7be(0x193)),Swal[_0x40e7be(0x136)]({'icon':_0x40e7be(0x13f),'title':_0x40e7be(0x153),'text':_0x40e7be(0x17a)});},'error':function(_0xb0eba6){const _0x112552=_0x137e4d,_0xd09004=JSON[_0x112552(0x132)](_0xb0eba6[_0x112552(0x15d)]);Swal[_0x112552(0x136)](_0x112552(0x15b),_0xd09004['message'],_0x112552(0x125));},'complete':function(){const _0x554eae=_0x137e4d;$(_0x554eae(0x15a))[_0x554eae(0x152)](_0x554eae(0x193));}});}));},'error':function(_0x44dc9e){const _0x59b908=_0xcaeaf8,_0x2278bc=JSON[_0x59b908(0x132)](_0x44dc9e['responseText']);Swal[_0x59b908(0x136)](_0x59b908(0x15b),_0x2278bc[_0x59b908(0x150)],'error');},'complete':function(){const _0x2139ed=_0xcaeaf8;$(_0x2139ed(0x15a))[_0x2139ed(0x152)](_0x2139ed(0x193));}});});}function fetchProducts(){const _0x343c52=_0x3f0c6d;$[_0x343c52(0x159)]({'url':_0x343c52(0x178),'method':_0x343c52(0x12b),'success':function(_0x1abbc2){const _0x50de51=_0x343c52;_0x1abbc2[_0x50de51(0x174)]===_0x50de51(0x13f)&&displayProducts(_0x1abbc2['data']);},'error':function(_0x16c843,_0x7b0741,_0x123c21){const _0x1e9c1=_0x343c52;console[_0x1e9c1(0x125)](_0x16c843[_0x1e9c1(0x15d)]);}});}function displayProducts(_0x1dd73d){const _0x33db88=_0x3f0c6d;_0x1dd73d[_0x33db88(0x16d)]((_0x213fef,_0x382e69)=>{const _0x56a11d=_0x33db88;let _0x321aca=_0x382e69===0x0?'green-purple-shadow':'pink-shadow',_0x48b1f4=_0x213fef[_0x56a11d(0x11e)]==0x0?_0x56a11d(0x17b):'',_0x171355=_0x213fef[_0x56a11d(0x11e)]==0x0?_0x56a11d(0x17f):'',_0x13dd7d=_0x56a11d(0x134)+_0x382e69*0xc8+'\x22\x20data-aos-duration=\x22800\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22card\x20hover-shadow\x20zoom-effect\x20'+_0x321aca+'\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<img\x20class=\x22card-img-top\x20img-fluid\x22\x20src=\x22'+_0x213fef[_0x56a11d(0x184)]+'\x22\x20alt=\x22'+_0x213fef[_0x56a11d(0x157)]+_0x56a11d(0x185)+_0x213fef[_0x56a11d(0x181)]+_0x56a11d(0x128)+_0x213fef[_0x56a11d(0x157)]+'</h5>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22card-text\x22>Stok:\x20'+_0x213fef['Stok']+'\x20'+_0x171355+_0x56a11d(0x14e)+_0x213fef[_0x56a11d(0x138)]+_0x56a11d(0x180)+_0x48b1f4+_0x56a11d(0x139);$(_0x56a11d(0x167))[_0x56a11d(0x144)](_0x13dd7d);});}function sendResetLink(){const _0x2ce7ae=_0x3f0c6d;$(_0x2ce7ae(0x127))[_0x2ce7ae(0x156)](function(_0x273a0f){const _0x4963ee=_0x2ce7ae;_0x273a0f[_0x4963ee(0x198)]();const _0x3ae896=new FormData(this);console[_0x4963ee(0x164)](_0x3ae896),$(_0x4963ee(0x15a))[_0x4963ee(0x158)](_0x4963ee(0x193)),$[_0x4963ee(0x159)]({'url':_0x4963ee(0x161),'method':'POST','data':_0x3ae896,'processData':![],'contentType':![],'success':function(_0xf2fb5){const _0x50adeb=_0x4963ee;$('#loading-spinner')[_0x50adeb(0x152)](_0x50adeb(0x193)),_0xf2fb5['status']===_0x50adeb(0x13f)&&Swal[_0x50adeb(0x136)](_0x50adeb(0x12d),_0xf2fb5[_0x50adeb(0x150)],'success');},'error':function(_0x208ad8,_0x1682ad,_0x533b2a){const _0x218fe4=_0x4963ee;Swal['fire'](_0x218fe4(0x15b),_0x208ad8[_0x218fe4(0x129)]['message'],'error');},'complete':function(){const _0xbb7d94=_0x4963ee;$(_0xbb7d94(0x15a))[_0xbb7d94(0x152)](_0xbb7d94(0x193));}});});}function sendResetPassword(){const _0x6d2e3a=_0x3f0c6d;$(_0x6d2e3a(0x14b))[_0x6d2e3a(0x156)](function(_0x158748){const _0x5b3034=_0x6d2e3a;_0x158748['preventDefault']();var _0x1b8438=$('#password')[_0x5b3034(0x133)](),_0x5b074e=$(_0x5b3034(0x168))['val']();if(_0x1b8438['length']<0x8){Swal[_0x5b3034(0x136)](_0x5b3034(0x15b),_0x5b3034(0x1a5),'error');return;}if(_0x1b8438!==_0x5b074e){Swal[_0x5b3034(0x136)](_0x5b3034(0x15b),_0x5b3034(0x15e),_0x5b3034(0x125));return;}const _0x3f550e=new FormData(this);$(_0x5b3034(0x15a))[_0x5b3034(0x158)]('d-none'),$[_0x5b3034(0x159)]({'url':_0x5b3034(0x176),'method':'POST','data':_0x3f550e,'processData':![],'contentType':![],'success':function(_0x5b751d){const _0x144dfd=_0x5b3034;$(_0x144dfd(0x15a))[_0x144dfd(0x152)](_0x144dfd(0x193)),_0x5b751d[_0x144dfd(0x174)]===_0x144dfd(0x13f)&&Swal[_0x144dfd(0x136)](_0x144dfd(0x12d),_0x5b751d[_0x144dfd(0x150)],_0x144dfd(0x13f))['then'](()=>{window['location']['href']='/login';});},'error':function(_0x1b5ee5,_0x1e41e0,_0x3cb94f){const _0x46a95e=_0x5b3034;Swal[_0x46a95e(0x136)](_0x46a95e(0x15b),_0x1b5ee5['responseJSON'][_0x46a95e(0x150)],_0x46a95e(0x125));},'complete':function(){const _0x55a1c3=_0x5b3034;$(_0x55a1c3(0x15a))[_0x55a1c3(0x152)](_0x55a1c3(0x193));}});});}function getHistoryUID(){const _0x52448b=_0x3f0c6d;$(_0x52448b(0x160))[_0x52448b(0x195)]({'destroy':!![],'responsive':!![],'scrollX':!![],'ajax':{'url':'/riwayat-pembelian','dataSrc':_0x52448b(0x177),'error':function(_0x78f7f9,_0x4447f6,_0x4bbaa2){const _0x579287=_0x52448b;$(_0x579287(0x160))[_0x579287(0x195)]()[_0x579287(0x182)]()[_0x579287(0x151)](),$(_0x579287(0x175))[_0x579287(0x120)](_0x579287(0x16a));}},'columns':[{'data':_0x52448b(0x145)},{'data':'total_qty'},{'data':_0x52448b(0x196)},{'data':_0x52448b(0x174),'render':function(_0x320249,_0x26d2b0,_0x57e5f8){const _0x16c825=_0x52448b;if(_0x320249===_0x16c825(0x170))return _0x16c825(0x171);else{if(_0x320249===_0x16c825(0x173))return'<span\x20class=\x22badge\x20text-bg-success\x22>success</span>';}}},{'data':null,'render':function(_0x11ef0d,_0x19bc87,_0x283da8){const _0x500b62=_0x52448b;if(_0x283da8[_0x500b62(0x11b)])return _0x500b62(0x18d)+_0x283da8[_0x500b62(0x145)]+'\x22\x20data-token=\x22'+_0x283da8[_0x500b62(0x11b)]+'\x22>Selesaikan\x20Pemesanan</button>';return'';}}],'columnDefs':[{'width':'5%','targets':0x0},{'width':'2%','targets':0x1},{'width':'2%','targets':0x2},{'width':'2%','targets':0x3},{'width':'2%','targets':0x4}],'order':[[0x0,_0x52448b(0x1a2)]]});}function _0xdfb1(){const _0x2b5b52=['val','\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22col-md-4\x20col-sm-6\x20col-12\x20mb-4\x22\x20data-aos=\x22fade-up\x22\x20data-aos-delay=\x22','.complete-order','fire','Anda\x20akan\x20menghapus\x20data\x20ini!','id_gas','\x22>Pesan\x20Sekarang</a>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20','110970nqvkcc','.btn-edit','then','ready','redirect','success','show','#alamatModal','#resend-verification-link','modal','append','id_Order','<span\x20class=\x22badge\x20bg-secondary\x22>Unknown</span>','warning','20RHiBrp','json','40%','#resetPasswordForm','text','reset','</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<!--\x20Tampilkan\x20pesan\x20stok\x20habis\x20jika\x20stoknya\x200\x20-->\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22d-flex\x20justify-content-center\x20mb-4\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<a\x20href=\x22/product/','/Alamat/','message','draw','addClass','Link\x20verifikasi\x20dikrim','Apakah\x20Anda\x20yakin?','text-center','submit','Jenis_gas','removeClass','ajax','#loading-spinner','Error','#btnTambahAlamat','responseText','Password\x20tidak\x20cocok','/auth/resend-verification','#tabelRiwayatPembelian','/auth/password-reset','Data\x20tidak\x20ditemukan','Pemesanan\x20gagal','log','POST','/Alamat/Edit','#product-container','#confirmPassword','1174458gLacHP','<tr><td\x20colspan=\x225\x22\x20class=\x22text-center\x22>No\x20data\x20found</td></tr>','/Alamat/Delete/','13101550ASrnFv','forEach','Gagal\x20parsing\x20JSON:','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<button\x20class=\x22btn\x20btn-sm\x20\x20btn-success\x20btn-pAlamat\x22\x20data-id=\x22','pending','<span\x20class=\x22badge\x20text-bg-warning\x22>pending</span>','15%','paid','status','#tabelRiwayatPembelian\x20tbody','/auth/new-password','data','/api/products','secondary','Silahkan\x20cek\x20email\x20anda!\x20','disabled','Yes,\x20delete\x20it!','snap','44lmrAyr','<span\x20class=\x27text-danger\x27>Stok\x20Habis</span>','\x22\x20class=\x22btn\x20btn-primary\x20p-2\x20','Harga_gas','clear','#password','foto_gas','\x22\x20/>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22card-body\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22text-center\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22badge\x20text-bg-success\x20text-center\x20fs-6\x22>Rp.','isConfirmed','<a\x20href=\x22\x22\x20id=\x22resend-verification-link\x22>Kirim\x20link\x20verifikasi</a>','96954SEkVba','#formAlamat','Terjadi\x20kesalahan:\x20','\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<i\x20class=\x22fas\x20fa-trash-alt\x22></i>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</button>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','location','<button\x20class=\x22btn\x20btn-primary\x20btn-sm\x20complete-order\x22\x20data-order-id=\x22','30%','click','360sjTGKv','#detailAlamat','/Alamat/Create','d-none','1853674QrpBQm','DataTable','total_harga','Status','preventDefault','#tabelAlamat','length','PUT','Detail_Alamat','<span\x20class=\x22badge\x20bg-success\x22>Utama</span>','Terjadi\x20kesalahan','279234ItAdPZ','token','<span\x20class=\x22badge\x20bg-warning\x22>Secondary</span>','desc','.btn-pAlamat','/auth/register','Password\x20harus\x20minimal\x208\x20karakter','#modalAlamatLabel','36WYifLs','pay','id_Alamat','DELETE','snap_token','#tabelAlamat\x20tbody','application/json','Stok','Menunggu\x20Pembayaran','html','stringify','Tambah\x20Data\x20Alamat','reload','string','error','6460880AXffIJ','#forgotPasswordForm','</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<h5\x20class=\x22card-title\x22>','responseJSON','Deleted!','GET','#description','Success','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<button\x20class=\x22btn\x20btn-sm\x20btn-primary\x20btn-edit\x22\x20data-id=\x22','/auth/login','Edit\x20Data\x20Alamat','#flogin','parse'];_0xdfb1=function(){return _0x2b5b52;};return _0xdfb1();}function selesaikanPemesanana(){const _0x38e0c6=_0x3f0c6d;$(_0x38e0c6(0x160))['on']('click',_0x38e0c6(0x135),function(){const _0x5edf42=_0x38e0c6;var _0x341c9b=$(this)[_0x5edf42(0x177)](_0x5edf42(0x1a0));window[_0x5edf42(0x17d)][_0x5edf42(0x118)](_0x341c9b,{'onSuccess':function(_0x1fd25c){const _0x4036e4=_0x5edf42;Swal[_0x4036e4(0x136)](_0x4036e4(0x12d),'Pemesanan\x20berhasil',_0x4036e4(0x13f)),$(_0x4036e4(0x160))[_0x4036e4(0x195)]()['ajax'][_0x4036e4(0x123)]();},'onPending':function(_0x459efe){const _0x263d9f=_0x5edf42;Swal[_0x263d9f(0x136)]('Pending',_0x263d9f(0x11f),_0x263d9f(0x147));},'onError':function(_0xd5f2d8){const _0x4c518d=_0x5edf42;Swal[_0x4c518d(0x136)]('Error',_0x4c518d(0x163),'error');}});});}function tabelAlamats(){const _0x288ed5=_0x3f0c6d;$('#tabelAlamat')[_0x288ed5(0x195)]({'destroy':!![],'responsive':!![],'scrollX':!![],'ajax':{'url':'/Alamat','dataSrc':'data','error':function(_0x3c9fec,_0x2f07aa,_0x4f3690){const _0x340761=_0x288ed5;$('#tabelAlamat')[_0x340761(0x195)]()[_0x340761(0x182)]()[_0x340761(0x151)](),$(_0x340761(0x11c))[_0x340761(0x120)]('<tr><td\x20colspan=\x225\x22\x20class=\x22text-center\x22>Belum\x20ada\x20alamat</td></tr>');}},'columns':[{'data':_0x288ed5(0x119)},{'data':'Detail_alamat'},{'data':'Description'},{'data':null,'render':function(_0xc1addb,_0x4f336b,_0x5955b8){const _0x3526cc=_0x288ed5;return _0x3526cc(0x12e)+_0xc1addb['id_Alamat']+'\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<i\x20class=\x22fas\x20fa-edit\x22></i>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</button>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<button\x20class=\x22btn\x20btn-sm\x20btn-danger\x20btn-delete\x22\x20data-id=\x22'+_0xc1addb['id_Alamat']+_0x3526cc(0x18b);}},{'data':null,'className':_0x288ed5(0x155),'render':function(_0x350ba6,_0x1c967d,_0x3d6e1c){const _0x4f4b2b=_0x288ed5;return _0x4f4b2b(0x16f)+_0x350ba6[_0x4f4b2b(0x119)]+'\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Pilih\x20Alamat\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</button>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20';}},{'data':_0x288ed5(0x197),'className':'text-center','render':function(_0x445582,_0x503c3d,_0x37c312){const _0x2a48e7=_0x288ed5;if(_0x445582===_0x2a48e7(0x179))return _0x2a48e7(0x1a1);else return _0x445582==='utama'?_0x2a48e7(0x19d):_0x2a48e7(0x146);}}],'columnDefs':[{'width':'5%','targets':0x0},{'width':_0x288ed5(0x14a),'targets':0x1},{'width':_0x288ed5(0x18e),'targets':0x2},{'width':'5%','targets':0x3},{'width':_0x288ed5(0x172),'targets':0x4}]});}function clearFormAlamat(){const _0x4660d7=_0x3f0c6d;$(_0x4660d7(0x15c))[_0x4660d7(0x18f)](function(){const _0x3c4f35=_0x4660d7;$(_0x3c4f35(0x189))[0x0][_0x3c4f35(0x14d)](),$(_0x3c4f35(0x1a6))[_0x3c4f35(0x14c)](_0x3c4f35(0x122)),$(_0x3c4f35(0x141))[_0x3c4f35(0x143)](_0x3c4f35(0x140));});}function getEditAlamatData(){const _0x24906a=_0x3f0c6d;$('#tabelAlamat')['on'](_0x24906a(0x18f),_0x24906a(0x13b),function(){const _0x4fed0b=_0x24906a,_0x205be8=$(this)[_0x4fed0b(0x177)]('id');$(_0x4fed0b(0x1a6))[_0x4fed0b(0x14c)]('Edit\x20Data\x20Alamat'),$['ajax']({'url':_0x4fed0b(0x14f)+_0x205be8,'type':'GET','success':function(_0x149ce1){const _0x4e90a3=_0x4fed0b;if(typeof _0x149ce1===_0x4e90a3(0x124))try{_0x149ce1=JSON[_0x4e90a3(0x132)](_0x149ce1);}catch(_0x333982){console['error'](_0x4e90a3(0x16e),_0x333982);return;}_0x149ce1&&_0x149ce1['data']?($(_0x4e90a3(0x191))[_0x4e90a3(0x133)](_0x149ce1['data'][_0x4e90a3(0x19c)]),$(_0x4e90a3(0x12c))[_0x4e90a3(0x133)](_0x149ce1[_0x4e90a3(0x177)]['Description']),$(_0x4e90a3(0x189))[_0x4e90a3(0x177)]('id',_0x205be8),$('#modalAlamatLabel')[_0x4e90a3(0x14c)](_0x4e90a3(0x130)),$(_0x4e90a3(0x141))['modal']('show')):alert(_0x4e90a3(0x162));},'error':function(_0x535c83,_0x1f8fca,_0x24e723){const _0x4390c5=_0x4fed0b;alert(_0x4390c5(0x19e),+_0x24e723);}});});}function pilihAlamat(){const _0x2fb72e=_0x3f0c6d;$(_0x2fb72e(0x199))['on'](_0x2fb72e(0x18f),_0x2fb72e(0x1a3),function(){const _0x180dfb=_0x2fb72e,_0x16a5a0=$(this)[_0x180dfb(0x177)]('id');$[_0x180dfb(0x159)]({'url':'/Alamat/pilih-alamat/'+_0x16a5a0,'method':'POST','success':function(_0x5569f5){const _0x4bdbc3=_0x180dfb;_0x5569f5[_0x4bdbc3(0x174)]===_0x4bdbc3(0x13f)&&Swal[_0x4bdbc3(0x136)]('Sukses',_0x5569f5[_0x4bdbc3(0x150)],_0x4bdbc3(0x13f))[_0x4bdbc3(0x13c)](()=>{const _0x231d6d=_0x4bdbc3;$('#tabelAlamat')[_0x231d6d(0x195)]()[_0x231d6d(0x159)][_0x231d6d(0x123)]();});},'error':function(_0x591a0f,_0x207ae7,_0x54767c){const _0x47dcbb=_0x180dfb;Swal[_0x47dcbb(0x136)]('Error',_0x591a0f['responseJSON'][_0x47dcbb(0x150)],_0x47dcbb(0x125));}});});}function deleteAlamat(){const _0x4c377a=_0x3f0c6d;$(_0x4c377a(0x199))['on'](_0x4c377a(0x18f),'.btn-delete',function(){const _0x2c7bd9=_0x4c377a,_0x179e07=$(this)[_0x2c7bd9(0x177)]('id');Swal[_0x2c7bd9(0x136)]({'title':_0x2c7bd9(0x154),'text':_0x2c7bd9(0x137),'icon':'warning','showCancelButton':!![],'confirmButtonColor':'#3085d6','cancelButtonColor':'#d33','confirmButtonText':_0x2c7bd9(0x17c)})[_0x2c7bd9(0x13c)](_0x540d53=>{const _0xc13c63=_0x2c7bd9;_0x540d53[_0xc13c63(0x186)]&&$[_0xc13c63(0x159)]({'url':_0xc13c63(0x16b)+_0x179e07,'method':_0xc13c63(0x11a),'success':function(_0xb033f0){const _0x4f2780=_0xc13c63;typeof _0xb033f0===_0x4f2780(0x124)&&(_0xb033f0=JSON[_0x4f2780(0x132)](_0xb033f0)),_0xb033f0[_0x4f2780(0x174)]===_0x4f2780(0x13f)&&Swal[_0x4f2780(0x136)](_0x4f2780(0x12a),'Your\x20data\x20has\x20been\x20deleted.',_0x4f2780(0x13f))[_0x4f2780(0x13c)](()=>{const _0x517c9d=_0x4f2780;$(_0x517c9d(0x199))['DataTable']()[_0x517c9d(0x159)][_0x517c9d(0x123)]();});},'error':function(_0xf75012,_0x30fb44,_0xf77743){alert('Terjadi\x20kesalahan',+_0xf77743);}});});});}function submitFormAlamat(){$('#submitAlamat')['click'](function(){const _0x5e79f7=_0x2614;$(_0x5e79f7(0x189))[_0x5e79f7(0x156)]();}),$('#formAlamat')['submit'](function(_0x375343){const _0x2b7083=_0x2614;_0x375343['preventDefault']();const _0x387a89=$(this)[_0x2b7083(0x177)]('id'),_0xcb2aec=_0x387a89?_0x2b7083(0x166):_0x2b7083(0x192),_0x2a0ff6=_0x387a89?_0x2b7083(0x19b):'POST',_0x39b461={'Detail_alamat':$(_0x2b7083(0x191))[_0x2b7083(0x133)](),'Description':$(_0x2b7083(0x12c))[_0x2b7083(0x133)](),'id_Alamat':_0x387a89};$('#loading-spinner')[_0x2b7083(0x158)](_0x2b7083(0x193)),$['ajax']({'url':_0xcb2aec,'method':_0x2a0ff6,'contentType':_0x2b7083(0x11d),'data':JSON[_0x2b7083(0x121)](_0x39b461),'processData':![],'success':function(_0x4e671a){const _0xcafade=_0x2b7083;$(_0xcafade(0x15a))['addClass'](_0xcafade(0x193)),_0x4e671a[_0xcafade(0x174)]===_0xcafade(0x13f)&&(Swal[_0xcafade(0x136)](_0xcafade(0x12d),_0x4e671a['message'],_0xcafade(0x13f)),window['location'][_0xcafade(0x123)]());},'error':function(_0x11efee,_0x59f275,_0x40516a){const _0x1085a9=_0x2b7083;alert(_0x1085a9(0x18a)+_0x40516a);},'complete':function(){const _0x57d02b=_0x2b7083;$(_0x57d02b(0x15a))[_0x57d02b(0x152)]('d-none');}});});}
+$(document).ready(function () {
+  //function bagian home
+
+  //Function halaman register
+  submitRegister();
+  //Function halaman login
+
+  //Function untuk lupa password
+  sendResetPassword();
+
+  //function account
+  getHistoryUID();
+  tabelAlamats();
+  clearFormAlamat();
+  getEditAlamatData();
+  submitFormAlamat();
+  pilihAlamat();
+  deleteAlamat();
+  selesaikanPemesanana();
+});
+
+//Submit form register
+function submitRegister() {
+  $("#fregister").submit(function (event) {
+    event.preventDefault();
+    const form = this;
+    if (!form.checkValidity()) {
+      return;
+    }
+    var formData = new FormData(this);
+
+    var password = $("#password").val();
+    var confirmPassword = $("#confirmPassword").val();
+
+    if (password.length < 8) {
+      Swal.fire("Error", "Password harus minimal 8 karakter", "error");
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      Swal.fire("Error", "Password tidak cocok", "error");
+      return;
+    }
+    $("#loading-spinner").removeClass("d-none");
+    $.ajax({
+      url: "/auth/register",
+      type: "POST",
+      data: formData,
+      processData: false,
+      contentType: false,
+      dataType: "json",
+      success: function (response) {
+        $("#loading-spinner").addClass("d-none");
+        if (response.status === "success") {
+          Swal.fire("Success", response.message, "success");
+        }
+      },
+      error: function (xhr, status, error) {
+        Swal.fire("Error", xhr.responseJSON.message, "error");
+      },
+      complete: function () {
+        $("#loading-spinner").addClass("d-none");
+      },
+    });
+  });
+}
+
+//Function untuk login
+function login() {
+  $("#flogin").submit(function (event) {
+    event.preventDefault();
+    const formData = new FormData(this);
+    $("#loading-spinner").removeClass("d-none");
+    $.ajax({
+      url: "/auth/login",
+      type: "POST",
+      data: formData,
+      processData: false,
+      contentType: false,
+      dataType: "json",
+      success: function (response) {
+        $("#loading-spinner").addClass("d-none");
+        if (response.status === "success") {
+          if (response.redirect) {
+            window.location.href = response.redirect;
+          }
+        } else if (response.status === "unverified") {
+          Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: response.message,
+            footer:
+              '<a href="" id="resend-verification-link">Kirim link verifikasi</a>',
+          });
+
+          $("#resend-verification-link").on("click", function (e) {
+            e.preventDefault();
+            $("#loading-spinner").removeClass("d-none");
+            $.ajax({
+              url: "/auth/resend-verification",
+              type: "POST",
+              data: { email: response.email },
+              success: function (res) {
+                $("#loading-spinner").addClass("d-none");
+                Swal.fire({
+                  icon: "success",
+                  title: "Link verifikasi dikrim",
+                  text: "Silahkan cek email anda! ",
+                });
+              },
+              error: function (xhr) {
+                const errRes = JSON.parse(xhr.responseText);
+                Swal.fire("Error", errRes.message, "error");
+              },
+              complete: function () {
+                $("#loading-spinner").addClass("d-none");
+              },
+            });
+          });
+        }
+      },
+      error: function (xhr) {
+        const errorResponse = JSON.parse(xhr.responseText);
+        Swal.fire("Error", errorResponse.message, "error");
+      },
+      complete: function () {
+        $("#loading-spinner").addClass("d-none");
+      },
+    });
+  });
+}
+
+//bagian home, fetching data gas elpiji
+function fetchProducts() {
+  $.ajax({
+    url: "/api/products",
+    method: "GET",
+    success: function (response) {
+      if (response.status === "success") {
+        displayProducts(response.data);
+      }
+    },
+    error: function (xhr, status, error) {
+      console.error(xhr.responseText);
+    },
+  });
+}
+//display gas elpiji
+function displayProducts(products) {
+  products.forEach((product, index) => {
+    // Tentukan warna shadow berdasarkan index
+    let shadowColor = index === 0 ? "green-purple-shadow" : "pink-shadow";
+
+    // Tentukan apakah produk stoknya 0, jika iya maka tambahkan class disabled
+    let isDisabled = product.Stok == 0 ? "disabled" : "";
+    let disableMessage =
+      product.Stok == 0 ? "<span class='text-danger'>Stok Habis</span>" : "";
+
+    let productCard = `
+        <div class="col-md-4 col-sm-6 col-12 mb-4" data-aos="fade-up" data-aos-delay="${
+          index * 200
+        }" data-aos-duration="800">
+          <div class="card hover-shadow zoom-effect ${shadowColor}">
+            <img class="card-img-top img-fluid" src="${
+              product.foto_gas
+            }" alt="${product.Jenis_gas}" />
+            <div class="card-body">
+              <div class="text-center">
+                <span class="badge text-bg-success text-center fs-6">Rp.${
+                  product.Harga_gas
+                }</span>
+              </div>
+              <h5 class="card-title">${product.Jenis_gas}</h5>
+              
+              <p class="card-text">Stok: ${product.Stok} ${disableMessage}</p>
+               <!-- Tampilkan pesan stok habis jika stoknya 0 -->
+              <div class="d-flex justify-content-center mb-4">
+                <a href="/product/${
+                  product.id_gas
+                }" class="btn btn-primary p-2 ${isDisabled}">Pesan Sekarang</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    $("#product-container").append(productCard);
+  });
+}
+
+//Function untuk lupa password
+function sendResetLink() {
+  $("#forgotPasswordForm").submit(function (event) {
+    event.preventDefault();
+
+    const form = this;
+    if (!form.checkValidity()) {
+      return;
+    }
+
+    const formData = new FormData(this);
+    console.log(formData);
+    $("#loading-spinner").removeClass("d-none");
+    $.ajax({
+      url: "/auth/password-reset",
+      method: "POST",
+      data: formData,
+      processData: false,
+      contentType: false,
+      success: function (response) {
+        $("#loading-spinner").addClass("d-none");
+        if (response.status === "success") {
+          Swal.fire("Success", response.message, "success");
+        }
+      },
+      error: function (xhr, status, error) {
+        Swal.fire("Error", xhr.responseJSON.message, "error");
+      },
+      complete: function () {
+        $("#loading-spinner").addClass("d-none");
+      },
+    });
+  });
+}
+
+function sendResetPassword() {
+  $("#resetPasswordForm").submit(function (event) {
+    event.preventDefault();
+    var password = $("#password").val();
+    var confirmPassword = $("#confirmPassword").val();
+
+    if (password.length < 8) {
+      Swal.fire("Error", "Password harus minimal 8 karakter", "error");
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      Swal.fire("Error", "Password tidak cocok", "error");
+      return;
+    }
+
+    const formData = new FormData(this);
+
+    $("#loading-spinner").removeClass("d-none");
+    $.ajax({
+      url: "/auth/new-password",
+      method: "POST",
+      data: formData,
+      processData: false,
+      contentType: false,
+      success: function (response) {
+        $("#loading-spinner").addClass("d-none");
+        if (response.status === "success") {
+          Swal.fire("Success", response.message, "success").then(() => {
+            window.location.href = "/login";
+          });
+        }
+      },
+      error: function (xhr, status, error) {
+        Swal.fire("Error", xhr.responseJSON.message, "error");
+      },
+      complete: function () {
+        $("#loading-spinner").addClass("d-none");
+      },
+    });
+  });
+}
+
+//bagian Account
+function getHistoryUID() {
+  $("#tabelRiwayatPembelian").DataTable({
+    destroy: true,
+    responsive: true,
+    scrollX: true,
+    ajax: {
+      url: "/riwayat-pembelian",
+      dataSrc: "data",
+      error: function (xhr, error, thrown) {
+        // Kosongkan tabel jika ada kesalahan
+        $("#tabelRiwayatPembelian").DataTable().clear().draw();
+
+        // Tampilkan pesan no data found
+        $("#tabelRiwayatPembelian tbody").html(
+          '<tr><td colspan="5" class="text-center">No data found</td></tr>'
+        );
+      },
+    },
+    columns: [
+      { data: "id_Order" },
+      { data: "total_qty" },
+      { data: "total_harga" },
+      {
+        data: "status",
+        render: function (data, type, row) {
+          if (data === "pending") {
+            return '<span class="badge text-bg-warning">pending</span>';
+          } else if (data === "paid") {
+            return '<span class="badge text-bg-success">success</span>';
+          }
+        },
+      },
+      {
+        data: null, // Kolom untuk tombol 'Selesaikan Pemesanan'
+        render: function (data, type, row) {
+          // Jika ada snap_token, tampilkan tombol 'Selesaikan Pemesanan'
+          if (row.snap_token) {
+            return (
+              '<button class="btn btn-primary btn-sm complete-order" data-order-id="' +
+              row.id_Order +
+              '" data-token="' +
+              row.snap_token +
+              '">Selesaikan Pemesanan</button>'
+            );
+          }
+          return "";
+        },
+      },
+    ],
+    columnDefs: [
+      { width: "5%", targets: 0 },
+      { width: "2%", targets: 1 },
+      { width: "2%", targets: 2 },
+      { width: "2%", targets: 3 },
+      { width: "2%", targets: 4 },
+    ],
+    order: [[0, "desc"]],
+  });
+}
+
+//selesaikan pemesanana menggunakan snapToken;
+function selesaikanPemesanana() {
+  $("#tabelRiwayatPembelian").on("click", ".complete-order", function () {
+    var snapToken = $(this).data("token");
+
+    window.snap.pay(snapToken, {
+      onSuccess: function (result) {
+        Swal.fire("Success", "Pemesanan berhasil", "success");
+        $("#tabelRiwayatPembelian").DataTable().ajax.reload();
+      },
+      onPending: function (result) {
+        Swal.fire("Pending", "Menunggu Pembayaran", "warning");
+      },
+      onError: function (result) {
+        Swal.fire("Error", "Pemesanan gagal", "error");
+      },
+    });
+  });
+}
+
+//alamat
+function tabelAlamats() {
+  $("#tabelAlamat").DataTable({
+    destroy: true,
+    responsive: true,
+    scrollX: true,
+
+    ajax: {
+      url: "/Alamat",
+
+      dataSrc: "data",
+      error: function (xhr, error, thrown) {
+        // Kosongkan tabel jika ada kesalahan
+        $("#tabelAlamat").DataTable().clear().draw();
+
+        // Tampilkan pesan no data found
+        $("#tabelAlamat tbody").html(
+          '<tr><td colspan="5" class="text-center">Belum ada alamat</td></tr>'
+        );
+      },
+    },
+    columns: [
+      { data: "id_Alamat" },
+      { data: "Detail_alamat" },
+      { data: "Description" },
+      {
+        data: null,
+        render: function (data, type, row) {
+          return `
+                            <button class="btn btn-sm btn-primary btn-edit" data-id="${data.id_Alamat}">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn btn-sm btn-danger btn-delete" data-id="${data.id_Alamat}">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        `;
+        },
+      },
+      {
+        data: null,
+        className: "text-center",
+        render: function (data, type, row) {
+          return `
+                            <button class="btn btn-sm  btn-success btn-pAlamat" data-id="${data.id_Alamat}">
+                                Pilih Alamat
+                            </button>
+                        `;
+        },
+      },
+      {
+        data: "Status",
+        className: "text-center",
+        render: function (data, type, row) {
+          if (data === "secondary") {
+            return '<span class="badge bg-warning">Secondary</span>';
+          } else if (data === "utama") {
+            return '<span class="badge bg-success">Utama</span>';
+          } else {
+            return '<span class="badge bg-secondary">Unknown</span>'; // Jika ada status lain
+          }
+        },
+      },
+    ],
+    columnDefs: [
+      { width: "5%", targets: 0 },
+      { width: "40%", targets: 1 },
+      { width: "30%", targets: 2 },
+      { width: "5%", targets: 3 },
+      { width: "15%", targets: 4 },
+    ],
+  });
+}
+
+function clearFormAlamat() {
+  $("#btnTambahAlamat").click(function () {
+    $("#formAlamat")[0].reset();
+    $("#modalAlamatLabel").text("Tambah Data Alamat");
+
+    $("#alamatModal").modal("show");
+  });
+}
+
+function getEditAlamatData() {
+  $("#tabelAlamat").on("click", ".btn-edit", function () {
+    const idAlamat = $(this).data("id");
+    $("#modalAlamatLabel").text("Edit Data Alamat");
+
+    $.ajax({
+      url: "/Alamat/" + idAlamat,
+      type: "GET",
+      success: function (response) {
+        if (typeof response === "string") {
+          try {
+            response = JSON.parse(response);
+          } catch (e) {
+            console.error("Gagal parsing JSON:", e);
+            return;
+          }
+        }
+
+        if (response && response.data) {
+          $("#detailAlamat").val(response.data.Detail_Alamat);
+          $("#description").val(response.data.Description);
+
+          $("#formAlamat").data("id", idAlamat);
+          $("#modalAlamatLabel").text("Edit Data Alamat");
+
+          $("#alamatModal").modal("show");
+        } else {
+          alert("Data tidak ditemukan");
+        }
+      },
+      error: function (xhr, status, error) {
+        alert("Terjadi kesalahan", +error);
+      },
+    });
+  });
+}
+
+function pilihAlamat() {
+  $("#tabelAlamat").on("click", ".btn-pAlamat", function () {
+    const idAlamat = $(this).data("id");
+
+    $.ajax({
+      url: "/Alamat/pilih-alamat/" + idAlamat,
+      method: "POST",
+      success: function (response) {
+        if (response.status === "success") {
+          Swal.fire("Sukses", response.message, "success").then(() => {
+            $("#tabelAlamat").DataTable().ajax.reload();
+          });
+        }
+      },
+      error: function (xhr, status, error) {
+        Swal.fire("Error", xhr.responseJSON.message, "error");
+      },
+    });
+  });
+}
+
+function deleteAlamat() {
+  $("#tabelAlamat").on("click", ".btn-delete", function () {
+    const idAlamat = $(this).data("id");
+
+    Swal.fire({
+      title: "Apakah Anda yakin?",
+      text: "Anda akan menghapus data ini!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        $.ajax({
+          url: "/Alamat/Delete/" + idAlamat,
+          method: "DELETE",
+          success: function (response) {
+            if (typeof response === "string") {
+              response = JSON.parse(response);
+            }
+            if (response.status === "success") {
+              Swal.fire(
+                "Deleted!",
+                "Your data has been deleted.",
+                "success"
+              ).then(() => {
+                $("#tabelAlamat").DataTable().ajax.reload();
+              });
+            }
+          },
+          error: function (xhr, status, error) {
+            alert("Terjadi kesalahan", +error);
+          },
+        });
+      }
+    });
+  });
+}
+
+function submitFormAlamat() {
+  $("#submitAlamat").click(function () {
+    $("#formAlamat").submit();
+  });
+
+  $("#formAlamat").submit(function (event) {
+    event.preventDefault();
+
+    const idAlamat = $(this).data("id");
+
+    const url = idAlamat ? `/Alamat/Edit` : "/Alamat/Create";
+    const method = idAlamat ? "PUT" : "POST";
+
+    const data = {
+      Detail_alamat: $("#detailAlamat").val(),
+      Description: $("#description").val(),
+      id_Alamat: idAlamat,
+    };
+    $("#loading-spinner").removeClass("d-none");
+    $.ajax({
+      url: url,
+      method: method,
+      contentType: "application/json",
+      data: JSON.stringify(data),
+      processData: false,
+      success: function (response) {
+        $("#loading-spinner").addClass("d-none");
+        if (response.status === "success") {
+          Swal.fire("Success", response.message, "success");
+          // $("#tabelAlamat").DataTable().ajax.reload();
+          window.location.reload();
+        }
+      },
+      error: function (xhr, status, error) {
+        alert("Terjadi kesalahan: " + error);
+      },
+      complete: function () {
+        $("#loading-spinner").addClass("d-none");
+      },
+    });
+  });
+}
