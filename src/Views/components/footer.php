@@ -22,24 +22,12 @@
             <div class="col-md-4 mb-4">
                 <h5 class="text-uppercase mb-4">Hubungi Kami</h5>
                 <p><i class="fas fa-map-marker-alt me-2"></i>Jalan Veteran, Motoboi Kecil</p>
-                <p><i class="fas fa-phone-alt me-2"></i>+62 123 4567 890</p>
+                <p><i class="fas fa-phone-alt me-2"></i>+62 823 9414 3812</p>
                 <p><i class="fas fa-envelope me-2"></i>info@pangkalangasabdulrahman.online</p>
             </div>
         </div>
         <hr class="bg-light">
         <div class="row text-center">
-            <div class="col-md-12">
-                <!-- Social Media Icons -->
-                <a href="#" class="text-white me-4">
-                    <i class="fab fa-facebook-f"></i>
-                </a>
-                <a href="#" class="text-white me-4">
-                    <i class="fab fa-twitter"></i>
-                </a>
-                <a href="#" class="text-white me-4">
-                    <i class="fab fa-instagram"></i>
-                </a>
-            </div>
             <div class="col-md-12 mt-3">
                 <p class="small">&copy; 2024 Pangkalan Gas Abdul Rahman. All Rights Reserved.</p>
             </div>

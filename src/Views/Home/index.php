@@ -150,7 +150,7 @@
             <strong>Email:</strong>
             <a href="mailto:contact@example.com">info@pangkalangasabdulrahman.online</a>
           </p>
-          <p><strong>Phone:</strong> +62 812 3456 7890</p>
+          <p><strong>Phone:</strong> +62 823 9414 3812</p>
         </div>
       </div>
     </div>
