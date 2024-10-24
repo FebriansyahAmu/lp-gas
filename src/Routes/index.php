@@ -17,7 +17,8 @@ use App\Router;
 $router = new Router();
 
 $router->get('/', HomeController::class, 'index');
-$router->get('/about', HomeController::class, 'about');
+$router->get('/404', HomeController::class, 'pageNotFound');
+
 
 $router->get('/login', AuthController::class, 'login');
 $router->get('/register', AuthController::class, 'register');

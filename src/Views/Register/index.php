@@ -1,3 +1,4 @@
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <div class="container">
   <div class="row d-flex align-items-center justify-content-center vh-100 p-2">
     
@@ -53,6 +54,14 @@
           </div>
           <div class="invalid-feedback" id="confirmPasswordFeedback">Passwords do not match.</div>
         </div>
+
+        <?php
+          $siteKey = $_ENV['SITE_KEY'];
+          echo '<div class="g-recaptcha-wrapper">
+                  <div class="mt-4 g-recaptcha" style="max-width:50px;" data-sitekey="' . htmlspecialchars($siteKey, ENT_QUOTES, 'UTF-8') . '"></div>
+                </div>';
+      ?>
+
 
         <div class="col-12 d-flex justify-content-center mt-5">
           <button class="btn btn-md btn-primary px-4 py-2" type="submit">Register</button>

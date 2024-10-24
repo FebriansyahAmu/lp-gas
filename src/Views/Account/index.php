@@ -1,6 +1,5 @@
 <?php 
-$clientKey = getenv('MIDTRANS_CLIENT_KEY');
-
+$clientKey = $_ENV['CLIENT_KEY'];
   echo '
   <script
     type="text/javascript"

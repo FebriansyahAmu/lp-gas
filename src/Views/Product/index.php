@@ -1,8 +1,7 @@
 <link rel="stylesheet" href="/css/prodctAdditionalcss.css" />
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <?php 
-$clientKey = getenv('MIDTRANS_CLIENT_KEY');
-
+$clientKey = $_ENV['CLIENT_KEY'];
   echo '
   <script
     type="text/javascript"

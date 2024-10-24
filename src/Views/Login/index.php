@@ -1,5 +1,7 @@
 
-<div class="container py-5 vh-100 overflow-hidden">
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+<div class="container py-5 vh-100 ">
   
   <div class="row d-flex align-items-center justify-content-center h-100">
       <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb" class="d-flex justify-content-center ">
@@ -51,6 +53,14 @@
           </div>
           <div class="invalid-feedback">Password tidak boleh kosong</div>
         </div>
+
+        <?php
+          $siteKey = $_ENV['SITE_KEY'];
+          echo '<div class="g-recaptcha-wrapper">
+                  <div class="mt-4 g-recaptcha" style="max-width:50px;" data-sitekey="' . htmlspecialchars($siteKey, ENT_QUOTES, 'UTF-8') . '"></div>
+                </div>';
+      ?>
+
 
         <!-- Submit button -->
         <button

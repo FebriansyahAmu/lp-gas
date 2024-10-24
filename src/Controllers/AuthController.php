@@ -70,6 +70,14 @@ class AuthController extends Controller
                     'phone' => filter_input(INPUT_POST, 'phone', FILTER_SANITIZE_SPECIAL_CHARS),
                     'password' => filter_input(INPUT_POST, 'password', FILTER_DEFAULT),
                 ];
+                $recaptchaResponse = filter_input(INPUT_POST, 'g-recaptcha-response', FILTER_SANITIZE_STRING);
+                if(!$recaptchaResponse){
+                    throw new \Exception("reCAPTCHA wajib diselesaikan", 400);
+                }
+                if(!$this->validatereCaptcha($recaptchaResponse)){
+                    throw new \Exception("reCAPTCHA tidak berhasil, silahkan coba lagi nanti", 400);
+                }
+    
 
                 //validasi Data yang diinputkan oleh user
                 $errors = User::validateData($data);
@@ -132,6 +140,30 @@ class AuthController extends Controller
         }
     }
 
+    private function validatereCaptcha($res){
+        $secretKey = $_ENV['SECRET_KEY'];
+
+        $url = 'https://www.google.com/recaptcha/api/siteverify';
+        $data = [
+            'secret' => $secretKey,
+            'response' => $res
+        ];
+
+        $options = [
+            'http' => [
+                'header' => 'Content-Type: application/x-www-form-urlencoded\r\n',
+                'method' => 'POST',
+                'content' => http_build_query($data),
+            ],
+        ];
+
+        $context = stream_context_create($options);
+        $response = file_get_contents($url, false, $context);
+        $result = json_decode($response);
+
+        return $result->success;
+    }
+
     //Method untuk login
     public function loginAct(){
         try{ //Gunakan try & catch untuk error handling
@@ -144,7 +176,16 @@ class AuthController extends Controller
             //Validasi input dari user 
             $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
             $password = filter_input(INPUT_POST, 'password', FILTER_DEFAULT);
-        
+            $recaptchaResponse = filter_input(INPUT_POST, 'g-recaptcha-response', FILTER_SANITIZE_STRING);
+
+            if(!$recaptchaResponse){
+                throw new \Exception("reCAPTCHA wajib diselesaikan", 400);
+            }
+
+            if(!$this->validatereCaptcha($recaptchaResponse)){
+                throw new \Exception("reCAPTCHA tidak berhasil, silahkan coba lagi nanti", 400);
+            }
+
             if(!$email || !$password){
                 throw new \Exception("Email or password cannot be empty", 400);
             }
@@ -393,6 +434,15 @@ class AuthController extends Controller
             if($_SERVER['REQUEST_METHOD'] !== 'POST'){
                 throw new \Exception("Method not allowed", 405);
             }
+            $recaptchaResponse = filter_input(INPUT_POST, 'g-recaptcha-response', FILTER_SANITIZE_STRING);
+            if(!$recaptchaResponse){
+                throw new \Exception("reCAPTCHA wajib diselesaikan", 400);
+            }
+
+            if(!$this->validatereCaptcha($recaptchaResponse)){
+                throw new \Exception("reCAPTCHA tidak berhasil, silahkan coba lagi nanti", 400);
+            }
+
 
             $resetToken = bin2hex(random_bytes(32));
             $data = [

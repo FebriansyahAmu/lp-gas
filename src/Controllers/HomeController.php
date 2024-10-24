@@ -18,4 +18,9 @@ class HomeController extends Controller
         $this->render('/Home/index', ['isLoggedIn' => $isLoggedIn] );
     }
 
+    public function pageNotFound(){
+        $data = [];
+        $this->render('/404/index', $data, null);
+    }
+
 }

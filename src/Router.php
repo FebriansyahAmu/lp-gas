@@ -102,9 +102,7 @@ class Router {
 
     private function sendNotFound() {
         http_response_code(404);
-        echo json_encode([
-            'error' => 'Route not found'
-        ], JSON_PRETTY_PRINT);
+        header('Location: /404');
     }
 
     private function sendErrorResponse($statusCode, $message){

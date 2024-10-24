@@ -1,6 +1,7 @@
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <div class="container py-5 h-100" >
   <div class="row d-flex justify-content-center align-items-center h-100 p-2">
-    <div class="col-md-6 p-5 rounded  text-white" style="background-color: rgba(0, 0, 0, 0.2)">
+    <div class="col-md-6 p-5 rounded  text-dark" style="background-color: rgba(0, 0, 0, 0.2)">
       <h2 class="mb-4 text-center">Lupa Password</h2>
       <form id="forgotPasswordForm" class="needs-validation" novalidate>
         <div class="mb-3 ">
@@ -15,6 +16,13 @@
           />
           <div class="invalid-feedback">Silakan masukkan alamat email yang valid.</div>
         </div>
+        <?php
+          $siteKey = $_ENV['SITE_KEY'];
+          echo '<div class="g-recaptcha-wrapper">
+                  <div class="mt-4 g-recaptcha" style="max-width:50px;" data-sitekey="' . htmlspecialchars($siteKey, ENT_QUOTES, 'UTF-8') . '"></div>
+                </div>';
+      ?>
+
         <div class="text-center mb-4 mt-4">
             <button type="submit" class="btn btn-primary">Kirim Link Reset Password</button>
         </div>
