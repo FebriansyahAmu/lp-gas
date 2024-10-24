@@ -9,24 +9,10 @@ class UlasanController extends Controller
 {
     public function kirimUlasan(){
         try{
-            $allowedOrigin = "https://pangkalangasabdulrahman.online";
-            if (isset($_SERVER['HTTP_ORIGIN'])) {
-                if ($_SERVER['HTTP_ORIGIN'] === $allowedOrigin) {
-                    header("Access-Control-Allow-Origin: $allowedOrigin");
-                    header("Access-Control-Allow-Methods: POST");
-                    header("Access-Control-Allow-Headers: Content-Type, X-Requested-With");
-                } else {
-                    http_response_code(403);
-                    echo json_encode([
-                        'error' => 'Origin not allowed'
-                    ]);
-                    exit();
-                }
-            }
-
             if($_SERVER['REQUEST_METHOD'] !== 'POST'){
-                throw new \Exception('Invalid request method', 400);
+                throw new \Exception('Invalid request method', 405);
             }
+            $this->checkRequest();
 
             $userData = AuthMiddleWare::checkAuth();
             $userId = $userData['id'];
@@ -59,17 +45,10 @@ class UlasanController extends Controller
 
     public function getUlasan(){
         try{
-            $allowedOrigin = "https://pangkalangasabdulrahman.online";
-            if (isset($_SERVER['HTTP_ORIGIN'])) {
-                if ($_SERVER['HTTP_ORIGIN'] === $allowedOrigin) {
-                    header("Access-Control-Allow-Origin: $allowedOrigin");
-                    header("Access-Control-Allow-Methods: GET");
-                    header("Access-Control-Allow-Headers: Content-Type, X-Requested-With");
-                } else {
-                    header('Location: /');
-                    exit();
-                }
-            }
+            $endpoint = "/";
+            $this->checkReferer($endpoint);
+            $this->checkRequest();
+
             $ulasan = Ulasan::getDataUlasan();
             if(!$ulasan){
                 throw new \Exception("Tidak ada ulasan", 404);
@@ -85,6 +64,22 @@ class UlasanController extends Controller
                 'status' => 'error',
                 'message' => $e->getMessage()
             ]);
+        }
+    }
+
+    private function checkReferer($endpoint){
+        $allowedReferer = "https://pangkalangasabdulrahman.online";
+        if (!isset($_SERVER['HTTP_REFERER']) || strpos($_SERVER['HTTP_REFERER'], $allowedReferer) !== 0) {
+            header("Location: $endpoint");
+            exit();
+        }
+    }
+
+    private function checkRequest(){
+        if (!isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_REQUESTED_WITH'] !== 'XMLHttpRequest') {
+            http_response_code(403); 
+            echo json_encode(['status' => 'error', 'message' => 'Permintaan tidak diizinkan']);
+            exit();
         }
     }
 }

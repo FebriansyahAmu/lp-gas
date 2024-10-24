@@ -98,9 +98,9 @@ class CheckoutController extends Controller{
     public function checkoutCart() {
         try {
             if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-                throw new \Exception("Invalid method request", 400);
+                throw new \Exception("Invalid method request", 405);
             }
-    
+            $this->checkRequest();
             // Validasi autentikasi user
             $userData = AuthMiddleware::checkAuth();
             $userId = $userData['id'];
@@ -276,6 +276,12 @@ class CheckoutController extends Controller{
             ]);
         }
     }
-
+    private function checkRequest(){
+        if (!isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_REQUESTED_WITH'] !== 'XMLHttpRequest') {
+            http_response_code(403); 
+            echo json_encode(['status' => 'error', 'message' => 'Permintaan tidak diizinkan']);
+            exit();
+        }
+    }
 
 }

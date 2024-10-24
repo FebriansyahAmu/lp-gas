@@ -28,6 +28,7 @@ class CartController extends Controller{
             if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
                 throw new Exception('Invalid request method', 405);
             }
+            $this->checkRequest();
     
             // Ambil JSON payload dari request body
             $jsonData = file_get_contents('php://input');
@@ -84,17 +85,10 @@ class CartController extends Controller{
 
     public function getAllCartByUID(){
         try{
-            $allowedOrigin = "https://pangkalangasabdulrahman.online";
-            if (isset($_SERVER['HTTP_ORIGIN'])) {
-                if ($_SERVER['HTTP_ORIGIN'] === $allowedOrigin) {
-                    header("Access-Control-Allow-Origin: $allowedOrigin");
-                    header("Access-Control-Allow-Methods: GET");
-                    header("Access-Control-Allow-Headers: Content-Type, X-Requested-With");
-                } else {
-                    header('Location: /account/cart');
-                    exit();
-                }
-            }
+            $endPoint = "/account/cart";
+            $this->checkReferer($endpoint);
+            $this->checkRequest();
+
             $userData = AuthMiddleware::checkAuth();
             $userId = $userData['id'];
 
@@ -120,20 +114,10 @@ class CartController extends Controller{
 
     public function deleteCartByID($id){
         try{
-            $allowedOrigin = "https://pangkalangasabdulrahman.online";
-            if (isset($_SERVER['HTTP_ORIGIN'])) {
-                if ($_SERVER['HTTP_ORIGIN'] === $allowedOrigin) {
-                    header("Access-Control-Allow-Origin: $allowedOrigin");
-                    header("Access-Control-Allow-Methods: DELETE");
-                    header("Access-Control-Allow-Headers: Content-Type, X-Requested-With");
-                } else {
-                    http_response_code(403);
-                    echo json_encode([
-                        'error'=> 'Origin not allowed'
-                    ]);
-                    exit();
-                }
+            if($_SERVER['REQUEST METHOD'] !== "DELETE"){
+                throw new \Exception("Invalid request method", 405);
             }
+            $this->checkRequest();
 
             $userData = AuthMiddleware::checkAuth();
             $userId = $userData['id'];
@@ -161,17 +145,10 @@ class CartController extends Controller{
 
     public function getAlamatCart(){
         try{
-            $allowedOrigin = "https://pangkalangasabdulrahman.online";
-            if (isset($_SERVER['HTTP_ORIGIN'])) {
-                if ($_SERVER['HTTP_ORIGIN'] === $allowedOrigin) {
-                    header("Access-Control-Allow-Origin: $allowedOrigin");
-                    header("Access-Control-Allow-Methods: GET");
-                    header("Access-Control-Allow-Headers: Content-Type, X-Requested-With");
-                } else {
-                    header('Location: /account/cart');
-                    exit();
-                }
-            }
+            $endPoint = "/account/cart";
+            $this->checkReferer($endPoint);
+            $this->checkRequest();
+            
             $userData = AuthMiddleware::checkAuth();
             $userId = $userData['id'];
 
