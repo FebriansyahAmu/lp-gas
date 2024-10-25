@@ -114,7 +114,7 @@ class CartController extends Controller{
 
     public function deleteCartByID($id){
         try{
-            if($_SERVER['REQUEST METHOD'] !== "DELETE"){
+            if($_SERVER['REQUEST_METHOD'] !== 'DELETE'){
                 throw new \Exception("Invalid request method", 405);
             }
             $this->checkRequest();

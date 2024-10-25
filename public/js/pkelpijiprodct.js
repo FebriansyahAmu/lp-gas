@@ -1,1 +1,409 @@
-(function(_0x585089,_0x526fc1){const _0x4af769=_0x504e,_0x36f21c=_0x585089();while(!![]){try{const _0x1258ae=parseInt(_0x4af769(0x238))/0x1+-parseInt(_0x4af769(0x1fa))/0x2*(-parseInt(_0x4af769(0x244))/0x3)+parseInt(_0x4af769(0x22d))/0x4*(-parseInt(_0x4af769(0x23b))/0x5)+-parseInt(_0x4af769(0x209))/0x6*(-parseInt(_0x4af769(0x223))/0x7)+-parseInt(_0x4af769(0x24d))/0x8*(parseInt(_0x4af769(0x24b))/0x9)+-parseInt(_0x4af769(0x233))/0xa*(parseInt(_0x4af769(0x216))/0xb)+-parseInt(_0x4af769(0x230))/0xc*(-parseInt(_0x4af769(0x259))/0xd);if(_0x1258ae===_0x526fc1)break;else _0x36f21c['push'](_0x36f21c['shift']());}catch(_0x4694df){_0x36f21c['push'](_0x36f21c['shift']());}}}(_0x1169,0x63537),$(document)['ready'](function(){handleProductData(),checkAuth(),checkoutProducts(),showAlamat(),addCart(),kirimUlasan();}));function handleProductData(){var _0x29294c=getProductId();_0x29294c&&getdatabyid(_0x29294c);}function getProductId(){const _0x394cf9=_0x504e;return window['location'][_0x394cf9(0x21f)][_0x394cf9(0x1f8)](/\/product\/(\d+)/)?.[0x1];}let stok=0x0;function getdatabyid(_0xf2031a){const _0x2d1003=_0x504e,_0x1df16=document[_0x2d1003(0x1f6)]('product-image');$[_0x2d1003(0x228)]({'url':_0x2d1003(0x251)+_0xf2031a,'type':_0x2d1003(0x234),'success':function(_0x1520a5){const _0x39396b=_0x2d1003;_0x1520a5[_0x39396b(0x248)]===_0x39396b(0x23e)&&($(_0x39396b(0x20c))[_0x39396b(0x204)](_0x1520a5[_0x39396b(0x206)][_0x39396b(0x25c)]),$(_0x39396b(0x20d))[_0x39396b(0x204)](_0x1520a5[_0x39396b(0x206)][_0x39396b(0x1e1)]),$(_0x39396b(0x207))['text'](_0x1520a5[_0x39396b(0x206)]['Harga_gas'][_0x39396b(0x210)]()),_0x1df16[_0x39396b(0x237)]=_0x39396b(0x200)+_0x1520a5['data'][_0x39396b(0x1f7)],stok=parseInt(_0x1520a5[_0x39396b(0x206)][_0x39396b(0x1e1)]),initializeAndSetupEvents(),_0x1520a5['data']['Stok']===0x0&&(Swal[_0x39396b(0x201)]({'icon':_0x39396b(0x258),'title':_0x39396b(0x1e0),'text':'Maaf,\x20produk\x20ini\x20sedang\x20tidak\x20tersedia.','confirmButtonText':'OK'}),document['getElementById'](_0x39396b(0x227))['disabled']=!![],document[_0x39396b(0x1f6)](_0x39396b(0x205))[_0x39396b(0x217)]=!![]));}});}function _0x504e(_0x2132a9,_0x4ee6b7){const _0x116929=_0x1169();return _0x504e=function(_0x504e3f,_0x1ffa03){_0x504e3f=_0x504e3f-0x1db;let _0x2da496=_0x116929[_0x504e3f];return _0x2da496;},_0x504e(_0x2132a9,_0x4ee6b7);}function initializeAndSetupEvents(){const _0x2d7214=_0x504e,_0x3c7117=()=>{const _0x1b847d=_0x504e;return{'decrementButton':document[_0x1b847d(0x1f6)](_0x1b847d(0x25e)),'incrementButton':document['getElementById'](_0x1b847d(0x1e8)),'quantityElement':document[_0x1b847d(0x1f6)](_0x1b847d(0x252)),'totalPriceElement':document[_0x1b847d(0x1f6)]('total-price'),'deliveryOptionSelect':document[_0x1b847d(0x1f6)](_0x1b847d(0x205)),'deliveryFeeElement':document[_0x1b847d(0x1f6)](_0x1b847d(0x240)),'delivElement':document['getElementById'](_0x1b847d(0x236)),'quantity':parseInt(document['getElementById'](_0x1b847d(0x252))[_0x1b847d(0x1ef)]),'pricePerUnit':parseFloat(document['getElementById'](_0x1b847d(0x219))['textContent'][_0x1b847d(0x232)](/,/g,''))||0x0,'deliveryFeePerUnit':0x7d0};};let _0x1893f0=_0x3c7117();const _0x139ebf=()=>{const _0xc76576=_0x504e,_0x4c03ab=_0x1893f0[_0xc76576(0x257)][_0xc76576(0x1ef)],_0x4e336b=_0x4c03ab===_0xc76576(0x220),_0xc93106=_0x1893f0[_0xc76576(0x252)]*_0x1893f0[_0xc76576(0x22e)],_0x27944d=_0x4e336b?_0x1893f0[_0xc76576(0x252)]*_0x1893f0[_0xc76576(0x1e6)]:0x0,_0x22496d=_0xc93106+_0x27944d;_0x1893f0['totalPriceElement'][_0xc76576(0x243)]=_0xc76576(0x231)+_0x22496d[_0xc76576(0x210)](),_0x1893f0[_0xc76576(0x212)][_0xc76576(0x243)]=''+_0x27944d[_0xc76576(0x210)](),_0x1893f0[_0xc76576(0x1e4)]['style']['display']=_0x4e336b?_0xc76576(0x1f2):_0xc76576(0x256);};_0x1893f0['decrementButton']['addEventListener'](_0x2d7214(0x23c),()=>{const _0x56e864=_0x2d7214;_0x1893f0[_0x56e864(0x252)]>0x1&&(_0x1893f0['quantity']--,_0x1893f0[_0x56e864(0x22b)]['value']=_0x1893f0[_0x56e864(0x252)],_0x139ebf());}),_0x1893f0[_0x2d7214(0x245)][_0x2d7214(0x24c)]('click',()=>{const _0x47c795=_0x2d7214;_0x1893f0[_0x47c795(0x252)]<stok?(_0x1893f0['quantity']++,_0x1893f0['quantityElement'][_0x47c795(0x1ef)]=_0x1893f0[_0x47c795(0x252)],_0x139ebf()):alert(_0x47c795(0x1f4));}),_0x1893f0[_0x2d7214(0x257)][_0x2d7214(0x24c)](_0x2d7214(0x22a),()=>{_0x139ebf();}),_0x139ebf();}function checkoutProducts(){const _0x42c4a1=_0x504e;$(_0x42c4a1(0x247))['on']('submit',function(_0x3cbded){const _0x166fd3=_0x42c4a1;_0x3cbded[_0x166fd3(0x213)]();const _0x142d12=document['getElementById'](_0x166fd3(0x205))[_0x166fd3(0x1ef)],_0x403975=document[_0x166fd3(0x1f6)](_0x166fd3(0x1fc))[_0x166fd3(0x1ef)];console['log'](_0x403975);if(_0x142d12===''){_0x3cbded['preventDefault']();return;}if(_0x142d12===_0x166fd3(0x220)&&_0x403975===''){_0x3cbded[_0x166fd3(0x213)]();return;}const _0x286a28=getProductId(),_0x1d252f=parseInt(document[_0x166fd3(0x1f6)]('delivery-fee')['textContent'][_0x166fd3(0x232)](/[^\d]/g,'')),_0x59d277=parseInt(document[_0x166fd3(0x1f6)](_0x166fd3(0x1f5))[_0x166fd3(0x243)][_0x166fd3(0x232)](/[^\d]/g,'')),_0x2af375=document[_0x166fd3(0x1f6)](_0x166fd3(0x1dd))[_0x166fd3(0x243)],_0x5ceffc=new FormData(this);_0x5ceffc[_0x166fd3(0x1ff)](_0x166fd3(0x25d),_0x286a28),_0x5ceffc[_0x166fd3(0x1ff)](_0x166fd3(0x1fe),_0x2af375),_0x5ceffc[_0x166fd3(0x1ff)](_0x166fd3(0x1dc),_0x1d252f),_0x5ceffc[_0x166fd3(0x1ff)](_0x166fd3(0x208),_0x59d277),Swal[_0x166fd3(0x201)]({'title':_0x166fd3(0x215),'text':_0x166fd3(0x25f),'icon':_0x166fd3(0x23f),'showCancelButton':!![],'confirmButtonColor':'#3085d6','cancelButtonColor':'#d33','confirmButtonText':'Lanjutkan'})[_0x166fd3(0x225)](_0x372b38=>{const _0x5393a8=_0x166fd3;_0x372b38[_0x5393a8(0x242)]&&$[_0x5393a8(0x228)]({'url':'/checkout','type':_0x5393a8(0x23a),'data':_0x5ceffc,'contentType':![],'processData':![],'dataType':_0x5393a8(0x24a),'success':function(_0x297e80){const _0x3f1463=_0x5393a8,_0xad013f=_0x297e80[_0x3f1463(0x1f1)];_0xad013f?window[_0x3f1463(0x1e7)][_0x3f1463(0x250)](_0xad013f,{'onSuccess':function(_0x52a51d){const _0x294eb3=_0x3f1463;console[_0x294eb3(0x211)](_0x294eb3(0x23d),_0x52a51d),$('#reviewModal')[_0x294eb3(0x1e2)](_0x294eb3(0x25a));},'onPending':function(_0x52e121){const _0x1b41e9=_0x3f1463;console[_0x1b41e9(0x211)](_0x1b41e9(0x24f),_0x52e121);},'onError':function(_0x361e5a){const _0x15e477=_0x3f1463;console[_0x15e477(0x211)]('Payment\x20error:',_0x361e5a);}}):console[_0x3f1463(0x258)](_0x3f1463(0x1e9));},'error':function(_0x4a9ce1,_0x2ff77b,_0x3b0acf){const _0x31807a=_0x5393a8;_0x4a9ce1['status']===0x191?Swal['fire']({'title':_0x31807a(0x1fb),'text':'Silahkan\x20Login\x20terlebih\x20dahulu\x20untuk\x20membuat\x20pesanan','icon':_0x31807a(0x20f),'confirmButtonText':'Login'})[_0x31807a(0x225)](_0x4417df=>{const _0x3ebaa1=_0x31807a;_0x4417df[_0x3ebaa1(0x242)]&&(window[_0x3ebaa1(0x1df)][_0x3ebaa1(0x241)]=_0x3ebaa1(0x235));}):console[_0x31807a(0x258)](_0x31807a(0x1e3),_0x2ff77b,_0x3b0acf);}});});});}function checkAuth(){const _0x3545a9=_0x504e;$[_0x3545a9(0x228)]({'url':_0x3545a9(0x20b),'type':_0x3545a9(0x234),'success':function(_0x2223d4){const _0x38161b=_0x3545a9,_0x424915=_0x2223d4[_0x38161b(0x21d)]===!![];document[_0x38161b(0x1f6)](_0x38161b(0x1fc))[_0x38161b(0x24c)](_0x38161b(0x22a),function(){const _0x143f5f=_0x38161b;this[_0x143f5f(0x1ef)]===_0x143f5f(0x21a)&&(_0x424915?window[_0x143f5f(0x1df)][_0x143f5f(0x241)]=_0x143f5f(0x1ed):Swal[_0x143f5f(0x201)]({'title':'Info','text':_0x143f5f(0x221),'icon':_0x143f5f(0x20f),'confirmButtonText':_0x143f5f(0x1e5)})[_0x143f5f(0x225)](_0xfac437=>{const _0x1ece2b=_0x143f5f;_0xfac437['isConfirmed']&&(window[_0x1ece2b(0x1df)][_0x1ece2b(0x241)]=_0x1ece2b(0x235));}));});},'error':function(){console['error']('Gagal\x20melakukan\x20cek\x20autentikasi');}});}function truncateText(_0xd5a7b4,_0x2ae339){const _0x10f176=_0x504e;if(_0xd5a7b4['length']>_0x2ae339)return _0xd5a7b4[_0x10f176(0x22f)](0x0,_0x2ae339)+'...';return _0xd5a7b4;}function _0x1169(){const _0x2d2444=['POST','3015080PoNVgj','click','Payment\x20success:','success','question','delivery-fee','href','isConfirmed','textContent','3itpvdC','incrementButton','\x20-\x20','#checkout-form','status','Detail_alamat','json','489627MWbqNW','addEventListener','104eYQreX','display','Waiting\x20for\x20payment:','pay','/api/product/','quantity','bg-primary','classList','responseJSON','none','deliveryOptionSelect','error','65qKGTQT','show','Gagal\x20mendapatkan\x20alamat','Jenis_gas','Id_gas','decrement','Apakah\x20Anda\x20yakin\x20ingin\x20melakukan\x20checkout?','createElement','stringify','delivery_fee','title-gas','/ulasan','location','Produk\x20Tidak\x20Tersedia','Stok','modal','AJAX\x20Error:','delivElement','Login','deliveryFeePerUnit','snap','increment','Failed\x20to\x20receive\x20transaction\x20token','id_Alamat','add','Response\x20tidak\x20sesuai\x20dengan\x20format\x20yang\x20diharapkan.','/account/alamat','Error','value','parse','token','block','#delivery-option','Jumlah\x20tidak\x20boleh\x20melebihi\x20stok\x20yang\x20tersedia.','total-price','getElementById','foto_gas','match','#reviewForm','410654pAqleh','Anda\x20belum\x20login','addr-select','reload','jenis_gas','append','../','fire','Sukses','isArray','text','delivery-option','data','#harga-gas','total_harga','186FYBIIo','val','/checkauth','#title-gas','#stok','#cart-button','info','toLocaleString','log','deliveryFeeElement','preventDefault','forEach','Konfirmasi\x20Pesanan','231zoKsDV','disabled','message','harga-gas','add-new','appendChild','submit','auth','Gagal\x20parsing\x20JSON:','pathname','delivery','Anda\x20belum\x20login,\x20silahkan\x20login\x20untuk\x20melanjutkan\x20ordering','Anda\x20belum\x20login,\x20silahkan\x20login\x20untuk\x20menambahkan\x20ke\x20keranjang','121373tkztUq','hide','then','application/json','pay-button','ajax','option','change','quantityElement','style','4PZqoas','pricePerUnit','substring','2901108QDLEjD','Total:\x20Rp\x20','replace','207260WPNUEg','GET','/login','delive','src','200709suKPxo','\x20\x20\x20\x20+\x20Tambah\x20Alamat'];_0x1169=function(){return _0x2d2444;};return _0x1169();}function getAlamat(){const _0x252920=_0x504e;var _0xa77ff2=document[_0x252920(0x1f6)](_0x252920(0x1fc));_0xa77ff2['innerHTML']='<option\x20value=\x22\x22\x20disabled\x20selected>Pilih\x20Alamat</option>';const _0x4aee11=document[_0x252920(0x260)]('option');_0x4aee11[_0x252920(0x1ef)]=_0x252920(0x21a),_0x4aee11[_0x252920(0x254)][_0x252920(0x1eb)](_0x252920(0x253)),_0x4aee11['classList'][_0x252920(0x1eb)]('text-center'),_0x4aee11[_0x252920(0x243)]=_0x252920(0x239),_0xa77ff2[_0x252920(0x21b)](_0x4aee11),document[_0x252920(0x1f6)]('address-option')[_0x252920(0x22c)][_0x252920(0x24e)]=_0x252920(0x1f2),$[_0x252920(0x228)]({'url':'/Alamat','type':_0x252920(0x234),'success':function(_0x2eded6){const _0x151424=_0x252920;if(typeof _0x2eded6==='string')try{_0x2eded6=JSON[_0x151424(0x1f0)](_0x2eded6);}catch(_0x1a1b11){console['error'](_0x151424(0x21e),_0x1a1b11);return;}if(_0x2eded6&&Array[_0x151424(0x203)](_0x2eded6[_0x151424(0x206)])){const _0x58bbaa=_0x2eded6[_0x151424(0x206)];_0x58bbaa[_0x151424(0x214)](_0x4f93ac=>{const _0x4169cf=_0x151424,_0x687819=0x32,_0x4db87e=_0x4f93ac[_0x4169cf(0x249)]+_0x4169cf(0x246)+_0x4f93ac['Description'],_0x351ed2=truncateText(_0x4db87e,_0x687819),_0x3a69ce=document[_0x4169cf(0x260)](_0x4169cf(0x229));_0x3a69ce[_0x4169cf(0x1ef)]=_0x4f93ac[_0x4169cf(0x1ea)],_0x3a69ce[_0x4169cf(0x243)]=_0x351ed2,_0xa77ff2['insertBefore'](_0x3a69ce,_0x4aee11);});}else console[_0x151424(0x258)](_0x151424(0x1ec));},'error':function(){const _0x97ec12=_0x252920;console[_0x97ec12(0x258)](_0x97ec12(0x25b));}});}function showAlamat(){const _0x39066f=_0x504e;$(_0x39066f(0x1f3))['on'](_0x39066f(0x22a),function(){const _0x110679=_0x39066f,_0x2a66e3=$(this)[_0x110679(0x20a)]();_0x2a66e3==='delivery'?($('#address-option')[_0x110679(0x25a)](),getAlamat()):$('#address-option')[_0x110679(0x224)]();});}function addCart(){const _0x311eb5=_0x504e;$(_0x311eb5(0x20e))['on'](_0x311eb5(0x23c),function(){const _0x335ad4=_0x311eb5,_0xa1c65e=getProductId(),_0x19c6bd=document[_0x335ad4(0x1f6)](_0x335ad4(0x1dd))[_0x335ad4(0x243)],_0x3d679c=document['getElementById'](_0x335ad4(0x219))['textContent'],_0x535669=parseInt(document['getElementById'](_0x335ad4(0x252))[_0x335ad4(0x1ef)]),_0x1a89ba={'id_gas':_0xa1c65e,'jenis_gas':_0x19c6bd,'harga_gas':_0x3d679c,'qty':_0x535669},_0x3480e9=JSON[_0x335ad4(0x1db)](_0x1a89ba);$['ajax']({'url':'/api/add-cart','method':_0x335ad4(0x23a),'data':_0x3480e9,'contentType':_0x335ad4(0x226),'success':function(_0x4c7eff){const _0x383043=_0x335ad4;_0x4c7eff[_0x383043(0x248)]==='success'&&Swal[_0x383043(0x201)](_0x383043(0x202),_0x4c7eff['message'],'success');},'error':function(_0x3c8bcd,_0x302689,_0x2a9990){const _0x24fe1b=_0x335ad4;_0x3c8bcd[_0x24fe1b(0x248)]===0x191?Swal['fire']({'title':'Info','text':_0x24fe1b(0x222),'icon':'info','confirmButtonText':_0x24fe1b(0x1e5)})[_0x24fe1b(0x225)](()=>{const _0x11cf65=_0x24fe1b;window[_0x11cf65(0x1df)]['href']=_0x11cf65(0x235);}):Swal['fire'](_0x24fe1b(0x1ee),_0x3c8bcd[_0x24fe1b(0x255)][_0x24fe1b(0x218)],_0x24fe1b(0x258));}});});}function kirimUlasan(){const _0x1a565f=_0x504e;$(_0x1a565f(0x1f9))['on'](_0x1a565f(0x21c),function(_0x368356){const _0x1c7e1c=_0x1a565f;_0x368356[_0x1c7e1c(0x213)]();const _0x1f6dc9=new FormData(this);$[_0x1c7e1c(0x228)]({'url':_0x1c7e1c(0x1de),'method':_0x1c7e1c(0x23a),'data':_0x1f6dc9,'contentType':![],'processData':![],'success':function(_0x2c256d){const _0x1d317b=_0x1c7e1c;_0x2c256d['status']==='success'&&Swal[_0x1d317b(0x201)](_0x1d317b(0x202),_0x2c256d[_0x1d317b(0x218)],'success')[_0x1d317b(0x225)](()=>{const _0x516280=_0x1d317b;window[_0x516280(0x1df)][_0x516280(0x1fd)]();});},'error':function(_0x4c0ef2,_0x32385d,_0xfe4e0){const _0x150e42=_0x1c7e1c;Swal[_0x150e42(0x201)](_0x150e42(0x1ee),_0x4c0ef2['responseJSON'][_0x150e42(0x218)],_0x150e42(0x258));}});});}
+$(document).ready(function () {
+  //Function untuk Product gas elpiji
+  handleProductData();
+  checkAuth();
+  checkoutProducts();
+  showAlamat();
+  addCart();
+  kirimUlasan();
+});
+
+function handleProductData() {
+  var id = getProductId();
+  if (id) {
+    getdatabyid(id);
+  }
+}
+
+function getProductId() {
+  return window.location.pathname.match(/\/product\/(\d+)/)?.[1];
+}
+
+let stok = 0;
+function getdatabyid(id) {
+  const productImage = document.getElementById("product-image");
+  $.ajax({
+    url: "/api/product/" + id,
+    type: "GET",
+    success: function (response) {
+      if (response.status === "success") {
+        // Mengisi data produk dari response
+        $("#title-gas").text(response.data.Jenis_gas);
+        $("#stok").text(response.data.Stok);
+        $("#harga-gas").text(response.data.Harga_gas.toLocaleString());
+        productImage.src = "../" + response.data.foto_gas;
+
+        stok = parseInt(response.data.Stok);
+        initializeAndSetupEvents();
+        if (response.data.Stok === 0) {
+          Swal.fire({
+            icon: "error",
+            title: "Produk Tidak Tersedia",
+            text: "Maaf, produk ini sedang tidak tersedia.",
+            confirmButtonText: "OK",
+          });
+
+          // Matikan tombol checkout
+          document.getElementById("pay-button").disabled = true;
+          document.getElementById("delivery-option").disabled = true;
+        }
+      }
+    },
+  });
+}
+
+function initializeAndSetupEvents() {
+  const initializeVariable = () => {
+    return {
+      decrementButton: document.getElementById("decrement"),
+      incrementButton: document.getElementById("increment"),
+      quantityElement: document.getElementById("quantity"),
+      totalPriceElement: document.getElementById("total-price"),
+      deliveryOptionSelect: document.getElementById("delivery-option"),
+      deliveryFeeElement: document.getElementById("delivery-fee"),
+      delivElement: document.getElementById("delive"),
+      quantity: parseInt(document.getElementById("quantity").value),
+      pricePerUnit:
+        parseFloat(
+          document.getElementById("harga-gas").textContent.replace(/,/g, "")
+        ) || 0, // Ambil harga dari elemen atau gunakan 0 jika kosong
+      deliveryFeePerUnit: 2000,
+    };
+  };
+
+  let vars = initializeVariable();
+
+  const updateTotalPrice = () => {
+    const deliveryOption = vars.deliveryOptionSelect.value;
+    const isDelivery = deliveryOption === "delivery";
+
+    // Hitung harga total tanpa biaya pengiriman
+    const totalPrice = vars.quantity * vars.pricePerUnit;
+
+    // Hitung biaya pengiriman
+    const deliveryFee = isDelivery
+      ? vars.quantity * vars.deliveryFeePerUnit
+      : 0;
+
+    // Hitung total harga dengan biaya pengiriman
+    const totalPriceWithDelivery = totalPrice + deliveryFee;
+
+    // Tampilkan total harga dan biaya pengiriman
+    vars.totalPriceElement.textContent = `Total: Rp ${totalPriceWithDelivery.toLocaleString()}`;
+    vars.deliveryFeeElement.textContent = `${deliveryFee.toLocaleString()}`;
+    vars.delivElement.style.display = isDelivery ? "block" : "none";
+  };
+
+  // Tambahkan event listeners
+  vars.decrementButton.addEventListener("click", () => {
+    if (vars.quantity > 1) {
+      vars.quantity--;
+      vars.quantityElement.value = vars.quantity;
+      updateTotalPrice();
+    }
+  });
+
+  vars.incrementButton.addEventListener("click", () => {
+    // Tambahkan pengecekan apakah quantity melebihi stok
+    if (vars.quantity < stok) {
+      vars.quantity++;
+      vars.quantityElement.value = vars.quantity;
+      updateTotalPrice();
+    } else {
+      alert("Jumlah tidak boleh melebihi stok yang tersedia.");
+    }
+  });
+
+  vars.deliveryOptionSelect.addEventListener("change", () => {
+    updateTotalPrice();
+  });
+
+  // Panggil updateTotalPrice pertama kali setelah semua event listener ditambahkan
+  updateTotalPrice();
+}
+
+function checkoutProducts() {
+  $("#checkout-form").on("submit", function (event) {
+    event.preventDefault();
+
+    //Validasi form
+    const deliveryMethod = document.getElementById("delivery-option").value;
+    const alamat = document.getElementById("addr-select").value;
+    if (deliveryMethod === "") {
+      event.preventDefault();
+      return;
+    }
+    if (deliveryMethod === "delivery" && alamat === "") {
+      event.preventDefault();
+      return;
+    }
+
+    const idGas = getProductId();
+    const deliveryfee = parseInt(
+      document.getElementById("delivery-fee").textContent.replace(/[^\d]/g, "")
+    );
+    const totalPrice = parseInt(
+      document.getElementById("total-price").textContent.replace(/[^\d]/g, "")
+    );
+    const titleGas = document.getElementById("title-gas").textContent;
+
+    const formData = new FormData(this);
+
+    // Menambahkan data tambahan ke formData
+    formData.append("Id_gas", idGas);
+    formData.append("jenis_gas", titleGas);
+    formData.append("delivery_fee", deliveryfee);
+    formData.append("total_harga", totalPrice);
+
+    // Mengirim form menggunakan AJAX
+    Swal.fire({
+      title: "Konfirmasi Pesanan",
+      text: "Apakah Anda yakin ingin melakukan checkout?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Lanjutkan",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        $.ajax({
+          url: "/checkout",
+          type: "POST",
+          data: formData,
+          contentType: false,
+          processData: false,
+          dataType: "json",
+          success: function (response) {
+            const token = response.token;
+            if (token) {
+              // Trigger snap popup dengan token yang diterima
+              window.snap.pay(token, {
+                onSuccess: function (result) {
+                  $("#reviewModal").modal("show");
+                },
+                onPending: function (result) {
+                  Swal.fire("Informasi", "Pembayaran sedang di proses", "info");
+                },
+                onError: function (result) {
+                  Swal.fire(
+                    "Error",
+                    "Pembayaran gagal, silahkan gunakan coba lagi atau hubungi kami jika mengalami masalah lebih lanjut",
+                    "Error"
+                  );
+                },
+              });
+            } else {
+              console.error("Failed to receive transaction token");
+            }
+          },
+          error: function (xhr, status, error) {
+            // Cek apakah status code 401
+            if (xhr.status === 401) {
+              Swal.fire({
+                title: "Anda belum login",
+                text: "Silahkan Login terlebih dahulu untuk membuat pesanan",
+                icon: "info",
+                confirmButtonText: "Login",
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  window.location.href = "/login"; // Redirect ke halaman login
+                }
+              });
+            } else {
+              console.error("AJAX Error:", status, error);
+            }
+          },
+        });
+      }
+    });
+  });
+}
+
+function checkAuth() {
+  $.ajax({
+    url: "/checkauth",
+    type: "GET",
+    success: function (response) {
+      // Cek apakah pengguna terautentikasi
+      const isAuthenticated = response.auth === true;
+
+      // Tambahkan event listener untuk perubahan pada select
+      document
+        .getElementById("addr-select")
+        .addEventListener("change", function () {
+          if (this.value === "add-new") {
+            if (isAuthenticated) {
+              // Jika pengguna terautentikasi, arahkan ke halaman tambah alamat
+              window.location.href = "/account/alamat";
+            } else {
+              // Jika pengguna tidak terautentikasi, tampilkan Swal
+              Swal.fire({
+                title: "Info",
+                text: "Anda belum login, silahkan login untuk melanjutkan ordering",
+                icon: "info",
+                confirmButtonText: "Login",
+              }).then((result) => {
+                // Redirect ke halaman login setelah konfirmasi
+                if (result.isConfirmed) {
+                  window.location.href = "/login";
+                }
+              });
+            }
+          }
+        });
+    },
+    error: function () {
+      console.error("Gagal melakukan cek autentikasi");
+    },
+  });
+}
+
+function truncateText(text, maxLength) {
+  if (text.length > maxLength) {
+    return text.substring(0, maxLength) + "...";
+  }
+  return text;
+}
+
+function getAlamat() {
+  // Menambahkan opsi "Tambah Alamat" terlebih dahulu
+  var addressSelect = document.getElementById("addr-select");
+
+  // Reset isi select terlebih dahulu
+  addressSelect.innerHTML =
+    '<option value="" disabled selected>Pilih Alamat</option>';
+
+  // Tambahkan opsi "Tambah Alamat"
+  const addOption = document.createElement("option");
+  addOption.value = "add-new"; // Nilai unik untuk mendeteksi opsi ini
+  addOption.classList.add("bg-primary");
+  addOption.classList.add("text-center");
+  addOption.textContent = "    + Tambah Alamat"; // Teks untuk opsi "Tambah Alamat"
+  addressSelect.appendChild(addOption);
+
+  // Menampilkan elemen div jika belum terlihat
+  document.getElementById("address-option").style.display = "block";
+
+  // Panggilan AJAX untuk mendapatkan alamat
+  $.ajax({
+    url: "/Alamat",
+    type: "GET",
+    success: function (response) {
+      if (typeof response === "string") {
+        try {
+          response = JSON.parse(response); // Parsing jika respons berupa string JSON
+        } catch (e) {
+          console.error("Gagal parsing JSON:", e);
+          return;
+        }
+      }
+
+      // Pastikan response.data ada
+      if (response && Array.isArray(response.data)) {
+        const alamatArray = response.data;
+
+        // Tambahkan opsi untuk setiap alamat dari respons
+        alamatArray.forEach((alamat) => {
+          const maxLength = 50;
+          const fullText = `${alamat.Detail_alamat} - ${alamat.Description}`;
+          const truncatedText = truncateText(fullText, maxLength);
+
+          const option = document.createElement("option");
+          option.value = alamat.id_Alamat;
+          option.textContent = truncatedText;
+
+          // Tambahkan ke select sebelum opsi "Tambah Alamat"
+          addressSelect.insertBefore(option, addOption);
+        });
+      } else {
+        console.error("Response tidak sesuai dengan format yang diharapkan.");
+      }
+    },
+    error: function () {
+      console.error("Gagal mendapatkan alamat");
+    },
+  });
+}
+
+function showAlamat() {
+  $("#delivery-option").on("change", function () {
+    const selectedOption = $(this).val();
+
+    if (selectedOption === "delivery") {
+      $("#address-option").show();
+      getAlamat();
+    } else {
+      $("#address-option").hide();
+    }
+  });
+}
+
+function addCart() {
+  $("#cart-button").on("click", function () {
+    const idGas = getProductId();
+    const titleGas = document.getElementById("title-gas").textContent;
+    const priceGas = document.getElementById("harga-gas").textContent;
+    const quantityGas = parseInt(document.getElementById("quantity").value);
+
+    const formData = {
+      id_gas: idGas,
+      jenis_gas: titleGas,
+      harga_gas: priceGas,
+      qty: quantityGas,
+    };
+
+    const jsonData = JSON.stringify(formData);
+
+    $.ajax({
+      url: "/api/add-cart",
+      method: "POST",
+      data: jsonData,
+      contentType: "application/json",
+      success: function (response) {
+        if (response.status === "success") {
+          Swal.fire("Sukses", response.message, "success");
+        }
+      },
+      error: function (xhr, status, err) {
+        if (xhr.status === 401) {
+          Swal.fire({
+            title: "Info",
+            text: "Anda belum login, silahkan login untuk menambahkan ke keranjang",
+            icon: "info",
+            confirmButtonText: "Login",
+          }).then(() => {
+            window.location.href = "/login";
+          });
+        } else {
+          Swal.fire("Error", xhr.responseJSON.message, "error");
+        }
+      },
+    });
+  });
+}
+
+function kirimUlasan() {
+  $("#reviewForm").on("submit", function (event) {
+    event.preventDefault();
+
+    const formData = new FormData(this);
+
+    $.ajax({
+      url: "/ulasan",
+      method: "POST",
+      data: formData,
+      contentType: false,
+      processData: false,
+      success: function (response) {
+        if (response.status === "success") {
+          Swal.fire("Sukses", response.message, "success").then(() => {
+            window.location.reload();
+          });
+        }
+      },
+      error: function (xhr, status, error) {
+        Swal.fire("Error", xhr.responseJSON.message, "error");
+      },
+    });
+  });
+}

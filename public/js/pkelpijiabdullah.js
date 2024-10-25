@@ -11,8 +11,6 @@ $(document).ready(function () {
   selesaikanPemesanana();
 });
 
-//Submit form register
-
 //bagian home, fetching data gas elpiji
 function fetchProducts() {
   $.ajax({
@@ -229,6 +227,7 @@ function tabelAlamats() {
 function clearFormAlamat() {
   $("#btnTambahAlamat").click(function () {
     $("#formAlamat")[0].reset();
+    $("#formAlamat").removeData("id");
     $("#modalAlamatLabel").text("Tambah Data Alamat");
 
     $("#alamatModal").modal("show");
@@ -302,9 +301,9 @@ function deleteAlamat() {
       text: "Anda akan menghapus data ini!",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Ya, hapus alamat!",
     }).then((result) => {
       if (result.isConfirmed) {
         $.ajax({
@@ -315,13 +314,11 @@ function deleteAlamat() {
               response = JSON.parse(response);
             }
             if (response.status === "success") {
-              Swal.fire(
-                "Deleted!",
-                "Your data has been deleted.",
-                "success"
-              ).then(() => {
-                $("#tabelAlamat").DataTable().ajax.reload();
-              });
+              Swal.fire("Deleted!", "Alamat berhasil dihapus!", "success").then(
+                () => {
+                  $("#tabelAlamat").DataTable().ajax.reload();
+                }
+              );
             }
           },
           error: function (xhr, status, error) {
@@ -361,9 +358,9 @@ function submitFormAlamat() {
       success: function (response) {
         $("#loading-spinner").addClass("d-none");
         if (response.status === "success") {
-          Swal.fire("Success", response.message, "success");
-          // $("#tabelAlamat").DataTable().ajax.reload();
-          window.location.reload();
+          Swal.fire("Success", response.message, "success").then(() => {
+            window.location.reload();
+          });
         }
       },
       error: function (xhr, status, error) {
