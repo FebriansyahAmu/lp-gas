@@ -201,7 +201,6 @@ function sendResetLink() {
     }
 
     const formData = new FormData(this);
-    console.log(formData);
     $("#loading-spinner").removeClass("d-none");
     $.ajax({
       url: "/auth/password-reset",

@@ -9,10 +9,12 @@ $clientKey = $_ENV['CLIENT_KEY'];
   ></script>
   ';
 ?>
+<?php component('reviewmodal'); ?>
 <section
   class="d-flex justify-content-center align-items-start py-5"
   style="min-height: 100vh"
 >
+
   <div
     class="container p-4 rounded shadow bg-light mt-5"
     style="min-height: 60vh; width: 100%; max-width: 800px"

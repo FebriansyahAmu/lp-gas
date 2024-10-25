@@ -46,36 +46,3 @@
     padding: 10px;
   }
 }
-
-.star-rating {
-  display: flex;
-  flex-direction: row-reverse;
-  justify-content: flex-start;
-  gap: 0.1rem;
-  font-size: 2rem;
-}
-
-.star-rating input {
-  display: none;
-}
-
-.star-rating label {
-  color: black; /* Default to black stars */
-  cursor: pointer;
-  font-size: 1.5rem;
-}
-
-.star-rating input:checked ~ label {
-  color: orange; /* Highlight checked stars */
-}
-
-/* Change the colors of stars before the hovered star */
-.star-rating label:hover,
-.star-rating label:hover ~ label {
-  color: orange;
-}
-
-/* Keep unselected stars black */
-.star-rating input:checked + label:hover ~ label {
-  color: black;
-}

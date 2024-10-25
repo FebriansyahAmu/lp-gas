@@ -10,6 +10,7 @@ $(document).ready(function () {
     deleteCartItem(cartId);
   });
   cartCheckouts();
+  kirimUlasan();
 });
 
 // Render setiap item di cart
@@ -308,22 +309,28 @@ function cartCheckouts() {
             delivery_fee: deliveryFee,
           }),
           success: function (response) {
-            console.log("Response received:", response);
             const token = response.token;
             if (token) {
               // Trigger snap popup dengan token yang diterima
               window.snap.pay(token, {
                 onSuccess: function (result) {
-                  console.log("Payment success:", result);
-                  // Tangani hasil sukses pembayaran di sini
+                  $("#reviewModal").modal("show");
                 },
                 onPending: function (result) {
-                  console.log("Waiting for payment:", result);
-                  // Tangani jika pembayaran tertunda di sini
+                  Swal.fire(
+                    "Informasi",
+                    "Pembayaran sedang di proses, Harap tunggu atau cek status transaksi Anda",
+                    "info"
+                  ).then(() => {
+                    window.location.href = "/account";
+                  });
                 },
                 onError: function (result) {
-                  console.log("Payment error:", result);
-                  // Tangani jika ada error di sini
+                  Swal.fire(
+                    "Error",
+                    "Pembayaran gagal, silahkan gunakan coba lagi atau hubungi kami jika mengalami masalah lebih lanjut",
+                    "Error"
+                  );
                 },
               });
             } else {
@@ -355,5 +362,31 @@ function getAlamat() {
     error: function (xhr, status, error) {
       Swal.fire("Error", xhr.responseJSON.message, "error");
     },
+  });
+}
+
+function kirimUlasan() {
+  $("#reviewForm").on("submit", function (event) {
+    event.preventDefault();
+
+    const formData = new FormData(this);
+
+    $.ajax({
+      url: "/ulasan",
+      method: "POST",
+      data: formData,
+      contentType: false,
+      processData: false,
+      success: function (response) {
+        if (response.status === "success") {
+          Swal.fire("Sukses", response.message, "success").then(() => {
+            window.location.reload();
+          });
+        }
+      },
+      error: function (xhr, status, error) {
+        Swal.fire("Error", xhr.responseJSON.message, "error");
+      },
+    });
   });
 }

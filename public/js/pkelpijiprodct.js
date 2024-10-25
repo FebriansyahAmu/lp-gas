@@ -182,7 +182,13 @@ function checkoutProducts() {
                   $("#reviewModal").modal("show");
                 },
                 onPending: function (result) {
-                  Swal.fire("Informasi", "Pembayaran sedang di proses", "info");
+                  Swal.fire(
+                    "Informasi",
+                    "Pembayaran sedang di proses, Harap tunggu atau cek status transaksi Anda",
+                    "info"
+                  ).then(() => {
+                    window.location.href = "/account";
+                  });
                 },
                 onError: function (result) {
                   Swal.fire(
