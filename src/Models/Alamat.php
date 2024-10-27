@@ -7,28 +7,43 @@ use App\Core\Database;
 class Alamat{
     protected static $table = 'ec_alamat';
 
-    public static function createAlamat($data){
-        try{
+    public static function createAlamat($data) {
+        try {
             $db = Database::getConnection();
-
-            $status = 'secondary';
-            $stmt = $db->prepare("INSERT INTO " . self::$table . " (id_user, Detail_alamat, Description, Status) VALUES(?,?,?,?)");
-            if(!$stmt){
+    
+            // Cek apakah user sudah memiliki alamat
+            $stmt = $db->prepare("SELECT COUNT(*) as count FROM " . self::$table . " WHERE id_user = ?");
+            if (!$stmt) {
                 throw new \Exception("Failed to create statement", $db->error);   
             }
-
+    
+            $stmt->bind_param("i", $data['userId']);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $row = $result->fetch_assoc();
+    
+            // Set status berdasarkan hasil pengecekan
+            $status = ($row['count'] > 0) ? 'secondary' : 'utama';
+    
+            // Masukkan data alamat baru
+            $stmt = $db->prepare("INSERT INTO " . self::$table . " (id_user, Detail_alamat, Description, Status) VALUES(?,?,?,?)");
+            if (!$stmt) {
+                throw new \Exception("Failed to create statement", $db->error);   
+            }
+    
             $stmt->bind_param("isss", $data['userId'], $data['Detail_alamat'], $data['Description'], $status);
             $success = $stmt->execute();
-            if(!$success){
+            if (!$success) {
                 throw new \Exception("Failed to execute query", $stmt->error);
             }
-
+    
             return true;
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             error_log($e->getMessage());
             return false;
         }
     }
+    
 
     public static function getAlamatByUsersId($userId){
         try{
