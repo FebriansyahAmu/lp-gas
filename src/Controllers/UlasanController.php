@@ -46,8 +46,8 @@ class UlasanController extends Controller
     public function getUlasan(){
         try{
             $endpoint = "/";
-            // $this->checkReferer($endpoint);
-            // $this->checkRequest();
+            $this->checkReferer($endpoint);
+            $this->checkRequest();
 
             $ulasan = Ulasan::getDataUlasan();
             if(!$ulasan){
