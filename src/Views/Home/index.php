@@ -64,7 +64,8 @@
         <p class="lead text-light" data-aos="zoom-in" data-aos-delay="300" data-aos-duration="1000">
           Di sini, anda akan menemukan solusi praktis untuk semua kebutuhan gas LPG anda.
         </p>
-        <a href="/register" class="btn btn-md rounded-1 btn-primary mt-4" data-aos="zoom-in" data-aos-delay="300" data-aos-duration="1200">Daftar Sekarang</a>
+        
+        <?php component('regBtn', ['isLoggedIn' => $isLoggedIn]); ?>
       </div>
     </div>
   </div>
@@ -217,6 +218,12 @@ function tampilkanUlasan(data) {
         <div class="row justify-content-center">
           <div class="col-md-8">
             <div class="testimonial">
+              <img 
+                src="${ulasan.foto_filepath || '/img/user.png'}" 
+                alt="Avatar ${ulasan.Nama_lengkap}" 
+                class="rounded-circle mb-3" 
+                style="width: 80px; height: 80px; object-fit: cover;"
+              >
               <p class="mb-4">"${ulasan.review_description}"</p>
               <h2 class="font-weight-bold">${ulasan.Nama_lengkap}</h2>
               <div class="stars mb-3">
@@ -231,4 +238,5 @@ function tampilkanUlasan(data) {
     carouselInner.innerHTML += ulasanItem;
   });
 }
+
 </script>

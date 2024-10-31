@@ -31,6 +31,7 @@
             name="email"
             required
           />
+          <div class="invalid-feedback">Mohon isikan email yang valid.</div>
         </div>
 
         <!-- Password input -->
@@ -51,7 +52,7 @@
               <i id="togglePasswordIcon" class="fas fa-eye"></i>
             </span>
           </div>
-          <div class="invalid-feedback">Password tidak boleh kosong</div>
+          <div class="invalid-feedback" id="passwordFeedback">Password minimal harus 8 karakter.</div>
         </div>
 
         <?php
@@ -83,20 +84,68 @@
 </div>
 
 <script>
-  (() => {
-    'use strict'
-    const forms = document.querySelectorAll('.needs-validation')
-    Array.from(forms).forEach(form => {
-      form.addEventListener('submit', event => {
-        if (!form.checkValidity()) {
-          event.preventDefault()
-          event.stopPropagation()
-        }
+(() => {
+  "use strict";
 
-        form.classList.add('was-validated')
-      }, false)
-    })
-  })()
+  const forms = document.querySelectorAll(".needs-validation");
+
+  const validateInput = (input, isValid) => {
+    if (isValid) {
+      input.classList.remove("is-invalid");
+      input.classList.add("is-valid");
+    } else {
+      input.classList.add("is-invalid");
+      input.classList.remove("is-valid");
+    }
+  };
+
+  const toggleFeedback = (feedbackElement, isVisible) => {
+    feedbackElement.style.display = isVisible ? 'block' : 'none';
+  };
+
+  const setupRealTimeValidation = (input, feedbackElement, validator) => {
+    input.addEventListener("input", () => {
+      const isValid = validator(input);
+      validateInput(input, isValid);
+      toggleFeedback(feedbackElement, !isValid);
+    });
+  };
+
+  const setupFormValidation = (form) => {
+    const emailInput = form.querySelector("#email");
+    const passwordInput = form.querySelector("#password");
+    const feedbackPassword = form.querySelector("#passwordFeedback");
+
+    // Real-time validation for email
+    setupRealTimeValidation(emailInput, null, (input) => input.checkValidity());
+
+    // Real-time validation for password length
+    setupRealTimeValidation(passwordInput, feedbackPassword, (input) => input.value.length >= 8);
+
+    // Form submission validation
+    form.addEventListener("submit", (event) => {
+      const isEmailValid = emailInput.checkValidity();
+      const isPasswordValid = passwordInput.value.length >= 8;
+
+      if (!form.checkValidity() || !isEmailValid || !isPasswordValid) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        // Validate email
+        validateInput(emailInput, isEmailValid);
+
+        // Validate password
+        validateInput(passwordInput, isPasswordValid);
+        toggleFeedback(feedbackPassword, !isPasswordValid);
+      } else {
+        form.classList.add("was-validated");
+      }
+    });
+  };
+
+  Array.from(forms).forEach(setupFormValidation);
+})();
+
 </script>
 <script>
   

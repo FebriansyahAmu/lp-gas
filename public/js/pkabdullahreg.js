@@ -1,1 +1,342 @@
-(function(_0x34d637,_0x33f163){const _0x1653ff=_0x455b,_0x2d0cd1=_0x34d637();while(!![]){try{const _0x1db729=-parseInt(_0x1653ff(0xf7))/0x1*(parseInt(_0x1653ff(0xe5))/0x2)+parseInt(_0x1653ff(0xf8))/0x3*(-parseInt(_0x1653ff(0xe9))/0x4)+parseInt(_0x1653ff(0xc8))/0x5*(parseInt(_0x1653ff(0xee))/0x6)+-parseInt(_0x1653ff(0xf2))/0x7+parseInt(_0x1653ff(0xc9))/0x8*(parseInt(_0x1653ff(0xe6))/0x9)+parseInt(_0x1653ff(0xef))/0xa*(-parseInt(_0x1653ff(0xf4))/0xb)+-parseInt(_0x1653ff(0xf5))/0xc*(-parseInt(_0x1653ff(0xe8))/0xd);if(_0x1db729===_0x33f163)break;else _0x2d0cd1['push'](_0x2d0cd1['shift']());}catch(_0x57044f){_0x2d0cd1['push'](_0x2d0cd1['shift']());}}}(_0x19fc,0xe47e8),$(document)['ready'](function(){submitRegister(),sendResetPassword();}));function submitRegister(){const _0x97503d=_0x455b;$(_0x97503d(0xe2))[_0x97503d(0xdf)](function(_0x43e2c6){const _0x56853b=_0x97503d;_0x43e2c6[_0x56853b(0xc3)]();const _0x1d4406=this;if(!_0x1d4406[_0x56853b(0xd1)]())return;var _0x89293c=new FormData(this),_0x178b77=$(_0x56853b(0xf6))[_0x56853b(0xc4)](),_0x32fe39=$(_0x56853b(0xd5))[_0x56853b(0xc4)]();if(_0x178b77[_0x56853b(0xd3)]<0x8){Swal[_0x56853b(0xce)](_0x56853b(0xe1),_0x56853b(0xea),'error');return;}if(_0x178b77!==_0x32fe39){Swal[_0x56853b(0xce)]('Error',_0x56853b(0xfc),'error');return;}const _0x110eaa=document[_0x56853b(0xd7)](_0x56853b(0xc2))[_0x56853b(0xda)];if(_0x110eaa===''){_0x43e2c6['preventDefault'](),Swal[_0x56853b(0xce)](_0x56853b(0xe1),'Please\x20complete\x20the\x20reCAPTCHA.',_0x56853b(0xd8));return;}$(_0x56853b(0xc6))['removeClass'](_0x56853b(0xfb)),$[_0x56853b(0xf3)]({'url':_0x56853b(0xd0),'type':_0x56853b(0xd4),'data':_0x89293c,'processData':![],'contentType':![],'dataType':_0x56853b(0xf0),'success':function(_0x5a1eb7){const _0x40fc2e=_0x56853b;$(_0x40fc2e(0xc6))[_0x40fc2e(0xe7)](_0x40fc2e(0xfb)),_0x5a1eb7['status']==='success'&&Swal['fire']('Success',_0x5a1eb7[_0x40fc2e(0xcc)],_0x40fc2e(0xe0));},'error':function(_0x4c41c5,_0x24cd93,_0x342bdb){const _0x480fae=_0x56853b;Swal[_0x480fae(0xce)](_0x480fae(0xe1),_0x4c41c5[_0x480fae(0xeb)]['message'],'error');},'complete':function(){const _0x3d3c09=_0x56853b;$(_0x3d3c09(0xc6))[_0x3d3c09(0xe7)](_0x3d3c09(0xfb));}});});}function login(){const _0x493e8c=_0x455b;$('#flogin')[_0x493e8c(0xdf)](function(_0xfbd07d){const _0x1f9117=_0x493e8c;_0xfbd07d[_0x1f9117(0xc3)]();const _0x29a00a=this;var _0x59d86a=document[_0x1f9117(0xd7)](_0x1f9117(0xc2))[_0x1f9117(0xda)];if(_0x59d86a===''){_0xfbd07d['preventDefault'](),alert(_0x1f9117(0xf9));return;}if(!_0x29a00a['checkValidity']()){_0xfbd07d[_0x1f9117(0xc3)]();return;}const _0x4b1ee0=new FormData(this);$(_0x1f9117(0xc6))[_0x1f9117(0xca)](_0x1f9117(0xfb)),$['ajax']({'url':_0x1f9117(0xe3),'type':_0x1f9117(0xd4),'data':_0x4b1ee0,'processData':![],'contentType':![],'dataType':'json','success':function(_0x5cff21){const _0x139b07=_0x1f9117;$(_0x139b07(0xc6))[_0x139b07(0xe7)](_0x139b07(0xfb));if(_0x5cff21[_0x139b07(0xcd)]===_0x139b07(0xe0))_0x5cff21[_0x139b07(0xc7)]&&(window[_0x139b07(0xcf)][_0x139b07(0xd6)]=_0x5cff21[_0x139b07(0xc7)]);else _0x5cff21[_0x139b07(0xcd)]==='unverified'&&(Swal['fire']({'icon':_0x139b07(0xd8),'title':_0x139b07(0xe1),'text':_0x5cff21[_0x139b07(0xcc)],'footer':_0x139b07(0xc5)}),$(_0x139b07(0xd9))['on'](_0x139b07(0xe4),function(_0x7727a9){const _0x3a1da3=_0x139b07;_0x7727a9[_0x3a1da3(0xc3)](),$('#loading-spinner')[_0x3a1da3(0xca)]('d-none'),$[_0x3a1da3(0xf3)]({'url':'/auth/resend-verification','type':'POST','data':{'email':_0x5cff21[_0x3a1da3(0xdd)]},'success':function(_0x3f8fb6){const _0x33e8af=_0x3a1da3;$(_0x33e8af(0xc6))[_0x33e8af(0xe7)](_0x33e8af(0xfb)),Swal[_0x33e8af(0xce)]({'icon':_0x33e8af(0xe0),'title':_0x33e8af(0xf1),'text':_0x33e8af(0xcb)});},'error':function(_0x1761ae){const _0x3d0609=_0x3a1da3,_0x33a761=JSON['parse'](_0x1761ae[_0x3d0609(0xdc)]);Swal['fire'](_0x3d0609(0xe1),_0x33a761[_0x3d0609(0xcc)],'error');},'complete':function(){const _0x56809e=_0x3a1da3;$('#loading-spinner')[_0x56809e(0xe7)]('d-none');}});}));},'error':function(_0x21efc9){const _0x39e160=_0x1f9117,_0x9e4cbd=JSON['parse'](_0x21efc9[_0x39e160(0xdc)]);Swal['fire']('Error',_0x9e4cbd[_0x39e160(0xcc)],_0x39e160(0xd8));},'complete':function(){const _0x1de4f7=_0x1f9117;$(_0x1de4f7(0xc6))[_0x1de4f7(0xe7)](_0x1de4f7(0xfb));}});});}function sendResetPassword(){const _0x215199=_0x455b;$(_0x215199(0xdb))['submit'](function(_0x1dfe5e){const _0x59b990=_0x215199;_0x1dfe5e['preventDefault']();var _0x59ac32=$(_0x59b990(0xf6))[_0x59b990(0xc4)](),_0x51a8f8=$(_0x59b990(0xd5))[_0x59b990(0xc4)]();if(_0x59ac32['length']<0x8){Swal[_0x59b990(0xce)](_0x59b990(0xe1),'Password\x20harus\x20minimal\x208\x20karakter','error');return;}if(_0x59ac32!==_0x51a8f8){Swal[_0x59b990(0xce)](_0x59b990(0xe1),_0x59b990(0xfc),_0x59b990(0xd8));return;}const _0x11d3b9=new FormData(this);$(_0x59b990(0xc6))['removeClass'](_0x59b990(0xfb)),$[_0x59b990(0xf3)]({'url':_0x59b990(0xed),'method':_0x59b990(0xd4),'data':_0x11d3b9,'processData':![],'contentType':![],'success':function(_0x1a55b8){const _0x30b12c=_0x59b990;$(_0x30b12c(0xc6))['addClass'](_0x30b12c(0xfb)),_0x1a55b8[_0x30b12c(0xcd)]===_0x30b12c(0xe0)&&Swal['fire']('Success',_0x1a55b8[_0x30b12c(0xcc)],_0x30b12c(0xe0))[_0x30b12c(0xfa)](()=>{const _0xb0d56e=_0x30b12c;window['location'][_0xb0d56e(0xd6)]=_0xb0d56e(0xde);});},'error':function(_0x47e987,_0x5ca154,_0x5cd6af){const _0x3f94e1=_0x59b990;Swal[_0x3f94e1(0xce)](_0x3f94e1(0xe1),_0x47e987[_0x3f94e1(0xeb)][_0x3f94e1(0xcc)],_0x3f94e1(0xd8));},'complete':function(){const _0x18149e=_0x59b990;$(_0x18149e(0xc6))[_0x18149e(0xe7)](_0x18149e(0xfb));}});});}function _0x455b(_0x57f6ed,_0x271a4e){const _0x19fc16=_0x19fc();return _0x455b=function(_0x455bc2,_0x4f0291){_0x455bc2=_0x455bc2-0xc2;let _0x486914=_0x19fc16[_0x455bc2];return _0x486914;},_0x455b(_0x57f6ed,_0x271a4e);}function _0x19fc(){const _0x47d53c=['responseJSON','Success','/auth/new-password','10086ZJVznU','20WjjWFY','json','Link\x20verifikasi\x20dikrim','10909710YNZUWk','ajax','1499861KRGATd','3752676qauZxX','#password','1lKcUri','3PJscFI','Please\x20complete\x20the\x20reCAPTCHA.','then','d-none','Password\x20tidak\x20cocok','/auth/password-reset','.g-recaptcha-response','preventDefault','val','<a\x20href=\x22\x22\x20id=\x22resend-verification-link\x22>Kirim\x20link\x20verifikasi</a>','#loading-spinner','redirect','3265wubSQT','72xUMzBG','removeClass','Silahkan\x20cek\x20email\x20anda!\x20','message','status','fire','location','/auth/register','checkValidity','#forgotPasswordForm','length','POST','#confirmPassword','href','querySelector','error','#resend-verification-link','value','#resetPasswordForm','responseText','email','/login','submit','success','Error','#fregister','/auth/login','click','3290842tjmCgz','1459359fqXXXu','addClass','117KuMIoB','3835976QTpyTX','Password\x20harus\x20minimal\x208\x20karakter'];_0x19fc=function(){return _0x47d53c;};return _0x19fc();}function sendResetLink(){const _0x4f9621=_0x455b;$(_0x4f9621(0xd2))['submit'](function(_0x9c247d){const _0x1ce29b=_0x4f9621;_0x9c247d[_0x1ce29b(0xc3)]();const _0x502a06=this;if(!_0x502a06[_0x1ce29b(0xd1)]())return;const _0x32a8a3=document[_0x1ce29b(0xd7)](_0x1ce29b(0xc2))[_0x1ce29b(0xda)];if(_0x32a8a3===''){_0x9c247d[_0x1ce29b(0xc3)](),Swal[_0x1ce29b(0xce)]('Error','Please\x20complete\x20the\x20reCAPTCHA.',_0x1ce29b(0xd8));return;}const _0x54fb13=new FormData(this);$(_0x1ce29b(0xc6))['removeClass'](_0x1ce29b(0xfb)),$[_0x1ce29b(0xf3)]({'url':_0x1ce29b(0xfd),'method':_0x1ce29b(0xd4),'data':_0x54fb13,'processData':![],'contentType':![],'success':function(_0x5e4aff){const _0x3283c0=_0x1ce29b;$(_0x3283c0(0xc6))[_0x3283c0(0xe7)](_0x3283c0(0xfb)),_0x5e4aff[_0x3283c0(0xcd)]===_0x3283c0(0xe0)&&Swal[_0x3283c0(0xce)](_0x3283c0(0xec),_0x5e4aff[_0x3283c0(0xcc)],_0x3283c0(0xe0));},'error':function(_0x543758,_0x5e420b,_0x55f805){const _0x30f181=_0x1ce29b;Swal[_0x30f181(0xce)]('Error',_0x543758[_0x30f181(0xeb)]['message'],_0x30f181(0xd8));},'complete':function(){const _0x46bd7a=_0x1ce29b;$(_0x46bd7a(0xc6))[_0x46bd7a(0xe7)](_0x46bd7a(0xfb));}});});}
+$(document).ready(function () {
+  //Function halaman register
+  submitRegister();
+  //Function halaman login
+
+  //Function untuk lupa password
+  sendResetPassword();
+
+  //function account
+});
+(() => {
+  "use strict";
+
+  const forms = document.querySelectorAll(".needs-validation");
+
+  const validateInput = (input, isValid) => {
+    if (isValid) {
+      input.classList.remove("is-invalid");
+      input.classList.add("is-valid");
+    } else {
+      input.classList.add("is-invalid");
+      input.classList.remove("is-valid");
+    }
+  };
+
+  const toggleFeedback = (feedbackElement, isVisible) => {
+    feedbackElement.style.display = isVisible ? "block" : "none";
+  };
+
+  const setupRealTimeValidation = (input, feedbackElement, validator) => {
+    input.addEventListener("input", () => {
+      const isValid = validator(input);
+      validateInput(input, isValid);
+      toggleFeedback(feedbackElement, !isValid);
+    });
+  };
+
+  const setupFormValidation = (form) => {
+    const password = form.querySelector("#password");
+    const confirmPassword = form.querySelector("#confirmPassword");
+    const feedbackPassword = form.querySelector("#passwordFeedback");
+    const feedbackConfirmPassword = form.querySelector(
+      "#confirmPasswordFeedback"
+    );
+    const nameInput = form.querySelector("#namalengkap");
+    const emailInput = form.querySelector("#email");
+    const phoneInput = form.querySelector("#phone");
+
+    // Real-time validations
+    setupRealTimeValidation(
+      nameInput,
+      null,
+      (input) => input.value.trim() !== ""
+    );
+    setupRealTimeValidation(emailInput, null, (input) => input.checkValidity());
+    setupRealTimeValidation(phoneInput, null, (input) => input.checkValidity());
+
+    // Password length validation
+    setupRealTimeValidation(
+      password,
+      feedbackPassword,
+      (input) => input.value.length >= 8
+    );
+
+    // Confirmation password validation considering the password field
+    setupRealTimeValidation(
+      confirmPassword,
+      feedbackConfirmPassword,
+      (input) => password.value.trim() !== "" && input.value === password.value
+    );
+
+    // Form submission validation
+    form.addEventListener("submit", (event) => {
+      const isLengthValid = password.value.length >= 8;
+      const isPasswordMatch = confirmPassword.value === password.value;
+      const isNameValid = nameInput.value.trim() !== "";
+      const isEmailValid = emailInput.checkValidity();
+      const isPhoneValid = phoneInput.checkValidity();
+
+      // Prevent form submission if any field is invalid
+      if (
+        !form.checkValidity() ||
+        !isLengthValid ||
+        !isPasswordMatch ||
+        !isNameValid ||
+        !isEmailValid ||
+        !isPhoneValid
+      ) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        // Validate password
+        validateInput(password, isLengthValid);
+        toggleFeedback(feedbackPassword, !isLengthValid);
+
+        // Validate confirmation password
+        validateInput(
+          confirmPassword,
+          isPasswordMatch && password.value.trim() !== ""
+        );
+        toggleFeedback(
+          feedbackConfirmPassword,
+          !(isPasswordMatch && password.value.trim() !== "")
+        );
+
+        // Validate name
+        validateInput(nameInput, isNameValid);
+
+        // Validate email
+        validateInput(emailInput, isEmailValid);
+
+        // Validate phone
+        validateInput(phoneInput, isPhoneValid);
+      } else {
+        form.classList.add("was-validated");
+      }
+    });
+  };
+  Array.from(forms).forEach(setupFormValidation);
+})();
+
+function submitRegister() {
+  $("#fregister").submit(function (event) {
+    event.preventDefault();
+    const form = this;
+    if (!form.checkValidity()) {
+      return;
+    }
+    var formData = new FormData(this);
+    var password = $("#password").val();
+    var confirmPassword = $("#confirmPassword").val();
+
+    if (password.length < 8) {
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      Swal.fire("Error", "Password tidak cocok", "error");
+      return;
+    }
+
+    const recaptcha = document.querySelector(".g-recaptcha-response").value;
+    if (recaptcha === "") {
+      event.preventDefault();
+      Swal.fire("Error", "Please complete the reCAPTCHA.", "error");
+      return;
+    }
+
+    $("#loading-spinner").removeClass("d-none");
+    $.ajax({
+      url: "/auth/register",
+      type: "POST",
+      data: formData,
+      processData: false,
+      contentType: false,
+      dataType: "json",
+      success: function (response) {
+        $("#loading-spinner").addClass("d-none");
+        if (response.status === "success") {
+          Swal.fire("Success", response.message, "success").then(() => {
+            window.location.href = "/login";
+          });
+        }
+      },
+      error: function (xhr, status, error) {
+        Swal.fire("Error", xhr.responseJSON.message, "error");
+      },
+      complete: function () {
+        $("#loading-spinner").addClass("d-none");
+      },
+    });
+  });
+}
+
+//Function untuk login
+function login() {
+  $("#flogin").submit(function (event) {
+    event.preventDefault();
+    const form = this;
+    var recaptcha = document.querySelector(".g-recaptcha-response").value;
+
+    const loginVal = $("#password").val();
+    if (loginVal === "" || loginVal.length < 8) {
+      return;
+    }
+
+    // Check if reCAPTCHA is fille
+    if (recaptcha === "") {
+      event.preventDefault();
+      Swal.fire("Error", "Please complete the reCAPTCHA.", "error");
+      return;
+    }
+
+    if (!form.checkValidity()) {
+      event.preventDefault();
+      return;
+    }
+
+    const formData = new FormData(this);
+    $("#loading-spinner").removeClass("d-none");
+    $.ajax({
+      url: "/auth/login",
+      type: "POST",
+      data: formData,
+      processData: false,
+      contentType: false,
+      dataType: "json",
+      success: function (response) {
+        $("#loading-spinner").addClass("d-none");
+        if (response.status === "success") {
+          if (response.redirect) {
+            window.location.href = response.redirect;
+          }
+        } else if (response.status === "unverified") {
+          Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: response.message,
+            footer:
+              '<a href="" id="resend-verification-link">Kirim link verifikasi</a>',
+          });
+
+          $("#resend-verification-link").on("click", function (e) {
+            e.preventDefault();
+            $("#loading-spinner").removeClass("d-none");
+            $.ajax({
+              url: "/auth/resend-verification",
+              type: "POST",
+              data: { email: response.email },
+              success: function (res) {
+                $("#loading-spinner").addClass("d-none");
+                Swal.fire({
+                  icon: "success",
+                  title: "Link verifikasi dikrim",
+                  text: "Silahkan cek email anda! ",
+                });
+              },
+              error: function (xhr) {
+                const errRes = JSON.parse(xhr.responseText);
+                Swal.fire("Error", errRes.message, "error");
+              },
+              complete: function () {
+                $("#loading-spinner").addClass("d-none");
+              },
+            });
+          });
+        }
+      },
+      error: function (xhr) {
+        const errorResponse = JSON.parse(xhr.responseText);
+        Swal.fire("Error", errorResponse.message, "error");
+      },
+      complete: function () {
+        $("#loading-spinner").addClass("d-none");
+      },
+    });
+  });
+}
+
+function sendResetPassword() {
+  $("#resetPasswordForm").submit(function (event) {
+    event.preventDefault();
+
+    var password = $("#password").val();
+    var confirmPassword = $("#confirmPassword").val();
+
+    if (password.length < 8) {
+      Swal.fire("Error", "Password harus minimal 8 karakter", "error");
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      Swal.fire("Error", "Password tidak cocok", "error");
+      return;
+    }
+
+    const formData = new FormData(this);
+
+    $("#loading-spinner").removeClass("d-none");
+    $.ajax({
+      url: "/auth/new-password",
+      method: "POST",
+      data: formData,
+      processData: false,
+      contentType: false,
+      success: function (response) {
+        $("#loading-spinner").addClass("d-none");
+        if (response.status === "success") {
+          Swal.fire("Success", response.message, "success").then(() => {
+            window.location.href = "/login";
+          });
+        }
+      },
+      error: function (xhr, status, error) {
+        Swal.fire("Error", xhr.responseJSON.message, "error");
+      },
+      complete: function () {
+        $("#loading-spinner").addClass("d-none");
+      },
+    });
+  });
+}
+
+function sendResetLink() {
+  $("#forgotPasswordForm").submit(function (event) {
+    event.preventDefault();
+
+    const form = this;
+    if (!form.checkValidity()) {
+      return;
+    }
+
+    const recaptcha = document.querySelector(".g-recaptcha-response").value;
+    if (recaptcha === "") {
+      event.preventDefault(); // Stop form submission
+      Swal.fire("Error", "Please complete the reCAPTCHA.", "error");
+      return;
+    }
+
+    const formData = new FormData(this);
+    $("#loading-spinner").removeClass("d-none");
+    $.ajax({
+      url: "/auth/password-reset",
+      method: "POST",
+      data: formData,
+      processData: false,
+      contentType: false,
+      success: function (response) {
+        $("#loading-spinner").addClass("d-none");
+        if (response.status === "success") {
+          Swal.fire("Success", response.message, "success");
+        }
+      },
+      error: function (xhr, status, error) {
+        Swal.fire("Error", xhr.responseJSON.message, "error");
+      },
+      complete: function () {
+        $("#loading-spinner").addClass("d-none");
+      },
+    });
+  });
+}

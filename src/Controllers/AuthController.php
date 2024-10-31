@@ -20,8 +20,6 @@ class AuthController extends Controller
 
     //Inisiasi method untuk memanggil key di file .env
     public static function init(){
-        $dotenv = Dotenv::createImmutable(__DIR__ . '/../../');
-        $dotenv->load();
         self::$host = $_ENV['SMTP_HOST'];
         self::$smtpEmail = $_ENV['SMTP_USERNAME'];
         self::$smtpPass = $_ENV['SMTP_PASSWORD'];
@@ -178,6 +176,11 @@ class AuthController extends Controller
             $password = filter_input(INPUT_POST, 'password', FILTER_DEFAULT);
             $recaptchaResponse = filter_input(INPUT_POST, 'g-recaptcha-response', FILTER_SANITIZE_STRING);
 
+            if (strlen($password) < 8) {
+                throw new \Exception("Password harus minimal 8 karakter", 400);
+                return;
+            }
+
             if(!$recaptchaResponse){
                 throw new \Exception("reCAPTCHA wajib diselesaikan", 400);
             }
@@ -221,7 +224,7 @@ class AuthController extends Controller
 
              //simpan authToken di cookie, NOTE::HARUS COOKIE HTTP_ONLY
              setcookie('authToken', $token, [
-                'expires' => time() + 3600,
+                'expires' => time() + 18000,
                 'path' => '/',
                 'domain' => '',
                 'secure' => true,

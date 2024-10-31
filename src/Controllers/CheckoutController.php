@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 use App\Controller;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 use App\Models\Order;
 use App\Config\Midtrans;
 use App\Middleware\AuthMiddleware;
@@ -11,6 +13,19 @@ use App\Models\ProductModel;
 
 
 class CheckoutController extends Controller{
+
+
+    protected static $host;
+    protected static $smtpEmail;
+    protected static $smtpPass;
+    protected static $port;
+
+    private static function init(){
+        self::$host = $_ENV['SMTP_HOST'];
+        self::$smtpEmail = $_ENV['SMTP_USERNAME'];
+        self::$smtpPass = $_ENV['SMTP_PASSWORD'];
+        self::$port = $_ENV['SMTP_PORT'];
+    }
     
     public function checkout(){
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
@@ -18,7 +33,7 @@ class CheckoutController extends Controller{
                 $userData = AuthMiddleware::checkAuth();
                 $userId = $userData['id'];
 
-                $orderId = uniqid('ORDER-', true);
+                $orderId = preg_replace('/[^A-Za-z0-9]/', '', uniqid('ORDER', true));
 
                 $data = [
                     'productId' => filter_input(INPUT_POST, 'Id_gas', FILTER_VALIDATE_INT),
@@ -82,7 +97,9 @@ class CheckoutController extends Controller{
                 echo json_encode([
                     'token' => $snapToken
                 ]);
-
+                register_shutdown_function(function() use ($orderId) {
+                    $this->sendEmailNotification($orderId);
+                });
 
             }catch(\Exception $e){
                  http_response_code(500);
@@ -125,7 +142,7 @@ class CheckoutController extends Controller{
             }
     
             // Inisialisasi variabel
-            $orderId = uniqid('ORDER-', true);
+            $orderId = preg_replace('/[^A-Za-z0-9]/', '', uniqid('ORDER', true));
             $totalHarga = 0;
             $itemsDetail = [];
     
@@ -231,6 +248,10 @@ class CheckoutController extends Controller{
             echo json_encode([
                 'token' => $snapToken
             ]);
+
+            register_shutdown_function(function() use ($orderId) {
+                $this->sendEmailNotification($orderId);
+            });
         } catch (\Exception $e) {
             header('Content-Type: application/json');
             http_response_code($e->getCode() ?: 500);
@@ -243,39 +264,117 @@ class CheckoutController extends Controller{
     
     
 
-    
-
-
-    public function handleNotification(){
+    private function sendEmailNotification($orderId){
         try{
-            $jsonResult = file_get_contents('php://input');
-            $notification = json_decode($jsonResult);
 
-            $transactionStatus = $notification->transaction_status;
-            $orderId = $notification->order_id;
-
-            // Periksa status transaksi dan update status pesanan di database
-            if($transactionStatus == 'capture' || $transactionStatus == 'settlement'){
-                    Order::updateOrderStatus($orderId, 'paid');
-                    Order::updateSnapToken($orderId, NULL);
-                } elseif ($transactionStatus == 'pending') {
-                    Order::updateOrderStatus($orderId, 'pending');
-                } elseif ($transactionStatus == 'deny' || $transactionStatus == 'expire' || $transactionStatus == 'cancel') {
-                    // Order::updateOrderStatus($orderId, 'failed');
-                    Order::deleteExpireOrder($orderId);
-                }
-
-            // Response ke Midtrans
-            header('Content-Type: application/json');
-            return json_encode(['status' => 'success']);
+            $orderedItems = Order::getOrderbyOID($orderId);
+            if (!$orderedItems) {
+                throw new \Exception("Order ID tidak ditemukan", 404);
+            }
+    
+            $toEmail = 'abdulrahmanpkgas@gmail.com';
+            self::init();
+            
+            // Konfigurasi PHPMailer
+            $mail = new PHPMailer(true);
+            $mail->isSMTP();
+            $mail->Host = self::$host;
+            $mail->SMTPAuth = true;
+            $mail->Username = self::$smtpEmail;
+            $mail->Password = self::$smtpPass;
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+            $mail->Port = self::$port;
+            
+            $mail->setFrom('nvlysys@gmail.com', 'PKGas-Abdullah');
+            $mail->addAddress($toEmail);
+            
+            $mail->isHTML(true);
+            $mail->Subject = 'Pesanan yang masuk';
+            
+            // Mulai pembuatan isi email dalam HTML
+            $totalHarga = 0;
+            $tableRows = '';
+    
+            // Buat baris tabel untuk setiap item dalam pesanan
+            foreach ($orderedItems as $item) {
+                $tableRows .= "
+                    <tr>
+                        <td>{$item['id_Order']}</td>
+                        <td>{$item['Jenis_gas']}</td>
+                        <td>{$item['Qty']}</td>
+                        <td>{$item['totalharga']}</td>
+                        <td>{$item['created_at']}</td>
+                    </tr>
+                ";
+                $totalHarga += $item['totalharga'];
+            }
+    
+            // Gabungkan alamat dan deskripsi jika ada, atau kosongkan jika tidak ada
+            $alamatPengiriman = $orderedItems[0]['Detail_alamat'] && $orderedItems[0]['Description'] 
+                ? "{$orderedItems[0]['Detail_alamat']} - {$orderedItems[0]['Description']}"
+                : "Tidak ada alamat";
+    
+            $biayaPengiriman = $orderedItems[0]['delivery_fee'] == 0 ? "-" : $orderedItems[0]['delivery_fee'];
+            
+            // Rangkai HTML email
+            $mail->Body = "
+                <h2>Detail Pesanan yang Masuk</h2>
+                <table border='1' cellpadding='8' cellspacing='0'>
+                    <thead>
+                        <tr>
+                            <th>ID Order</th>
+                            <th>Jenis Gas LPG</th>
+                            <th>Qty</th>
+                            <th>Harga</th>
+                            <th>Tanggal Pemesanan</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {$tableRows}
+                    </tbody>
+                </table>
+                <br>
+                <p><strong>Alamat Pengiriman:</strong> {$alamatPengiriman}</p>
+                <p><strong>Biaya Pengiriman:</strong> {$biayaPengiriman}</p>
+                <p><strong>Total Harga:</strong> {$totalHarga}</p>
+            ";
+    
+            // Kirim email
+            $mail->send();
         }catch(\Exception $e){
-            http_response_code(500);
+            header('Content-Type: application/json');
+            http_response_code($e->getCode() ?: 500);
             echo json_encode([
                 'status' => 'error',
                 'message' => $e->getMessage()
             ]);
         }
     }
+
+
+    public function handleNotification() {
+        try {
+            $jsonResult = file_get_contents('php://input');
+            $notification = json_decode($jsonResult);
+            $transactionStatus = $notification->transaction_status;
+            $orderId = $notification->order_id;
+    
+            // Update status transaksi di database
+            if ($transactionStatus == 'capture' || $transactionStatus == 'settlement') {
+                Order::updateOrderStatus($orderId, 'paid');
+                Order::updateSnapToken($orderId, NULL);
+            } elseif ($transactionStatus == 'pending') {
+                Order::updateOrderStatus($orderId, 'pending');
+            } elseif ($transactionStatus == 'deny' || $transactionStatus == 'expire' || $transactionStatus == 'cancel') {
+                Order::deleteExpireOrder($orderId);
+            }
+        } catch (\Exception $e) {
+            http_response_code(500);
+            echo json_encode(['status' => 'error', 'message' => $e->getMessage()]);
+        }
+    }
+    
+    
     private function checkRequest(){
         if (!isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_REQUESTED_WITH'] !== 'XMLHttpRequest') {
             http_response_code(403); 

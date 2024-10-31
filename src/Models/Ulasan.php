@@ -34,7 +34,7 @@ class Ulasan{
         try{    
             $db = Database::getConnection();
             $stmt = $db->prepare("
-                    SELECT rating.rating, rating.review_description, user.Nama_lengkap, rating.created_at AS created_at
+                    SELECT rating.rating, rating.review_description, user.Nama_lengkap, user.foto_filepath, rating.created_at AS created_at
                     FROM " . self::$table ." AS rating
                     INNER JOIN " . self::$table_user . " AS user ON rating.user_id = user.user_id
                     ORDER BY created_at DESC

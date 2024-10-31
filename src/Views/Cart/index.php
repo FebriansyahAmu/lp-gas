@@ -50,7 +50,7 @@ $clientKey = $_ENV['CLIENT_KEY'];
         <h5 class="card-title">Ringkasan belanja</h5>
         <div class="" id="d-alamat" style="display: none">
           <h6>Dikirim Ke</h6>
-          <i class="bi bi-geo-alt"></i> <span id="u-alamat" data-id=""></span
+          <i class="bi bi-geo-alt"></i> <span id="u-alamat" data-id="">Belum ada alamat </span
           ><a href="/account/alamat" class="text-decoration-none"
             >Ganti Alamat?</a
           >

@@ -131,6 +131,7 @@ $router->get('/dashboard', AdminController::class, 'dashboard', [
 ]);
 
 
+
 //CRUD DATA GAS
 $router->get('/data-gas', AdminController::class, 'indexGas', [
     'class' => AuthMiddleware::class,
@@ -173,6 +174,11 @@ $router->get('/data/total-customer', AdminController::class, 'getCountUsers', [
 
 //GET DATA PEMBELIAN
 $router->get('/data/riwayat-pembelian', AdminController::class, 'getRiwayatPembelian', [
+    'class' => AuthMiddleware::class,
+    'role' => 'admin'
+]);
+
+$router->get('/data/detail-pembelian/{orderId}', AdminController::class, 'getDetailOrder', [
     'class' => AuthMiddleware::class,
     'role' => 'admin'
 ]);

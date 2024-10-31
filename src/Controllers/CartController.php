@@ -86,8 +86,8 @@ class CartController extends Controller{
     public function getAllCartByUID(){
         try{
             $endPoint = "/account/cart";
-            $this->checkReferer($endpoint);
-            $this->checkRequest();
+            // $this->checkReferer($endpoint);
+            // $this->checkRequest();
 
             $userData = AuthMiddleware::checkAuth();
             $userId = $userData['id'];
@@ -146,8 +146,8 @@ class CartController extends Controller{
     public function getAlamatCart(){
         try{
             $endPoint = "/account/cart";
-            $this->checkReferer($endPoint);
-            $this->checkRequest();
+            // $this->checkReferer($endPoint);
+            // $this->checkRequest();
             
             $userData = AuthMiddleware::checkAuth();
             $userId = $userData['id'];

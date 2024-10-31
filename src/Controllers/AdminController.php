@@ -30,8 +30,8 @@ class AdminController extends Controller
     public function getDataCustomer(){
         try{
             $endPoint = "/data-customer";
-            $this->checkReferer($endpoint);
-            $this->checkRequest();
+            // $this->checkReferer($endpoint);
+            // $this->checkRequest();
             
             $dataCustomer = User::getAllCustomer();
             if($dataCustomer){
@@ -55,12 +55,38 @@ class AdminController extends Controller
     }
 
 
+    public function getDetailOrder($orderId){
+        try{
+            // $endPonint = "/dashboard";
+            // // $this->checkReferer($endPoint);
+            // // $this->checkRequest();
+
+            $detailOrder = Order::getOrderbyOID($orderId);
+            if($detailOrder){
+                header('Content-Type: application/json');
+                echo json_encode([
+                    'status' => 'success',
+                    'data' => $detailOrder
+                ]);
+            }else{
+                throw new \Exception("Detail order tidak ditemukan", 404);
+            }
+        }catch(\Exception $e){
+            header('Content-Type: application/json');
+            http_response_code($e->getCode() ? : 500);
+            echo json_encode([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
 
     public function getRiwayatPembelian(){
         try{
             $endPoint = "/dashboard";
-            $this->checkReferer($endPoint);
-            $this->checkRequest();
+            // $this->checkReferer($endPoint);
+            // $this->checkRequest();
 
             $riwayatPembelian = Order::getRiwayatOrders();
             if($riwayatPembelian){
@@ -77,7 +103,8 @@ class AdminController extends Controller
             http_response_code($e->getCode() ? : 500);
             echo json_encode([
                 'status' => 'error',
-                'message' => $e->getMessage()
+                'message' => $e->getMessage(),
+                'data' => []
             ]);
         }
     }
@@ -85,8 +112,8 @@ class AdminController extends Controller
     public function getCountUsers(){
         try{
             $endPoint = "/dashboard";
-            $this->checkReferer($endPoint);
-            $this->checkRequest();
+            // $this->checkReferer($endPoint);
+            // $this->checkRequest();
             
             $getcountUser = User::countUsers();
 

@@ -13,10 +13,7 @@ class AuthMiddleware {
             // Periksa apakah cookie `authToken` ada
             if (!isset($_COOKIE['authToken'])) {
                 http_response_code(401);
-                // echo json_encode([
-                //     'status' => 'error',
-                //     'message' => 'Access denied, no token found',
-                // ]);
+                header('Location: /login');
                 exit;
             }
 

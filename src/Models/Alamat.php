@@ -12,7 +12,7 @@ class Alamat{
             $db = Database::getConnection();
     
             // Cek apakah user sudah memiliki alamat
-            $stmt = $db->prepare("SELECT COUNT(*) as count FROM " . self::$table . " WHERE id_user = ?");
+            $stmt = $db->prepare("SELECT COUNT(*) as count FROM " . self::$table . " WHERE id_user = ? AND deleted_at IS NULL");
             if (!$stmt) {
                 throw new \Exception("Failed to create statement", $db->error);   
             }
@@ -49,7 +49,7 @@ class Alamat{
         try{
             $db = Database::getConnection();
 
-            $stmt = $db->prepare("SELECT id_Alamat, Detail_alamat, Description, Status FROM " . self::$table . " WHERE id_user = ?");
+            $stmt = $db->prepare("SELECT id_Alamat, Detail_alamat, Description, Status FROM " . self::$table . " WHERE id_user = ? AND deleted_at IS NULL");
             if(!$stmt){
                 throw new \Exception("Failed to creaete statement", $db->error);
             }
@@ -73,7 +73,7 @@ class Alamat{
         try{
             $db = Database::getConnection();
 
-            $stmt = $db->prepare("SELECT Detail_Alamat, Description FROM " . self::$table . " WHERE id_Alamat = ? AND id_user = ?");
+            $stmt = $db->prepare("SELECT Detail_Alamat, Description FROM " . self::$table . " WHERE id_Alamat = ? AND id_user = ? AND deleted_at IS NULL");
             if(!$stmt){
                 throw new \Exception("Failed to prepare statement", $db->error);
             }
@@ -122,7 +122,7 @@ class Alamat{
         try{
             $db = Database::getConnection();
 
-            $stmt = $db->prepare("DELETE FROM " . self::$table . " WHERE id_Alamat = ? AND id_user = ?");
+            $stmt = $db->prepare("UPDATE " . self::$table . " SET deleted_at = NOW() WHERE id_Alamat = ? AND id_user = ?");
             if(!$stmt){
                 throw new \Exception("Failed to create statement", $db->error);
             }
@@ -145,7 +145,7 @@ class Alamat{
         try{
             $status = 'utama';
             $db = Database::getConnection();
-            $stmt = $db->prepare("SELECT id_Alamat, Detail_alamat, Description FROM " . self::$table . " WHERE id_user = ? AND status = ?");
+            $stmt = $db->prepare("SELECT id_Alamat, Detail_alamat, Description FROM " . self::$table . " WHERE id_user = ? AND status = ? AND deleted_at IS NULL");
 
             if(!$stmt){
                 throw new \Exception("Failed to prepare statement", $db->error);

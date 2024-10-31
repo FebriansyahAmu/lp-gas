@@ -7,7 +7,7 @@ return [
         'port' => '3306',
         'dbname' => 'ec_gas',
         'username' => 'root',
-        'password' => '',
+        'password' => 'Hollow69@#',
         'charset' => 'utf8mb4',
         'collation' => 'utf8mb4_general_ci',
         'prefix' => '',

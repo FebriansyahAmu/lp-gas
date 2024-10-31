@@ -51,30 +51,36 @@
             ></button>
           </div>
           <div class="modal-body">
-            <form id="formAlamat">
-              <div class="mb-3">
-                <label for="detailAlamat" class="form-label"
-                  >Detail Alamat</label
-                >
-                <textarea
-                  class="form-control"
-                  id="detailAlamat"
-                  name="Detail_alamat"
-                  rows="3"
-                  placeholder="Masukkan detail alamat lengkap"
-                ></textarea>
+          <form id="formAlamat" class="needs-validation" novalidate>
+            <div class="mb-3">
+              <label for="detailAlamat" class="form-label">Detail Alamat</label>
+              <textarea
+                class="form-control"
+                id="detailAlamat"
+                name="Detail_alamat"
+                rows="3"
+                required
+                placeholder="Masukkan detail alamat lengkap"
+              ></textarea>
+              <div class="invalid-feedback">
+                Detail alamat wajib diisi.
               </div>
-              <div class="mb-3">
-                <label for="description" class="form-label">Deskripsi</label>
-                <textarea
-                  class="form-control"
-                  id="description"
-                  rows="3"
-                  name="Description"
-                  placeholder="Masukkan deskripsi tambahan"
-                ></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="description" class="form-label">Deskripsi</label>
+              <textarea
+                class="form-control"
+                id="description"
+                rows="3"
+                name="Description"
+                placeholder="Masukkan deskripsi tambahan: Rumah warna pink belakang SDN 2 Motoboi Kecil"
+              ></textarea>
+              <div class="invalid-feedback">
+                Deskripsi wajib diisi.
               </div>
-            </form>
+            </div>
+          </form>
+
           </div>
           <div class="modal-footer">
             <button
@@ -117,3 +123,13 @@
     </div>
   </div>
 </section>
+<script>
+  document.getElementById("formAlamat").addEventListener("submit", function (event) {
+  if (!this.checkValidity()) {
+    event.preventDefault();
+    event.stopPropagation();
+  }
+  this.classList.add("was-validated");
+});
+
+</script>

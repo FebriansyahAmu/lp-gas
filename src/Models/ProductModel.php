@@ -11,7 +11,7 @@ class ProductModel {
     public static function findbyId($id){
         try{
             $db = Database::getConnection();
-            $stmt = $db->prepare("SELECT * FROM " . self::$table . " WHERE id_gas= ?");
+            $stmt = $db->prepare("SELECT * FROM " . self::$table . " WHERE id_gas= ? AND deleted_at IS NULL");
             if(!$stmt){
                 throw new \Exception("Failed to prepare statement", $db->error);
             }
@@ -34,7 +34,7 @@ class ProductModel {
     public static function getAll(){
         try{
             $db = Database::getConnection();
-            $stmt = $db->prepare("SELECT * FROM " . self::$table);
+            $stmt = $db->prepare("SELECT * FROM " . self::$table . " WHERE deleted_at IS NULL");
             
             if(!$stmt){
                 throw new \Exception("Failed to prepare statement", $db->error);
@@ -123,7 +123,7 @@ class ProductModel {
                 unlink($foto_filepath); 
             }
 
-            $stmt = $db->prepare("DELETE FROM " . self::$table . " WHERE id_gas = ?");
+            $stmt = $db->prepare("UPDATE " . self::$table . " SET deleted_at = NOW(), foto_gas = NULL WHERE id_gas = ?");
             if(!$stmt){
                 throw new \Exception("Failed to prepare delete statement", $db->error);
             }

@@ -9,6 +9,7 @@ Class Order{
     protected static $table = 'ec_order';
     protected static $table_gas = 'ec_gas';
     protected static $tb_user = 'ec_user';
+    protected static $tb_alamat = 'ec_alamat';
  
     public static function  validateOrder($data){
         $errors = [
@@ -287,6 +288,34 @@ Class Order{
 
             return $result->fetch_all(MYSQLI_ASSOC);
 
+        }catch(\Exception $e){
+            error_log($e->getMessage());
+            return false;
+        }
+    }
+
+    public static function getOrderbyOID($orderId){
+        try{
+            $db = Database::getConnection();
+            $stmt = $db->prepare("
+                        SELECT orders.id_Order, gas.Jenis_gas, orders.Qty, orders.delivery_fee , orders.totalharga, orders.created_at, alamat.Detail_alamat, alamat.Description
+                        FROM " . self::$table . " AS orders
+                        LEFT JOIN " . self::$table_gas ." AS gas ON orders.id_gas = gas.id_gas
+                        LEFT JOIN " . self::$tb_alamat . " AS alamat ON orders.id_alamat = alamat.id_Alamat
+                        WHERE orders.id_Order = ?
+            ");
+            if(!$stmt){
+                throw new \Exception("Failed to prepare statement", $db->error);
+            }
+
+            $stmt->bind_param("s", $orderId);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            if(!$result){
+                throw new \Exception("Failed to execute query", $stmt->error);
+            }
+
+            return $result->fetch_all(MYSQLI_ASSOC);
         }catch(\Exception $e){
             error_log($e->getMessage());
             return false;

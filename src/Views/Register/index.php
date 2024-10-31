@@ -18,19 +18,19 @@
         <div class="col-12 text-light">
           <label for="namalengkap" class="form-label">Nama Lengkap</label>
           <input type="text" class="form-control" id="namalengkap" name="namalengkap" required autocomplete="off" />
-          <div class="invalid-feedback">Name Cannot be empty.</div>
+          <div class="invalid-feedback">Nama tidak boleh kosong.</div>
         </div>
 
         <div class="col-12 text-light">
           <label for="email" class="form-label">Email</label>
           <input type="email" class="form-control" id="email" name="email" required autocomplete="off" />
-          <div class="invalid-feedback">Please provide a valid email.</div>
+          <div class="invalid-feedback">Mohon isikan email yang valid.</div>
         </div>
 
         <div class="col-12 text-light">
           <label for="nohp" class="form-label">No Hp</label>
           <input type="number" class="form-control" id="phone" name="phone" required autocomplete="off" />
-          <div class="invalid-feedback">Please provide a valid phone number.</div>
+          <div class="invalid-feedback">Mohon isikan nomor Hp yang valid.</div>
         </div>
 
         <div class="col-12 position-relative text-light">
@@ -41,9 +41,8 @@
               <i id="togglePasswordIcon" class="fas fa-eye"></i>
             </span>
           </div>
-          <div class="invalid-feedback" id="passwordFeedback">Password must be at least 8 characters.</div>
+          <div class="invalid-feedback" id="passwordFeedback">Password minimal harus 8 karakter.</div>
         </div>
-
         <div class="col-12 position-relative text-light">
           <label for="confirmPassword" class="form-label">Konfirmasi Password</label>
           <div class="input-group">
@@ -52,7 +51,7 @@
               <i id="toggleConfirmPasswordIcon" class="fas fa-eye"></i>
             </span>
           </div>
-          <div class="invalid-feedback" id="confirmPasswordFeedback">Passwords do not match.</div>
+          <div class="invalid-feedback" id="confirmPasswordFeedback">Password tidak sesuai.</div>
         </div>
 
         <?php
@@ -73,19 +72,6 @@
 </div>
 
 <script>
-  (() => {
-    "use strict";
-    const forms = document.querySelectorAll(".needs-validation");
-    Array.from(forms).forEach((form) => {
-      form.addEventListener("submit", (event) => {
-        if (!form.checkValidity()) {
-          event.preventDefault();
-          event.stopPropagation();
-        }
-        form.classList.add("was-validated");
-      }, false);
-    });
-  })();
 
   $(document).ready(function(){
     togglePassword();
