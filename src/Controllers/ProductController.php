@@ -15,14 +15,17 @@ class ProductController extends Controller
     }
     public function product($id)
     {
-        $isLoggedIn = $this->authMiddleware->handle();
+        $authResult = $this->authMiddleware->handle();
+        $isLoggedIn = $authResult['isLoggedIn'];
+        $role = $authResult['role'];
         try{
             $product = ProductModel::findbyId($id);
 
             if($product){
                 $this->render('/Product/index', [
                     'product' => $product,
-                    'isLoggedIn' => $isLoggedIn
+                    'isLoggedIn' => $isLoggedIn,
+                    'role' => $role
                 ]);
             }else{
                 throw new \Exception("Product tidak ditemukan", 404);
@@ -37,12 +40,12 @@ class ProductController extends Controller
 
     public function getProduct($id){
         try{
-            $this->checkRequest();
-            $allowedReferer = "https://pangkalangasabdulrahman.online";
-            if (!isset($_SERVER['HTTP_REFERER']) || strpos($_SERVER['HTTP_REFERER'], $allowedReferer) !== 0) {
-                header('Location: /');
-                exit();
-            }
+            // $this->checkRequest();
+            // $allowedReferer = "https://pangkalangasabdulrahman.online";
+            // if (!isset($_SERVER['HTTP_REFERER']) || strpos($_SERVER['HTTP_REFERER'], $allowedReferer) !== 0) {
+            //     header('Location: /');
+            //     exit();
+            // }
             $product = ProductModel::findbyId($id);
 
             if($product){
@@ -67,11 +70,11 @@ class ProductController extends Controller
     public function getAllProduct() {
         try {
             $this->checkRequest();
-            $allowedReferer = "https://pangkalangasabdulrahman.online";
-            if (!isset($_SERVER['HTTP_REFERER']) || strpos($_SERVER['HTTP_REFERER'], $allowedReferer) !== 0) {
-                header('Location: /');
-                exit();
-            }
+            // $allowedReferer = "https://pangkalangasabdulrahman.online";
+            // if (!isset($_SERVER['HTTP_REFERER']) || strpos($_SERVER['HTTP_REFERER'], $allowedReferer) !== 0) {
+            //     header('Location: /');
+            //     exit();
+            // }
 
             $product = ProductModel::getAll();
     

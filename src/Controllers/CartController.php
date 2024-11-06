@@ -19,8 +19,10 @@ class CartController extends Controller{
     }
 
     public function indexCart(){
-        $isLoggedIn = $this->authMiddleware->handle();
-        $this->render('/Cart/index', ['isLoggedIn' => $isLoggedIn] );
+        $authResult = $this->authMiddleware->handle();
+        $isLoggedIn = $authResult['isLoggedIn'];
+        $role = $authResult['role'];
+        $this->render('/Cart/index', ['isLoggedIn' => $isLoggedIn, 'role' => $role]);
     }
 
     public function addCart(){
@@ -28,7 +30,7 @@ class CartController extends Controller{
             if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
                 throw new Exception('Invalid request method', 405);
             }
-            $this->checkRequest();
+            // $this->checkRequest();
     
             // Ambil JSON payload dari request body
             $jsonData = file_get_contents('php://input');
@@ -85,9 +87,9 @@ class CartController extends Controller{
 
     public function getAllCartByUID(){
         try{
-            $endPoint = "/account/cart";
-            $this->checkReferer($endpoint);
-            $this->checkRequest();
+            // $endPoint = "/account/cart";
+            // $this->checkReferer($endpoint);
+            // $this->checkRequest();
 
             $userData = AuthMiddleware::checkAuth();
             $userId = $userData['id'];
@@ -145,9 +147,9 @@ class CartController extends Controller{
 
     public function getAlamatCart(){
         try{
-            $endPoint = "/account/cart";
-            $this->checkReferer($endPoint);
-            $this->checkRequest();
+            // $endPoint = "/account/cart";
+            // $this->checkReferer($endPoint);
+            // $this->checkRequest();
             
             $userData = AuthMiddleware::checkAuth();
             $userId = $userData['id'];

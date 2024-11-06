@@ -1,1 +1,321 @@
-(function(_0x3dd46a,_0x4eef1a){const _0x45e4a8=_0x5969,_0x5e24e4=_0x3dd46a();while(!![]){try{const _0x1136de=parseInt(_0x45e4a8(0x208))/0x1+-parseInt(_0x45e4a8(0x213))/0x2+-parseInt(_0x45e4a8(0x1bc))/0x3+parseInt(_0x45e4a8(0x20f))/0x4+-parseInt(_0x45e4a8(0x1e8))/0x5*(-parseInt(_0x45e4a8(0x1f4))/0x6)+parseInt(_0x45e4a8(0x1ed))/0x7*(parseInt(_0x45e4a8(0x1f7))/0x8)+parseInt(_0x45e4a8(0x21f))/0x9;if(_0x1136de===_0x4eef1a)break;else _0x5e24e4['push'](_0x5e24e4['shift']());}catch(_0x1c885e){_0x5e24e4['push'](_0x5e24e4['shift']());}}}(_0xbed3,0xd4c5b),$(document)['ready'](function(){submitFormDataGas(),tabelDataGas(),clearFormDataGas(),getEditGas(),deleteDataGas(),dataCustomer(),getHistoryPembelian(),getTotalUser(),getDetailOrder();}));function submitFormDataGas(){const _0x303d64=_0x5969;$(_0x303d64(0x1bb))[_0x303d64(0x202)](function(_0x1e6868){const _0x5993bb=_0x303d64;_0x1e6868[_0x5993bb(0x212)]();const _0x52c7ef=$(_0x5993bb(0x1bb))[_0x5993bb(0x210)]('id'),_0x41162e=_0x52c7ef?_0x5993bb(0x1e7):_0x5993bb(0x1cc),_0x2f0b74=new FormData(this);_0x52c7ef&&_0x2f0b74[_0x5993bb(0x1ba)](_0x5993bb(0x1d0),_0x52c7ef),_0x52c7ef&&$('#GambarGas')[_0x5993bb(0x1b6)](0x0)[_0x5993bb(0x1f8)][_0x5993bb(0x1f0)]===0x0&&_0x2f0b74[_0x5993bb(0x1f5)](_0x5993bb(0x1d7)),Swal[_0x5993bb(0x1be)]({'title':_0x5993bb(0x1f1),'text':_0x5993bb(0x205),'icon':'info','showCancelButton':!![],'confirmButtonColor':_0x5993bb(0x1f6),'cancelButtonColor':_0x5993bb(0x1e3),'confirmButtonText':_0x5993bb(0x1c9)})['then'](_0x1396bb=>{const _0x3e86d8=_0x5993bb;_0x1396bb[_0x3e86d8(0x20c)]&&$[_0x3e86d8(0x1fc)]({'url':_0x41162e,'method':'POST','data':_0x2f0b74,'contentType':![],'processData':![],'success':function(_0x1f0b2c){const _0x17a0d0=_0x3e86d8;_0x1f0b2c[_0x17a0d0(0x1d2)]===_0x17a0d0(0x1ea)&&Swal[_0x17a0d0(0x1be)](_0x17a0d0(0x1ec),_0x1f0b2c[_0x17a0d0(0x1e2)],_0x17a0d0(0x1ea))[_0x17a0d0(0x20b)](()=>{window['location']['reload']();});},'error':function(_0x158afd,_0x309397,_0x4e1981){const _0x1e0b04=_0x3e86d8;Swal[_0x1e0b04(0x1be)](_0x1e0b04(0x1af),_0x158afd[_0x1e0b04(0x1c7)]['message'],_0x1e0b04(0x1cd));}});});});}function tabelDataGas(){const _0x28d0b2=_0x5969;$(_0x28d0b2(0x1e9))[_0x28d0b2(0x1ef)]({'responsive':!![],'scrollX':!![],'ajax':{'url':_0x28d0b2(0x21e),'dataSrc':_0x28d0b2(0x210)},'columns':[{'data':_0x28d0b2(0x1c5)},{'data':'Jenis_gas'},{'data':'Harga_gas'},{'data':_0x28d0b2(0x21d)},{'data':null,'render':function(_0x596257,_0xef8253,_0x39dc51){const _0x79232e=_0x28d0b2;return'\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<button\x20class=\x22btn\x20btn-sm\x20btn-primary\x20btn-edit\x22\x20data-id=\x22'+_0x596257[_0x79232e(0x1c5)]+_0x79232e(0x1eb)+_0x596257[_0x79232e(0x1c5)]+'\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<i\x20class=\x22bi\x20bi-trash\x22></i>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</button>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20';}}]});}function clearFormDataGas(){const _0x5b3b14=_0x5969;$(_0x5b3b14(0x1b2))[_0x5b3b14(0x1b4)](function(){const _0x59611d=_0x5b3b14;$(_0x59611d(0x1bb))[0x0]['reset'](),$(_0x59611d(0x1bb))['removeData']('id'),$(_0x59611d(0x201))[_0x59611d(0x1dd)](_0x59611d(0x1d8)),$(_0x59611d(0x1db))[_0x59611d(0x214)]('src','')[_0x59611d(0x1e6)]();});}function getEditGas(){const _0x33eab0=_0x5969;$(_0x33eab0(0x1e9))['on']('click',_0x33eab0(0x204),function(){const _0x621e12=_0x33eab0,_0x5aec02=$(this)[_0x621e12(0x210)]('id');$(_0x621e12(0x1bb))[_0x621e12(0x210)]('id',_0x5aec02),$(_0x621e12(0x201))[_0x621e12(0x1dd)](_0x621e12(0x1b8)),$[_0x621e12(0x1fc)]({'url':_0x621e12(0x1de)+_0x5aec02,'method':_0x621e12(0x215),'success':function(_0x424a72){const _0x26f7df=_0x621e12;_0x424a72[_0x26f7df(0x210)]?($(_0x26f7df(0x1bd))[_0x26f7df(0x216)](_0x424a72[_0x26f7df(0x210)][_0x26f7df(0x207)]),$('#HargaGas')['val'](_0x424a72['data'][_0x26f7df(0x21b)]),$(_0x26f7df(0x21c))[_0x26f7df(0x216)](_0x424a72[_0x26f7df(0x210)]['Stok']),_0x424a72[_0x26f7df(0x210)][_0x26f7df(0x1dc)]?($(_0x26f7df(0x1db))[_0x26f7df(0x214)]('src',_0x424a72['data'][_0x26f7df(0x1dc)]),$(_0x26f7df(0x1db))[_0x26f7df(0x1d6)]()):$(_0x26f7df(0x1db))['hide'](),$(_0x26f7df(0x1ca))[_0x26f7df(0x1c2)](_0x26f7df(0x1d6))):alert(_0x26f7df(0x1ad));},'error':function(_0x24ef82,_0x28735a,_0x349b96){alert('Terjadi\x20Kesalahan',+_0x349b96);}});});}function _0xbed3(){const _0x1a8bd2=['/data/detail-pembelian/','.btn-delete','Harga_gas','#Stok','Stok','/api/products','10517076cRDfee','\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Detail\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</button>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','Data\x20Gas\x20Tidak\x20Ditemukan','No_Hp','Error','warning','#tabelRiwayatPembelianA','#btnTambahGas','html','click','id_Order','get','</td>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</tr>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','Edit\x20Data\x20Gas','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<tr>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<td>','append','#formDataGas','3993993XqECwQ','#JenisGas','fire','#detailOrderModalLabel','Error!','#tabelRiwayatPembelianA\x20tbody','modal','</td>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<td>','Belum\x20ada\x20data','id_gas','created_at','responseJSON','paid','Ya,\x20simpan!','#dataGasModal','<tr><td\x20colspan=\x227\x22\x20class=\x22text-center\x22>Belum\x20ada\x20data</td></tr>','/gas/create','error','<tr><td\x20colspan=\x224\x22\x20class=\x22text-center\x22>Belum\x20ada\x20data</td></tr>','forEach','idGas','<span\x20class=\x22badge\x20text-bg-warning\x22>pending</span>','status','totalharga','log','.btn-detail','show','gambarGas','Tambah\x20Gas','Detail\x20Order','Apakah\x20anda\x20yakin?','#gambarGasPreview','foto_gas','text','/api/product/','total_harga','desc','<span\x20class=\x22badge\x20text-bg-success\x22>success</span>','message','#d33','Anda\x20akan\x20menghapus\x20data\x20ini!','Email','hide','/gas/edit','533405GgCTYr','#tabelDataGas','success','\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<i\x20class=\x22bi\x20bi-pencil-square\x22></i>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</button>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<button\x20class=\x22btn\x20btn-sm\x20btn-danger\x20btn-delete\x22\x20data-id=\x22','Success','11393347EOpNwL','</p>','DataTable','length','Konfirmasi','#alamatPengiriman','Deleted!','6BUSjpF','delete','#3085d6','8wDrNKp','files','#totalOrders','Nama_lengkap','<p><strong>Alamat\x20Pengiriman:</strong>\x20','ajax','/data/riwayat-pembelian','Detail_alamat','Ya,\x20Hapus\x20data','reload','#dataGasModalLabel','submit','Error\x20fetching\x20order\x20details:','.btn-edit','Anda\x20yakin\x20ingin\x20menyimpan\x20data\x20ini?','#tabelDataCustomer','Jenis_gas','475772hswYIe','Qty','#tabelDetail\x20tbody','then','isConfirmed','delivery_method','/data/customers','1837044bHOSlA','data','delivery_fee','preventDefault','3270106YElMJu','attr','GET','val','empty','total_qty'];_0xbed3=function(){return _0x1a8bd2;};return _0xbed3();}function deleteDataGas(){const _0x553124=_0x5969;$(_0x553124(0x1e9))['on'](_0x553124(0x1b4),_0x553124(0x21a),function(){const _0x4b7d7b=_0x553124,_0x4306b5=$(this)[_0x4b7d7b(0x210)]('id');Swal['fire']({'title':_0x4b7d7b(0x1da),'text':_0x4b7d7b(0x1e4),'icon':_0x4b7d7b(0x1b0),'showCancelButton':!![],'confirmButtonColor':'#3085d6','cancelButtonColor':_0x4b7d7b(0x1e3),'confirmButtonText':_0x4b7d7b(0x1ff)})[_0x4b7d7b(0x20b)](_0x5efda0=>{const _0x3b7714=_0x4b7d7b;_0x5efda0['isConfirmed']&&$[_0x3b7714(0x1fc)]({'url':'/gas/delete/'+_0x4306b5,'method':'DELETE','success':function(_0x25c861){const _0x36f9a5=_0x3b7714;_0x25c861['status']===_0x36f9a5(0x1ea)&&Swal['fire'](_0x36f9a5(0x1f3),_0x25c861[_0x36f9a5(0x1e2)],_0x36f9a5(0x1ea))[_0x36f9a5(0x20b)](()=>{const _0x2a5ace=_0x36f9a5;$(_0x2a5ace(0x1e9))[_0x2a5ace(0x1ef)]()[_0x2a5ace(0x1fc)][_0x2a5ace(0x200)]();});},'error':function(_0x27aa2e,_0x783e37,_0x237ab3){const _0x485fa1=_0x3b7714;Swal[_0x485fa1(0x1be)](_0x485fa1(0x1c0),'Terjadi\x20kesalahan,\x20silahkan\x20coba\x20lagi\x20nanti',_0x485fa1(0x1cd));}});});});}function dataCustomer(){const _0xf1752d=_0x5969;$(_0xf1752d(0x206))['DataTable']({'responsive':!![],'scrollX':!![],'ajax':{'url':_0xf1752d(0x20e),'dataSrc':_0xf1752d(0x210)},'columns':[{'data':'user_id'},{'data':'Nama_lengkap'},{'data':_0xf1752d(0x1e5)},{'data':_0xf1752d(0x1ae)}]});}function getHistoryPembelian(){const _0x1cc71c=_0x5969;var _0x19490d=$('#tabelRiwayatPembelianA')[_0x1cc71c(0x1ef)]({'responsive':!![],'scrollX':!![],'ajax':{'url':_0x1cc71c(0x1fd),'dataSrc':'data','complete':function(_0xada895){const _0x1ba753=_0x1cc71c;var _0x4ad3fb=_0xada895[_0x1ba753(0x1c7)]&&_0xada895[_0x1ba753(0x1c7)][_0x1ba753(0x210)]?_0xada895[_0x1ba753(0x1c7)]['data'][_0x1ba753(0x1f0)]:0x0;$(_0x1ba753(0x1f9))[_0x1ba753(0x1dd)](_0x4ad3fb),_0x4ad3fb===0x0&&$(_0x1ba753(0x1c1))['html'](_0x1ba753(0x1cb));},'error':function(_0x69c879,_0x3ee634,_0x4b5614){}},'columns':[{'data':_0x1cc71c(0x1b5)},{'data':_0x1cc71c(0x1fa)},{'data':_0x1cc71c(0x218)},{'data':_0x1cc71c(0x20d)},{'data':_0x1cc71c(0x211)},{'data':_0x1cc71c(0x1df)},{'data':'status','render':function(_0xbee75f,_0xc07e42,_0x43755b){const _0x170c45=_0x1cc71c;if(_0xbee75f==='pending')return _0x170c45(0x1d1);else{if(_0xbee75f===_0x170c45(0x1c8))return _0x170c45(0x1e1);}}},{'data':null,'render':function(_0x58f534,_0x6cdf64,_0x12f096){const _0x435697=_0x1cc71c;return'\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<button\x20class=\x22btn\x20btn-sm\x20btn-primary\x20btn-detail\x22\x20data-id=\x22'+_0x58f534[_0x435697(0x1b5)]+_0x435697(0x1ac);}}],'order':[[0x0,_0x1cc71c(0x1e0)]],'language':{'emptyTable':_0x1cc71c(0x1c4)}});}function _0x5969(_0x6fa8e1,_0x48ca48){const _0xbed3a=_0xbed3();return _0x5969=function(_0x5969f0,_0x591a6a){_0x5969f0=_0x5969f0-0x1ac;let _0x7a81a0=_0xbed3a[_0x5969f0];return _0x7a81a0;},_0x5969(_0x6fa8e1,_0x48ca48);}function getDetailOrder(){const _0x1f0982=_0x5969;$(_0x1f0982(0x1b1))['on'](_0x1f0982(0x1b4),_0x1f0982(0x1d5),function(){const _0x16f2f=_0x1f0982,_0x267089=$(this)[_0x16f2f(0x210)]('id');console[_0x16f2f(0x1d4)](_0x267089),$[_0x16f2f(0x1fc)]({'url':_0x16f2f(0x219)+_0x267089,'method':_0x16f2f(0x215),'success':function(_0x412ae5){const _0x4da450=_0x16f2f,_0x3fa282=_0x412ae5['data'],_0x37e8d6=$(_0x4da450(0x20a));_0x37e8d6[_0x4da450(0x217)]();if(_0x3fa282[_0x4da450(0x1f0)]>0x0){_0x3fa282[_0x4da450(0x1cf)](_0x1ec9be=>{const _0x2131b5=_0x4da450;_0x37e8d6[_0x2131b5(0x1ba)](_0x2131b5(0x1b9)+_0x1ec9be[_0x2131b5(0x207)]+_0x2131b5(0x1c3)+_0x1ec9be[_0x2131b5(0x209)]+_0x2131b5(0x1c3)+_0x1ec9be[_0x2131b5(0x1d3)]+'</td>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<td>'+_0x1ec9be[_0x2131b5(0x1c6)]+_0x2131b5(0x1b7));});const _0x49c9ad=_0x3fa282[0x0][_0x4da450(0x1fe)]+'\x20-\x20'+_0x3fa282[0x0]['Description'];$(_0x4da450(0x1f2))[_0x4da450(0x1b3)](_0x4da450(0x1fb)+_0x49c9ad+_0x4da450(0x1ee));}else _0x37e8d6['append'](_0x4da450(0x1ce)),$(_0x4da450(0x1f2))[_0x4da450(0x1b3)]('');},'error':function(_0x4020e1,_0x434169,_0x16cbe7){const _0x154f58=_0x16f2f;console[_0x154f58(0x1cd)](_0x154f58(0x203),_0x16cbe7);}}),$('#detailOrder')['modal'](_0x16f2f(0x1d6)),$(_0x16f2f(0x1bf))[_0x16f2f(0x1dd)](_0x16f2f(0x1d9));});}function getTotalUser(){const _0x20aec8=_0x5969;$[_0x20aec8(0x1fc)]({'url':'/data/total-customer','method':_0x20aec8(0x215),'success':function(_0x13ae31){const _0x236053=_0x20aec8,_0x5eb69e=_0x13ae31[_0x236053(0x210)]['count(user_id)'];$('#totalUsers')[_0x236053(0x1dd)](_0x5eb69e);}});}
+$(document).ready(function () {
+  submitFormDataGas();
+  tabelDataGas();
+  clearFormDataGas();
+  getEditGas();
+  deleteDataGas();
+
+  dataCustomer();
+  getHistoryPembelian();
+  getTotalUser();
+
+  getDetailOrder();
+});
+function submitFormDataGas() {
+  $("#formDataGas").submit(function (event) {
+    event.preventDefault();
+
+    const idGas = $("#formDataGas").data("id");
+    const url = idGas ? "/gas/edit" : "/gas/create";
+    // const method = idGas ? 'PUT' : 'POST';
+
+    const formData = new FormData(this);
+
+    if (idGas) {
+      formData.append("idGas", idGas);
+    }
+
+    if (idGas && $("#GambarGas").get(0).files.length === 0) {
+      formData.delete("gambarGas");
+    }
+
+    Swal.fire({
+      title: "Konfirmasi",
+      text: "Anda yakin ingin menyimpan data ini?",
+      icon: "info",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Ya, simpan!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        $.ajax({
+          url: url,
+          method: "POST",
+          data: formData,
+          contentType: false,
+          processData: false,
+          success: function (response) {
+            if (response.status === "success") {
+              Swal.fire("Success", response.message, "success").then(() => {
+                // $("#tabelDataGas").DataTable().ajax.reload();
+                window.location.reload();
+              });
+            }
+          },
+          error: function (xhr, status, error) {
+            Swal.fire("Error", xhr.responseJSON.message, "error");
+          },
+        });
+      }
+    });
+  });
+}
+
+function tabelDataGas() {
+  $("#tabelDataGas").DataTable({
+    responsive: true,
+    scrollX: true,
+    ajax: {
+      url: "/api/products",
+      dataSrc: "data",
+    },
+    columns: [
+      { data: "id_gas" },
+      { data: "Jenis_gas" },
+      { data: "Harga_gas" },
+      { data: "Stok" },
+      {
+        data: null,
+        render: function (data, type, row) {
+          return `
+                        <button class="btn btn-sm btn-primary btn-edit" data-id="${data.id_gas}">
+                              <i class="bi bi-pencil-square"></i>
+                        </button>
+                        <button class="btn btn-sm btn-danger btn-delete" data-id="${data.id_gas}">
+                              <i class="bi bi-trash"></i>
+                        </button>
+                  `;
+        },
+      },
+    ],
+  });
+}
+
+function clearFormDataGas() {
+  $("#btnTambahGas").click(function () {
+    // Reset form input
+    $("#formDataGas")[0].reset();
+    $("#formDataGas").removeData("id");
+    $("#dataGasModalLabel").text("Tambah Gas");
+
+    // Reset image preview
+    $("#gambarGasPreview").attr("src", "").hide();
+  });
+}
+
+function getEditGas() {
+  $("#tabelDataGas").on("click", ".btn-edit", function () {
+    const idGas = $(this).data("id");
+    $("#formDataGas").data("id", idGas);
+    $("#dataGasModalLabel").text("Edit Data Gas");
+
+    $.ajax({
+      url: "/api/product/" + idGas,
+      method: "GET",
+      success: function (response) {
+        if (response.data) {
+          $("#JenisGas").val(response.data.Jenis_gas);
+          $("#HargaGas").val(response.data.Harga_gas);
+          $("#Stok").val(response.data.Stok);
+
+          if (response.data.foto_gas) {
+            $("#gambarGasPreview").attr("src", response.data.foto_gas);
+            $("#gambarGasPreview").show(); // Tampilkan gambar
+            // $('#currentGambar').val(response.data.foto_gas);
+          } else {
+            $("#gambarGasPreview").hide(); // Sembunyikan gambar jika tidak ada
+          }
+
+          $("#dataGasModal").modal("show");
+        } else {
+          alert("Data Gas Tidak Ditemukan");
+        }
+      },
+      error: function (xhr, status, error) {
+        alert("Terjadi Kesalahan", +error);
+      },
+    });
+  });
+}
+
+function deleteDataGas() {
+  $("#tabelDataGas").on("click", ".btn-delete", function () {
+    const idGas = $(this).data("id");
+
+    Swal.fire({
+      title: "Apakah anda yakin?",
+      text: "Anda akan menghapus data ini!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Ya, Hapus data",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        $.ajax({
+          url: "/gas/delete/" + idGas,
+          method: "DELETE",
+          success: function (response) {
+            if (response.status === "success") {
+              Swal.fire("Deleted!", response.message, "success").then(() => {
+                $("#tabelDataGas").DataTable().ajax.reload();
+              });
+            }
+          },
+          error: function (xhr, status, error) {
+            Swal.fire(
+              "Error!",
+              "Terjadi kesalahan, silahkan coba lagi nanti",
+              "error"
+            );
+          },
+        });
+      }
+    });
+  });
+}
+function dataCustomer() {
+  $("#tabelDataCustomer").DataTable({
+    responsive: true,
+    scrollX: true,
+    ajax: {
+      url: "/data/customers",
+      dataSrc: "data",
+    },
+    columns: [
+      { data: "user_id" },
+      { data: "Nama_lengkap" },
+      { data: "Email" },
+      { data: "No_Hp" },
+    ],
+  });
+}
+
+function getHistoryPembelian() {
+  var table = $("#tabelRiwayatPembelianA").DataTable({
+    responsive: true,
+    scrollX: true,
+    ajax: {
+      url: "/data/riwayat-pembelian",
+      dataSrc: "data",
+      complete: function (response) {
+        var totalOrders =
+          response.responseJSON && response.responseJSON.data
+            ? response.responseJSON.data.length
+            : 0;
+        $("#totalOrders").text(totalOrders);
+
+        if (totalOrders === 0) {
+          // Tampilkan pesan "Belum ada data" jika data kosong
+          $("#tabelRiwayatPembelianA tbody").html(
+            '<tr><td colspan="7" class="text-center">Belum ada data</td></tr>'
+          );
+        }
+      },
+      error: function (xhr, status, error) {},
+    },
+    columns: [
+      { data: "id_Order" },
+      { data: "Nama_lengkap" },
+      { data: "total_qty" },
+      { data: "delivery_method" },
+      { data: "delivery_fee" },
+      { data: "total_harga" },
+      {
+        data: "status",
+        render: function (data, type, row) {
+          if (data === "pending") {
+            return '<span class="badge text-bg-warning">pending</span>';
+          } else if (data === "paid") {
+            return '<span class="badge text-bg-success">success</span>';
+          }
+        },
+      },
+      {
+        data: null,
+        render: function (data, type, row) {
+          return `
+                          <button class="btn btn-sm btn-primary btn-detail" data-id="${data.id_Order}">
+                                Detail
+                          </button>
+                    `;
+        },
+      },
+    ],
+    order: [[0, "desc"]],
+    language: {
+      emptyTable: "Belum ada data", // Tampilkan pesan khusus ketika tabel kosong
+    },
+  });
+}
+
+function getDetailOrder() {
+  $("#tabelRiwayatPembelianA").on("click", ".btn-detail", function () {
+    const orderId = $(this).data("id");
+
+    console.log(orderId);
+
+    // Ambil data detail order dari server
+    $.ajax({
+      url: "/data/detail-pembelian/" + orderId,
+      method: "GET",
+      success: function (response) {
+        const data = response.data; // Ambil data dari response
+        const $tbody = $("#tabelDetail tbody");
+
+        // Kosongkan tabel sebelum mengisi
+        $tbody.empty();
+
+        // Tambahkan data ke tabel
+        if (data.length > 0) {
+          data.forEach((item) => {
+            $tbody.append(`
+                <tr>
+                  <td>${item.Jenis_gas}</td>
+                  <td>${item.Qty}</td>
+                  <td>${item.totalharga}</td>
+                  <td>${item.created_at}</td>
+                </tr>
+              `);
+          });
+
+          // Gabungkan alamat dan deskripsi atau tampilkan pesan jika alamat null
+          let alamatLengkap;
+          if (data[0].Detail_alamat) {
+            alamatLengkap = `${data[0].Detail_alamat} - ${data[0].Description}`;
+          } else {
+            alamatLengkap =
+              "Metode pengambilan Ambil ditempat, alamat tidak dipilih";
+          }
+
+          $("#alamatPengiriman").html(
+            `<p><strong>Alamat Pengiriman:</strong> ${alamatLengkap}</p>`
+          );
+        } else {
+          $tbody.append(
+            '<tr><td colspan="4" class="text-center">Belum ada data</td></tr>'
+          );
+          $("#alamatPengiriman").html(""); // Kosongkan jika tidak ada data
+        }
+      },
+      error: function (xhr, status, error) {
+        console.error("Error fetching order details:", error);
+      },
+    });
+
+    $("#detailOrder").modal("show");
+    $("#detailOrderModalLabel").text("Detail Order");
+  });
+}
+
+function getTotalUser() {
+  $.ajax({
+    url: "/data/total-customer",
+    method: "GET",
+    success: function (response) {
+      const totalUsers = response.data["count(user_id)"];
+      $("#totalUsers").text(totalUsers);
+    },
+  });
+}

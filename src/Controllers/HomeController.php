@@ -14,8 +14,10 @@ class HomeController extends Controller
     }
     public function index()
     {
-        $isLoggedIn = $this->authMiddleware->handle();
-        $this->render('/Home/index', ['isLoggedIn' => $isLoggedIn] );
+        $authResult = $this->authMiddleware->handle();
+        $isLoggedIn = $authResult['isLoggedIn'];
+        $role = $authResult['role'];
+        $this->render('/Home/index', ['isLoggedIn' => $isLoggedIn, 'role' => $role]);
     }
 
     public function pageNotFound(){

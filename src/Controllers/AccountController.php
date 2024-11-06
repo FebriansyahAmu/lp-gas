@@ -17,19 +17,25 @@ class AccountController extends Controller
     }
     public function index()
     {
-        $isLoggedIn = $this->authMiddleware->handle();
-        $this->render('/Account/index', ['isLoggedIn' => $isLoggedIn] );
+        $authResult = $this->authMiddleware->handle();
+        $isLoggedIn = $authResult['isLoggedIn'];
+        $role = $authResult['role'];
+        $this->render('/Account/index', ['isLoggedIn' => $isLoggedIn, 'role' => $role] );
     }
 
     public function indexAlamat(){
-        $isLoggedIn = $this->authMiddleware->handle();
-        $this->render('/Alamat/index', ['isLoggedIn' => $isLoggedIn] );
+        $authResult = $this->authMiddleware->handle();
+        $isLoggedIn = $authResult['isLoggedIn'];
+        $role = $authResult['role'];
+        $this->render('/Alamat/index', ['isLoggedIn' => $isLoggedIn, 'role' => $role] );
     }
 
 
     public function indexPengaturan(){
-        $isLoggedIn = $this->authMiddleware->handle();
-        $this->render('/Pengaturan/index', ['isLoggedIn' => $isLoggedIn]);
+        $authResult = $this->authMiddleware->handle();
+        $isLoggedIn = $authResult['isLoggedIn'];
+        $role = $authResult['role'];
+        $this->render('/Pengaturan/index', ['isLoggedIn' => $isLoggedIn, 'role' => $role]);
     }
 
 
@@ -76,11 +82,11 @@ class AccountController extends Controller
     public function getAlamatbyUser(){
         try{
             
-            $allowedReferer = "https://pangkalangasabdulrahman.online";
-            if (!isset($_SERVER['HTTP_REFERER']) || strpos($_SERVER['HTTP_REFERER'], $allowedReferer) !== 0) {
-                header('Location: /account/alamat');
-                exit();
-            }
+            // $allowedReferer = "https://pangkalangasabdulrahman.online";
+            // if (!isset($_SERVER['HTTP_REFERER']) || strpos($_SERVER['HTTP_REFERER'], $allowedReferer) !== 0) {
+            //     header('Location: /account/alamat');
+            //     exit();
+            // }
             $this->checkRequest();
             
             $userData = AuthMiddleware::checkAuth();
@@ -158,11 +164,11 @@ class AccountController extends Controller
     public function getAlamatbyID($id){
         try{
             
-            $allowedReferer = "https://pangkalangasabdulrahman.online";
-            if (!isset($_SERVER['HTTP_REFERER']) || strpos($_SERVER['HTTP_REFERER'], $allowedReferer) !== 0) {
-                header('Location: /Alamat');
-                exit();
-            }
+            // $allowedReferer = "https://pangkalangasabdulrahman.online";
+            // if (!isset($_SERVER['HTTP_REFERER']) || strpos($_SERVER['HTTP_REFERER'], $allowedReferer) !== 0) {
+            //     header('Location: /Alamat');
+            //     exit();
+            // }
             $this->checkRequest();
 
             $userData = AuthMiddleware::checkAuth();
@@ -258,12 +264,12 @@ class AccountController extends Controller
     public function getRiwayatPembelian(){
         try{
 
-            $allowedReferer = "https://pangkalangasabdulrahman.online";
-            if (!isset($_SERVER['HTTP_REFERER']) || strpos($_SERVER['HTTP_REFERER'], $allowedReferer) !== 0) {
-                header('Location: /account');
-                exit();
-            }
-            $this->checkRequest();
+            // $allowedReferer = "https://pangkalangasabdulrahman.online";
+            // if (!isset($_SERVER['HTTP_REFERER']) || strpos($_SERVER['HTTP_REFERER'], $allowedReferer) !== 0) {
+            //     header('Location: /account');
+            //     exit();
+            // }
+            // $this->checkRequest();
 
             $userData = AuthMiddleware::checkAuth();
             $userId = $userData['id'];
@@ -293,12 +299,12 @@ class AccountController extends Controller
     //ini untun pengaturan akun
     public function getUserbyuid(){
         try{
-            $allowedReferer = "https://pangkalangasabdulrahman.online";
-            if (!isset($_SERVER['HTTP_REFERER']) || strpos($_SERVER['HTTP_REFERER'], $allowedReferer) !== 0) {
-                header('Location: /account/pengaturan');
-                exit();
-            }
-            $this->checkRequest();
+            // $allowedReferer = "https://pangkalangasabdulrahman.online";
+            // if (!isset($_SERVER['HTTP_REFERER']) || strpos($_SERVER['HTTP_REFERER'], $allowedReferer) !== 0) {
+            //     header('Location: /account/pengaturan');
+            //     exit();
+            // }
+            // $this->checkRequest();
 
             $userData = AuthMiddleware::checkAuth();
             $userId = $userData['id'];

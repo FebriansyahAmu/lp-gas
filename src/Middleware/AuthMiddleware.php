@@ -13,7 +13,6 @@ class AuthMiddleware {
             // Periksa apakah cookie `authToken` ada
             if (!isset($_COOKIE['authToken'])) {
                 http_response_code(401);
-                header('Location: /login');
                 exit;
             }
 
@@ -66,20 +65,28 @@ class AuthMiddleware {
         }
     }
 
-    public function handle(){
+    public function handle() {
         $isLoggedIn = false;
-        if(isset($_COOKIE['authToken'])){
-            try{
+        $role = null;
+    
+        if (isset($_COOKIE['authToken'])) {
+            try {
                 $token = $_COOKIE['authToken'];
-                $userData = JwtHelper::validateToken('$token');
-                if($userData){
+                $userData = JwtHelper::validateToken($token); 
+    
+                if ($userData) {
                     $isLoggedIn = true;
+                    $role = $userData['role']; 
                 }
-            }catch(\Exception $e){
+            } catch (\Exception $e) {
                 error_log($e->getMessage());
             }
         }
-
-        return $isLoggedIn;
+    
+        return [
+            'isLoggedIn' => $isLoggedIn,
+            'role' => $role
+        ];
     }
+    
 }

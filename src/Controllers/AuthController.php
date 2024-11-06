@@ -196,7 +196,7 @@ class AuthController extends Controller
             //cek apakah email dan username sesuai dengan yang ada di database
             $user = User::verifyUser($email, $password);
             if(!$user){
-                throw new \Exception("Invalid credentials", 401);
+                throw new \Exception("Email atau password salah!", 401);
             }
 
             //lakukan pengecekan apakah user sudah melakukan verifikasi email?

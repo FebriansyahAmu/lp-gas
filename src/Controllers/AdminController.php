@@ -57,9 +57,9 @@ class AdminController extends Controller
 
     public function getDetailOrder($orderId){
         try{
-            $endPonint = "/dashboard";
-            $this->checkReferer($endPoint);
-            $this->checkRequest();
+            // $endPonint = "/dashboard";
+            // $this->checkReferer($endPoint);
+            // $this->checkRequest();
 
             $detailOrder = Order::getOrderbyOID($orderId);
             if($detailOrder){
@@ -84,9 +84,9 @@ class AdminController extends Controller
 
     public function getRiwayatPembelian(){
         try{
-            $endPoint = "/dashboard";
-            $this->checkReferer($endPoint);
-            $this->checkRequest();
+            // $endPoint = "/dashboard";
+            // $this->checkReferer($endPoint);
+            // $this->checkRequest();
 
             $riwayatPembelian = Order::getRiwayatOrders();
             if($riwayatPembelian){
@@ -111,9 +111,9 @@ class AdminController extends Controller
 
     public function getCountUsers(){
         try{
-            $endPoint = "/dashboard";
-            $this->checkReferer($endPoint);
-            $this->checkRequest();
+            // $endPoint = "/dashboard";
+            // $this->checkReferer($endPoint);
+            // $this->checkRequest();
             
             $getcountUser = User::countUsers();
 
