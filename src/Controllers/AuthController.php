@@ -258,19 +258,18 @@ class AuthController extends Controller
     }
 
     //Method untuk chekauth apakah user sudah login atau belum yang mana data ini akan diperlukan nanti
-    public function checkAuthStatus(){
+    public function checkAuthStatus() {
         try {
             $endPoint = "/";
             $this->checkReferer($endPoint);
             $this->checkRequest();
-
+    
             $auth = $this->authMiddleware->handle();
     
             header('Content-Type: application/json');
-    
-            // Kembalikan nilai boolean secara langsung
             echo json_encode([
-                "auth" => $auth ? true : false  // Mengembalikan boolean, bukan string
+                "isLoggedIn" => $auth['isLoggedIn'], // Menggunakan nilai isLoggedIn dari hasil authMiddleware
+                "message" => $auth['isLoggedIn'] ? "Authorized" : "Unauthorized"
             ]);
         } catch (Exception $e) {
             http_response_code(500);
@@ -280,6 +279,8 @@ class AuthController extends Controller
             ]);
         }
     }
+    
+    
     
 
     //Method untuk mengirim verifikasi email

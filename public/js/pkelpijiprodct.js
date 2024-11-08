@@ -243,8 +243,7 @@ function checkAuth() {
     url: "/checkauth",
     type: "GET",
     success: function (response) {
-      // Cek apakah pengguna terautentikasi
-      const isAuthenticated = response.auth === true;
+      const isAuthenticated = response.isLoggedIn;
 
       // Tambahkan event listener untuk perubahan pada select
       document
@@ -258,11 +257,10 @@ function checkAuth() {
               // Jika pengguna tidak terautentikasi, tampilkan Swal
               Swal.fire({
                 title: "Info",
-                text: "Anda belum login, silahkan login untuk melanjutkan ordering",
+                text: "Anda belum login, silakan login untuk menambahkan alamat",
                 icon: "info",
                 confirmButtonText: "Login",
               }).then((result) => {
-                // Redirect ke halaman login setelah konfirmasi
                 if (result.isConfirmed) {
                   window.location.href = "/login";
                 }
@@ -285,10 +283,7 @@ function truncateText(text, maxLength) {
 }
 
 function getAlamat() {
-  // Menambahkan opsi "Tambah Alamat" terlebih dahulu
   var addressSelect = document.getElementById("addr-select");
-
-  // Reset isi select terlebih dahulu
   addressSelect.innerHTML =
     '<option value="" disabled selected>Pilih Alamat</option>';
 
@@ -297,7 +292,7 @@ function getAlamat() {
   addOption.value = "add-new"; // Nilai unik untuk mendeteksi opsi ini
   addOption.classList.add("bg-primary");
   addOption.classList.add("text-center");
-  addOption.textContent = "    + Tambah Alamat"; // Teks untuk opsi "Tambah Alamat"
+  addOption.textContent = "    + Tambah Alamat";
   addressSelect.appendChild(addOption);
 
   // Menampilkan elemen div jika belum terlihat
@@ -384,7 +379,7 @@ function addCart() {
         }
       },
       error: function (xhr, status, err) {
-        if (xhr.status === 302) {
+        if (xhr.status === 401) {
           Swal.fire({
             title: "Info",
             text: "Anda belum login, silahkan login untuk menambahkan ke keranjang",
