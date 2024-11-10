@@ -37,35 +37,42 @@ function displayProducts(products) {
     let disableMessage =
       product.Stok == 0 ? "<span class='text-danger'>Stok Habis</span>" : "";
 
+    // Buat pesan WhatsApp berdasarkan produk
+    let whatsappMessage = `Halo, saya ingin memesan ${product.Jenis_gas}.\nHarga: Rp.${product.Harga_gas}\nStok: 1\nApakah masih tersedia?`;
+
+    // Buat URL WhatsApp dengan pesan
+    let whatsappUrl = `https://wa.me/6282394143812?text=${encodeURIComponent(
+      whatsappMessage
+    )}`;
+
     let productCard = `
-            <div class="col-md-4 col-sm-6 col-12 mb-4" data-aos="fade-up" data-aos-delay="${
-              index * 200
-            }" data-aos-duration="800">
-              <div class="card hover-shadow zoom-effect ${shadowColor}">
-                <img class="card-img-top img-fluid" src="${
-                  product.foto_gas
-                }" alt="${product.Jenis_gas}" />
-                <div class="card-body">
-                  <div class="text-center">
-                    <span class="badge text-bg-success text-center fs-6">Rp.${
-                      product.Harga_gas
-                    }</span>
-                  </div>
-                  <h5 class="card-title">${product.Jenis_gas}</h5>
-                  
-                  <p class="card-text">Stok: ${
-                    product.Stok
-                  } ${disableMessage}</p>
-                   <!-- Tampilkan pesan stok habis jika stoknya 0 -->
-                  <div class="d-flex justify-content-center mb-4">
-                    <a href="/product/${
-                      product.id_gas
-                    }" class="btn btn-primary p-2 ${isDisabled}">Pesan Sekarang</a>
-                  </div>
-                </div>
-              </div>
+      <div class="col-md-4 col-sm-6 col-12 mb-4" data-aos="fade-up" data-aos-delay="${
+        index * 200
+      }" data-aos-duration="800">
+        <div class="card hover-shadow zoom-effect ${shadowColor}">
+          <img class="card-img-top img-fluid" src="${product.foto_gas}" alt="${
+      product.Jenis_gas
+    }" />
+          <div class="card-body">
+            <div class="text-center">
+              <span class="badge text-bg-success text-center fs-6">Rp.${
+                product.Harga_gas
+              }</span>
             </div>
-          `;
+            <h5 class="card-title">${product.Jenis_gas}</h5>
+            
+            <p class="card-text">Stok: ${product.Stok} ${disableMessage}</p>
+            <!-- Tampilkan pesan stok habis jika stoknya 0 -->
+            <div class="d-flex justify-content-center mb-4">
+              <a href="${
+                isDisabled ? "#" : whatsappUrl
+              }" target="_blank" class="btn btn-primary p-2 ${isDisabled}">Pesan Sekarang</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+
     $("#product-container").append(productCard);
   });
 }

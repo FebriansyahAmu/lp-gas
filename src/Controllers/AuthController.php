@@ -236,15 +236,15 @@ class AuthController extends Controller
             if($user['role'] === 'admin'){
                 echo json_encode([
                     'status' => 'success',
-                    'redirect' => '/dashboard'
+                    'redirect' => '/data-gas'
                 ]);
                 exit();
-             }else if($user['role'] === 'user'){
+             }/*else if($user['role'] === 'user'){
                 echo json_encode([
                     'status' => 'success',
                     'redirect' => '/account/alamat'
                 ]);
-             }
+             }*/
 
 
         }catch(\Exception $e){//Tangkap error dengan menggunakan catch
@@ -427,7 +427,7 @@ class AuthController extends Controller
             'samesite' => 'Strict'
         ]);
 
-        header('Location: /login');
+        header('Location: /');
         exit();
     }
 

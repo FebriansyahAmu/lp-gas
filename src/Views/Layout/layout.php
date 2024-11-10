@@ -27,6 +27,7 @@
 
 <main>
 <?php component('navbar', ['isLoggedIn' => $isLoggedIn, 'role' => $role]); ?>
+<?php component('whatsapme'); ?>
 <?php component('spinners'); ?>
 
     <div class="">

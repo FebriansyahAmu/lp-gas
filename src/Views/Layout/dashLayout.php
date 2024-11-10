@@ -75,17 +75,17 @@
                 <nav class="mt-2"> 
                     <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="menu" data-accordion="false">
                         <li class="nav-header">Menu</li>
-                        <li class="nav-item"> <a href="dashboard" class="nav-link"> <i class="bi bi-activity"></i></i>
+                        <!-- <li class="nav-item"> <a href="dashboard" class="nav-link"> <i class="bi bi-activity"></i></i>
                             <p>Dashboard</p>
-                        </a> </li>
+                        </a> </li> -->
                        
                         <li class="nav-item"> <a href="/data-gas" class="nav-link"> <i class="bi bi-clipboard-data"></i>
                             <p>Data Gas</p>
                         </a> </li>
 
-                        <li class="nav-item"> <a href="/data-customer" class="nav-link"> <i class="bi bi-people"></i>
+                        <!-- <li class="nav-item"> <a href="/data-customer" class="nav-link"> <i class="bi bi-people"></i>
                             <p>Data Customer</p>
-                        </a> </li>
+                        </a> </li> -->
                       
                     </ul>
                 </nav>

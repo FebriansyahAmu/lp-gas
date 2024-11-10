@@ -28,41 +28,6 @@
           <a class="nav-link" href="#contact">Kontak</a>
         </li>
         <?php endif; ?>
-
-        <ul class="navbar-nav d-flex align-items-center" >
-          <?php if ($isLoggedIn) : ?>
-          <li class="nav-item dropdown">
-            <a class="nav-link text-light dropdown-toggle" href="#" id="profileDropdown" role="button"
-              data-bs-toggle="dropdown" aria-expanded="false">
-              Account
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="profileDropdown">
-              <?php if ($role === 'admin'): ?>
-                <li><a class="dropdown-item" href="/dashboard">Dashboard</a></li>
-                <li><a class="dropdown-item" href="/logout">Logout</a></li>
-              <?php else: ?>
-                <li><a class="dropdown-item" href="/account">Riwayat Pembelian</a></li>
-                <li><a class="dropdown-item" href="/account/alamat">Alamat</a></li>
-                <li><a class="dropdown-item" href="/account/pengaturan">Pengaturan</a></li>
-                <li><a class="dropdown-item" href="/logout">Logout</a></li>
-              <?php endif; ?>
-            </ul>
-          </li>
-          
-          <?php if ($role === 'user'): ?>
-          <li class="nav-item">
-            <a class="nav-link" href="/account/cart">
-              <i class="bi bi-cart4" style="font-size: 1.5rem; padding-top: 2;"></i>
-            </a>
-          </li>
-          <?php endif; ?>
-
-          <?php else: ?>
-          <li class="nav-item">
-            <a class="nav-link" href="/login">Login</a>
-          </li>
-          <?php endif; ?>
-        </ul>
       </ul>
     </div>
   </div>

@@ -71,13 +71,13 @@
           Log in
         </button>
 
-        <p class="mt-2">
+        <!-- <p class="mt-2">
           Belum punya akun?
           <a href="/register" style="text-decoration: none">Daftar Sekarang</a>
         </p>
         <a href="/lupa-password" style="text-decoration: none"
           >Lupa Kata Sandi?</a
-        >
+        > -->
       </form>
     </div>
   </div>
